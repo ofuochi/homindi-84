@@ -1,12 +1,29 @@
-"use client"
+"use client";
 
-import { Card, Row, Col, Typography, Button, Space, Statistic, Timeline } from "antd"
-import { GlobalOutlined, HeartOutlined, RocketOutlined, SafetyOutlined, ThunderboltOutlined } from "@ant-design/icons"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
+import {
+  Card,
+  Row,
+  Col,
+  Typography,
+  Button,
+  Space,
+  Statistic,
+  Timeline,
+} from "antd";
+import {
+  GlobalOutlined,
+  HeartOutlined,
+  RocketOutlined,
+  SafetyOutlined,
+  ThunderboltOutlined,
+} from "@ant-design/icons";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
-const { Title, Paragraph, Text } = Typography
+const { Title, Paragraph, Text } = Typography;
 
 export default function AboutPage() {
   const stats = [
@@ -14,7 +31,7 @@ export default function AboutPage() {
     { title: "Products Available", value: 5000, suffix: "+" },
     { title: "Countries Served", value: 25, suffix: "+" },
     { title: "Years of Experience", value: 8, suffix: "" },
-  ]
+  ];
 
   const values = [
     {
@@ -41,7 +58,7 @@ export default function AboutPage() {
       description:
         "Continuously improving our platform with cutting-edge technology to provide seamless shopping experiences.",
     },
-  ]
+  ];
 
   const timeline = [
     {
@@ -53,7 +70,8 @@ export default function AboutPage() {
           </Text>
           <br />
           <Text className="text-gray-600 font-inter">
-            Founded with a vision to connect diaspora communities with authentic products from their homeland.
+            Founded with a vision to connect diaspora communities with authentic
+            products from their homeland.
           </Text>
         </div>
       ),
@@ -67,7 +85,8 @@ export default function AboutPage() {
           </Text>
           <br />
           <Text className="text-gray-600 font-inter">
-            Launched our first e-commerce platform, serving customers across 5 countries.
+            Launched our first e-commerce platform, serving customers across 5
+            countries.
           </Text>
         </div>
       ),
@@ -81,7 +100,8 @@ export default function AboutPage() {
           </Text>
           <br />
           <Text className="text-gray-600 font-inter">
-            Expanded to 15 countries and partnered with over 100 local suppliers worldwide.
+            Expanded to 15 countries and partnered with over 100 local suppliers
+            worldwide.
           </Text>
         </div>
       ),
@@ -95,7 +115,8 @@ export default function AboutPage() {
           </Text>
           <br />
           <Text className="text-gray-600 font-inter">
-            Implemented AI-powered recommendations and enhanced mobile experience.
+            Implemented AI-powered recommendations and enhanced mobile
+            experience.
           </Text>
         </div>
       ),
@@ -109,42 +130,48 @@ export default function AboutPage() {
           </Text>
           <br />
           <Text className="text-gray-600 font-inter">
-            Serving 25+ countries with 10,000+ happy customers and 5,000+ authentic products.
+            Serving 25+ countries with 10,000+ happy customers and 5,000+
+            authentic products.
           </Text>
         </div>
       ),
     },
-  ]
+  ];
 
   const team = [
     {
       name: "Fortune Ochi",
       role: "Co-Founder & CEO",
       image: "/placeholder.svg?height=300&width=300",
-      description: "Passionate about connecting communities through authentic cultural products.",
+      description:
+        "Passionate about connecting communities through authentic cultural products.",
     },
     {
       name: "Sarah Johnson",
       role: "Co-Founder & CTO",
       image: "/placeholder.svg?height=300&width=300",
-      description: "Technology enthusiast focused on creating seamless user experiences.",
+      description:
+        "Technology enthusiast focused on creating seamless user experiences.",
     },
     {
       name: "Michael Chen",
       role: "Head of Operations",
       image: "/placeholder.svg?height=300&width=300",
-      description: "Ensures smooth operations and quality control across all our services.",
+      description:
+        "Ensures smooth operations and quality control across all our services.",
     },
     {
       name: "Amara Okafor",
       role: "Head of Customer Success",
       image: "/placeholder.svg?height=300&width=300",
-      description: "Dedicated to ensuring every customer has an exceptional experience.",
+      description:
+        "Dedicated to ensuring every customer has an exceptional experience.",
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      <Header />
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-[#0B8457] to-[#0a7249] text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -158,9 +185,10 @@ export default function AboutPage() {
               About Homindi
             </Title>
             <Paragraph className="text-xl text-green-100 max-w-3xl mx-auto font-inter leading-relaxed">
-              We're on a mission to bridge the gap between diaspora communities and their cultural roots by providing
-              authentic, high-quality products from around the world. Every purchase tells a story, connects a family,
-              and preserves a tradition.
+              We're on a mission to bridge the gap between diaspora communities
+              and their cultural roots by providing authentic, high-quality
+              products from around the world. Every purchase tells a story,
+              connects a family, and preserves a tradition.
             </Paragraph>
           </motion.div>
         </div>
@@ -179,7 +207,11 @@ export default function AboutPage() {
                 <Col xs={12} sm={6} key={index}>
                   <Card className="border-0 shadow-sm rounded-xl">
                     <Statistic
-                      title={<span className="font-inter text-gray-600">{stat.title}</span>}
+                      title={
+                        <span className="font-inter text-gray-600">
+                          {stat.title}
+                        </span>
+                      }
                       value={stat.value}
                       suffix={stat.suffix}
                       valueStyle={{
@@ -230,9 +262,11 @@ export default function AboutPage() {
                     Our Mission
                   </Title>
                   <Paragraph className="text-lg text-gray-700 font-inter leading-relaxed">
-                    To create meaningful connections between diaspora communities and their cultural heritage through
-                    authentic products, exceptional service, and innovative technology. We believe that distance should
-                    never diminish the bond with one's roots.
+                    To create meaningful connections between diaspora
+                    communities and their cultural heritage through authentic
+                    products, exceptional service, and innovative technology. We
+                    believe that distance should never diminish the bond with
+                    one's roots.
                   </Paragraph>
                 </div>
                 <div>
@@ -240,8 +274,9 @@ export default function AboutPage() {
                     Our Vision
                   </Title>
                   <Paragraph className="text-gray-700 font-inter leading-relaxed">
-                    To become the world's most trusted platform for authentic cultural products, fostering global
-                    communities while preserving and celebrating diverse traditions.
+                    To become the world's most trusted platform for authentic
+                    cultural products, fostering global communities while
+                    preserving and celebrating diverse traditions.
                   </Paragraph>
                 </div>
               </motion.div>
@@ -263,7 +298,8 @@ export default function AboutPage() {
               Our Core Values
             </Title>
             <Paragraph className="text-lg text-gray-600 max-w-2xl mx-auto font-inter">
-              These principles guide everything we do and shape how we serve our community.
+              These principles guide everything we do and shape how we serve our
+              community.
             </Paragraph>
           </motion.div>
 
@@ -278,10 +314,15 @@ export default function AboutPage() {
                   <Card className="h-full border-0 shadow-sm rounded-xl hover:shadow-md transition-shadow duration-300">
                     <div className="text-center p-6">
                       <div className="mb-4">{value.icon}</div>
-                      <Title level={4} className="!mb-3 font-poppins text-gray-900">
+                      <Title
+                        level={4}
+                        className="!mb-3 font-poppins text-gray-900"
+                      >
                         {value.title}
                       </Title>
-                      <Paragraph className="text-gray-600 font-inter">{value.description}</Paragraph>
+                      <Paragraph className="text-gray-600 font-inter">
+                        {value.description}
+                      </Paragraph>
                     </div>
                   </Card>
                 </motion.div>
@@ -305,7 +346,8 @@ export default function AboutPage() {
                   Our Journey
                 </Title>
                 <Paragraph className="text-lg text-gray-600 mb-8 font-inter">
-                  From a simple idea to a global platform serving thousands of customers worldwide.
+                  From a simple idea to a global platform serving thousands of
+                  customers worldwide.
                 </Paragraph>
                 <Timeline items={timeline} />
               </motion.div>
@@ -323,8 +365,10 @@ export default function AboutPage() {
                       What's Next?
                     </Title>
                     <Paragraph className="text-green-100 mb-6 font-inter">
-                      We're constantly innovating and expanding our reach. Our upcoming features include AI-powered
-                      product recommendations, virtual cultural experiences, and enhanced community features.
+                      We're constantly innovating and expanding our reach. Our
+                      upcoming features include AI-powered product
+                      recommendations, virtual cultural experiences, and
+                      enhanced community features.
                     </Paragraph>
                     <Space direction="vertical" className="w-full">
                       <Button
@@ -357,7 +401,8 @@ export default function AboutPage() {
               Meet Our Team
             </Title>
             <Paragraph className="text-lg text-gray-600 max-w-2xl mx-auto font-inter">
-              The passionate individuals behind Homindi, working tirelessly to serve our global community.
+              The passionate individuals behind Homindi, working tirelessly to
+              serve our global community.
             </Paragraph>
           </motion.div>
 
@@ -380,11 +425,18 @@ export default function AboutPage() {
                           className="rounded-full mx-auto object-cover"
                         />
                       </div>
-                      <Title level={4} className="!mb-1 font-poppins text-gray-900">
+                      <Title
+                        level={4}
+                        className="!mb-1 font-poppins text-gray-900"
+                      >
                         {member.name}
                       </Title>
-                      <Text className="text-[#0B8457] font-medium font-inter">{member.role}</Text>
-                      <Paragraph className="text-gray-600 mt-3 font-inter">{member.description}</Paragraph>
+                      <Text className="text-[#0B8457] font-medium font-inter">
+                        {member.role}
+                      </Text>
+                      <Paragraph className="text-gray-600 mt-3 font-inter">
+                        {member.description}
+                      </Paragraph>
                     </div>
                   </Card>
                 </motion.div>
@@ -406,7 +458,8 @@ export default function AboutPage() {
               Ready to Start Your Journey?
             </Title>
             <Paragraph className="text-lg text-gray-600 mb-8 font-inter">
-              Join thousands of satisfied customers who trust Homindi for authentic cultural products.
+              Join thousands of satisfied customers who trust Homindi for
+              authentic cultural products.
             </Paragraph>
             <Space size="large" wrap>
               <Link href="/products">
@@ -419,7 +472,10 @@ export default function AboutPage() {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="large" className="rounded-lg px-8 font-inter font-medium">
+                <Button
+                  size="large"
+                  className="rounded-lg px-8 font-inter font-medium"
+                >
                   Contact Us
                 </Button>
               </Link>
@@ -427,6 +483,7 @@ export default function AboutPage() {
           </motion.div>
         </div>
       </div>
+      <Footer />
     </div>
-  )
+  );
 }

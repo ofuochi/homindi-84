@@ -1,7 +1,17 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, Form, Input, Button, message, Row, Col, Typography, Space } from "antd"
+import { useState } from "react";
+import {
+  Card,
+  Form,
+  Input,
+  Button,
+  message,
+  Row,
+  Col,
+  Typography,
+  Space,
+} from "antd";
 import {
   MailOutlined,
   PhoneOutlined,
@@ -9,37 +19,41 @@ import {
   ClockCircleOutlined,
   SendOutlined,
   UserOutlined,
-} from "@ant-design/icons"
-import { motion } from "framer-motion"
+} from "@ant-design/icons";
+import { motion } from "framer-motion";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
-const { Title, Paragraph, Text } = Typography
-const { TextArea } = Input
+const { Title, Paragraph, Text } = Typography;
+const { TextArea } = Input;
 
 interface ContactFormData {
-  name: string
-  email: string
-  subject: string
-  message: string
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
 }
 
 export default function ContactPage() {
-  const [form] = Form.useForm()
-  const [loading, setLoading] = useState(false)
+  const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (values: ContactFormData) => {
-    setLoading(true)
+    setLoading(true);
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      message.success("Thank you for your message! We'll get back to you within 24 hours.")
-      form.resetFields()
+      message.success(
+        "Thank you for your message! We'll get back to you within 24 hours."
+      );
+      form.resetFields();
     } catch (error) {
-      message.error("Failed to send message. Please try again.")
+      message.error("Failed to send message. Please try again.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const contactInfo = [
     {
@@ -66,10 +80,11 @@ export default function ContactPage() {
       content: "Monday - Friday",
       description: "8:00 AM - 6:00 PM EST",
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      <Header />
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-[#0B8457] to-[#0a7249] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,8 +98,8 @@ export default function ContactPage() {
               Get in Touch
             </Title>
             <Paragraph className="text-xl text-green-100 max-w-2xl mx-auto font-inter">
-              Have questions about our products or services? We'd love to hear from you. Send us a message and we'll
-              respond as soon as possible.
+              Have questions about our products or services? We'd love to hear
+              from you. Send us a message and we'll respond as soon as possible.
             </Paragraph>
           </motion.div>
         </div>
@@ -105,18 +120,35 @@ export default function ContactPage() {
                     Send us a Message
                   </Title>
                   <Paragraph className="text-gray-600 mb-8 font-inter">
-                    Fill out the form below and we'll get back to you as soon as possible.
+                    Fill out the form below and we'll get back to you as soon as
+                    possible.
                   </Paragraph>
 
-                  <Form form={form} layout="vertical" onFinish={handleSubmit} size="large" className="space-y-4">
+                  <Form
+                    form={form}
+                    layout="vertical"
+                    onFinish={handleSubmit}
+                    size="large"
+                    className="space-y-4"
+                  >
                     <Row gutter={16}>
                       <Col xs={24} sm={12}>
                         <Form.Item
                           name="name"
-                          label={<span className="font-inter font-medium">Full Name</span>}
+                          label={
+                            <span className="font-inter font-medium">
+                              Full Name
+                            </span>
+                          }
                           rules={[
-                            { required: true, message: "Please enter your name" },
-                            { min: 2, message: "Name must be at least 2 characters" },
+                            {
+                              required: true,
+                              message: "Please enter your name",
+                            },
+                            {
+                              min: 2,
+                              message: "Name must be at least 2 characters",
+                            },
                           ]}
                         >
                           <Input
@@ -129,10 +161,20 @@ export default function ContactPage() {
                       <Col xs={24} sm={12}>
                         <Form.Item
                           name="email"
-                          label={<span className="font-inter font-medium">Email Address</span>}
+                          label={
+                            <span className="font-inter font-medium">
+                              Email Address
+                            </span>
+                          }
                           rules={[
-                            { required: true, message: "Please enter your email" },
-                            { type: "email", message: "Please enter a valid email" },
+                            {
+                              required: true,
+                              message: "Please enter your email",
+                            },
+                            {
+                              type: "email",
+                              message: "Please enter a valid email",
+                            },
                           ]}
                         >
                           <Input
@@ -146,21 +188,37 @@ export default function ContactPage() {
 
                     <Form.Item
                       name="subject"
-                      label={<span className="font-inter font-medium">Subject</span>}
+                      label={
+                        <span className="font-inter font-medium">Subject</span>
+                      }
                       rules={[
                         { required: true, message: "Please enter a subject" },
-                        { min: 5, message: "Subject must be at least 5 characters" },
+                        {
+                          min: 5,
+                          message: "Subject must be at least 5 characters",
+                        },
                       ]}
                     >
-                      <Input placeholder="What is this regarding?" className="rounded-lg font-inter" />
+                      <Input
+                        placeholder="What is this regarding?"
+                        className="rounded-lg font-inter"
+                      />
                     </Form.Item>
 
                     <Form.Item
                       name="message"
-                      label={<span className="font-inter font-medium">Message</span>}
+                      label={
+                        <span className="font-inter font-medium">Message</span>
+                      }
                       rules={[
-                        { required: true, message: "Please enter your message" },
-                        { min: 10, message: "Message must be at least 10 characters" },
+                        {
+                          required: true,
+                          message: "Please enter your message",
+                        },
+                        {
+                          min: 10,
+                          message: "Message must be at least 10 characters",
+                        },
                       ]}
                     >
                       <TextArea
@@ -201,7 +259,8 @@ export default function ContactPage() {
                   Contact Information
                 </Title>
                 <Paragraph className="text-gray-600 mb-8 font-inter">
-                  Reach out to us through any of these channels. We're here to help!
+                  Reach out to us through any of these channels. We're here to
+                  help!
                 </Paragraph>
               </div>
 
@@ -217,12 +276,19 @@ export default function ContactPage() {
                       <div className="flex items-start space-x-4 p-4">
                         <div className="flex-shrink-0">{info.icon}</div>
                         <div className="flex-1">
-                          <Title level={4} className="!mb-1 font-inter text-gray-900">
+                          <Title
+                            level={4}
+                            className="!mb-1 font-inter text-gray-900"
+                          >
                             {info.title}
                           </Title>
-                          <Text className="text-lg font-medium text-gray-800 font-inter">{info.content}</Text>
+                          <Text className="text-lg font-medium text-gray-800 font-inter">
+                            {info.content}
+                          </Text>
                           <br />
-                          <Text className="text-gray-600 font-inter">{info.description}</Text>
+                          <Text className="text-gray-600 font-inter">
+                            {info.description}
+                          </Text>
                         </div>
                       </div>
                     </Card>
@@ -242,8 +308,8 @@ export default function ContactPage() {
                       Need Immediate Help?
                     </Title>
                     <Paragraph className="text-green-100 mb-4 font-inter">
-                      For urgent matters, please call our support line or check our FAQ section for quick answers to
-                      common questions.
+                      For urgent matters, please call our support line or check
+                      our FAQ section for quick answers to common questions.
                     </Paragraph>
                     <Space direction="vertical" className="w-full">
                       <Button
@@ -268,6 +334,7 @@ export default function ContactPage() {
           </Col>
         </Row>
       </div>
+      <Footer />
     </div>
-  )
+  );
 }
