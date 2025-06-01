@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Menu, Tooltip, Badge } from "antd"
+import { Menu, Tooltip, Badge } from "antd";
 import {
   DashboardOutlined,
   ShoppingOutlined,
@@ -26,18 +26,19 @@ import {
   ScanOutlined,
   LineChartOutlined,
   DatabaseOutlined,
-} from "@ant-design/icons"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useClerkAuth } from "@/lib/hooks/useClerkAuth"
+} from "@ant-design/icons";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useClerkAuth } from "@/lib/hooks/useClerkAuth";
+import { ItemType, MenuItemType } from "antd/es/menu/interface";
 
 interface AdminSidebarProps {
-  collapsed?: boolean
+  collapsed?: boolean;
 }
 
 export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
-  const pathname = usePathname()
-  const { user, userRole, roleInfo, hasPermission } = useClerkAuth()
+  const pathname = usePathname();
+  const { user, userRole, roleInfo, hasPermission } = useClerkAuth();
 
   const roleIcons = {
     god: CrownOutlined,
@@ -46,11 +47,11 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
     supplier: ShopOutlined,
     moderator: FlagOutlined,
     user: UserOutlined,
-  }
-  const RoleIcon = roleIcons[userRole] || UserOutlined
+  };
+  const RoleIcon = roleIcons[userRole] || UserOutlined;
 
   const getMenuItems = () => {
-    const items = []
+    const items: ItemType<MenuItemType>[] = [];
 
     // Dashboard
     items.push({
@@ -58,39 +59,48 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
       icon: <DashboardOutlined />,
       label: collapsed ? null : <Link href="/admin">Dashboard</Link>,
       title: "Dashboard",
-    })
+    });
 
     // Inventory Management Section
     if (hasPermission("inventory.manage") || hasPermission("inventory.view")) {
-      items.push({ type: "divider" })
+      items.push({ type: "divider" });
 
       if (!collapsed) {
         items.push({
           key: "inventory-group",
           label: "Inventory Management",
           type: "group",
-        })
+        });
       }
 
       const inventoryItems = [
         {
           key: "/admin/inventory",
           icon: <InboxOutlined />,
-          label: collapsed ? null : <Link href="/admin/inventory">Overview</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/inventory">Overview</Link>
+          ),
           title: "Inventory Overview",
-          show: hasPermission("inventory.view") || hasPermission("inventory.manage"),
+          show:
+            hasPermission("inventory.view") ||
+            hasPermission("inventory.manage"),
         },
         {
           key: "/admin/products",
           icon: <AppstoreOutlined />,
-          label: collapsed ? null : <Link href="/admin/products">Products</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/products">Products</Link>
+          ),
           title: "Products",
-          show: hasPermission("products.manage") || hasPermission("products.view"),
+          show:
+            hasPermission("products.manage") || hasPermission("products.view"),
         },
         {
           key: "/admin/categories",
           icon: <TagOutlined />,
-          label: collapsed ? null : <Link href="/admin/categories">Categories</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/categories">Categories</Link>
+          ),
           title: "Categories",
           show: hasPermission("products.manage"),
         },
@@ -106,44 +116,54 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
             </Link>
           ),
           title: "Low Stock Alerts",
-          show: hasPermission("inventory.view") || hasPermission("inventory.manage"),
+          show:
+            hasPermission("inventory.view") ||
+            hasPermission("inventory.manage"),
         },
         {
           key: "/admin/inventory/scanner",
           icon: <ScanOutlined />,
-          label: collapsed ? null : <Link href="/admin/inventory/scanner">Barcode Scanner</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/inventory/scanner">Barcode Scanner</Link>
+          ),
           title: "Barcode Scanner",
           show: hasPermission("inventory.manage"),
         },
         {
           key: "/admin/inventory/logs",
           icon: <HistoryOutlined />,
-          label: collapsed ? null : <Link href="/admin/inventory/logs">Stock History</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/inventory/logs">Stock History</Link>
+          ),
           title: "Stock History",
-          show: hasPermission("inventory.view") || hasPermission("inventory.manage"),
+          show:
+            hasPermission("inventory.view") ||
+            hasPermission("inventory.manage"),
         },
-      ]
+      ];
 
-      items.push(...inventoryItems.filter((item) => item.show !== false))
+      items.push(...inventoryItems.filter((item) => item.show));
     }
 
     // Order Management Section
     if (hasPermission("orders.manage") || hasPermission("orders.view")) {
-      items.push({ type: "divider" })
+      items.push({ type: "divider" });
 
       if (!collapsed) {
         items.push({
           key: "orders-group",
           label: "Order Management",
           type: "group",
-        })
+        });
       }
 
       const orderItems = [
         {
           key: "/admin/orders",
           icon: <ShoppingOutlined />,
-          label: collapsed ? null : <Link href="/admin/orders">All Orders</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/orders">All Orders</Link>
+          ),
           title: "All Orders",
           show: hasPermission("orders.view") || hasPermission("orders.manage"),
         },
@@ -164,32 +184,36 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
         {
           key: "/admin/exports",
           icon: <ExportOutlined />,
-          label: collapsed ? null : <Link href="/admin/exports">Export Management</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/exports">Export Management</Link>
+          ),
           title: "Export Management",
           show: hasPermission("exports.manage") || userRole === "exporter",
         },
         {
           key: "/admin/imports",
           icon: <ImportOutlined />,
-          label: collapsed ? null : <Link href="/admin/imports">Bulk Import</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/imports">Bulk Import</Link>
+          ),
           title: "Bulk Import",
           show: hasPermission("imports.manage"),
         },
-      ]
+      ];
 
-      items.push(...orderItems.filter((item) => item.show !== false))
+      items.push(...orderItems.filter((item) => item.show));
     }
 
     // User Management Section
     if (hasPermission("users.manage") || hasPermission("users.view")) {
-      items.push({ type: "divider" })
+      items.push({ type: "divider" });
 
       if (!collapsed) {
         items.push({
           key: "users-group",
           label: "User Management",
           type: "group",
-        })
+        });
       }
 
       const userItems = [
@@ -203,71 +227,86 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
         {
           key: "/admin/users/roles",
           icon: <TeamOutlined />,
-          label: collapsed ? null : <Link href="/admin/users/roles">Role Management</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/users/roles">Role Management</Link>
+          ),
           title: "Role Management",
           show: hasPermission("roles.manage"),
         },
         {
           key: "/admin/users/permissions",
           icon: <SafetyOutlined />,
-          label: collapsed ? null : <Link href="/admin/users/permissions">Permissions</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/users/permissions">Permissions</Link>
+          ),
           title: "Permissions",
           show: hasPermission("roles.manage"),
         },
-      ]
+      ];
 
-      items.push(...userItems.filter((item) => item.show !== false))
+      items.push(...userItems.filter((item) => item.show));
     }
 
     // Analytics & Reports Section
-    if (hasPermission("analytics.view") || hasPermission("analytics.view.limited")) {
-      items.push({ type: "divider" })
+    if (
+      hasPermission("analytics.view") ||
+      hasPermission("analytics.view.limited")
+    ) {
+      items.push({ type: "divider" });
 
       if (!collapsed) {
         items.push({
           key: "analytics-group",
           label: "Analytics & Reports",
           type: "group",
-        })
+        });
       }
 
       const analyticsItems = [
         {
           key: "/admin/analytics",
           icon: <BarChartOutlined />,
-          label: collapsed ? null : <Link href="/admin/analytics">Dashboard Analytics</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/analytics">Dashboard Analytics</Link>
+          ),
           title: "Dashboard Analytics",
-          show: hasPermission("analytics.view") || hasPermission("analytics.view.limited"),
+          show:
+            hasPermission("analytics.view") ||
+            hasPermission("analytics.view.limited"),
         },
         {
           key: "/admin/analytics/sales",
           icon: <LineChartOutlined />,
-          label: collapsed ? null : <Link href="/admin/analytics/sales">Sales Reports</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/analytics/sales">Sales Reports</Link>
+          ),
           title: "Sales Reports",
           show: hasPermission("analytics.view"),
         },
         {
           key: "/admin/reports",
           icon: <FileTextOutlined />,
-          label: collapsed ? null : <Link href="/admin/reports">Custom Reports</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/reports">Custom Reports</Link>
+          ),
           title: "Custom Reports",
           show: hasPermission("reports.generate"),
         },
-      ]
+      ];
 
-      items.push(...analyticsItems.filter((item) => item.show !== false))
+      items.push(...analyticsItems.filter((item) => item.show));
     }
 
     // System Management Section (God and Admin only)
     if (hasPermission("system.manage") || hasPermission("audit.view")) {
-      items.push({ type: "divider" })
+      items.push({ type: "divider" });
 
       if (!collapsed) {
         items.push({
           key: "system-group",
           label: "System Management",
           type: "group",
-        })
+        });
       }
 
       const systemItems = [
@@ -281,33 +320,40 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
         {
           key: "/admin/notifications",
           icon: <BellOutlined />,
-          label: collapsed ? null : <Link href="/admin/notifications">Notifications</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/notifications">Notifications</Link>
+          ),
           title: "Notification Center",
           show: hasPermission("notifications.manage"),
         },
         {
           key: "/admin/database",
           icon: <DatabaseOutlined />,
-          label: collapsed ? null : <Link href="/admin/database">Database Tools</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/database">Database Tools</Link>
+          ),
           title: "Database Tools",
           show: hasPermission("system.manage"),
         },
         {
           key: "/admin/settings",
           icon: <SettingOutlined />,
-          label: collapsed ? null : <Link href="/admin/settings">System Settings</Link>,
+          label: collapsed ? null : (
+            <Link href="/admin/settings">System Settings</Link>
+          ),
           title: "System Settings",
           show: hasPermission("settings.manage"),
         },
-      ]
+      ];
 
-      items.push(...systemItems.filter((item) => item.show !== false))
+      items.push(...systemItems.filter((item) => item.show));
     }
 
-    return items
-  }
+    return items;
+  };
 
   const renderMenuItem = (item: any) => {
+    if (item.show !== undefined) item.show = item.show.toString();
     if (collapsed && item.title && !item.type) {
       return {
         ...item,
@@ -316,12 +362,12 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
             <Link href={item.key}>{item.title}</Link>
           </Tooltip>
         ),
-      }
+      };
     }
-    return item
-  }
+    return item;
+  };
 
-  const processedItems = getMenuItems().map(renderMenuItem)
+  const processedItems = getMenuItems().map(renderMenuItem);
 
   return (
     <div className="h-full flex flex-col bg-white">
@@ -332,8 +378,12 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
             <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg mx-auto mb-3">
               <RoleIcon className="text-white text-xl" />
             </div>
-            <span className="font-bold text-white font-poppins text-lg block">Admin Panel</span>
-            <p className="text-xs text-white/80 font-inter mt-1">{roleInfo?.name}</p>
+            <span className="font-bold text-white font-poppins text-lg block">
+              Admin Panel
+            </span>
+            <p className="text-xs text-white/80 font-inter mt-1">
+              {roleInfo?.name}
+            </p>
             <div className="mt-2 px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full">
               <span className="text-xs text-white font-inter font-medium">
                 {user?.firstName} {user?.lastName}
@@ -345,7 +395,10 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
 
       {collapsed && (
         <div className="p-3 border-b border-gray-200 flex justify-center bg-gradient-to-r from-[#0B8457] to-[#0a7249]">
-          <Tooltip title={`${roleInfo?.name} - ${user?.firstName} ${user?.lastName}`} placement="right">
+          <Tooltip
+            title={`${roleInfo?.name} - ${user?.firstName} ${user?.lastName}`}
+            placement="right"
+          >
             <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-lg">
               <RoleIcon className="text-white text-sm" />
             </div>
@@ -372,11 +425,15 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
       {!collapsed && (
         <div className="p-4 border-t border-gray-200 bg-gray-50">
           <div className="text-center">
-            <p className="text-xs text-gray-500 font-inter">DiasporaBasket Admin v2.0</p>
-            <p className="text-xs text-gray-400 font-inter mt-1">© 2024 All rights reserved</p>
+            <p className="text-xs text-gray-500 font-inter">
+              Homindi Admin v2.0
+            </p>
+            <p className="text-xs text-gray-400 font-inter mt-1">
+              © 2024 All rights reserved
+            </p>
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }

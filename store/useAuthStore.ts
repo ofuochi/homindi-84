@@ -135,7 +135,7 @@ export const useAuthStore = create<AuthState>()(
       },
     })),
     {
-      name: "diaspora-auth",
+      name: "homindi-auth",
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,

@@ -1,39 +1,39 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import type React from "react"
-import { Layout, Button } from "antd"
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons"
-import Header from "@/components/layout/Header"
-import AdminSidebar from "@/components/admin/AdminSidebar"
-import ProtectedRoute from "@/components/auth/ProtectedRoute"
+import { useState, useEffect } from "react";
+import type React from "react";
+import { Layout, Button } from "antd";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import Header from "@/components/layout/Header";
+import AdminSidebar from "@/components/admin/AdminSidebar";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
-const { Content, Sider } = Layout
+const { Content, Sider } = Layout;
 
 export default function AdminLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const [collapsed, setCollapsed] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth < 768
-      setIsMobile(mobile)
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
       // Auto-collapse on mobile for better UX
       if (mobile && !collapsed) {
-        setCollapsed(true)
+        setCollapsed(true);
       }
-    }
+    };
 
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [collapsed])
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, [collapsed]);
 
-  const siderWidth = collapsed ? (isMobile ? 0 : 80) : 256
+  const siderWidth = collapsed ? (isMobile ? 0 : 80) : 256;
 
   return (
     <ProtectedRoute adminOnly>
@@ -78,14 +78,20 @@ export default function AdminLayout({
               <div className="flex items-center space-x-4">
                 <Button
                   type="text"
-                  icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                  icon={
+                    collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />
+                  }
                   onClick={() => setCollapsed(!collapsed)}
                   className="flex items-center justify-center w-8 h-8 hover:bg-gray-100 transition-colors"
                   size="small"
                 />
                 <div className="hidden sm:block">
-                  <span className="font-poppins font-semibold text-gray-900">Admin Dashboard</span>
-                  <p className="font-inter text-xs text-gray-500 mt-0.5">Manage your DiasporaBasket platform</p>
+                  <span className="font-poppins font-semibold text-gray-900">
+                    Admin Dashboard
+                  </span>
+                  <p className="font-inter text-xs text-gray-500 mt-0.5">
+                    Manage your Homindi platform
+                  </p>
                 </div>
               </div>
 
@@ -96,8 +102,8 @@ export default function AdminLayout({
                       isMobile
                         ? "bg-orange-100 text-orange-800"
                         : collapsed
-                          ? "bg-blue-100 text-blue-800"
-                          : "bg-green-100 text-green-800"
+                        ? "bg-blue-100 text-blue-800"
+                        : "bg-green-100 text-green-800"
                     }`}
                   >
                     {isMobile ? "Mobile" : collapsed ? "Compact" : "Full"}
@@ -123,5 +129,5 @@ export default function AdminLayout({
         )}
       </div>
     </ProtectedRoute>
-  )
+  );
 }

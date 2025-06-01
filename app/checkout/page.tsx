@@ -1,23 +1,40 @@
-"use client"
-import { Form, Input, Button, Card, Typography, Select, Row, Col, Divider, message } from "antd"
-import { CreditCardOutlined, UserOutlined, MailOutlined, PhoneOutlined, HomeOutlined } from "@ant-design/icons"
-import { useRouter } from "next/navigation"
-import Header from "@/components/layout/Header"
-import Footer from "@/components/layout/Footer"
-import { useCartStore } from "@/store/useCartStore"
-import { useOrderStore } from "@/store/useOrderStore"
-import { formatCurrency } from "@/lib/utils"
-import { COUNTRIES } from "@/lib/constants"
+"use client";
+import {
+  Form,
+  Input,
+  Button,
+  Card,
+  Typography,
+  Select,
+  Row,
+  Col,
+  Divider,
+  message,
+} from "antd";
+import {
+  CreditCardOutlined,
+  UserOutlined,
+  MailOutlined,
+  PhoneOutlined,
+  HomeOutlined,
+} from "@ant-design/icons";
+import { useRouter } from "next/navigation";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import { useCartStore } from "@/store/useCartStore";
+import { useOrderStore } from "@/store/useOrderStore";
+import { formatCurrency } from "@/lib/utils";
+import { COUNTRIES } from "@/lib/constants";
 
-const { Title, Text } = Typography
-const { TextArea } = Input
-const { Option } = Select
+const { Title, Text } = Typography;
+const { TextArea } = Input;
+const { Option } = Select;
 
 export default function CheckoutPage() {
-  const { items, getTotal, clearCart } = useCartStore()
-  const { createOrder, isLoading } = useOrderStore()
-  const router = useRouter()
-  const total = getTotal()
+  const { items, getTotal, clearCart } = useCartStore();
+  const { createOrder, isLoading } = useOrderStore();
+  const router = useRouter();
+  const total = getTotal();
 
   const onFinish = async (values: any) => {
     try {
@@ -30,25 +47,25 @@ export default function CheckoutPage() {
         streetAddress: values.address,
         postalCode: values.postalCode,
         deliveryNotes: values.deliveryNotes,
-      }
+      };
 
       const order = await createOrder({
         items,
         shippingAddress,
         total,
-      })
+      });
 
-      message.success("Order placed successfully!")
-      clearCart()
-      router.push(`/dashboard/orders`)
+      message.success("Order placed successfully!");
+      clearCart();
+      router.push(`/dashboard/orders`);
     } catch (error) {
-      message.error("Failed to place order. Please try again.")
+      message.error("Failed to place order. Please try again.");
     }
-  }
+  };
 
   if (items.length === 0) {
-    router.push("/cart")
-    return null
+    router.push("/cart");
+    return null;
   }
 
   return (
@@ -64,24 +81,45 @@ export default function CheckoutPage() {
           {/* Checkout Form */}
           <Col xs={24} lg={16}>
             <Card title="Shipping Information" className="mb-6">
-              <Form name="checkout" onFinish={onFinish} layout="vertical" size="large">
+              <Form
+                name="checkout"
+                onFinish={onFinish}
+                layout="vertical"
+                size="large"
+              >
                 <Row gutter={16}>
                   <Col xs={24} sm={12}>
                     <Form.Item
                       name="firstName"
                       label="First Name"
-                      rules={[{ required: true, message: "Please input your first name!" }]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your first name!",
+                        },
+                      ]}
                     >
-                      <Input prefix={<UserOutlined />} placeholder="First name" />
+                      <Input
+                        prefix={<UserOutlined />}
+                        placeholder="First name"
+                      />
                     </Form.Item>
                   </Col>
                   <Col xs={24} sm={12}>
                     <Form.Item
                       name="lastName"
                       label="Last Name"
-                      rules={[{ required: true, message: "Please input your last name!" }]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your last name!",
+                        },
+                      ]}
                     >
-                      <Input prefix={<UserOutlined />} placeholder="Last name" />
+                      <Input
+                        prefix={<UserOutlined />}
+                        placeholder="Last name"
+                      />
                     </Form.Item>
                   </Col>
                 </Row>
@@ -94,15 +132,26 @@ export default function CheckoutPage() {
                     { type: "email", message: "Please enter a valid email!" },
                   ]}
                 >
-                  <Input prefix={<MailOutlined />} placeholder="Email address" />
+                  <Input
+                    prefix={<MailOutlined />}
+                    placeholder="Email address"
+                  />
                 </Form.Item>
 
                 <Form.Item
                   name="phone"
                   label="Phone Number"
-                  rules={[{ required: true, message: "Please input your phone number!" }]}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your phone number!",
+                    },
+                  ]}
                 >
-                  <Input prefix={<PhoneOutlined />} placeholder="Phone number" />
+                  <Input
+                    prefix={<PhoneOutlined />}
+                    placeholder="Phone number"
+                  />
                 </Form.Item>
 
                 <Row gutter={16}>
@@ -110,7 +159,12 @@ export default function CheckoutPage() {
                     <Form.Item
                       name="country"
                       label="Country"
-                      rules={[{ required: true, message: "Please select your country!" }]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please select your country!",
+                        },
+                      ]}
                     >
                       <Select placeholder="Select country">
                         {COUNTRIES.map((country) => (
@@ -125,7 +179,9 @@ export default function CheckoutPage() {
                     <Form.Item
                       name="city"
                       label="City"
-                      rules={[{ required: true, message: "Please input your city!" }]}
+                      rules={[
+                        { required: true, message: "Please input your city!" },
+                      ]}
                     >
                       <Input placeholder="City" />
                     </Form.Item>
@@ -135,21 +191,37 @@ export default function CheckoutPage() {
                 <Form.Item
                   name="address"
                   label="Street Address"
-                  rules={[{ required: true, message: "Please input your address!" }]}
+                  rules={[
+                    { required: true, message: "Please input your address!" },
+                  ]}
                 >
-                  <Input prefix={<HomeOutlined />} placeholder="Street address" />
+                  <Input
+                    prefix={<HomeOutlined />}
+                    placeholder="Street address"
+                  />
                 </Form.Item>
 
                 <Form.Item
                   name="postalCode"
                   label="Postal Code"
-                  rules={[{ required: true, message: "Please input your postal code!" }]}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your postal code!",
+                    },
+                  ]}
                 >
                   <Input placeholder="Postal code" />
                 </Form.Item>
 
-                <Form.Item name="deliveryNotes" label="Delivery Notes (Optional)">
-                  <TextArea rows={3} placeholder="Any special delivery instructions..." />
+                <Form.Item
+                  name="deliveryNotes"
+                  label="Delivery Notes (Optional)"
+                >
+                  <TextArea
+                    rows={3}
+                    placeholder="Any special delivery instructions..."
+                  />
                 </Form.Item>
 
                 <Divider />
@@ -161,7 +233,7 @@ export default function CheckoutPage() {
                     size="large"
                     loading={isLoading}
                     icon={<CreditCardOutlined />}
-                    className="w-full sm:w-auto px-12"
+                    className="w-full px-12"
                   >
                     Place Order - {formatCurrency(total)}
                   </Button>
@@ -175,16 +247,22 @@ export default function CheckoutPage() {
             <Card title="Order Summary" className="sticky top-8">
               <div className="space-y-4">
                 {items.map((item) => (
-                  <div key={item.product.id} className="flex justify-between items-start">
+                  <div
+                    key={item.product.id}
+                    className="flex justify-between items-start"
+                  >
                     <div className="flex-1">
                       <Text strong className="block">
                         {item.product.name}
                       </Text>
                       <Text type="secondary" className="text-sm">
-                        Qty: {item.quantity} × {formatCurrency(item.product.price)}
+                        Qty: {item.quantity} ×{" "}
+                        {formatCurrency(item.product.price)}
                       </Text>
                     </div>
-                    <Text strong>{formatCurrency(item.product.price * item.quantity)}</Text>
+                    <Text strong>
+                      {formatCurrency(item.product.price * item.quantity)}
+                    </Text>
                   </div>
                 ))}
 
@@ -212,7 +290,9 @@ export default function CheckoutPage() {
                 </div>
 
                 <div className="bg-green-50 p-4 rounded-lg mt-4">
-                  <Text className="text-green-800 text-sm">🔒 Secure checkout powered by Stripe</Text>
+                  <Text className="text-green-800 text-sm">
+                    🔒 Secure checkout powered by Stripe
+                  </Text>
                 </div>
               </div>
             </Card>
@@ -222,5 +302,5 @@ export default function CheckoutPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

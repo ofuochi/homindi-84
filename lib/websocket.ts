@@ -184,17 +184,17 @@ export class MockWebSocketServer {
   private clients: Set<any> = new Set()
   private messageQueue: WebSocketMessage[] = []
 
-  constructor() {
-    // Simulate periodic notifications
-    setInterval(() => {
-      this.simulateNotification()
-    }, 45000) // Every 45 seconds
+  // constructor() {
+  //   // Simulate periodic notifications
+  //   setInterval(() => {
+  //     this.simulateNotification()
+  //   }, 45000) // Every 45 seconds
 
-    // Simulate order updates
-    setInterval(() => {
-      this.simulateOrderUpdate()
-    }, 120000) // Every 2 minutes
-  }
+  //   // Simulate order updates
+  //   setInterval(() => {
+  //     this.simulateOrderUpdate()
+  //   }, 120000) // Every 2 minutes
+  // }
 
   addClient(client: any) {
     this.clients.add(client)

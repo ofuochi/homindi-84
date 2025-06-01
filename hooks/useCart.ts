@@ -9,7 +9,7 @@ export function useCart() {
 
   // Load cart from localStorage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem("diaspora-cart")
+    const savedCart = localStorage.getItem("homindi-cart")
     if (savedCart) {
       try {
         setItems(JSON.parse(savedCart))
@@ -21,7 +21,7 @@ export function useCart() {
 
   // Save cart to localStorage whenever items change
   useEffect(() => {
-    localStorage.setItem("diaspora-cart", JSON.stringify(items))
+    localStorage.setItem("homindi-cart", JSON.stringify(items))
   }, [items])
 
   const addItem = (product: Product, quantity = 1) => {
@@ -58,7 +58,7 @@ export function useCart() {
 
   const clearCart = () => {
     setItems([])
-    localStorage.removeItem("diaspora-cart")
+    localStorage.removeItem("homindi-cart")
   }
 
   const getTotal = () => {

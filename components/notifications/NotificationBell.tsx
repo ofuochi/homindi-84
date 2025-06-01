@@ -198,7 +198,7 @@ export default function NotificationBell() {
 
   return (
     <Dropdown
-      overlay={dropdownContent}
+    popupRender={() => dropdownContent}
       trigger={["click"]}
       open={open}
       onOpenChange={setOpen}

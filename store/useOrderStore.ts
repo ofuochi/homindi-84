@@ -337,7 +337,7 @@ export const useOrderStore = create<OrderState>()(
       },
     })),
     {
-      name: "diaspora-orders",
+      name: "homindi-orders",
       partialize: (state) => ({
         orders: state.orders,
       }),

@@ -256,7 +256,7 @@ export const useNotificationStore = create<NotificationState>()(
       },
     })),
     {
-      name: "diaspora-notifications",
+      name: "homindi-notifications",
       partialize: (state) => ({
         notifications: state.notifications,
         unreadCount: state.unreadCount,

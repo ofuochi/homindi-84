@@ -41,7 +41,7 @@ const mockUsers: User[] = [
   {
     id: "admin-1",
     name: "Admin User",
-    email: "admin@diasporabasket.com",
+    email: "admin@homindibasket.com",
     phone: "+1-555-0100",
     preferredCountry: "United States",
     createdAt: "2023-01-01T00:00:00Z",

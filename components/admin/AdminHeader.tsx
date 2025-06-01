@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Badge, Drawer, Button, Avatar, Dropdown } from "antd"
+import { useState } from "react";
+import Link from "next/link";
+import { Badge, Drawer, Button, Avatar, Dropdown } from "antd";
 import {
   BellOutlined,
   MenuOutlined,
@@ -10,14 +10,14 @@ import {
   SettingOutlined,
   LogoutOutlined,
   DashboardOutlined,
-} from "@ant-design/icons"
-import { useAuthStore } from "@/store/useAuthStore"
-import { useNotificationStore } from "@/store/useNotificationStore"
+} from "@ant-design/icons";
+import { useAuthStore } from "@/store/useAuthStore";
+import { useNotificationStore } from "@/store/useNotificationStore";
 
 export default function AdminHeader() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { user, logout } = useAuthStore()
-  const { unreadCount } = useNotificationStore()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, logout } = useAuthStore();
+  const { unreadCount } = useNotificationStore();
 
   const userMenuItems = [
     {
@@ -44,7 +44,7 @@ export default function AdminHeader() {
       label: "Logout",
       onClick: logout,
     },
-  ]
+  ];
 
   return (
     <>
@@ -54,10 +54,14 @@ export default function AdminHeader() {
             {/* Logo */}
             <Link href="/admin" className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg font-poppins">DB</span>
+                <span className="text-white font-bold text-lg font-poppins">
+                  DB
+                </span>
               </div>
               <div>
-                <span className="text-xl font-bold text-gray-900 font-poppins">DiasporaBasket</span>
+                <span className="text-xl font-bold text-gray-900 font-poppins">
+                  Homindi
+                </span>
                 <span className="text-sm text-[#0B8457] font-inter ml-2 bg-green-100 px-2 py-1 rounded-full">
                   Admin
                 </span>
@@ -78,10 +82,20 @@ export default function AdminHeader() {
               />
 
               {/* User Menu */}
-              <Dropdown menu={{ items: userMenuItems }} placement="bottomRight" arrow>
+              <Dropdown
+                menu={{ items: userMenuItems }}
+                placement="bottomRight"
+                arrow
+              >
                 <Button type="text" className="flex items-center space-x-2">
-                  <Avatar size="small" icon={<UserOutlined />} src={user?.avatar} />
-                  <span className="hidden md:inline font-inter font-medium">{user?.name}</span>
+                  <Avatar
+                    size="small"
+                    icon={<UserOutlined />}
+                    src={user?.avatar}
+                  />
+                  <span className="hidden md:inline font-inter font-medium">
+                    {user?.name}
+                  </span>
                 </Button>
               </Dropdown>
 
@@ -99,7 +113,11 @@ export default function AdminHeader() {
 
       {/* Mobile Menu Drawer */}
       <Drawer
-        title={<span className="font-poppins font-semibold text-gray-900">Admin Menu</span>}
+        title={
+          <span className="font-poppins font-semibold text-gray-900">
+            Admin Menu
+          </span>
+        }
         placement="right"
         onClose={() => setMobileMenuOpen(false)}
         open={mobileMenuOpen}
@@ -130,8 +148,8 @@ export default function AdminHeader() {
             <Button
               block
               onClick={() => {
-                logout()
-                setMobileMenuOpen(false)
+                logout();
+                setMobileMenuOpen(false);
               }}
               className="font-inter"
             >
@@ -141,5 +159,5 @@ export default function AdminHeader() {
         </div>
       </Drawer>
     </>
-  )
+  );
 }

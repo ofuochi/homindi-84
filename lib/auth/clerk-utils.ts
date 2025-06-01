@@ -1,5 +1,7 @@
-import { clerkClient } from "@clerk/nextjs"
 import type { UserRole, ClerkUserMetadata, ExtendedUser } from "@/lib/types"
+import { createClerkClient } from '@clerk/backend'
+
+const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY })
 
 export const updateUserRole = async (userId: string, role: UserRole, assignedBy: string) => {
   try {
@@ -11,7 +13,7 @@ export const updateUserRole = async (userId: string, role: UserRole, assignedBy:
     }
 
     await clerkClient.users.updateUserMetadata(userId, {
-      publicMetadata: metadata,
+      publicMetadata: {...metadata}
     })
 
     return { success: true }
@@ -24,7 +26,7 @@ export const updateUserRole = async (userId: string, role: UserRole, assignedBy:
 export const updateUserStatus = async (userId: string, isActive: boolean) => {
   try {
     const user = await clerkClient.users.getUser(userId)
-    const currentMetadata = user.publicMetadata as ClerkUserMetadata
+    const currentMetadata = user.publicMetadata
 
     await clerkClient.users.updateUserMetadata(userId, {
       publicMetadata: {

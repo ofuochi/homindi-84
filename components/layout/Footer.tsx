@@ -1,5 +1,10 @@
-import Link from "next/link"
-import { FacebookOutlined, TwitterOutlined, InstagramOutlined, LinkedinOutlined } from "@ant-design/icons"
+import Link from "next/link";
+import {
+  FacebookOutlined,
+  TwitterOutlined,
+  InstagramOutlined,
+  LinkedinOutlined,
+} from "@ant-design/icons";
 
 export default function Footer() {
   return (
@@ -12,11 +17,12 @@ export default function Footer() {
               <div className="w-8 h-8 bg-[#0B8457] rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">DB</span>
               </div>
-              <span className="text-xl font-bold">DiasporaBasket</span>
+              <span className="text-xl font-bold">Homindi</span>
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
-              Connecting Africans in the diaspora with authentic Nigerian food products. Fresh, quality ingredients
-              delivered to your doorstep worldwide.
+              Connecting Africans in the homindi with authentic Nigerian food
+              products. Fresh, quality ingredients delivered to your doorstep
+              worldwide.
             </p>
             <div className="flex space-x-4">
               <FacebookOutlined className="text-xl hover:text-[#F9A826] cursor-pointer transition-colors" />
@@ -31,22 +37,34 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/products" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/products"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Products
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/about"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/contact"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/shipping" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/shipping"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Shipping Info
                 </Link>
               </li>
@@ -58,22 +76,34 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/faq" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/faq"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/returns" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/returns"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Returns
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/privacy"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/terms"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Terms of Service
                 </Link>
               </li>
@@ -83,10 +113,11 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 DiasporaBasket. All rights reserved. Made with ❤️ for the African diaspora.
+            © 2024 Homindi. All rights reserved. Made with ❤️ for the African
+            homindi.
           </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

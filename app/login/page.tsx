@@ -1,27 +1,27 @@
-"use client"
-import { Form, Input, Button, Card, Typography, Divider, message } from "antd"
-import { GoogleOutlined, MailOutlined, LockOutlined } from "@ant-design/icons"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import Header from "@/components/layout/Header"
-import Footer from "@/components/layout/Footer"
-import { useAuthStore } from "@/store/useAuthStore"
+"use client";
+import { Form, Input, Button, Card, Typography, Divider, message } from "antd";
+import { GoogleOutlined, MailOutlined, LockOutlined } from "@ant-design/icons";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import { useAuthStore } from "@/store/useAuthStore";
 
-const { Title, Text } = Typography
+const { Title, Text } = Typography;
 
 export default function LoginPage() {
-  const { login, isLoading } = useAuthStore()
-  const router = useRouter()
+  const { login, isLoading } = useAuthStore();
+  const router = useRouter();
 
   const onFinish = async (values: any) => {
     try {
-      await login(values.email, values.password)
-      message.success("Login successful!")
-      router.push("/dashboard")
+      await login(values.email, values.password);
+      message.success("Login successful!");
+      router.push("/dashboard");
     } catch (error) {
-      message.error("Login failed. Please try again.")
+      message.error("Login failed. Please try again.");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -33,7 +33,7 @@ export default function LoginPage() {
             <Title level={2} className="mb-2">
               Welcome Back
             </Title>
-            <Text type="secondary">Sign in to your DiasporaBasket account</Text>
+            <Text type="secondary">Sign in to your Homindi account</Text>
           </div>
 
           <Form name="login" onFinish={onFinish} layout="vertical" size="large">
@@ -51,13 +51,23 @@ export default function LoginPage() {
             <Form.Item
               name="password"
               label="Password"
-              rules={[{ required: true, message: "Please input your password!" }]}
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
             >
-              <Input.Password prefix={<LockOutlined />} placeholder="Enter your password" />
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="Enter your password"
+              />
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" block loading={isLoading}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                block
+                loading={isLoading}
+              >
                 Sign In
               </Button>
             </Form.Item>
@@ -72,7 +82,10 @@ export default function LoginPage() {
           <div className="text-center">
             <Text type="secondary">
               Don't have an account?{" "}
-              <Link href="/register" className="text-[#0B8457] hover:text-[#0a7249]">
+              <Link
+                href="/register"
+                className="text-[#0B8457] hover:text-[#0a7249]"
+              >
                 Sign up here
               </Link>
             </Text>
@@ -82,5 +95,5 @@ export default function LoginPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

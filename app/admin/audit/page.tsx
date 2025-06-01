@@ -1,42 +1,63 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Card, Table, Tag, Input, Space, Typography, Avatar, DatePicker, Select, Button } from "antd"
-import { SearchOutlined, UserOutlined, FilterOutlined, DownloadOutlined, ReloadOutlined } from "@ant-design/icons"
-import { useClerkAuth } from "@/lib/hooks/useClerkAuth"
-import type { AuditLog } from "@/lib/types"
-import ProtectedRoute from "@/components/auth/ProtectedRoute"
+import { useState, useEffect } from "react";
+import {
+  Card,
+  Table,
+  Tag,
+  Input,
+  Space,
+  Typography,
+  Avatar,
+  DatePicker,
+  Select,
+  Button,
+} from "antd";
+import {
+  SearchOutlined,
+  UserOutlined,
+  FilterOutlined,
+  DownloadOutlined,
+  ReloadOutlined,
+} from "@ant-design/icons";
+import { useClerkAuth } from "@/lib/hooks/useClerkAuth";
+import type { AuditLog } from "@/lib/types";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
-const { Title, Text } = Typography
-const { Search } = Input
-const { RangePicker } = DatePicker
-const { Option } = Select
+const { Title, Text } = Typography;
+const { Search } = Input;
+const { RangePicker } = DatePicker;
+const { Option } = Select;
 
 export default function AuditLogsPage() {
-  const [auditLogs, setAuditLogs] = useState<AuditLog[]>([])
-  const [loading, setLoading] = useState(true)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [actionFilter, setActionFilter] = useState<string>("all")
-  const [dateRange, setDateRange] = useState<[any, any] | null>(null)
+  const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [actionFilter, setActionFilter] = useState<string>("all");
+  const [dateRange, setDateRange] = useState<[any, any] | null>(null);
 
-  const { user } = useClerkAuth()
+  const { user } = useClerkAuth();
 
   useEffect(() => {
-    loadAuditLogs()
-  }, [])
+    loadAuditLogs();
+  }, []);
 
   const loadAuditLogs = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       // Mock audit logs data
       const mockLogs: AuditLog[] = [
         {
           id: "audit_1",
           userId: "user_1",
-          userEmail: "admin@diasporabasket.com",
+          userEmail: "admin@homindibasket.com",
           action: "role_update",
           resource: "user",
-          details: { targetUserId: "user_2", newRole: "exporter", previousRole: "user" },
+          details: {
+            targetUserId: "user_2",
+            newRole: "exporter",
+            previousRole: "user",
+          },
           timestamp: new Date(Date.now() - 3600000).toISOString(),
           ipAddress: "192.168.1.1",
           userAgent: "Mozilla/5.0...",
@@ -44,7 +65,7 @@ export default function AuditLogsPage() {
         {
           id: "audit_2",
           userId: "user_1",
-          userEmail: "admin@diasporabasket.com",
+          userEmail: "admin@homindibasket.com",
           action: "user_create",
           resource: "user",
           details: { newUserId: "user_3", role: "user" },
@@ -55,22 +76,26 @@ export default function AuditLogsPage() {
         {
           id: "audit_3",
           userId: "user_2",
-          userEmail: "exporter@diasporabasket.com",
+          userEmail: "exporter@homindibasket.com",
           action: "order_update",
           resource: "order",
-          details: { orderId: "order_123", status: "shipped", previousStatus: "processing" },
+          details: {
+            orderId: "order_123",
+            status: "shipped",
+            previousStatus: "processing",
+          },
           timestamp: new Date(Date.now() - 10800000).toISOString(),
           ipAddress: "192.168.1.2",
           userAgent: "Mozilla/5.0...",
         },
-      ]
-      setAuditLogs(mockLogs)
+      ];
+      setAuditLogs(mockLogs);
     } catch (error) {
-      console.error("Failed to load audit logs:", error)
+      console.error("Failed to load audit logs:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const getActionColor = (action: string) => {
     const colors: Record<string, string> = {
@@ -82,34 +107,40 @@ export default function AuditLogsPage() {
       product_create: "cyan",
       product_update: "geekblue",
       product_delete: "volcano",
-    }
-    return colors[action] || "default"
-  }
+    };
+    return colors[action] || "default";
+  };
 
   const filteredLogs = auditLogs.filter((log) => {
     const matchesSearch =
       log.userEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
       log.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      log.resource.toLowerCase().includes(searchTerm.toLowerCase())
+      log.resource.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesAction = actionFilter === "all" || log.action === actionFilter
+    const matchesAction = actionFilter === "all" || log.action === actionFilter;
 
-    let matchesDate = true
+    let matchesDate = true;
     if (dateRange && dateRange[0] && dateRange[1]) {
-      const logDate = new Date(log.timestamp)
-      matchesDate = logDate >= dateRange[0].toDate() && logDate <= dateRange[1].toDate()
+      const logDate = new Date(log.timestamp);
+      matchesDate =
+        logDate >= dateRange[0].toDate() && logDate <= dateRange[1].toDate();
     }
 
-    return matchesSearch && matchesAction && matchesDate
-  })
+    return matchesSearch && matchesAction && matchesDate;
+  });
 
   const columns = [
     {
       title: "Timestamp",
       dataIndex: "timestamp",
       key: "timestamp",
-      render: (timestamp: string) => <Text className="font-inter text-sm">{new Date(timestamp).toLocaleString()}</Text>,
-      sorter: (a: AuditLog, b: AuditLog) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
+      render: (timestamp: string) => (
+        <Text className="font-inter text-sm">
+          {new Date(timestamp).toLocaleString()}
+        </Text>
+      ),
+      sorter: (a: AuditLog, b: AuditLog) =>
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
       defaultSortOrder: "descend" as const,
     },
     {
@@ -137,7 +168,9 @@ export default function AuditLogsPage() {
       title: "Resource",
       dataIndex: "resource",
       key: "resource",
-      render: (resource: string) => <Tag className="font-inter">{resource.toUpperCase()}</Tag>,
+      render: (resource: string) => (
+        <Tag className="font-inter">{resource.toUpperCase()}</Tag>
+      ),
     },
     {
       title: "Details",
@@ -157,9 +190,11 @@ export default function AuditLogsPage() {
       title: "IP Address",
       dataIndex: "ipAddress",
       key: "ipAddress",
-      render: (ip: string) => <Text className="font-inter text-sm font-mono">{ip}</Text>,
+      render: (ip: string) => (
+        <Text className="font-inter text-sm font-mono">{ip}</Text>
+      ),
     },
-  ]
+  ];
 
   return (
     <ProtectedRoute requiredPermission="audit.view">
@@ -174,7 +209,12 @@ export default function AuditLogsPage() {
             </Text>
           </div>
           <Space>
-            <Button icon={<ReloadOutlined />} onClick={loadAuditLogs} loading={loading} className="font-inter">
+            <Button
+              icon={<ReloadOutlined />}
+              onClick={loadAuditLogs}
+              loading={loading}
+              className="font-inter"
+            >
               Refresh
             </Button>
             <Button
@@ -183,7 +223,7 @@ export default function AuditLogsPage() {
               className="font-inter"
               onClick={() => {
                 // Export functionality would be implemented here
-                console.log("Exporting audit logs...")
+                console.log("Exporting audit logs...");
               }}
             >
               Export
@@ -230,9 +270,9 @@ export default function AuditLogsPage() {
             <Button
               icon={<FilterOutlined />}
               onClick={() => {
-                setSearchTerm("")
-                setActionFilter("all")
-                setDateRange(null)
+                setSearchTerm("");
+                setActionFilter("all");
+                setDateRange(null);
               }}
               className="font-inter"
             >
@@ -264,5 +304,5 @@ export default function AuditLogsPage() {
         </Card>
       </div>
     </ProtectedRoute>
-  )
+  );
 }

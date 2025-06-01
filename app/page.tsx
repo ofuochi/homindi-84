@@ -1,18 +1,22 @@
-'use client';
+"use client";
 
-import Header from "@/components/layout/Header"
-import Footer from "@/components/layout/Footer"
-import { Button, Card, Typography, Row, Col } from "antd"
-import { CheckCircleOutlined, TruckOutlined, ShoppingOutlined } from "@ant-design/icons"
-import Link from "next/link"
-import Image from "next/image"
-import ProductCard from "@/components/product/ProductCard"
-import { mockProducts } from "@/lib/mockData"
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import { Button, Card, Typography, Row, Col } from "antd";
+import {
+  CheckCircleOutlined,
+  TruckOutlined,
+  ShoppingOutlined,
+} from "@ant-design/icons";
+import Link from "next/link";
+import Image from "next/image";
+import ProductCard from "@/components/product/ProductCard";
+import { mockProducts } from "@/lib/mockData";
 
-const { Title, Paragraph } = Typography
+const { Title, Paragraph } = Typography;
 
 export default function HomePage() {
-  const featuredProducts = mockProducts.slice(0, 4)
+  const featuredProducts = mockProducts.slice(0, 4);
 
   const testimonials = [
     {
@@ -30,10 +34,10 @@ export default function HomePage() {
     {
       name: "Fatima Adebayo",
       location: "Houston, USA 🇺🇸",
-      text: "DiasporaBasket connects me to my roots. Highly recommend to all Nigerians abroad!",
+      text: "Homindi connects me to my roots. Highly recommend to all Nigerians abroad!",
       rating: 5,
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen">
@@ -44,11 +48,12 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Title level={1} className="text-white mb-6 text-4xl lg:text-5xl font-bold">
+              <h1 className="text-white mb-6 text-4xl lg:text-5xl font-bold">
                 Bringing Nigerian Food to Your Doorstep
-              </Title>
+              </h1>
               <Paragraph className="text-xl text-green-100 mb-8">
-                Authentic Nigerian ingredients delivered worldwide. Connect with your roots through the flavors of home.
+                Authentic Nigerian ingredients delivered worldwide. Connect with
+                your roots through the flavors of home.
               </Paragraph>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/products">
@@ -83,7 +88,8 @@ export default function HomePage() {
               How It Works
             </Title>
             <Paragraph className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Getting authentic Nigerian food delivered to your door is simple with DiasporaBasket
+              Getting authentic Nigerian food delivered to your door is simple
+              with Homindi
             </Paragraph>
           </div>
 
@@ -93,7 +99,8 @@ export default function HomePage() {
                 <ShoppingOutlined className="text-4xl text-[#0B8457] mb-4" />
                 <Title level={4}>1. Browse & Order</Title>
                 <Paragraph>
-                  Browse our curated selection of authentic Nigerian products and add them to your cart.
+                  Browse our curated selection of authentic Nigerian products
+                  and add them to your cart.
                 </Paragraph>
               </Card>
             </Col>
@@ -102,7 +109,8 @@ export default function HomePage() {
                 <CheckCircleOutlined className="text-4xl text-[#F9A826] mb-4" />
                 <Title level={4}>2. We Process</Title>
                 <Paragraph>
-                  We carefully package your order with fresh, quality ingredients sourced directly from Nigeria.
+                  We carefully package your order with fresh, quality
+                  ingredients sourced directly from Nigeria.
                 </Paragraph>
               </Card>
             </Col>
@@ -111,7 +119,8 @@ export default function HomePage() {
                 <TruckOutlined className="text-4xl text-[#0B8457] mb-4" />
                 <Title level={4}>3. Fast Delivery</Title>
                 <Paragraph>
-                  Receive your authentic Nigerian ingredients at your doorstep, anywhere in the world.
+                  Receive your authentic Nigerian ingredients at your doorstep,
+                  anywhere in the world.
                 </Paragraph>
               </Card>
             </Col>
@@ -126,7 +135,9 @@ export default function HomePage() {
             <Title level={2} className="mb-4">
               Featured Products
             </Title>
-            <Paragraph className="text-lg text-gray-600">Discover our most popular Nigerian ingredients</Paragraph>
+            <Paragraph className="text-lg text-gray-600">
+              Discover our most popular Nigerian ingredients
+            </Paragraph>
           </div>
 
           <Row gutter={[24, 24]}>
@@ -154,7 +165,9 @@ export default function HomePage() {
             <Title level={2} className="mb-4">
               What Our Customers Say
             </Title>
-            <Paragraph className="text-lg text-gray-600">Join thousands of satisfied customers worldwide</Paragraph>
+            <Paragraph className="text-lg text-gray-600">
+              Join thousands of satisfied customers worldwide
+            </Paragraph>
           </div>
 
           <Row gutter={[24, 24]}>
@@ -169,11 +182,15 @@ export default function HomePage() {
                         </span>
                       ))}
                     </div>
-                    <Paragraph className="text-gray-600 mb-4 italic">"{testimonial.text}"</Paragraph>
+                    <Paragraph className="text-gray-600 mb-4 italic">
+                      "{testimonial.text}"
+                    </Paragraph>
                     <Title level={5} className="mb-1">
                       {testimonial.name}
                     </Title>
-                    <Paragraph type="secondary">{testimonial.location}</Paragraph>
+                    <Paragraph type="secondary">
+                      {testimonial.location}
+                    </Paragraph>
                   </div>
                 </Card>
               </Col>
@@ -189,7 +206,8 @@ export default function HomePage() {
             Ready to Taste Home?
           </Title>
           <Paragraph className="text-xl text-green-100 mb-8">
-            Start your culinary journey with authentic Nigerian ingredients delivered worldwide.
+            Start your culinary journey with authentic Nigerian ingredients
+            delivered worldwide.
           </Paragraph>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/products">
@@ -208,5 +226,5 @@ export default function HomePage() {
 
       <Footer />
     </div>
-  )
+  );
 }

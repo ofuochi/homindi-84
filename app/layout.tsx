@@ -1,31 +1,32 @@
-import type React from "react"
-import { ClerkProvider } from "@clerk/nextjs"
-import type { Metadata } from "next"
-import { Inter, Poppins } from "next/font/google"
-import "./globals.css"
-import Providers from "./providers"
+import type React from "react";
+import { ClerkProvider } from "@clerk/nextjs";
+import type { Metadata } from "next";
+import { Inter, Poppins } from "next/font/google";
+import "./globals.css";
+import Providers from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-})
+});
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-poppins",
-})
+});
 
 export const metadata: Metadata = {
-  title: "DiasporaBasket - African Food Marketplace",
-  description: "Your trusted source for authentic African foods and ingredients",
-    generator: 'v0.dev'
-}
+  title: "Homindi - African Food Marketplace",
+  description:
+    "Your trusted source for authentic African foods and ingredients",
+  generator: "v0.dev",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <ClerkProvider
@@ -51,5 +52,5 @@ export default function RootLayout({
         </body>
       </html>
     </ClerkProvider>
-  )
+  );
 }
