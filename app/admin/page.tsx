@@ -1,7 +1,20 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Card, Row, Col, Statistic, Progress, Table, Tag, Button, Space, Typography, Alert, Badge } from "antd"
+import { useState, useEffect } from "react";
+import {
+  Card,
+  Row,
+  Col,
+  Statistic,
+  Progress,
+  Table,
+  Tag,
+  Button,
+  Space,
+  Typography,
+  Alert,
+  Badge,
+} from "antd";
 import {
   ShoppingCartOutlined,
   UserOutlined,
@@ -12,21 +25,21 @@ import {
   FallOutlined,
   EyeOutlined,
   EditOutlined,
-} from "@ant-design/icons"
-import { useClerkAuth } from "@/lib/hooks/useClerkAuth"
-import Link from "next/link"
+} from "@ant-design/icons";
+import { useClerkAuth } from "@/lib/hooks/useClerkAuth";
+import Link from "next/link";
 
-const { Title, Text } = Typography
+const { Title, Text } = Typography;
 
 export default function AdminDashboard() {
-  const { user, userRole, roleInfo, hasPermission } = useClerkAuth()
-  const [loading, setLoading] = useState(true)
+  const { user, userRole, roleInfo, hasPermission } = useClerkAuth();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Simulate data loading
-    const timer = setTimeout(() => setLoading(false), 1000)
-    return () => clearTimeout(timer)
-  }, [])
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Mock data - replace with real API calls
   const dashboardStats = {
@@ -38,7 +51,7 @@ export default function AdminDashboard() {
     lowStockItems: 8,
     activeUsers: 234,
     conversionRate: 3.2,
-  }
+  };
 
   const recentOrders = [
     {
@@ -65,13 +78,25 @@ export default function AdminDashboard() {
       status: "delivered",
       date: "2024-01-14",
     },
-  ]
+  ];
 
   const lowStockProducts = [
-    { key: "1", name: "Jollof Rice Mix", stock: 5, threshold: 20, category: "Spices" },
+    {
+      key: "1",
+      name: "Jollof Rice Mix",
+      stock: 5,
+      threshold: 20,
+      category: "Spices",
+    },
     { key: "2", name: "Palm Oil", stock: 3, threshold: 15, category: "Oils" },
-    { key: "3", name: "Plantain Chips", stock: 8, threshold: 25, category: "Snacks" },
-  ]
+    {
+      key: "3",
+      name: "Plantain Chips",
+      stock: 8,
+      threshold: 25,
+      category: "Snacks",
+    },
+  ];
 
   const orderColumns = [
     {
@@ -101,8 +126,12 @@ export default function AdminDashboard() {
           shipped: "blue",
           delivered: "green",
           cancelled: "red",
-        }
-        return <Tag color={colors[status as keyof typeof colors]}>{status.toUpperCase()}</Tag>
+        };
+        return (
+          <Tag color={colors[status as keyof typeof colors]}>
+            {status.toUpperCase()}
+          </Tag>
+        );
       },
     },
     {
@@ -116,11 +145,13 @@ export default function AdminDashboard() {
       render: (_, record: any) => (
         <Space>
           <Button size="small" icon={<EyeOutlined />} />
-          {hasPermission("orders.manage") && <Button size="small" icon={<EditOutlined />} />}
+          {hasPermission("orders.manage") && (
+            <Button size="small" icon={<EditOutlined />} />
+          )}
         </Space>
       ),
     },
-  ]
+  ];
 
   const stockColumns = [
     {
@@ -142,7 +173,8 @@ export default function AdminDashboard() {
         <Badge
           count={stock}
           style={{
-            backgroundColor: stock <= 5 ? "#ff4d4f" : stock <= 10 ? "#faad14" : "#52c41a",
+            backgroundColor:
+              stock <= 5 ? "#ff4d4f" : stock <= 10 ? "#faad14" : "#52c41a",
           }}
         />
       ),
@@ -165,7 +197,7 @@ export default function AdminDashboard() {
         </Space>
       ),
     },
-  ]
+  ];
 
   return (
     <div className="space-y-6">
@@ -174,10 +206,11 @@ export default function AdminDashboard() {
         <div className="flex items-center justify-between">
           <div>
             <Title level={2} className="text-white mb-2 font-poppins">
-              Welcome back, {user?.firstName}! 👋
+              Welcome back, {user?.firstName || user?.username}! 👋
             </Title>
             <Text className="text-white/80 font-inter">
-              You're logged in as <strong>{roleInfo?.name}</strong>. Here's what's happening with your platform today.
+              You're logged in as <strong>{roleInfo?.name}</strong>. Here's
+              what's happening with your platform today.
             </Text>
           </div>
           <div className="hidden md:block">
@@ -256,7 +289,10 @@ export default function AdminDashboard() {
       {/* Alerts and Quick Actions */}
       <Row gutter={[16, 16]}>
         <Col xs={24} lg={16}>
-          <Card title="System Alerts" extra={<Button size="small">View All</Button>}>
+          <Card
+            title="System Alerts"
+            extra={<Button size="small">View All</Button>}
+          >
             <Space direction="vertical" className="w-full">
               <Alert
                 message="Low Stock Alert"
@@ -300,7 +336,11 @@ export default function AdminDashboard() {
                   <Text>Conversion Rate</Text>
                   <Text strong>{dashboardStats.conversionRate}%</Text>
                 </div>
-                <Progress percent={dashboardStats.conversionRate * 10} size="small" status="active" />
+                <Progress
+                  percent={dashboardStats.conversionRate * 10}
+                  size="small"
+                  status="active"
+                />
               </div>
               <div>
                 <div className="flex justify-between mb-1">
@@ -327,7 +367,13 @@ export default function AdminDashboard() {
               </Link>
             }
           >
-            <Table columns={orderColumns} dataSource={recentOrders} pagination={false} size="small" loading={loading} />
+            <Table
+              columns={orderColumns}
+              dataSource={recentOrders}
+              pagination={false}
+              size="small"
+              loading={loading}
+            />
           </Card>
         </Col>
         <Col xs={24} xl={10}>
@@ -357,5 +403,5 @@ export default function AdminDashboard() {
         </Col>
       </Row>
     </div>
-  )
+  );
 }
