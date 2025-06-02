@@ -1,7 +1,17 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import { Card, Button, Typography, Row, Col, Tag, Statistic, List, Avatar } from "antd"
+import { useEffect } from "react";
+import {
+  Card,
+  Button,
+  Typography,
+  Row,
+  Col,
+  Tag,
+  Statistic,
+  List,
+  Avatar,
+} from "antd";
 import {
   ShoppingOutlined,
   ReloadOutlined,
@@ -9,34 +19,38 @@ import {
   DollarOutlined,
   ShoppingCartOutlined,
   ClockCircleOutlined,
-} from "@ant-design/icons"
-import Link from "next/link"
-import { useOrderStore } from "@/store/useOrderStore"
-import { useAuthStore } from "@/store/useAuthStore"
-import { formatCurrency, formatDate } from "@/lib/utils"
-import { ORDER_STATUSES } from "@/lib/constants"
+} from "@ant-design/icons";
+import Link from "next/link";
+import { useOrderStore } from "@/store/useOrderStore";
+import { useAuthStore } from "@/store/useAuthStore";
+import { formatCurrency, formatDate } from "@/lib/utils";
+import { ORDER_STATUSES } from "@/lib/constants";
 
-const { Title, Text } = Typography
+const { Title, Text } = Typography;
 
 export default function DashboardPage() {
-  const { user } = useAuthStore()
-  const { orders, isLoading, fetchOrders, reorder } = useOrderStore()
+  const { user } = useAuthStore();
+  const { orders, isLoading, fetchOrders, reorder } = useOrderStore();
 
   useEffect(() => {
     if (orders.length === 0) {
-      fetchOrders()
+      fetchOrders();
     }
-  }, [orders.length, fetchOrders])
+  }, [orders.length, fetchOrders]);
 
-  const recentOrders = orders.slice(0, 3)
-  const totalSpent = orders.reduce((sum, order) => sum + order.total, 0)
-  const pendingOrders = orders.filter((order) => order.status === "pending" || order.status === "processing").length
-  const deliveredOrders = orders.filter((order) => order.status === "delivered").length
+  const recentOrders = orders.slice(0, 3);
+  const totalSpent = orders.reduce((sum, order) => sum + order.total, 0);
+  const pendingOrders = orders.filter(
+    (order) => order.status === "pending" || order.status === "processing"
+  ).length;
+  const deliveredOrders = orders.filter(
+    (order) => order.status === "delivered"
+  ).length;
 
   const getStatusColor = (status: string) => {
-    const statusConfig = ORDER_STATUSES.find((s) => s.value === status)
-    return statusConfig?.color || "default"
-  }
+    const statusConfig = ORDER_STATUSES.find((s) => s.value === status);
+    return statusConfig?.color || "default";
+  };
 
   return (
     <div className="space-y-6">
@@ -62,7 +76,6 @@ export default function DashboardPage() {
             <Statistic
               title="Total Spent"
               value={totalSpent}
-              prefix={<DollarOutlined />}
               formatter={(value) => formatCurrency(Number(value))}
               valueStyle={{ color: "#0B8457" }}
             />
@@ -126,19 +139,29 @@ export default function DashboardPage() {
                     ]}
                   >
                     <List.Item.Meta
-                      avatar={<Avatar style={{ backgroundColor: "#0B8457" }} icon={<ShoppingCartOutlined />} />}
+                      avatar={
+                        <Avatar
+                          style={{ backgroundColor: "#0B8457" }}
+                          icon={<ShoppingCartOutlined />}
+                        />
+                      }
                       title={
                         <div className="flex items-center gap-2">
                           <Text strong>{order.id}</Text>
-                          <Tag color={getStatusColor(order.status)} size="small">
-                            {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                          <Tag
+                            color={getStatusColor(order.status)}
+                            size="small"
+                          >
+                            {order.status.charAt(0).toUpperCase() +
+                              order.status.slice(1)}
                           </Tag>
                         </div>
                       }
                       description={
                         <div>
                           <Text type="secondary">
-                            {order.items.length} item(s) • {formatCurrency(order.total)}
+                            {order.items.length} item(s) •{" "}
+                            {formatCurrency(order.total)}
                           </Text>
                           <br />
                           <Text type="secondary" className="text-xs">
@@ -181,7 +204,12 @@ export default function DashboardPage() {
               <Link href="/dashboard/settings">
                 <Button block>Account Settings</Button>
               </Link>
-              <Button block icon={<ReloadOutlined />} onClick={fetchOrders} loading={isLoading}>
+              <Button
+                block
+                icon={<ReloadOutlined />}
+                onClick={fetchOrders}
+                loading={isLoading}
+              >
                 Refresh Orders
               </Button>
             </div>
@@ -191,9 +219,14 @@ export default function DashboardPage() {
           <Card title="Order Status Summary" className="mt-6">
             <div className="space-y-3">
               {ORDER_STATUSES.map((status) => {
-                const count = orders.filter((order) => order.status === status.value).length
+                const count = orders.filter(
+                  (order) => order.status === status.value
+                ).length;
                 return (
-                  <div key={status.value} className="flex justify-between items-center">
+                  <div
+                    key={status.value}
+                    className="flex justify-between items-center"
+                  >
                     <div className="flex items-center gap-2">
                       <Tag color={status.color} size="small">
                         {status.label}
@@ -201,12 +234,12 @@ export default function DashboardPage() {
                     </div>
                     <Text strong>{count}</Text>
                   </div>
-                )
+                );
               })}
             </div>
           </Card>
         </Col>
       </Row>
     </div>
-  )
+  );
 }

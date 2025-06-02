@@ -33,28 +33,20 @@ const roleIcons = {
   user: UserOutlined,
 };
 
-export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { getItemCount, setIsOpen } = useCartStore();
+export const HeaderActions = ({
+  setMobileMenuOpen,
+}: {
+  setMobileMenuOpen?: (open: boolean) => void;
+}) => {
   const { user, isSignedIn, userRole, roleInfo, canAccessAdminPanel } =
     useClerkAuth();
-
-  const cartItemCount = getItemCount();
-
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/products", label: "Products" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
-  ];
-
-  const handleCartClick = () => {
-    setIsOpen(true);
-  };
+  const { getItemCount, setIsOpen } = useCartStore();
 
   const RoleIcon = roleIcons[userRole] || UserOutlined;
   const userName = user
-    ? `${user.firstName || ""} ${user.lastName || ""}`.trim() || "User"
+    ? `${user.firstName || ""} ${user.lastName || ""}`.trim() ||
+      user.username ||
+      "User"
     : "User";
 
   const userMenuItems = [
@@ -92,6 +84,97 @@ export default function Header() {
   ];
 
   return (
+    <div className="flex items-center space-x-2 sm:space-x-3">
+      {isSignedIn && (
+        <>
+          <ConnectionStatus />
+          <NotificationBell />
+        </>
+      )}
+
+      {/* Cart */}
+      <Button
+        type="text"
+        icon={
+          <Badge count={getItemCount()} size="small">
+            <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-[#0B8457] transition-colors" />
+          </Badge>
+        }
+        onClick={() => setIsOpen(true)}
+        className="flex items-center"
+      />
+
+      {/* Auth */}
+      <div className="hidden md:flex items-center space-x-2">
+        {isSignedIn ? (
+          <Dropdown
+            menu={{ items: userMenuItems }}
+            placement="bottomRight"
+            arrow
+          >
+            <Button type="text" className="flex items-center space-x-2 px-3">
+              <Avatar
+                size="small"
+                icon={<RoleIcon />}
+                src={user?.imageUrl}
+                style={{
+                  backgroundColor:
+                    roleInfo?.color === "default" ? "#1890ff" : undefined,
+                }}
+              />
+              <div className="text-left hidden lg:block">
+                <div className="font-inter font-medium text-sm">{userName}</div>
+                <div className="font-inter text-xs text-gray-500">
+                  {roleInfo?.name}
+                </div>
+              </div>
+            </Button>
+          </Dropdown>
+        ) : (
+          <Space>
+            <Link href="/sign-in">
+              <Button type="default" className="font-inter font-medium">
+                Sign In
+              </Button>
+            </Link>
+            <Link href="/sign-up">
+              <Button type="primary" className="font-inter font-medium">
+                Sign Up
+              </Button>
+            </Link>
+          </Space>
+        )}
+      </div>
+
+      {/* Mobile menu button */}
+      <Button
+        type="text"
+        icon={<MenuOutlined />}
+        onClick={() => setMobileMenuOpen?.(true)}
+        className="md:hidden"
+      />
+    </div>
+  );
+};
+
+export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, isSignedIn, userRole, roleInfo, canAccessAdminPanel } =
+    useClerkAuth();
+
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/products", label: "Products" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+  ];
+
+  const RoleIcon = roleIcons[userRole] || UserOutlined;
+  const userName = user
+    ? `${user.firstName || ""} ${user.lastName || ""}`.trim() || "User"
+    : "User";
+
+  return (
     <>
       <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -126,82 +209,7 @@ export default function Header() {
             </nav>
 
             {/* Right side actions */}
-            <div className="flex items-center space-x-2 sm:space-x-3">
-              {/* Connection Status - only show when authenticated */}
-              {isSignedIn && <ConnectionStatus />}
-
-              {/* Notifications - only show when authenticated */}
-              {isSignedIn && <NotificationBell />}
-
-              {/* Cart */}
-              <Button
-                type="text"
-                icon={
-                  <Badge count={cartItemCount} size="small">
-                    <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-[#0B8457] transition-colors" />
-                  </Badge>
-                }
-                onClick={handleCartClick}
-                className="flex items-center"
-              />
-
-              {/* Auth */}
-              <div className="hidden md:flex items-center space-x-2">
-                {isSignedIn ? (
-                  <Dropdown
-                    menu={{ items: userMenuItems }}
-                    placement="bottomRight"
-                    arrow
-                  >
-                    <Button
-                      type="text"
-                      className="flex items-center space-x-2 px-3"
-                    >
-                      <Avatar
-                        size="small"
-                        icon={<RoleIcon />}
-                        src={user?.imageUrl}
-                        style={{
-                          backgroundColor:
-                            roleInfo?.color === "default"
-                              ? "#1890ff"
-                              : undefined,
-                        }}
-                      />
-                      <div className="text-left hidden lg:block">
-                        <div className="font-inter font-medium text-sm">
-                          {userName}
-                        </div>
-                        <div className="font-inter text-xs text-gray-500">
-                          {roleInfo?.name}
-                        </div>
-                      </div>
-                    </Button>
-                  </Dropdown>
-                ) : (
-                  <Space>
-                    <Link href="/sign-in">
-                      <Button type="default" className="font-inter font-medium">
-                        Sign In
-                      </Button>
-                    </Link>
-                    <Link href="/sign-up">
-                      <Button type="primary" className="font-inter font-medium">
-                        Sign Up
-                      </Button>
-                    </Link>
-                  </Space>
-                )}
-              </div>
-
-              {/* Mobile menu button */}
-              <Button
-                type="text"
-                icon={<MenuOutlined />}
-                onClick={() => setMobileMenuOpen(true)}
-                className="md:hidden"
-              />
-            </div>
+            <HeaderActions setMobileMenuOpen={setMobileMenuOpen} />
           </div>
         </div>
       </header>

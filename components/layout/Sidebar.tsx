@@ -1,5 +1,5 @@
-"use client"
-import { Menu, Badge, Tooltip } from "antd"
+"use client";
+import { Menu, Badge, Tooltip } from "antd";
 import {
   DashboardOutlined,
   ShoppingOutlined,
@@ -9,23 +9,24 @@ import {
   HeartOutlined,
   CreditCardOutlined,
   SafetyOutlined,
-} from "@ant-design/icons"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useNotificationStore } from "@/store/useNotificationStore"
-import { useAuthStore } from "@/store/useAuthStore"
-import { getRoleInfo } from "@/lib/auth/roles"
+} from "@ant-design/icons";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useNotificationStore } from "@/store/useNotificationStore";
+import { useAuthStore } from "@/store/useAuthStore";
+import { getRoleInfo } from "@/lib/auth/roles";
+import Image from "next/image";
 
 interface SidebarProps {
-  collapsed?: boolean
+  collapsed?: boolean;
 }
 
 export default function Sidebar({ collapsed = false }: SidebarProps) {
-  const pathname = usePathname()
-  const { unreadCount } = useNotificationStore()
-  const { user } = useAuthStore()
+  const pathname = usePathname();
+  const { unreadCount } = useNotificationStore();
+  const { user } = useAuthStore();
 
-  const roleInfo = user ? getRoleInfo(user.role) : null
+  const roleInfo = user ? getRoleInfo(user.role) : null;
 
   const menuItems = [
     {
@@ -43,11 +44,17 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
     {
       key: "/dashboard/notifications",
       icon: (
-        <Badge count={unreadCount} size="small" offset={collapsed ? [0, 0] : [10, 0]}>
+        <Badge
+          count={unreadCount}
+          size="small"
+          offset={collapsed ? [0, 0] : [10, 0]}
+        >
           <BellOutlined />
         </Badge>
       ),
-      label: collapsed ? null : <Link href="/dashboard/notifications">Notifications</Link>,
+      label: collapsed ? null : (
+        <Link href="/dashboard/notifications">Notifications</Link>
+      ),
       title: "Notifications",
     },
     {
@@ -61,25 +68,35 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
         {
           key: "/dashboard/settings",
           icon: <UserOutlined />,
-          label: collapsed ? null : <Link href="/dashboard/settings">Profile Settings</Link>,
+          label: collapsed ? null : (
+            <Link href="/dashboard/settings">Profile Settings</Link>
+          ),
           title: "Profile Settings",
         },
         {
           key: "/dashboard/settings/notifications",
           icon: <SettingOutlined />,
-          label: collapsed ? null : <Link href="/dashboard/settings/notifications">Notification Settings</Link>,
+          label: collapsed ? null : (
+            <Link href="/dashboard/settings/notifications">
+              Notification Settings
+            </Link>
+          ),
           title: "Notification Settings",
         },
         {
           key: "/dashboard/settings/privacy",
           icon: <SafetyOutlined />,
-          label: collapsed ? null : <Link href="/dashboard/settings/privacy">Privacy & Security</Link>,
+          label: collapsed ? null : (
+            <Link href="/dashboard/settings/privacy">Privacy & Security</Link>
+          ),
           title: "Privacy & Security",
         },
         {
           key: "/dashboard/settings/billing",
           icon: <CreditCardOutlined />,
-          label: collapsed ? null : <Link href="/dashboard/settings/billing">Billing & Payment</Link>,
+          label: collapsed ? null : (
+            <Link href="/dashboard/settings/billing">Billing & Payment</Link>
+          ),
           title: "Billing & Payment",
         },
       ],
@@ -90,10 +107,12 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
     {
       key: "/dashboard/wishlist",
       icon: <HeartOutlined />,
-      label: collapsed ? null : <Link href="/dashboard/wishlist">Wishlist</Link>,
+      label: collapsed ? null : (
+        <Link href="/dashboard/wishlist">Wishlist</Link>
+      ),
       title: "Wishlist",
     },
-  ]
+  ];
 
   const renderMenuItem = (item: any) => {
     if (collapsed && item.title) {
@@ -104,33 +123,46 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
             <Link href={item.key}>{item.title}</Link>
           </Tooltip>
         ),
-      }
+      };
     }
-    return item
-  }
+    return item;
+  };
 
-  const processedItems = menuItems.map(renderMenuItem)
+  const processedItems = menuItems.map(renderMenuItem);
 
   return (
     <div className="h-full flex flex-col">
       {!collapsed && (
-        <div className="p-4 border-b border-gray-200">
+        <div className="p-4 pb-3 border-r border-gray-200">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold text-lg font-poppins">DB</span>
+            <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
+              <Image
+                src="/logo.png"
+                alt="Homindi Logo"
+                width={100}
+                height={100}
+                className="object-contain"
+              />{" "}
             </div>
             <div>
-              <span className="font-bold text-gray-900 font-poppins text-lg">Dashboard</span>
-              <p className="text-xs text-gray-500 font-inter">{roleInfo?.name || "Welcome back!"}</p>
+              <span className="font-bold text-gray-900 font-poppins text-lg">
+                Homindi
+              </span>
             </div>
           </div>
         </div>
       )}
 
       {collapsed && (
-        <div className="p-4 border-b border-gray-200 flex justify-center">
-          <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-lg flex items-center justify-center shadow-lg">
-            <span className="text-white font-bold text-sm font-poppins">DB</span>
+        <div className="p-4 pb-3 border-r border-gray-200 flex justify-center">
+          <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
+            <Image
+              src="/logo.png"
+              alt="Homindi Logo"
+              width={100}
+              height={100}
+              className="object-contain"
+            />{" "}
           </div>
         </div>
       )}
@@ -149,5 +181,5 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
         />
       </div>
     </div>
-  )
+  );
 }
