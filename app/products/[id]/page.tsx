@@ -1,191 +1,292 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useParams } from "next/navigation"
-import { Row, Col, Button, InputNumber, Tag, Typography, Divider, Card, message } from "antd"
-import { ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons"
-import Image from "next/image"
-import Header from "@/components/layout/Header"
-import Footer from "@/components/layout/Footer"
-import ProductCard from "@/components/product/ProductCard"
-import { mockProducts } from "@/lib/mockData"
-import { formatCurrency } from "@/lib/utils"
-import { useCartStore } from "@/store/useCartStore"
+import { useState } from "react";
+import { useParams } from "next/navigation";
+import {
+  Row,
+  Col,
+  Typography,
+  Button,
+  InputNumber,
+  Divider,
+  Tag,
+  Tabs,
+  Breadcrumb,
+  Skeleton,
+  message,
+  Layout,
+} from "antd";
+import {
+  ShoppingCartOutlined,
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  TagOutlined,
+  GlobalOutlined,
+  InfoCircleOutlined,
+} from "@ant-design/icons";
+import Image from "next/image";
+import Link from "next/link";
+import { useCartStore } from "@/store/useCartStore";
+import { mockProducts } from "@/lib/mockData";
+import WishlistButton from "@/components/product/WishlistButton";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
-const { Title, Paragraph, Text } = Typography
+const { Title, Text } = Typography;
+const { TabPane } = Tabs;
 
-export default function ProductDetailPage() {
-  const params = useParams()
-  const { addItem } = useCartStore()
-  const [quantity, setQuantity] = useState(1)
+export default function ProductPage() {
+  const params = useParams();
+  const productId = params.id as string;
+  const { addItem } = useCartStore();
+  const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(true);
 
-  const product = mockProducts.find((p) => p.id === params.id)
-  const relatedProducts = mockProducts.filter((p) => p.id !== params.id && p.category === product?.category).slice(0, 4)
+  // Simulate loading
+  useState(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  });
 
-  if (!product) {
+  // In a real app, this would be fetched from an API
+  const product = mockProducts.find((p) => p.id === productId);
+
+  if (!product && !loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <Title level={2}>Product Not Found</Title>
-          <Paragraph>The product you're looking for doesn't exist.</Paragraph>
-        </div>
-        <Footer />
+      <div className="text-center py-12">
+        <Title level={3}>Product not found</Title>
+        <Link href="/products">
+          <Button type="primary" className="mt-4 bg-[#0B8457]">
+            Back to Products
+          </Button>
+        </Link>
       </div>
-    )
+    );
   }
 
   const handleAddToCart = () => {
-    addItem(product, quantity)
-    message.success(`${quantity}x ${product.name} added to cart!`)
-  }
+    if (product) {
+      addItem(product, quantity);
+      message.success(`${quantity} ${product.name} added to cart!`);
+    }
+  };
+
+  const handleQuantityChange = (value: number | null) => {
+    if (value !== null) {
+      setQuantity(value);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <Layout>
       <Header />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <Layout.Content className="container mx-auto px-4 py-8">
+        <Breadcrumb className="mb-6">
+          <Breadcrumb.Item>
+            <Link href="/">Home</Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            <Link href="/products">Products</Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            {loading ? <Skeleton.Button active size="small" /> : product?.name}
+          </Breadcrumb.Item>
+        </Breadcrumb>
+
         <Row gutter={[32, 32]}>
-          {/* Product Images */}
-          <Col xs={24} lg={12}>
-            <div className="sticky top-8">
-              <div className="relative aspect-square rounded-lg overflow-hidden bg-white">
-                <Image src={product.image || "/placeholder.svg"} alt={product.name} fill className="object-cover" />
-                {!product.inStock && (
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <Tag color="red" className="text-lg px-4 py-2">
-                      Out of Stock
-                    </Tag>
-                  </div>
-                )}
+          <Col xs={24} md={12}>
+            {loading ? (
+              <Skeleton.Image className="w-full h-96" active />
+            ) : (
+              <div className="relative w-full h-96 bg-gray-100 rounded-lg overflow-hidden">
+                <Image
+                  src={
+                    product?.image || "/placeholder.svg?height=400&width=600"
+                  }
+                  alt={product?.name || "Product"}
+                  fill
+                  className="object-cover"
+                />
               </div>
-            </div>
+            )}
           </Col>
 
-          {/* Product Info */}
-          <Col xs={24} lg={12}>
-            <div className="space-y-6">
-              <div>
-                <Tag color="green" className="mb-2">
-                  {product.category}
-                </Tag>
-                <Title level={1} className="mb-2">
-                  {product.name}
-                </Title>
-                <Text type="secondary" className="text-lg">
-                  Origin: {product.origin}
-                </Text>
-              </div>
+          <Col xs={24} md={12}>
+            {loading ? (
+              <>
+                <Skeleton active paragraph={{ rows: 1 }} />
+                <Skeleton active paragraph={{ rows: 3 }} />
+                <Skeleton.Button active size="large" className="mt-4" />
+                <Skeleton.Button active size="large" className="ml-4" />
+              </>
+            ) : (
+              product && (
+                <>
+                  <div className="flex justify-between items-start">
+                    <Title level={2}>{product.name}</Title>
+                    <WishlistButton product={product} showText />
+                  </div>
 
-              <div>
-                <Title level={2} className="text-[#0B8457] mb-2">
-                  {formatCurrency(product.price)}
-                </Title>
-                <Text className="text-lg text-gray-600">{product.unit}</Text>
-                {product.weight && <Text className="text-sm text-gray-500 ml-2">({product.weight})</Text>}
-              </div>
+                  <div className="flex items-center mb-4">
+                    <Text className="text-2xl font-bold mr-4">
+                      ${product.price.toFixed(2)}
+                    </Text>
+                    {product.discount && (
+                      <Tag color="red" className="text-sm">
+                        {product.discount}% OFF
+                      </Tag>
+                    )}
+                  </div>
 
-              <Divider />
+                  <Text className="text-gray-600 block mb-6">
+                    {product.description}
+                  </Text>
 
-              <div>
-                <Title level={4} className="mb-2">
-                  Description
-                </Title>
-                <Paragraph className="text-gray-600 text-lg leading-relaxed">{product.description}</Paragraph>
-              </div>
+                  <div className="flex items-center mb-4">
+                    <Text strong className="mr-2">
+                      Availability:
+                    </Text>
+                    {product.inStock ? (
+                      <Tag
+                        icon={<CheckCircleOutlined />}
+                        color="success"
+                        className="mr-4"
+                      >
+                        In Stock
+                      </Tag>
+                    ) : (
+                      <Tag
+                        icon={<CloseCircleOutlined />}
+                        color="error"
+                        className="mr-4"
+                      >
+                        Out of Stock
+                      </Tag>
+                    )}
 
-              <div>
-                <Title level={4} className="mb-2">
-                  Stock Status
-                </Title>
-                <Tag color={product.inStock ? "green" : "red"} className="text-sm">
-                  {product.inStock ? `In Stock (${product.stockQuantity} available)` : "Out of Stock"}
-                </Tag>
-              </div>
+                    <Text strong className="mr-2">
+                      Category:
+                    </Text>
+                    <Tag icon={<TagOutlined />} color="default">
+                      {product.category}
+                    </Tag>
+                  </div>
 
-              {product.inStock && (
-                <div className="space-y-4">
-                  <div>
-                    <Title level={4} className="mb-2">
-                      Quantity
-                    </Title>
+                  <div className="flex items-center mb-6">
+                    <Text strong className="mr-2">
+                      Origin:
+                    </Text>
+                    <Tag icon={<GlobalOutlined />} color="processing">
+                      {product.origin}
+                    </Tag>
+                  </div>
+
+                  <Divider />
+
+                  <div className="flex items-center mb-6">
+                    <Text strong className="mr-4">
+                      Quantity:
+                    </Text>
                     <InputNumber
                       min={1}
                       max={product.stockQuantity}
-                      value={quantity}
-                      onChange={(value) => setQuantity(value || 1)}
-                      size="large"
-                      className="w-24"
+                      defaultValue={1}
+                      onChange={handleQuantityChange}
+                      disabled={!product.inStock}
                     />
+                    <Text className="ml-4 text-gray-500">
+                      {product.stockQuantity} available
+                    </Text>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-wrap gap-4">
                     <Button
                       type="primary"
-                      size="large"
                       icon={<ShoppingCartOutlined />}
+                      size="large"
                       onClick={handleAddToCart}
-                      className="flex-1"
+                      disabled={!product.inStock}
+                      className="bg-[#0B8457]"
                     >
-                      Add to Cart - {formatCurrency(product.price * quantity)}
-                    </Button>
-                    <Button size="large" icon={<HeartOutlined />} className="sm:w-auto">
-                      Add to Wishlist
+                      Add to Cart
                     </Button>
                   </div>
-                </div>
-              )}
 
-              <Card className="bg-green-50 border-green-200">
-                <div className="space-y-2">
-                  <Text strong className="text-green-800">
-                    ✓ Authentic Nigerian Product
-                  </Text>
-                  <br />
-                  <Text strong className="text-green-800">
-                    ✓ Fresh & Quality Guaranteed
-                  </Text>
-                  <br />
-                  <Text strong className="text-green-800">
-                    ✓ Worldwide Shipping Available
-                  </Text>
-                  <br />
-                  <Text strong className="text-green-800">
-                    ✓ Secure Packaging
-                  </Text>
-                </div>
-              </Card>
-            </div>
+                  {product.minOrderQuantity && (
+                    <div className="mt-4 bg-blue-50 p-3 rounded-md">
+                      <Text type="secondary">
+                        <InfoCircleOutlined className="mr-2" />
+                        Minimum order quantity: {product.minOrderQuantity}{" "}
+                        {product.unit}
+                      </Text>
+                    </div>
+                  )}
+                </>
+              )
+            )}
           </Col>
         </Row>
 
-        {/* Related Products */}
-        {relatedProducts.length > 0 && (
-          <div className="mt-16">
-            <Title level={3} className="mb-8">
-              Related Products
-            </Title>
-            <Row gutter={[24, 24]}>
-              {relatedProducts.map((relatedProduct) => (
-                <Col key={relatedProduct.id} xs={24} sm={12} lg={6}>
-                  <ProductCard product={relatedProduct} />
-                </Col>
-              ))}
-            </Row>
+        {!loading && product && (
+          <div className="mt-12">
+            <Tabs defaultActiveKey="1">
+              <TabPane tab="Details" key="1">
+                <div className="p-4">
+                  <Title level={4}>Product Details</Title>
+                  <Row gutter={[16, 16]} className="mt-4">
+                    <Col xs={24} md={8}>
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <Text strong>SKU:</Text>
+                        <Text className="block">{product.sku || "N/A"}</Text>
+                      </div>
+                    </Col>
+                    <Col xs={24} md={8}>
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <Text strong>Weight:</Text>
+                        <Text className="block">{product.weight || "N/A"}</Text>
+                      </div>
+                    </Col>
+                    <Col xs={24} md={8}>
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <Text strong>Unit:</Text>
+                        <Text className="block">{product.unit}</Text>
+                      </div>
+                    </Col>
+                  </Row>
+                  <div className="mt-6">
+                    <Text>{product.description}</Text>
+                  </div>
+                </div>
+              </TabPane>
+              <TabPane tab="Shipping" key="2">
+                <div className="p-4">
+                  <Title level={4}>Shipping Information</Title>
+                  <Text>
+                    We ship to most countries worldwide. Shipping costs are
+                    calculated at checkout based on weight, dimensions, and
+                    destination.
+                  </Text>
+                  <ul className="list-disc pl-6 mt-4">
+                    <li>Standard Shipping: 5-7 business days</li>
+                    <li>Express Shipping: 2-3 business days</li>
+                  </ul>
+                </div>
+              </TabPane>
+              <TabPane tab="Reviews" key="3">
+                <div className="p-4">
+                  <Title level={4}>Customer Reviews</Title>
+                  <Text>
+                    No reviews yet. Be the first to review this product!
+                  </Text>
+                </div>
+              </TabPane>
+            </Tabs>
           </div>
         )}
-      </div>
-
-      {/* Sticky Add to Cart for Mobile */}
-      {product.inStock && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-4 lg:hidden z-30">
-          <Button type="primary" size="large" block icon={<ShoppingCartOutlined />} onClick={handleAddToCart}>
-            Add to Cart - {formatCurrency(product.price * quantity)}
-          </Button>
-        </div>
-      )}
+      </Layout.Content>
 
       <Footer />
-    </div>
-  )
+    </Layout>
+  );
 }
