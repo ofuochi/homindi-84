@@ -1,21 +1,33 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { Row, Col, Card, Slider, Checkbox, Select, Input, Button, Empty, Pagination, Spin } from "antd"
-import { FilterOutlined } from "@ant-design/icons"
-import Header from "@/components/layout/Header"
-import Footer from "@/components/layout/Footer"
-import ProductCard from "@/components/product/ProductCard"
-import { useProductStore } from "@/store/useProductStore"
-import { PRODUCT_CATEGORIES } from "@/lib/constants"
+import { useEffect, useState } from "react";
+import {
+  Row,
+  Col,
+  Card,
+  Slider,
+  Checkbox,
+  Select,
+  Input,
+  Button,
+  Empty,
+  Pagination,
+  Spin,
+} from "antd";
+import { FilterOutlined } from "@ant-design/icons";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import ProductCard from "@/components/product/ProductCard";
+import { useProductStore } from "@/store/useProductStore";
+import { PRODUCT_CATEGORIES } from "@/lib/constants";
 
-const { Search } = Input
-const { Option } = Select
+const { Search } = Input;
+const { Option } = Select;
 
 export default function ProductsPage() {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [showFilters, setShowFilters] = useState(false)
-  const pageSize = 12
+  const [currentPage, setCurrentPage] = useState(1);
+  const [showFilters, setShowFilters] = useState(false);
+  const pageSize = 12;
 
   const {
     filteredProducts,
@@ -33,17 +45,20 @@ export default function ProductsPage() {
     clearFilters,
     fetchProducts,
     products,
-  } = useProductStore()
+  } = useProductStore();
 
   useEffect(() => {
     if (products.length === 0) {
-      fetchProducts()
+      fetchProducts();
     }
-  }, [products.length, fetchProducts])
+  }, [products.length, fetchProducts]);
 
-  const paginatedProducts = filteredProducts.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
 
-  const maxPrice = Math.max(...products.map((p) => p.price), 100)
+  const maxPrice = Math.max(...products.map((p) => p.price), 100);
 
   if (isLoading) {
     return (
@@ -54,7 +69,7 @@ export default function ProductsPage() {
         </div>
         <Footer />
       </div>
-    )
+    );
   }
 
   return (
@@ -64,8 +79,12 @@ export default function ProductsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Our Products</h1>
-          <p className="text-gray-600">Discover authentic Nigerian ingredients for your kitchen</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            Our Products
+          </h1>
+          <p className="text-gray-600">
+            Discover authentic Nigerian ingredients for your kitchen
+          </p>
         </div>
 
         {/* Search and Sort */}
@@ -79,7 +98,12 @@ export default function ProductsPage() {
             onSearch={setSearchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Select value={sortBy} onChange={setSortBy} size="large" className="w-full sm:w-48">
+          <Select
+            value={sortBy}
+            onChange={setSortBy}
+            size="large"
+            className="w-full sm:w-48"
+          >
             <Option value="name">Sort by Name</Option>
             <Option value="price-low">Price: Low to High</Option>
             <Option value="price-high">Price: High to Low</Option>
@@ -96,7 +120,11 @@ export default function ProductsPage() {
 
         <Row gutter={24}>
           {/* Filters Sidebar */}
-          <Col xs={24} lg={6} className={`${showFilters ? "block" : "hidden"} lg:block`}>
+          <Col
+            xs={24}
+            lg={6}
+            className={`${showFilters ? "block" : "hidden"} lg:block`}
+          >
             <Card title="Filters" className="mb-6">
               {/* Categories */}
               <div className="mb-6">
@@ -117,7 +145,7 @@ export default function ProductsPage() {
                   min={0}
                   max={maxPrice}
                   value={priceRange}
-                  onChange={setPriceRange}
+                  onChange={(v) => setPriceRange(v as [number, number])}
                   tooltip={{ formatter: (value) => `$${value}` }}
                 />
                 <div className="flex justify-between text-sm text-gray-500 mt-2">
@@ -128,7 +156,10 @@ export default function ProductsPage() {
 
               {/* Stock Filter */}
               <div className="mb-6">
-                <Checkbox checked={inStockOnly} onChange={(e) => setInStockOnly(e.target.checked)}>
+                <Checkbox
+                  checked={inStockOnly}
+                  onChange={(e) => setInStockOnly(e.target.checked)}
+                >
                   In Stock Only
                 </Checkbox>
               </div>
@@ -143,11 +174,15 @@ export default function ProductsPage() {
           {/* Products Grid */}
           <Col xs={24} lg={18}>
             <div className="mb-4 text-gray-600">
-              Showing {paginatedProducts.length} of {filteredProducts.length} products
+              Showing {paginatedProducts.length} of {filteredProducts.length}{" "}
+              products
             </div>
 
             {paginatedProducts.length === 0 ? (
-              <Empty description="No products found" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+              <Empty
+                description="No products found"
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+              />
             ) : (
               <>
                 <Row gutter={[24, 24]}>
@@ -179,5 +214,5 @@ export default function ProductsPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

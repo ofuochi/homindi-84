@@ -1,4 +1,4 @@
-import { Card, Skeleton } from "antd"
+import { Card, Skeleton } from "antd";
 
 export default function WishlistLoading() {
   return (
@@ -14,8 +14,11 @@ export default function WishlistLoading() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {[...Array(8)].map((_, index) => (
           <Card key={index} className="w-full">
-            <Skeleton.Image className="w-full h-48" active />
+            {/* Fake Image Loader */}
+            <div className="bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-pulse h-48 rounded-md mb-4" />
+
             <Skeleton active paragraph={{ rows: 2 }} />
+
             <div className="flex justify-between mt-4">
               <Skeleton.Button active size="small" className="w-16" />
               <Skeleton.Button active size="small" className="w-16" />
@@ -25,5 +28,5 @@ export default function WishlistLoading() {
         ))}
       </div>
     </div>
-  )
+  );
 }
