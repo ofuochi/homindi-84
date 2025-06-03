@@ -25,7 +25,6 @@ import NotificationBell from "@/components/notifications/NotificationBell"
 import ConnectionStatus from "@/components/notifications/ConnectionStatus"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { colors, gradients } from "@/lib/theme"
 
 const roleIcons = {
   god: CrownOutlined,
@@ -90,36 +89,17 @@ export const HeaderActions = ({
         </>
       )}
 
-      {/* Cart with prominent red badge */}
+      {/* Cart */}
       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
         <Button
           type="text"
           icon={
-            <Badge
-              count={getItemCount()}
-              size="small"
-              style={{
-                backgroundColor: colors.cart.badge,
-                color: colors.white,
-                fontWeight: "bold",
-                fontSize: "10px",
-                minWidth: "18px",
-                height: "18px",
-                lineHeight: "18px",
-                border: `2px solid ${colors.white}`,
-                boxShadow: `0 2px 4px ${colors.shadow.medium}`,
-              }}
-            >
-              <ShoppingCartOutlined className="text-xl transition-colors" style={{ color: colors.text.secondary }} />
+            <Badge count={getItemCount()} size="small" className="cart-badge">
+              <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-[#0B8457] transition-colors" />
             </Badge>
           }
           onClick={() => setIsOpen(true)}
           className="flex items-center hover:bg-gray-50 rounded-lg"
-          style={{
-            ":hover": {
-              backgroundColor: colors.background.secondary,
-            },
-          }}
         />
       </motion.div>
 
@@ -128,30 +108,18 @@ export const HeaderActions = ({
         {isSignedIn ? (
           <Dropdown menu={{ items: userMenuItems }} placement="bottomRight" arrow trigger={["click"]}>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Button
-                type="text"
-                className="flex items-center space-x-2 px-3 rounded-lg"
-                style={{
-                  ":hover": {
-                    backgroundColor: colors.background.secondary,
-                  },
-                }}
-              >
+              <Button type="text" className="flex items-center space-x-2 px-3 hover:bg-gray-50 rounded-lg">
                 <Avatar
                   size="small"
                   icon={<RoleIcon />}
                   src={user?.imageUrl}
                   style={{
-                    backgroundColor: roleInfo?.color === "default" ? colors.info[500] : undefined,
+                    backgroundColor: roleInfo?.color === "default" ? "#1890ff" : undefined,
                   }}
                 />
                 <div className="text-left hidden lg:block">
-                  <div className="font-inter font-medium text-sm" style={{ color: colors.text.primary }}>
-                    {userName}
-                  </div>
-                  <div className="font-inter text-xs" style={{ color: colors.text.secondary }}>
-                    {roleInfo?.name}
-                  </div>
+                  <div className="font-inter font-medium text-sm">{userName}</div>
+                  <div className="font-inter text-xs text-gray-500">{roleInfo?.name}</div>
                 </div>
               </Button>
             </motion.div>
@@ -160,28 +128,14 @@ export const HeaderActions = ({
           <Space>
             <Link href="/sign-in">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  type="default"
-                  className="font-inter font-medium rounded-lg"
-                  style={{
-                    borderColor: colors.border.medium,
-                    color: colors.text.primary,
-                  }}
-                >
+                <Button type="default" className="font-inter font-medium rounded-lg">
                   Sign In
                 </Button>
               </motion.div>
             </Link>
             <Link href="/sign-up">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  type="primary"
-                  className="font-inter font-medium rounded-lg"
-                  style={{
-                    background: gradients.primary,
-                    borderColor: colors.primary[500],
-                  }}
-                >
+                <Button type="primary" className="font-inter font-medium rounded-lg">
                   Sign Up
                 </Button>
               </motion.div>
@@ -194,14 +148,9 @@ export const HeaderActions = ({
       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
         <Button
           type="text"
-          icon={<MenuOutlined style={{ color: colors.text.secondary }} />}
+          icon={<MenuOutlined />}
           onClick={() => setMobileMenuOpen?.(true)}
-          className="md:hidden rounded-lg"
-          style={{
-            ":hover": {
-              backgroundColor: colors.background.secondary,
-            },
-          }}
+          className="md:hidden hover:bg-gray-50 rounded-lg"
         />
       </motion.div>
     </div>
@@ -226,12 +175,7 @@ export default function Header() {
   return (
     <>
       <motion.header
-        className="sticky top-0 z-50 border-b"
-        style={{
-          backgroundColor: `${colors.background.primary}F5`,
-          backdropFilter: "blur(12px)",
-          borderBottomColor: colors.border.light,
-        }}
+        className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
@@ -241,16 +185,14 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3">
               <motion.div
-                className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg"
-                style={{ background: gradients.primary }}
+                className="w-10 h-10 bg-gradient-to-br from-[#d4e0db] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Image src="/logo.png" alt="Homindi Logo" width={100} height={100} className="object-contain" />
               </motion.div>
               <motion.span
-                className="text-xl font-bold font-poppins hidden sm:block"
-                style={{ color: colors.text.primary }}
+                className="text-xl font-bold text-gray-900 font-poppins hidden sm:block"
                 whileHover={{ scale: 1.05 }}
               >
                 Homindi
@@ -268,17 +210,13 @@ export default function Header() {
                 >
                   <Link
                     href={link.href}
-                    className="font-medium transition-all duration-300 font-inter relative group py-2"
-                    style={{ color: colors.text.secondary }}
+                    className="text-gray-700 hover:text-[#0B8457] font-medium transition-all duration-300 font-inter relative group py-2"
                   >
                     <span className="flex items-center space-x-1">
                       {link.icon && <link.icon className="text-sm" />}
                       <span>{link.label}</span>
                     </span>
-                    <span
-                      className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full"
-                      style={{ backgroundColor: colors.primary[500] }}
-                    ></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#0B8457] transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 </motion.div>
               ))}
@@ -292,105 +230,55 @@ export default function Header() {
 
       {/* Mobile Menu Drawer */}
       <Drawer
-        title={
-          <span className="font-poppins font-semibold" style={{ color: colors.text.primary }}>
-            Menu
-          </span>
-        }
+        title={<span className="font-poppins font-semibold text-gray-900">Menu</span>}
         placement="right"
         onClose={() => setMobileMenuOpen(false)}
         open={mobileMenuOpen}
         width={280}
         className="mobile-menu-drawer"
-        styles={{
-          header: {
-            background: gradients.primary,
-            borderBottom: "none",
-          },
-        }}
       >
         <div className="flex flex-col space-y-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="font-medium py-3 px-2 font-inter transition-colors rounded-lg flex items-center space-x-2"
-              style={{
-                color: colors.text.secondary,
-                ":hover": {
-                  color: colors.primary[500],
-                  backgroundColor: colors.background.secondary,
-                },
-              }}
+              className="text-gray-700 hover:text-[#0B8457] font-medium py-3 px-2 font-inter transition-colors rounded-lg hover:bg-gray-50 flex items-center space-x-2"
               onClick={() => setMobileMenuOpen(false)}
             >
               {link.icon && <link.icon />}
               <span>{link.label}</span>
             </Link>
           ))}
-          <div className="border-t pt-4 space-y-3" style={{ borderColor: colors.border.light }}>
+          <div className="border-t pt-4 space-y-3">
             {isSignedIn ? (
               <>
-                <div
-                  className="flex items-center space-x-3 p-3 rounded-lg"
-                  style={{ backgroundColor: colors.background.secondary }}
-                >
+                <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
                   <Avatar
                     icon={<RoleIcon />}
                     src={user?.imageUrl}
                     style={{
-                      backgroundColor: roleInfo?.color === "default" ? colors.info[500] : undefined,
+                      backgroundColor: roleInfo?.color === "default" ? "#1890ff" : undefined,
                     }}
                   />
                   <div>
-                    <div className="font-inter font-medium" style={{ color: colors.text.primary }}>
-                      {userName}
-                    </div>
-                    <div className="font-inter text-xs" style={{ color: colors.text.secondary }}>
-                      {roleInfo?.name}
-                    </div>
+                    <div className="font-inter font-medium">{userName}</div>
+                    <div className="font-inter text-xs text-gray-500">{roleInfo?.name}</div>
                   </div>
                 </div>
                 <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                  <Button
-                    type="default"
-                    block
-                    icon={<UserOutlined />}
-                    className="font-inter rounded-lg"
-                    style={{
-                      borderColor: colors.border.medium,
-                      color: colors.text.primary,
-                    }}
-                  >
+                  <Button type="default" block icon={<UserOutlined />} className="font-inter rounded-lg">
                     Dashboard
                   </Button>
                 </Link>
                 {canAccessAdminPanel() && (
                   <Link href="/admin" onClick={() => setMobileMenuOpen(false)}>
-                    <Button
-                      type="default"
-                      block
-                      icon={<DashboardOutlined />}
-                      className="font-inter rounded-lg"
-                      style={{
-                        borderColor: colors.border.medium,
-                        color: colors.text.primary,
-                      }}
-                    >
+                    <Button type="default" block icon={<DashboardOutlined />} className="font-inter rounded-lg">
                       Admin Panel
                     </Button>
                   </Link>
                 )}
                 <SignOutButton>
-                  <Button
-                    block
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="font-inter rounded-lg"
-                    style={{
-                      borderColor: colors.border.medium,
-                      color: colors.text.primary,
-                    }}
-                  >
+                  <Button block onClick={() => setMobileMenuOpen(false)} className="font-inter rounded-lg">
                     Sign Out
                   </Button>
                 </SignOutButton>
@@ -398,28 +286,12 @@ export default function Header() {
             ) : (
               <>
                 <Link href="/sign-in" onClick={() => setMobileMenuOpen(false)}>
-                  <Button
-                    type="default"
-                    block
-                    className="font-inter rounded-lg"
-                    style={{
-                      borderColor: colors.border.medium,
-                      color: colors.text.primary,
-                    }}
-                  >
+                  <Button type="default" block className="font-inter rounded-lg">
                     Sign In
                   </Button>
                 </Link>
                 <Link href="/sign-up" onClick={() => setMobileMenuOpen(false)}>
-                  <Button
-                    type="primary"
-                    block
-                    className="font-inter rounded-lg"
-                    style={{
-                      background: gradients.primary,
-                      borderColor: colors.primary[500],
-                    }}
-                  >
+                  <Button type="primary" block className="font-inter rounded-lg">
                     Sign Up
                   </Button>
                 </Link>
