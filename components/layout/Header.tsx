@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Badge, Drawer, Button, Space, Avatar, Dropdown } from "antd"
+import { useState } from "react";
+import Link from "next/link";
+import { Badge, Drawer, Button, Space, Avatar, Dropdown } from "antd";
 import {
   ShoppingCartOutlined,
   MenuOutlined,
@@ -16,15 +16,15 @@ import {
   ShopOutlined,
   FlagOutlined,
   QuestionCircleOutlined,
-} from "@ant-design/icons"
-import { SignOutButton } from "@clerk/nextjs"
-import { useCartStore } from "@/store/useCartStore"
-import { useClerkAuth } from "@/lib/hooks/useClerkAuth"
-import CartDrawer from "@/components/cart/CartDrawer"
-import NotificationBell from "@/components/notifications/NotificationBell"
-import ConnectionStatus from "@/components/notifications/ConnectionStatus"
-import Image from "next/image"
-import { motion } from "framer-motion"
+} from "@ant-design/icons";
+import { SignOutButton } from "@clerk/nextjs";
+import { useCartStore } from "@/store/useCartStore";
+import { useClerkAuth } from "@/lib/hooks/useClerkAuth";
+import CartDrawer from "@/components/cart/CartDrawer";
+import NotificationBell from "@/components/notifications/NotificationBell";
+import ConnectionStatus from "@/components/notifications/ConnectionStatus";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
 const roleIcons = {
   god: CrownOutlined,
@@ -33,18 +33,23 @@ const roleIcons = {
   supplier: ShopOutlined,
   moderator: FlagOutlined,
   user: UserOutlined,
-}
+};
 
 export const HeaderActions = ({
   setMobileMenuOpen,
 }: {
-  setMobileMenuOpen?: (open: boolean) => void
+  setMobileMenuOpen?: (open: boolean) => void;
 }) => {
-  const { user, isSignedIn, userRole, roleInfo, canAccessAdminPanel } = useClerkAuth()
-  const { getItemCount, setIsOpen } = useCartStore()
+  const { user, isSignedIn, userRole, roleInfo, canAccessAdminPanel } =
+    useClerkAuth();
+  const { getItemCount, setIsOpen } = useCartStore();
 
-  const RoleIcon = roleIcons[userRole] || UserOutlined
-  const userName = user ? `${user.firstName || ""} ${user.lastName || ""}`.trim() || user.username || "User" : "User"
+  const RoleIcon = roleIcons[userRole] || UserOutlined;
+  const userName = user
+    ? `${user.firstName || ""} ${user.lastName || ""}`.trim() ||
+      user.username ||
+      "User"
+    : "User";
 
   const userMenuItems = [
     {
@@ -78,7 +83,7 @@ export const HeaderActions = ({
         </SignOutButton>
       ),
     },
-  ]
+  ];
 
   return (
     <div className="flex items-center space-x-2 sm:space-x-3">
@@ -94,7 +99,7 @@ export const HeaderActions = ({
         <Button
           type="text"
           icon={
-            <Badge count={getItemCount()} size="small" className="cart-badge">
+            <Badge count={getItemCount()} size="small">
               <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-[#0B8457] transition-colors" />
             </Badge>
           }
@@ -106,20 +111,33 @@ export const HeaderActions = ({
       {/* Auth */}
       <div className="hidden md:flex items-center space-x-2">
         {isSignedIn ? (
-          <Dropdown menu={{ items: userMenuItems }} placement="bottomRight" arrow trigger={["click"]}>
+          <Dropdown
+            menu={{ items: userMenuItems }}
+            placement="bottomRight"
+            arrow
+            trigger={["click"]}
+          >
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Button type="text" className="flex items-center space-x-2 px-3 hover:bg-gray-50 rounded-lg">
+              <Button
+                type="text"
+                className="flex items-center space-x-2 px-3 hover:bg-gray-50 rounded-lg"
+              >
                 <Avatar
                   size="small"
                   icon={<RoleIcon />}
                   src={user?.imageUrl}
                   style={{
-                    backgroundColor: roleInfo?.color === "default" ? "#1890ff" : undefined,
+                    backgroundColor:
+                      roleInfo?.color === "default" ? "#1890ff" : undefined,
                   }}
                 />
                 <div className="text-left hidden lg:block">
-                  <div className="font-inter font-medium text-sm">{userName}</div>
-                  <div className="font-inter text-xs text-gray-500">{roleInfo?.name}</div>
+                  <div className="font-inter font-medium text-sm">
+                    {userName}
+                  </div>
+                  <div className="font-inter text-xs text-gray-500">
+                    {roleInfo?.name}
+                  </div>
                 </div>
               </Button>
             </motion.div>
@@ -127,15 +145,27 @@ export const HeaderActions = ({
         ) : (
           <Space>
             <Link href="/sign-in">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button type="default" className="font-inter font-medium rounded-lg">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  type="default"
+                  className="font-inter font-medium rounded-lg"
+                >
                   Sign In
                 </Button>
               </motion.div>
             </Link>
             <Link href="/sign-up">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button type="primary" className="font-inter font-medium rounded-lg">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  type="primary"
+                  className="font-inter font-medium rounded-lg"
+                >
                   Sign Up
                 </Button>
               </motion.div>
@@ -154,12 +184,13 @@ export const HeaderActions = ({
         />
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { user, isSignedIn, userRole, roleInfo, canAccessAdminPanel } = useClerkAuth()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, isSignedIn, userRole, roleInfo, canAccessAdminPanel } =
+    useClerkAuth();
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -167,10 +198,12 @@ export default function Header() {
     { href: "/about", label: "About" },
     { href: "/faq", label: "FAQ", icon: QuestionCircleOutlined },
     { href: "/contact", label: "Contact" },
-  ]
+  ];
 
-  const RoleIcon = roleIcons[userRole] || UserOutlined
-  const userName = user ? `${user.firstName || ""} ${user.lastName || ""}`.trim() || "User" : "User"
+  const RoleIcon = roleIcons[userRole] || UserOutlined;
+  const userName = user
+    ? `${user.firstName || ""} ${user.lastName || ""}`.trim() || "User"
+    : "User";
 
   return (
     <>
@@ -189,7 +222,13 @@ export default function Header() {
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Image src="/logo.png" alt="Homindi Logo" width={100} height={100} className="object-contain" />
+                <Image
+                  src="/logo.png"
+                  alt="Homindi Logo"
+                  width={100}
+                  height={100}
+                  className="object-contain"
+                />
               </motion.div>
               <motion.span
                 className="text-xl font-bold text-gray-900 font-poppins hidden sm:block"
@@ -230,7 +269,9 @@ export default function Header() {
 
       {/* Mobile Menu Drawer */}
       <Drawer
-        title={<span className="font-poppins font-semibold text-gray-900">Menu</span>}
+        title={
+          <span className="font-poppins font-semibold text-gray-900">Menu</span>
+        }
         placement="right"
         onClose={() => setMobileMenuOpen(false)}
         open={mobileMenuOpen}
@@ -257,28 +298,48 @@ export default function Header() {
                     icon={<RoleIcon />}
                     src={user?.imageUrl}
                     style={{
-                      backgroundColor: roleInfo?.color === "default" ? "#1890ff" : undefined,
+                      backgroundColor:
+                        roleInfo?.color === "default" ? "#1890ff" : undefined,
                     }}
                   />
                   <div>
                     <div className="font-inter font-medium">{userName}</div>
-                    <div className="font-inter text-xs text-gray-500">{roleInfo?.name}</div>
+                    <div className="font-inter text-xs text-gray-500">
+                      {roleInfo?.name}
+                    </div>
                   </div>
                 </div>
-                <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                  <Button type="default" block icon={<UserOutlined />} className="font-inter rounded-lg">
+                <Link
+                  href="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Button
+                    type="default"
+                    block
+                    icon={<UserOutlined />}
+                    className="font-inter rounded-lg"
+                  >
                     Dashboard
                   </Button>
                 </Link>
                 {canAccessAdminPanel() && (
                   <Link href="/admin" onClick={() => setMobileMenuOpen(false)}>
-                    <Button type="default" block icon={<DashboardOutlined />} className="font-inter rounded-lg">
+                    <Button
+                      type="default"
+                      block
+                      icon={<DashboardOutlined />}
+                      className="font-inter rounded-lg"
+                    >
                       Admin Panel
                     </Button>
                   </Link>
                 )}
                 <SignOutButton>
-                  <Button block onClick={() => setMobileMenuOpen(false)} className="font-inter rounded-lg">
+                  <Button
+                    block
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="font-inter rounded-lg"
+                  >
                     Sign Out
                   </Button>
                 </SignOutButton>
@@ -286,12 +347,20 @@ export default function Header() {
             ) : (
               <>
                 <Link href="/sign-in" onClick={() => setMobileMenuOpen(false)}>
-                  <Button type="default" block className="font-inter rounded-lg">
+                  <Button
+                    type="default"
+                    block
+                    className="font-inter rounded-lg"
+                  >
                     Sign In
                   </Button>
                 </Link>
                 <Link href="/sign-up" onClick={() => setMobileMenuOpen(false)}>
-                  <Button type="primary" block className="font-inter rounded-lg">
+                  <Button
+                    type="primary"
+                    block
+                    className="font-inter rounded-lg"
+                  >
                     Sign Up
                   </Button>
                 </Link>
@@ -304,5 +373,5 @@ export default function Header() {
       {/* Cart Drawer */}
       <CartDrawer />
     </>
-  )
+  );
 }
