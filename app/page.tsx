@@ -203,6 +203,114 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Enhanced Why Choose Us Section */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-5">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-primary-500 rounded-full"></div>
+          <div className="absolute bottom-10 right-10 w-24 h-24 bg-accent-500 rounded-full"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-primary-200 rounded-full"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="text-center mb-16"
+          >
+            <motion.div variants={fadeInUp}>
+              <Title level={2} className="mb-4 text-4xl font-bold">
+                Trusted by <span className="text-primary-500">10,000+</span> Customers Worldwide
+              </Title>
+              <Paragraph className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Join the growing community of Africans in the diaspora who trust Homindi for authentic ingredients and
+                exceptional service.
+              </Paragraph>
+            </motion.div>
+          </motion.div>
+
+          <Row gutter={[32, 32]} className="items-center">
+            <Col xs={24} lg={12}>
+              <motion.div variants={fadeInUp} className="space-y-8">
+                {[
+                  {
+                    icon: "🌍",
+                    title: "Global Reach",
+                    description: "Serving 25+ countries with reliable international shipping and local partnerships.",
+                    stat: "25+ Countries",
+                  },
+                  {
+                    icon: "⚡",
+                    title: "Lightning Fast",
+                    description: "Average delivery time of 3-5 business days with real-time tracking.",
+                    stat: "3-5 Days",
+                  },
+                  {
+                    icon: "🛡️",
+                    title: "Quality Assured",
+                    description: "100% authentic products with money-back guarantee and quality certification.",
+                    stat: "100% Authentic",
+                  },
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={fadeInUp}
+                    custom={index}
+                    className="flex items-start space-x-4 p-6 bg-gray-50 rounded-2xl hover:bg-white hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className="text-4xl">{item.icon}</div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <Title level={4} className="mb-0">
+                          {item.title}
+                        </Title>
+                        <span className="text-primary-500 font-bold text-lg">{item.stat}</span>
+                      </div>
+                      <Paragraph className="text-gray-600 mb-0">{item.description}</Paragraph>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </Col>
+
+            <Col xs={24} lg={12}>
+              <motion.div variants={fadeInUp} custom={3} className="relative">
+                <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-3xl p-8 text-center">
+                  <div className="mb-6">
+                    <div className="w-24 h-24 bg-primary-500 rounded-full mx-auto flex items-center justify-center mb-4">
+                      <span className="text-white text-3xl font-bold">H</span>
+                    </div>
+                    <Title level={3} className="mb-2">
+                      Ready to Get Started?
+                    </Title>
+                    <Paragraph className="text-gray-600">
+                      Join thousands of satisfied customers and taste home today.
+                    </Paragraph>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Link href="/products">
+                      <Button size="large" className="w-full btn-secondary h-14 text-lg font-semibold rounded-xl">
+                        Browse Products
+                      </Button>
+                    </Link>
+                    <Link href="/sign-up">
+                      <Button
+                        size="large"
+                        className="w-full h-14 text-lg font-semibold rounded-xl border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white transition-all duration-300"
+                      >
+                        Create Free Account
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            </Col>
+          </Row>
+        </div>
+      </section>
+
       {/* How It Works */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -356,6 +464,99 @@ export default function HomePage() {
                 View All Products
               </Button>
             </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Customer Stories Section */}
+      <section className="py-20 bg-gradient-to-br from-primary-50 to-accent-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="text-center mb-16"
+          >
+            <motion.div variants={fadeInUp}>
+              <Title level={2} className="mb-4 text-4xl font-bold">
+                Stories from Our Community
+              </Title>
+              <Paragraph className="text-xl text-gray-600 leading-relaxed">
+                Real experiences from customers who found their taste of home with Homindi
+              </Paragraph>
+            </motion.div>
+          </motion.div>
+
+          <motion.div variants={staggerContainer}>
+            <Row gutter={[24, 24]}>
+              {[
+                {
+                  story: "From London to Lagos Flavors",
+                  quote:
+                    "I moved to London 5 years ago and struggled to find authentic Nigerian ingredients. Homindi changed everything - now I can cook my grandmother's recipes exactly as she taught me.",
+                  author: "Chioma Okafor",
+                  location: "London, UK",
+                  image: "/placeholder-jc7pq.png",
+                  tag: "Authentic Recipes",
+                },
+                {
+                  story: "Building Community Through Food",
+                  quote:
+                    "I use Homindi to source ingredients for our Nigerian cultural events in Toronto. The quality is exceptional and delivery is always on time for our community gatherings.",
+                  author: "Dr. Emeka Johnson",
+                  location: "Toronto, Canada",
+                  image: "/nigerian-community-event.png",
+                  tag: "Community Events",
+                },
+                {
+                  story: "Teaching Heritage Through Cuisine",
+                  quote:
+                    "As a mother raising Nigerian-Canadian children, Homindi helps me teach my kids about their heritage through authentic flavors and traditional cooking.",
+                  author: "Fatima Adebayo",
+                  location: "Vancouver, Canada",
+                  image: "/nigerian-mother-cooking.png",
+                  tag: "Cultural Heritage",
+                },
+              ].map((story, index) => (
+                <Col key={index} xs={24} lg={8}>
+                  <motion.div variants={fadeInUp} custom={index}>
+                    <Card className="h-full border-0 shadow-lg rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
+                      <div className="relative h-48">
+                        <Image
+                          src={story.image || "/placeholder.svg"}
+                          alt={story.story}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-primary-600">
+                            {story.tag}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <Title level={4} className="mb-3">
+                          {story.story}
+                        </Title>
+                        <Paragraph className="text-gray-600 mb-4 italic">"{story.quote}"</Paragraph>
+                        <div className="flex items-center space-x-3">
+                          <Avatar size={40} src="/placeholder.svg?height=40&width=40" />
+                          <div>
+                            <Text strong className="block">
+                              {story.author}
+                            </Text>
+                            <Text type="secondary" className="text-sm">
+                              {story.location}
+                            </Text>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  </motion.div>
+                </Col>
+              ))}
+            </Row>
           </motion.div>
         </div>
       </section>
