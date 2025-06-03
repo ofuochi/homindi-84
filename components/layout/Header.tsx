@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import Link from "next/link";
-import { Badge, Drawer, Button, Space, Avatar, Dropdown } from "antd";
+import { useState } from "react"
+import Link from "next/link"
+import { Badge, Drawer, Button, Space, Avatar, Dropdown } from "antd"
 import {
   ShoppingCartOutlined,
   MenuOutlined,
@@ -15,14 +15,16 @@ import {
   TruckOutlined,
   ShopOutlined,
   FlagOutlined,
-} from "@ant-design/icons";
-import { SignOutButton } from "@clerk/nextjs";
-import { useCartStore } from "@/store/useCartStore";
-import { useClerkAuth } from "@/lib/hooks/useClerkAuth";
-import CartDrawer from "@/components/cart/CartDrawer";
-import NotificationBell from "@/components/notifications/NotificationBell";
-import ConnectionStatus from "@/components/notifications/ConnectionStatus";
-import Image from "next/image";
+  QuestionCircleOutlined,
+} from "@ant-design/icons"
+import { SignOutButton } from "@clerk/nextjs"
+import { useCartStore } from "@/store/useCartStore"
+import { useClerkAuth } from "@/lib/hooks/useClerkAuth"
+import CartDrawer from "@/components/cart/CartDrawer"
+import NotificationBell from "@/components/notifications/NotificationBell"
+import ConnectionStatus from "@/components/notifications/ConnectionStatus"
+import Image from "next/image"
+import { motion } from "framer-motion"
 
 const roleIcons = {
   god: CrownOutlined,
@@ -31,23 +33,18 @@ const roleIcons = {
   supplier: ShopOutlined,
   moderator: FlagOutlined,
   user: UserOutlined,
-};
+}
 
 export const HeaderActions = ({
   setMobileMenuOpen,
 }: {
-  setMobileMenuOpen?: (open: boolean) => void;
+  setMobileMenuOpen?: (open: boolean) => void
 }) => {
-  const { user, isSignedIn, userRole, roleInfo, canAccessAdminPanel } =
-    useClerkAuth();
-  const { getItemCount, setIsOpen } = useCartStore();
+  const { user, isSignedIn, userRole, roleInfo, canAccessAdminPanel } = useClerkAuth()
+  const { getItemCount, setIsOpen } = useCartStore()
 
-  const RoleIcon = roleIcons[userRole] || UserOutlined;
-  const userName = user
-    ? `${user.firstName || ""} ${user.lastName || ""}`.trim() ||
-      user.username ||
-      "User"
-    : "User";
+  const RoleIcon = roleIcons[userRole] || UserOutlined
+  const userName = user ? `${user.firstName || ""} ${user.lastName || ""}`.trim() || user.username || "User" : "User"
 
   const userMenuItems = [
     {
@@ -81,7 +78,7 @@ export const HeaderActions = ({
         </SignOutButton>
       ),
     },
-  ];
+  ]
 
   return (
     <div className="flex items-center space-x-2 sm:space-x-3">
@@ -93,118 +90,135 @@ export const HeaderActions = ({
       )}
 
       {/* Cart */}
-      <Button
-        type="text"
-        icon={
-          <Badge count={getItemCount()} size="small">
-            <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-[#0B8457] transition-colors" />
-          </Badge>
-        }
-        onClick={() => setIsOpen(true)}
-        className="flex items-center"
-      />
+      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <Button
+          type="text"
+          icon={
+            <Badge count={getItemCount()} size="small" className="cart-badge">
+              <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-[#0B8457] transition-colors" />
+            </Badge>
+          }
+          onClick={() => setIsOpen(true)}
+          className="flex items-center hover:bg-gray-50 rounded-lg"
+        />
+      </motion.div>
 
       {/* Auth */}
       <div className="hidden md:flex items-center space-x-2">
         {isSignedIn ? (
-          <Dropdown
-            menu={{ items: userMenuItems }}
-            placement="bottomRight"
-            arrow
-          >
-            <Button type="text" className="flex items-center space-x-2 px-3">
-              <Avatar
-                size="small"
-                icon={<RoleIcon />}
-                src={user?.imageUrl}
-                style={{
-                  backgroundColor:
-                    roleInfo?.color === "default" ? "#1890ff" : undefined,
-                }}
-              />
-              <div className="text-left hidden lg:block">
-                <div className="font-inter font-medium text-sm">{userName}</div>
-                <div className="font-inter text-xs text-gray-500">
-                  {roleInfo?.name}
+          <Dropdown menu={{ items: userMenuItems }} placement="bottomRight" arrow trigger={["click"]}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button type="text" className="flex items-center space-x-2 px-3 hover:bg-gray-50 rounded-lg">
+                <Avatar
+                  size="small"
+                  icon={<RoleIcon />}
+                  src={user?.imageUrl}
+                  style={{
+                    backgroundColor: roleInfo?.color === "default" ? "#1890ff" : undefined,
+                  }}
+                />
+                <div className="text-left hidden lg:block">
+                  <div className="font-inter font-medium text-sm">{userName}</div>
+                  <div className="font-inter text-xs text-gray-500">{roleInfo?.name}</div>
                 </div>
-              </div>
-            </Button>
+              </Button>
+            </motion.div>
           </Dropdown>
         ) : (
           <Space>
             <Link href="/sign-in">
-              <Button type="default" className="font-inter font-medium">
-                Sign In
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button type="default" className="font-inter font-medium rounded-lg">
+                  Sign In
+                </Button>
+              </motion.div>
             </Link>
             <Link href="/sign-up">
-              <Button type="primary" className="font-inter font-medium">
-                Sign Up
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button type="primary" className="font-inter font-medium rounded-lg">
+                  Sign Up
+                </Button>
+              </motion.div>
             </Link>
           </Space>
         )}
       </div>
 
       {/* Mobile menu button */}
-      <Button
-        type="text"
-        icon={<MenuOutlined />}
-        onClick={() => setMobileMenuOpen?.(true)}
-        className="md:hidden"
-      />
+      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <Button
+          type="text"
+          icon={<MenuOutlined />}
+          onClick={() => setMobileMenuOpen?.(true)}
+          className="md:hidden hover:bg-gray-50 rounded-lg"
+        />
+      </motion.div>
     </div>
-  );
-};
+  )
+}
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user, isSignedIn, userRole, roleInfo, canAccessAdminPanel } =
-    useClerkAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { user, isSignedIn, userRole, roleInfo, canAccessAdminPanel } = useClerkAuth()
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/products", label: "Products" },
     { href: "/about", label: "About" },
+    { href: "/faq", label: "FAQ", icon: QuestionCircleOutlined },
     { href: "/contact", label: "Contact" },
-  ];
+  ]
 
-  const RoleIcon = roleIcons[userRole] || UserOutlined;
-  const userName = user
-    ? `${user.firstName || ""} ${user.lastName || ""}`.trim() || "User"
-    : "User";
+  const RoleIcon = roleIcons[userRole] || UserOutlined
+  const userName = user ? `${user.firstName || ""} ${user.lastName || ""}`.trim() || "User" : "User"
 
   return (
     <>
-      <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
+      <motion.header
+        className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#d4e0db] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
-                <Image
-                  src="/logo.png"
-                  alt="Homindi Logo"
-                  width={100}
-                  height={100}
-                  className="object-contain"
-                />
-              </div>
-              <span className="text-xl font-bold text-gray-900 font-poppins hidden sm:block">
+              <motion.div
+                className="w-10 h-10 bg-gradient-to-br from-[#d4e0db] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Image src="/logo.png" alt="Homindi Logo" width={100} height={100} className="object-contain" />
+              </motion.div>
+              <motion.span
+                className="text-xl font-bold text-gray-900 font-poppins hidden sm:block"
+                whileHover={{ scale: 1.05 }}
+              >
                 Homindi
-              </span>
+              </motion.span>
             </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex space-x-8">
-              {navLinks.map((link) => (
-                <Link
+              {navLinks.map((link, index) => (
+                <motion.div
                   key={link.href}
-                  href={link.href}
-                  className="text-gray-700 hover:text-[#0B8457] font-medium transition-colors font-inter"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  {link.label}
-                </Link>
+                  <Link
+                    href={link.href}
+                    className="text-gray-700 hover:text-[#0B8457] font-medium transition-all duration-300 font-inter relative group py-2"
+                  >
+                    <span className="flex items-center space-x-1">
+                      {link.icon && <link.icon className="text-sm" />}
+                      <span>{link.label}</span>
+                    </span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#0B8457] transition-all duration-300 group-hover:w-full"></span>
+                  </Link>
+                </motion.div>
               ))}
             </nav>
 
@@ -212,13 +226,11 @@ export default function Header() {
             <HeaderActions setMobileMenuOpen={setMobileMenuOpen} />
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Mobile Menu Drawer */}
       <Drawer
-        title={
-          <span className="font-poppins font-semibold text-gray-900">Menu</span>
-        }
+        title={<span className="font-poppins font-semibold text-gray-900">Menu</span>}
         placement="right"
         onClose={() => setMobileMenuOpen(false)}
         open={mobileMenuOpen}
@@ -230,10 +242,11 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-gray-700 hover:text-[#0B8457] font-medium py-2 font-inter transition-colors"
+              className="text-gray-700 hover:text-[#0B8457] font-medium py-3 px-2 font-inter transition-colors rounded-lg hover:bg-gray-50 flex items-center space-x-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              {link.label}
+              {link.icon && <link.icon />}
+              <span>{link.label}</span>
             </Link>
           ))}
           <div className="border-t pt-4 space-y-3">
@@ -244,48 +257,28 @@ export default function Header() {
                     icon={<RoleIcon />}
                     src={user?.imageUrl}
                     style={{
-                      backgroundColor:
-                        roleInfo?.color === "default" ? "#1890ff" : undefined,
+                      backgroundColor: roleInfo?.color === "default" ? "#1890ff" : undefined,
                     }}
                   />
                   <div>
                     <div className="font-inter font-medium">{userName}</div>
-                    <div className="font-inter text-xs text-gray-500">
-                      {roleInfo?.name}
-                    </div>
+                    <div className="font-inter text-xs text-gray-500">{roleInfo?.name}</div>
                   </div>
                 </div>
-                <Link
-                  href="/dashboard"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Button
-                    type="default"
-                    block
-                    icon={<UserOutlined />}
-                    className="font-inter"
-                  >
+                <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                  <Button type="default" block icon={<UserOutlined />} className="font-inter rounded-lg">
                     Dashboard
                   </Button>
                 </Link>
                 {canAccessAdminPanel() && (
                   <Link href="/admin" onClick={() => setMobileMenuOpen(false)}>
-                    <Button
-                      type="default"
-                      block
-                      icon={<DashboardOutlined />}
-                      className="font-inter"
-                    >
+                    <Button type="default" block icon={<DashboardOutlined />} className="font-inter rounded-lg">
                       Admin Panel
                     </Button>
                   </Link>
                 )}
                 <SignOutButton>
-                  <Button
-                    block
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="font-inter"
-                  >
+                  <Button block onClick={() => setMobileMenuOpen(false)} className="font-inter rounded-lg">
                     Sign Out
                   </Button>
                 </SignOutButton>
@@ -293,12 +286,12 @@ export default function Header() {
             ) : (
               <>
                 <Link href="/sign-in" onClick={() => setMobileMenuOpen(false)}>
-                  <Button type="default" block className="font-inter">
+                  <Button type="default" block className="font-inter rounded-lg">
                     Sign In
                   </Button>
                 </Link>
                 <Link href="/sign-up" onClick={() => setMobileMenuOpen(false)}>
-                  <Button type="primary" block className="font-inter">
+                  <Button type="primary" block className="font-inter rounded-lg">
                     Sign Up
                   </Button>
                 </Link>
@@ -311,5 +304,5 @@ export default function Header() {
       {/* Cart Drawer */}
       <CartDrawer />
     </>
-  );
+  )
 }
