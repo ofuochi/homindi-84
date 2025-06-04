@@ -25,6 +25,7 @@ import NotificationBell from "@/components/notifications/NotificationBell";
 import ConnectionStatus from "@/components/notifications/ConnectionStatus";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
 const roleIcons = {
   god: CrownOutlined,
@@ -93,6 +94,8 @@ export const HeaderActions = ({
           <NotificationBell />
         </>
       )}
+
+      <ThemeToggle />
 
       {/* Cart */}
       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

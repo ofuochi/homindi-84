@@ -46,7 +46,11 @@ export default function RootLayout({
         },
       }}
     >
-      <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+      <html
+        lang="en"
+        suppressHydrationWarning
+        className={`${inter.variable} ${poppins.variable}`}
+      >
         <body className="font-inter antialiased">
           <Providers>{children}</Providers>
         </body>
