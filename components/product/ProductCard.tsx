@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Button, Tag, Badge, message } from "antd";
+import { Card, Button, Tag, Badge, message, Typography } from "antd";
 import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import Link from "next/link";
@@ -83,9 +83,13 @@ export default function ProductCard({ product }: ProductCardProps) {
     >
       <div className="flex flex-col h-full p-2">
         <Link href={`/products/${product.id}`} className="block mb-3">
-          <h3 className="font-semibold text-lg line-clamp-2 hover:text-primary-500 transition-colors font-poppins">
+          <Typography.Title
+            level={5}
+            ellipsis={{ rows: 2 }}
+            className="!mb-0 hover:text-primary-500 transition-colors font-poppins"
+          >
             {product.name}
-          </h3>
+          </Typography.Title>
         </Link>
 
         <div className="flex items-center justify-between mb-3">
@@ -104,9 +108,12 @@ export default function ProductCard({ product }: ProductCardProps) {
           </Tag>
         </div>
 
-        <p className="text-sm text-gray-600 mb-4 line-clamp-2 font-inter leading-relaxed flex-grow">
+        <Typography.Paragraph
+          ellipsis={{ rows: 2 }}
+          className="text-sm text-gray-600 mb-4 font-inter leading-relaxed flex-grow"
+        >
           {product.description}
-        </p>
+        </Typography.Paragraph>
 
         <div className="flex items-center justify-between mb-4 text-xs text-gray-500 font-inter">
           <span>Origin: {product.origin}</span>

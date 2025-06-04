@@ -220,7 +220,6 @@ export default function HomePage() {
                         suffix={stat.suffix}
                         valueStyle={{
                           color: colors.primary[500],
-                          fontFamily: "Poppins",
                           fontWeight: "bold",
                           fontSize: "2rem",
                         }}

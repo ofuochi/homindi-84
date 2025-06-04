@@ -12,7 +12,7 @@ import {
   Button,
   Empty,
   Pagination,
-  Skeleton,
+  Spin,
 } from "antd";
 import { FilterOutlined } from "@ant-design/icons";
 import ProductCard from "@/components/product/ProductCard";
@@ -58,28 +58,8 @@ export default function ProductsPage() {
 
   const maxPrice = Math.max(...products.map((p) => p.price), 100);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <Row gutter={[24, 24]}>
-            {Array.from({ length: pageSize }).map((_, idx) => (
-              <Col key={idx} xs={24} sm={12} xl={8} className="flex">
-                <Card className="w-full min-h-[26rem]">
-                  <Skeleton.Image className="!w-full h-48" active />
-                  <Skeleton active paragraph={{ rows: 4 }} className="mt-4" />
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -177,45 +157,52 @@ export default function ProductsPage() {
 
           {/* Products Grid */}
           <Col xs={24} lg={18}>
-            <div className="mb-4 text-gray-600">
-              Showing {paginatedProducts.length} of {filteredProducts.length}{" "}
-              products
-            </div>
+            <Spin spinning={isLoading}>
+              <div className="mb-4 text-gray-600">
+                Showing {paginatedProducts.length} of {filteredProducts.length}{" "}
+                products
+              </div>
 
-            {paginatedProducts.length === 0 ? (
-              <Empty
-                description="No products found"
-                image={Empty.PRESENTED_IMAGE_SIMPLE}
-              />
-            ) : (
-              <>
-                <Row gutter={[24, 24]}>
-                  {paginatedProducts.map((product) => (
-                    <Col key={product.id} xs={24} sm={12} xl={8} className="flex">
-                      <ProductCard product={product} />
-                    </Col>
-                  ))}
-                </Row>
+              {paginatedProducts.length === 0 ? (
+                <Empty
+                  description="No products found"
+                  image={Empty.PRESENTED_IMAGE_SIMPLE}
+                />
+              ) : (
+                <>
+                  <Row gutter={[24, 24]}>
+                    {paginatedProducts.map((product) => (
+                      <Col
+                        key={product.id}
+                        xs={24}
+                        sm={12}
+                        xl={8}
+                        className="flex"
+                      >
+                        <ProductCard product={product} />
+                      </Col>
+                    ))}
+                  </Row>
 
-                {/* Pagination */}
-                {filteredProducts.length > pageSize && (
-                  <div className="mt-8 text-center">
-                    <Pagination
-                      current={currentPage}
-                      total={filteredProducts.length}
-                      pageSize={pageSize}
-                      onChange={setCurrentPage}
-                      showSizeChanger={false}
-                      showQuickJumper
-                    />
-                  </div>
-                )}
-              </>
-            )}
+                  {/* Pagination */}
+                  {filteredProducts.length > pageSize && (
+                    <div className="mt-8 text-center">
+                      <Pagination
+                        current={currentPage}
+                        total={filteredProducts.length}
+                        pageSize={pageSize}
+                        onChange={setCurrentPage}
+                        showSizeChanger={false}
+                        showQuickJumper
+                      />
+                    </div>
+                  )}
+                </>
+              )}
+            </Spin>
           </Col>
         </Row>
       </div>
-
     </div>
   );
 }

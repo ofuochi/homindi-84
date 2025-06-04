@@ -1,6 +1,16 @@
-"use client"
+"use client";
 
-import { Card, Row, Col, Typography, Button, Space, Statistic, Timeline, Avatar } from "antd"
+import {
+  Card,
+  Row,
+  Col,
+  Typography,
+  Button,
+  Space,
+  Statistic,
+  Timeline,
+  Avatar,
+} from "antd";
 import {
   GlobalOutlined,
   HeartOutlined,
@@ -10,20 +20,31 @@ import {
   TeamOutlined,
   TrophyOutlined,
   StarOutlined,
-} from "@ant-design/icons"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
+} from "@ant-design/icons";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { colors } from "@/lib/colors";
 
-const { Title, Paragraph, Text } = Typography
+const { Title, Paragraph, Text } = Typography;
 
 export default function AboutPage() {
   const stats = [
     { title: "Happy Customers", value: 10000, suffix: "+", icon: TeamOutlined },
-    { title: "Products Available", value: 5000, suffix: "+", icon: StarOutlined },
+    {
+      title: "Products Available",
+      value: 5000,
+      suffix: "+",
+      icon: StarOutlined,
+    },
     { title: "Countries Served", value: 25, suffix: "+", icon: GlobalOutlined },
-    { title: "Years of Experience", value: 8, suffix: "", icon: TrophyOutlined },
-  ]
+    {
+      title: "Years of Experience",
+      value: 8,
+      suffix: "",
+      icon: TrophyOutlined,
+    },
+  ];
 
   const values = [
     {
@@ -50,20 +71,25 @@ export default function AboutPage() {
       description:
         "Continuously improving our platform with cutting-edge technology to provide seamless shopping experiences and exceptional service delivery.",
     },
-  ]
+  ];
 
   const timeline = [
     {
       color: "#0B8457",
       children: (
-        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+        >
           <Text strong className="font-inter text-lg">
             2016 - The Beginning
           </Text>
           <br />
           <Text className="text-gray-600 font-inter leading-relaxed">
-            Founded with a vision to connect diaspora communities with authentic products from their homeland, starting
-            with a small team and big dreams.
+            Founded with a vision to connect diaspora communities with authentic
+            products from their homeland, starting with a small team and big
+            dreams.
           </Text>
         </motion.div>
       ),
@@ -82,8 +108,8 @@ export default function AboutPage() {
           </Text>
           <br />
           <Text className="text-gray-600 font-inter leading-relaxed">
-            Launched our first e-commerce platform, serving customers across 5 countries with carefully curated Nigerian
-            products.
+            Launched our first e-commerce platform, serving customers across 5
+            countries with carefully curated Nigerian products.
           </Text>
         </motion.div>
       ),
@@ -102,8 +128,8 @@ export default function AboutPage() {
           </Text>
           <br />
           <Text className="text-gray-600 font-inter leading-relaxed">
-            Expanded to 15 countries and partnered with over 100 local suppliers worldwide, establishing quality control
-            standards.
+            Expanded to 15 countries and partnered with over 100 local suppliers
+            worldwide, establishing quality control standards.
           </Text>
         </motion.div>
       ),
@@ -122,8 +148,8 @@ export default function AboutPage() {
           </Text>
           <br />
           <Text className="text-gray-600 font-inter leading-relaxed">
-            Implemented AI-powered recommendations and enhanced mobile experience with real-time tracking and customer
-            support.
+            Implemented AI-powered recommendations and enhanced mobile
+            experience with real-time tracking and customer support.
           </Text>
         </motion.div>
       ),
@@ -142,13 +168,13 @@ export default function AboutPage() {
           </Text>
           <br />
           <Text className="text-gray-600 font-inter leading-relaxed">
-            Serving 25+ countries with 10,000+ happy customers and 5,000+ authentic products, continuing to innovate and
-            expand.
+            Serving 25+ countries with 10,000+ happy customers and 5,000+
+            authentic products, continuing to innovate and expand.
           </Text>
         </motion.div>
       ),
     },
-  ]
+  ];
 
   const team = [
     {
@@ -179,7 +205,7 @@ export default function AboutPage() {
       description:
         "Dedicated to ensuring every customer has an exceptional experience and feels connected to their cultural heritage.",
     },
-  ]
+  ];
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -188,7 +214,7 @@ export default function AboutPage() {
       y: 0,
       transition: { delay: i * 0.1, duration: 0.6 },
     }),
-  }
+  };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -196,26 +222,34 @@ export default function AboutPage() {
       opacity: 1,
       transition: { staggerChildren: 0.1 },
     },
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
-
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-[#0B8457] to-[#0a7249] text-white py-24 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-48 translate-x-48"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full translate-y-32 -translate-x-32"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="text-center">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="text-center"
+          >
             <motion.div variants={fadeInUp}>
-              <Title level={1} className="!text-white !mb-6 font-poppins text-5xl lg:text-6xl">
+              <Title
+                level={1}
+                className="!text-white !mb-6 font-poppins text-5xl lg:text-6xl"
+              >
                 About Homindi
               </Title>
               <Paragraph className="text-xl text-green-100 max-w-4xl mx-auto font-inter leading-relaxed">
-                We're on a mission to bridge the gap between diaspora communities and their cultural roots by providing
-                authentic, high-quality products from around the world. Every purchase tells a story, connects a family,
-                and preserves a tradition.
+                We're on a mission to bridge the gap between diaspora
+                communities and their cultural roots by providing authentic,
+                high-quality products from around the world. Every purchase
+                tells a story, connects a family, and preserves a tradition.
               </Paragraph>
             </motion.div>
           </motion.div>
@@ -225,10 +259,15 @@ export default function AboutPage() {
       {/* Stats Section */}
       <div className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
             <Row gutter={[32, 32]} className="text-center">
               {stats.map((stat, index) => {
-                const Icon = stat.icon
+                const Icon = stat.icon;
                 return (
                   <Col xs={12} sm={6} key={index}>
                     <motion.div variants={fadeInUp} custom={index}>
@@ -238,12 +277,15 @@ export default function AboutPage() {
                             <Icon className="text-2xl text-[#0B8457]" />
                           </div>
                           <Statistic
-                            title={<span className="font-inter text-gray-600 text-base">{stat.title}</span>}
+                            title={
+                              <span className="font-inter text-gray-600 text-base">
+                                {stat.title}
+                              </span>
+                            }
                             value={stat.value}
                             suffix={stat.suffix}
                             valueStyle={{
-                              color: "#0B8457",
-                              fontFamily: "Poppins",
+                              color: colors.primary[500],
                               fontWeight: "bold",
                               fontSize: "2rem",
                             }}
@@ -252,7 +294,7 @@ export default function AboutPage() {
                       </Card>
                     </motion.div>
                   </Col>
-                )
+                );
               })}
             </Row>
           </motion.div>
@@ -278,9 +320,11 @@ export default function AboutPage() {
                     height={500}
                     className="rounded-3xl shadow-2xl object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-3xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-3xl" />
                   <div className="absolute bottom-6 left-6 text-white">
-                    <Text className="text-lg font-semibold">Authentic • Fresh • Global</Text>
+                    <span className="text-lg font-semibold">
+                      Authentic • Fresh • Global
+                    </span>
                   </div>
                 </div>
               </motion.div>
@@ -294,22 +338,32 @@ export default function AboutPage() {
                 className="space-y-8"
               >
                 <div>
-                  <Title level={2} className="!mb-6 font-poppins text-gray-900 text-4xl">
+                  <Title
+                    level={2}
+                    className="!mb-6 font-poppins text-gray-900 text-4xl"
+                  >
                     Our Mission
                   </Title>
                   <Paragraph className="text-lg text-gray-700 font-inter leading-relaxed mb-6">
-                    To create meaningful connections between diaspora communities and their cultural heritage through
-                    authentic products, exceptional service, and innovative technology. We believe that distance should
-                    never diminish the bond with one's roots.
+                    To create meaningful connections between diaspora
+                    communities and their cultural heritage through authentic
+                    products, exceptional service, and innovative technology. We
+                    believe that distance should never diminish the bond with
+                    one's roots.
                   </Paragraph>
                 </div>
                 <div>
-                  <Title level={3} className="!mb-4 font-poppins text-gray-900 text-2xl">
+                  <Title
+                    level={3}
+                    className="!mb-4 font-poppins text-gray-900 text-2xl"
+                  >
                     Our Vision
                   </Title>
                   <Paragraph className="text-lg text-gray-700 font-inter leading-relaxed">
-                    To become the world's most trusted platform for authentic cultural products, fostering global
-                    communities while preserving and celebrating diverse traditions for future generations.
+                    To become the world's most trusted platform for authentic
+                    cultural products, fostering global communities while
+                    preserving and celebrating diverse traditions for future
+                    generations.
                   </Paragraph>
                 </div>
               </motion.div>
@@ -329,12 +383,15 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <motion.div variants={fadeInUp}>
-              <Title level={2} className="!mb-6 font-poppins text-gray-900 text-4xl">
+              <Title
+                level={2}
+                className="!mb-6 font-poppins text-gray-900 text-4xl"
+              >
                 Our Core Values
               </Title>
               <Paragraph className="text-xl text-gray-600 max-w-3xl mx-auto font-inter leading-relaxed">
-                These principles guide everything we do and shape how we serve our community with integrity, passion,
-                and excellence.
+                These principles guide everything we do and shape how we serve
+                our community with integrity, passion, and excellence.
               </Paragraph>
             </motion.div>
           </motion.div>
@@ -357,10 +414,15 @@ export default function AboutPage() {
                         {value.icon}
                       </div>
                     </div>
-                    <Title level={4} className="!mb-4 font-poppins text-gray-900 text-xl">
+                    <Title
+                      level={4}
+                      className="!mb-4 font-poppins text-gray-900 text-xl"
+                    >
                       {value.title}
                     </Title>
-                    <Paragraph className="text-gray-600 font-inter leading-relaxed">{value.description}</Paragraph>
+                    <Paragraph className="text-gray-600 font-inter leading-relaxed">
+                      {value.description}
+                    </Paragraph>
                   </Card>
                 </motion.div>
               </Col>
@@ -380,12 +442,15 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
               >
-                <Title level={2} className="!mb-8 font-poppins text-gray-900 text-4xl">
+                <Title
+                  level={2}
+                  className="!mb-8 font-poppins text-gray-900 text-4xl"
+                >
                   Our Journey
                 </Title>
                 <Paragraph className="text-xl text-gray-600 mb-12 font-inter leading-relaxed">
-                  From a simple idea to a global platform serving thousands of customers worldwide, here's how we've
-                  grown and evolved.
+                  From a simple idea to a global platform serving thousands of
+                  customers worldwide, here's how we've grown and evolved.
                 </Paragraph>
                 <Timeline items={timeline} className="custom-timeline" />
               </motion.div>
@@ -400,13 +465,17 @@ export default function AboutPage() {
                 <Card className="bg-gradient-to-br from-[#0B8457] to-[#0a7249] text-white border-0 rounded-3xl shadow-2xl">
                   <div className="p-8">
                     <RocketOutlined className="text-5xl text-white mb-6" />
-                    <Title level={3} className="!text-white !mb-6 font-poppins text-2xl">
+                    <Title
+                      level={3}
+                      className="!text-white !mb-6 font-poppins text-2xl"
+                    >
                       What's Next?
                     </Title>
                     <Paragraph className="text-green-100 mb-8 font-inter text-lg leading-relaxed">
-                      We're constantly innovating and expanding our reach. Our upcoming features include AI-powered
-                      product recommendations, virtual cultural experiences, enhanced community features, and
-                      sustainable packaging initiatives.
+                      We're constantly innovating and expanding our reach. Our
+                      upcoming features include AI-powered product
+                      recommendations, virtual cultural experiences, enhanced
+                      community features, and sustainable packaging initiatives.
                     </Paragraph>
                     <Space direction="vertical" className="w-full" size="large">
                       <Button
@@ -445,12 +514,15 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <motion.div variants={fadeInUp}>
-              <Title level={2} className="!mb-6 font-poppins text-gray-900 text-4xl">
+              <Title
+                level={2}
+                className="!mb-6 font-poppins text-gray-900 text-4xl"
+              >
                 Meet Our Team
               </Title>
               <Paragraph className="text-xl text-gray-600 max-w-3xl mx-auto font-inter leading-relaxed">
-                The passionate individuals behind Homindi, working tirelessly to serve our global community and preserve
-                cultural connections.
+                The passionate individuals behind Homindi, working tirelessly to
+                serve our global community and preserve cultural connections.
               </Paragraph>
             </motion.div>
           </motion.div>
@@ -477,13 +549,18 @@ export default function AboutPage() {
                           className="mx-auto shadow-lg"
                         />
                       </div>
-                      <Title level={4} className="!mb-2 font-poppins text-gray-900 text-xl">
+                      <Title
+                        level={4}
+                        className="!mb-2 font-poppins text-gray-900 text-xl"
+                      >
                         {member.name}
                       </Title>
                       <Text className="text-[#0B8457] font-semibold font-inter text-base block mb-4">
                         {member.role}
                       </Text>
-                      <Paragraph className="text-gray-600 font-inter leading-relaxed">{member.description}</Paragraph>
+                      <Paragraph className="text-gray-600 font-inter leading-relaxed">
+                        {member.description}
+                      </Paragraph>
                     </div>
                   </Card>
                 </motion.div>
@@ -496,14 +573,22 @@ export default function AboutPage() {
       {/* CTA Section */}
       <div className="py-20 bg-gradient-to-r from-[#0B8457] to-[#0a7249] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
             <motion.div variants={fadeInUp}>
-              <Title level={2} className="!mb-8 font-poppins text-white text-4xl">
+              <Title
+                level={2}
+                className="!mb-8 font-poppins text-white text-4xl"
+              >
                 Ready to Start Your Journey?
               </Title>
               <Paragraph className="text-xl text-green-100 mb-12 font-inter leading-relaxed">
-                Join thousands of satisfied customers who trust Homindi for authentic cultural products and exceptional
-                service.
+                Join thousands of satisfied customers who trust Homindi for
+                authentic cultural products and exceptional service.
               </Paragraph>
             </motion.div>
             <motion.div variants={fadeInUp} custom={1}>
@@ -530,7 +615,6 @@ export default function AboutPage() {
           </motion.div>
         </div>
       </div>
-
     </div>
-  )
+  );
 }
