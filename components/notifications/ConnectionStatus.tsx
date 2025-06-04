@@ -1,55 +1,56 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import { Badge, Tooltip } from "antd"
-import { WifiOutlined } from "@ant-design/icons"
-import { useWebSocketStore } from "@/store/useWebSocketStore"
-import { useAuthStore } from "@/store/useAuthStore"
+import { useEffect } from "react";
+import { Badge, Tooltip } from "antd";
+import { WifiOutlined } from "@ant-design/icons";
+import { useWebSocketStore } from "@/store/useWebSocketStore";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function ConnectionStatus() {
-  const { connectionStatus, connect, disconnect, lastError } = useWebSocketStore()
-  const { isAuthenticated, user } = useAuthStore()
+  const { connectionStatus, connect, disconnect, lastError } =
+    useWebSocketStore();
+  const { isAuthenticated, user } = useAuthStore();
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      connect(user.id)
+      connect(user.id);
     } else {
-      disconnect()
+      disconnect();
     }
 
     return () => {
-      disconnect()
-    }
-  }, [isAuthenticated, user, connect, disconnect])
+      disconnect();
+    };
+  }, [isAuthenticated, user, connect, disconnect]);
 
   const getStatusColor = () => {
     switch (connectionStatus) {
       case "connected":
-        return "#52c41a"
+        return "#52c41a";
       case "connecting":
-        return "#faad14"
+        return "#faad14";
       case "error":
-        return "#ff4d4f"
+        return "#ff4d4f";
       default:
-        return "#d9d9d9"
+        return "#d9d9d9";
     }
-  }
+  };
 
   const getStatusText = () => {
     switch (connectionStatus) {
       case "connected":
-        return "Connected - Real-time updates active"
+        return "Connected - Real-time updates active";
       case "connecting":
-        return "Connecting to notification service..."
+        return "Connecting to notification service...";
       case "error":
-        return `Connection error: ${lastError || "Unknown error"}`
+        return `Connection error: ${lastError || "Unknown error"}`;
       default:
-        return "Disconnected - No real-time updates"
+        return "Disconnected - No real-time updates";
     }
-  }
+  };
 
   if (!isAuthenticated) {
-    return null
+    return null;
   }
 
   return (
@@ -63,5 +64,5 @@ export default function ConnectionStatus() {
         />
       </Badge>
     </Tooltip>
-  )
+  );
 }
