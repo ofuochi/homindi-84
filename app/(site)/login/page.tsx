@@ -23,7 +23,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
       <div className="max-w-md mx-auto px-4 py-16">
         <Card className="shadow-lg">
           <div className="text-center mb-8">
@@ -65,7 +64,7 @@ export default function LoginPage() {
                 block
                 loading={isLoading}
               >
-                Sign In
+                Login
               </Button>
             </Form.Item>
           </Form>
@@ -89,7 +88,6 @@ export default function LoginPage() {
           </div>
         </Card>
       </div>
-
     </div>
   );
 }

@@ -155,7 +155,7 @@ export const HeaderActions = ({
                   type="default"
                   className="font-inter font-medium rounded-lg"
                 >
-                  Sign In
+                  Login
                 </Button>
               </motion.div>
             </Link>
@@ -299,7 +299,9 @@ export default function Header() {
         <div className="flex flex-col space-y-4">
           {navLinks.map((link) => {
             const isActive =
-              link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+              link.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(link.href);
             return (
               <Link
                 key={link.href}

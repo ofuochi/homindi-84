@@ -580,10 +580,7 @@ export default function AboutPage() {
             variants={staggerContainer}
           >
             <motion.div variants={fadeInUp}>
-              <Title
-                level={2}
-                className="!mb-8 font-poppins text-white text-4xl"
-              >
+              <Title className="mb-8 !text-white text-4xl">
                 Ready to Start Your Journey?
               </Title>
               <Paragraph className="text-xl text-green-100 mb-12 font-inter leading-relaxed">

@@ -76,9 +76,8 @@ export default function ProductPage() {
 
   return (
     <Layout>
-
       <Layout.Content className="container mx-auto px-4 py-8">
-        <Breadcrumb 
+        <Breadcrumb
           className="mb-6"
           items={[
             {
@@ -88,7 +87,11 @@ export default function ProductPage() {
               title: <Link href="/products">Products</Link>,
             },
             {
-              title: loading ? <Skeleton.Button active size="small" /> : product?.name,
+              title: loading ? (
+                <Skeleton.Button active size="small" />
+              ) : (
+                product?.name
+              ),
             },
           ]}
         />
@@ -128,7 +131,7 @@ export default function ProductPage() {
                   </div>
 
                   <div className="flex items-center mb-4">
-                    <Text className="text-2xl font-bold mr-4">
+                    <Text className="text-2xl font-bold mr-4 text-primary">
                       ${product.price.toFixed(2)}
                     </Text>
                     {product.discount && (
@@ -143,6 +146,22 @@ export default function ProductPage() {
                   </Text>
 
                   <div className="flex items-center mb-4">
+                    <Text strong className="mr-2">
+                      Category:
+                    </Text>
+                    <Tag icon={<TagOutlined />} color="default">
+                      {product.category}
+                    </Tag>
+                  </div>
+                  <div className="flex items-center mb-4">
+                    <Text strong className="mr-2">
+                      Origin:
+                    </Text>
+                    <Tag icon={<GlobalOutlined />} color="processing">
+                      {product.origin}
+                    </Tag>
+                  </div>
+                  <div className="flex items-center mb-6">
                     <Text strong className="mr-2">
                       Availability:
                     </Text>
@@ -163,22 +182,6 @@ export default function ProductPage() {
                         Out of Stock
                       </Tag>
                     )}
-
-                    <Text strong className="mr-2">
-                      Category:
-                    </Text>
-                    <Tag icon={<TagOutlined />} color="default">
-                      {product.category}
-                    </Tag>
-                  </div>
-
-                  <div className="flex items-center mb-6">
-                    <Text strong className="mr-2">
-                      Origin:
-                    </Text>
-                    <Tag icon={<GlobalOutlined />} color="processing">
-                      {product.origin}
-                    </Tag>
                   </div>
 
                   <Divider />
@@ -229,7 +232,7 @@ export default function ProductPage() {
 
         {!loading && product && (
           <div className="mt-12">
-            <Tabs 
+            <Tabs
               defaultActiveKey="1"
               items={[
                 {
@@ -242,13 +245,17 @@ export default function ProductPage() {
                         <Col xs={24} md={8}>
                           <div className="bg-gray-50 p-4 rounded-lg">
                             <Text strong>SKU:</Text>
-                            <Text className="block">{product.sku || "N/A"}</Text>
+                            <Text className="block">
+                              {product.sku || "N/A"}
+                            </Text>
                           </div>
                         </Col>
                         <Col xs={24} md={8}>
                           <div className="bg-gray-50 p-4 rounded-lg">
                             <Text strong>Weight:</Text>
-                            <Text className="block">{product.weight || "N/A"}</Text>
+                            <Text className="block">
+                              {product.weight || "N/A"}
+                            </Text>
                           </div>
                         </Col>
                         <Col xs={24} md={8}>
@@ -262,7 +269,7 @@ export default function ProductPage() {
                         <Text>{product.description}</Text>
                       </div>
                     </div>
-                  )
+                  ),
                 },
                 {
                   key: "2",
@@ -280,7 +287,7 @@ export default function ProductPage() {
                         <li>Express Shipping: 2-3 business days</li>
                       </ul>
                     </div>
-                  )
+                  ),
                 },
                 {
                   key: "3",
@@ -292,14 +299,13 @@ export default function ProductPage() {
                         No reviews yet. Be the first to review this product!
                       </Text>
                     </div>
-                  )
-                }
+                  ),
+                },
               ]}
             />
           </div>
         )}
       </Layout.Content>
-
     </Layout>
   );
 }

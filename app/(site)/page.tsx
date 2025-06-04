@@ -18,6 +18,7 @@ import ProductCard from "@/components/product/ProductCard";
 import { mockProducts } from "@/lib/mockData";
 import { colors } from "@/lib/colors";
 import { motion } from "framer-motion";
+import { ROUTES } from "@/lib/routes";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -316,9 +317,29 @@ export default function HomePage() {
               <motion.div variants={fadeInUp} custom={3} className="relative">
                 <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-3xl p-8 text-center">
                   <div className="mb-6">
-                    <div className="w-24 h-24 bg-primary-500 rounded-full mx-auto flex items-center justify-center mb-4">
-                      <span className="text-white text-3xl font-bold">H</span>
-                    </div>
+                    <Link href={ROUTES.PRODUCTS}>
+                      <div
+                        className="w-24 h-24 bg-primary-500 rounded-full mx-auto flex items-center justify-center mb-4 
+     shadow-[0_10px_15px_-3px_rgba(11,132,87,0.3),0_4px_6px_-4px_rgba(11,132,87,0.2)] 
+     relative before:content-[''] before:absolute before:inset-0 before:rounded-full 
+     before:bg-gradient-to-b before:from-white/30 before:to-transparent before:opacity-80
+     transform hover:-translate-y-1 transition-all duration-300"
+                      >
+                        <motion.div
+                          className="w-16 h-16 flex items-center justify-center relative z-10"
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Image
+                            src="/logo.png"
+                            alt="Homindi Logo"
+                            width={100}
+                            height={100}
+                            className="object-contain"
+                          />
+                        </motion.div>
+                      </div>
+                    </Link>
                     <Title level={3} className="mb-2">
                       Ready to Get Started?
                     </Title>
