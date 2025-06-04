@@ -12,7 +12,7 @@ import {
   Button,
   Empty,
   Pagination,
-  Skeleton,
+  Spin,
 } from "antd";
 import { FilterOutlined } from "@ant-design/icons";
 import ProductCard from "@/components/product/ProductCard";
@@ -60,19 +60,8 @@ export default function ProductsPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <Row gutter={[24, 24]}>
-            {Array.from({ length: pageSize }).map((_, idx) => (
-              <Col key={idx} xs={24} sm={12} xl={8} className="flex">
-                <Card className="w-full min-h-[26rem]">
-                  <Skeleton.Image className="!w-full h-48" active />
-                  <Skeleton active paragraph={{ rows: 4 }} className="mt-4" />
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </div>
+      <div className="min-h-[60vh] flex items-center justify-center bg-gray-50">
+        <Spin size="large" />
       </div>
     );
   }
