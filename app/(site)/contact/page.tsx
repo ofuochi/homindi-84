@@ -91,10 +91,10 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <Title level={1} className="!text-white !mb-4 font-poppins">
+            <Title level={1} className="!text-white !mb-4 font-roboto">
               Get in Touch
             </Title>
-            <Paragraph className="text-xl text-green-100 max-w-2xl mx-auto font-inter">
+            <Paragraph className="text-xl text-green-100 max-w-2xl mx-auto font-roboto">
               Have questions about our products or services? We'd love to hear
               from you. Send us a message and we'll respond as soon as possible.
             </Paragraph>
@@ -113,10 +113,10 @@ export default function ContactPage() {
             >
               <Card className="shadow-lg border-0 rounded-2xl">
                 <div className="p-6">
-                  <Title level={2} className="!mb-2 font-poppins text-gray-900">
+                  <Title level={2} className="!mb-2 font-roboto text-gray-900">
                     Send us a Message
                   </Title>
-                  <Paragraph className="text-gray-600 mb-8 font-inter">
+                  <Paragraph className="text-gray-600 mb-8 font-roboto">
                     Fill out the form below and we'll get back to you as soon as
                     possible.
                   </Paragraph>
@@ -133,7 +133,7 @@ export default function ContactPage() {
                         <Form.Item
                           name="name"
                           label={
-                            <span className="font-inter font-medium">
+                            <span className="font-roboto font-medium">
                               Full Name
                             </span>
                           }
@@ -151,7 +151,7 @@ export default function ContactPage() {
                           <Input
                             prefix={<UserOutlined className="text-gray-400" />}
                             placeholder="Enter your full name"
-                            className="rounded-lg font-inter"
+                            className="rounded-lg font-roboto"
                           />
                         </Form.Item>
                       </Col>
@@ -159,7 +159,7 @@ export default function ContactPage() {
                         <Form.Item
                           name="email"
                           label={
-                            <span className="font-inter font-medium">
+                            <span className="font-roboto font-medium">
                               Email Address
                             </span>
                           }
@@ -177,7 +177,7 @@ export default function ContactPage() {
                           <Input
                             prefix={<MailOutlined className="text-gray-400" />}
                             placeholder="Enter your email address"
-                            className="rounded-lg font-inter"
+                            className="rounded-lg font-roboto"
                           />
                         </Form.Item>
                       </Col>
@@ -186,7 +186,7 @@ export default function ContactPage() {
                     <Form.Item
                       name="subject"
                       label={
-                        <span className="font-inter font-medium">Subject</span>
+                        <span className="font-roboto font-medium">Subject</span>
                       }
                       rules={[
                         { required: true, message: "Please enter a subject" },
@@ -198,14 +198,14 @@ export default function ContactPage() {
                     >
                       <Input
                         placeholder="What is this regarding?"
-                        className="rounded-lg font-inter"
+                        className="rounded-lg font-roboto"
                       />
                     </Form.Item>
 
                     <Form.Item
                       name="message"
                       label={
-                        <span className="font-inter font-medium">Message</span>
+                        <span className="font-roboto font-medium">Message</span>
                       }
                       rules={[
                         {
@@ -221,7 +221,7 @@ export default function ContactPage() {
                       <TextArea
                         rows={6}
                         placeholder="Tell us more about your inquiry..."
-                        className="rounded-lg font-inter"
+                        className="rounded-lg font-roboto"
                       />
                     </Form.Item>
 
@@ -231,7 +231,7 @@ export default function ContactPage() {
                         htmlType="submit"
                         loading={loading}
                         icon={<SendOutlined />}
-                        className="bg-[#0B8457] hover:bg-[#0a7249] border-[#0B8457] rounded-lg h-12 px-8 font-inter font-medium"
+                        className="bg-[#0B8457] hover:bg-[#0a7249] border-[#0B8457] rounded-lg h-12 px-8 font-roboto font-medium"
                         block
                       >
                         {loading ? "Sending..." : "Send Message"}
@@ -252,10 +252,10 @@ export default function ContactPage() {
               className="space-y-6"
             >
               <div>
-                <Title level={2} className="!mb-2 font-poppins text-gray-900">
+                <Title level={2} className="!mb-2 font-roboto text-gray-900">
                   Contact Information
                 </Title>
-                <Paragraph className="text-gray-600 mb-8 font-inter">
+                <Paragraph className="text-gray-600 mb-8 font-roboto">
                   Reach out to us through any of these channels. We're here to
                   help!
                 </Paragraph>
@@ -275,15 +275,15 @@ export default function ContactPage() {
                         <div className="flex-1">
                           <Title
                             level={4}
-                            className="!mb-1 font-inter text-gray-900"
+                            className="!mb-1 font-roboto text-gray-900"
                           >
                             {info.title}
                           </Title>
-                          <Text className="text-lg font-medium text-gray-800 font-inter">
+                          <Text className="text-lg font-medium text-gray-800 font-roboto">
                             {info.content}
                           </Text>
                           <br />
-                          <Text className="text-gray-600 font-inter">
+                          <Text className="text-gray-600 font-roboto">
                             {info.description}
                           </Text>
                         </div>
@@ -301,24 +301,24 @@ export default function ContactPage() {
               >
                 <Card className="bg-gradient-to-r from-[#0B8457] to-[#0a7249] text-white rounded-xl border-0">
                   <div className="p-6">
-                    <Title level={3} className="!text-white !mb-4 font-poppins">
+                    <Title level={3} className="!text-white !mb-4 font-roboto">
                       Need Immediate Help?
                     </Title>
-                    <Paragraph className="text-green-100 mb-4 font-inter">
+                    <Paragraph className="text-green-100 mb-4 font-roboto">
                       For urgent matters, please call our support line or check
                       our FAQ section for quick answers to common questions.
                     </Paragraph>
                     <Space direction="vertical" className="w-full">
                       <Button
                         type="default"
-                        className="bg-white text-[#0B8457] border-white hover:bg-gray-50 rounded-lg font-inter font-medium"
+                        className="bg-white text-[#0B8457] border-white hover:bg-gray-50 rounded-lg font-roboto font-medium"
                         block
                       >
                         View FAQ
                       </Button>
                       <Button
                         type="default"
-                        className="bg-transparent text-white border-white hover:bg-white hover:text-[#0B8457] rounded-lg font-inter font-medium"
+                        className="bg-transparent text-white border-white hover:bg-white hover:text-[#0B8457] rounded-lg font-roboto font-medium"
                         block
                       >
                         Live Chat Support

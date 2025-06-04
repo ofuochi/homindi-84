@@ -52,11 +52,11 @@ export default function Footer() {
                   <div className="w-10 h-10 bg-primary-500 rounded-xl flex items-center justify-center shadow-lg">
                     <span className="text-white font-bold text-sm">H</span>
                   </div>
-                  <span className="text-2xl font-bold font-poppins">
+                  <span className="text-2xl font-bold font-roboto">
                     Homindi
                   </span>
                 </div>
-                <p className="text-gray-300 mb-6 max-w-md leading-relaxed font-inter">
+                <p className="text-gray-300 mb-6 max-w-md leading-relaxed font-roboto">
                   Connecting Africans in the diaspora with authentic Nigerian
                   food products. Fresh, quality ingredients delivered to your
                   doorstep worldwide, bringing the taste of home to your
@@ -86,7 +86,7 @@ export default function Footer() {
             {/* Quick Links */}
             <Col xs={24} md={6} lg={4}>
               <motion.div variants={fadeInUp} custom={1}>
-                <h3 className="text-lg font-semibold mb-6 font-poppins">
+                <h3 className="text-lg font-semibold mb-6 font-roboto">
                   Quick Links
                 </h3>
                 <ul className="space-y-3">
@@ -100,7 +100,7 @@ export default function Footer() {
                     <li key={index}>
                       <Link
                         href={link.href}
-                        className="text-gray-300 hover:text-white transition-colors font-inter hover:translate-x-1 inline-block duration-300"
+                        className="text-gray-300 hover:text-white transition-colors font-roboto hover:translate-x-1 inline-block duration-300"
                       >
                         {link.label}
                       </Link>
@@ -113,7 +113,7 @@ export default function Footer() {
             {/* Support */}
             <Col xs={24} md={6} lg={4}>
               <motion.div variants={fadeInUp} custom={2}>
-                <h3 className="text-lg font-semibold mb-6 font-poppins">
+                <h3 className="text-lg font-semibold mb-6 font-roboto">
                   Support
                 </h3>
                 <ul className="space-y-3">
@@ -127,7 +127,7 @@ export default function Footer() {
                     <li key={index}>
                       <Link
                         href={link.href}
-                        className="text-gray-300 hover:text-white transition-colors font-inter hover:translate-x-1 inline-block duration-300"
+                        className="text-gray-300 hover:text-white transition-colors font-roboto hover:translate-x-1 inline-block duration-300"
                       >
                         {link.label}
                       </Link>
@@ -140,7 +140,7 @@ export default function Footer() {
             {/* Contact & Newsletter */}
             <Col xs={24} md={12} lg={8}>
               <motion.div variants={fadeInUp} custom={3}>
-                <h3 className="text-lg font-semibold mb-6 font-poppins">
+                <h3 className="text-lg font-semibold mb-6 font-roboto">
                   Stay Connected
                 </h3>
 
@@ -148,21 +148,21 @@ export default function Footer() {
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center space-x-3 text-gray-300">
                     <MailOutlined className="text-primary-500" />
-                    <span className="font-inter">support@homindi.com</span>
+                    <span className="font-roboto">support@homindi.com</span>
                   </div>
                   <div className="flex items-center space-x-3 text-gray-300">
                     <PhoneOutlined className="text-primary-500" />
-                    <span className="font-inter">+1 (555) 123-4567</span>
+                    <span className="font-roboto">+1 (555) 123-4567</span>
                   </div>
                   <div className="flex items-center space-x-3 text-gray-300">
                     <EnvironmentOutlined className="text-primary-500" />
-                    <span className="font-inter">New York, NY 10001</span>
+                    <span className="font-roboto">New York, NY 10001</span>
                   </div>
                 </div>
 
                 {/* Newsletter */}
                 <div>
-                  <p className="text-gray-300 mb-4 font-inter">
+                  <p className="text-gray-300 mb-4 font-roboto">
                     Subscribe to get updates on new products and exclusive
                     offers.
                   </p>
@@ -190,26 +190,26 @@ export default function Footer() {
             custom={4}
             className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
           >
-            <p className="text-gray-400 font-inter text-center md:text-left">
+            <p className="text-gray-400 font-roboto text-center md:text-left">
               © 2024 Homindi. All rights reserved. Made with ❤️ for the African
               diaspora.
             </p>
             <div className="flex space-x-6 text-sm">
               <Link
                 href={ROUTES.PRIVACY}
-                className="text-gray-400 hover:text-white transition-colors font-inter"
+                className="text-gray-400 hover:text-white transition-colors font-roboto"
               >
                 Privacy
               </Link>
               <Link
                 href={ROUTES.TERMS}
-                className="text-gray-400 hover:text-white transition-colors font-inter"
+                className="text-gray-400 hover:text-white transition-colors font-roboto"
               >
                 Terms
               </Link>
               <Link
                 href={ROUTES.COOKIES}
-                className="text-gray-400 hover:text-white transition-colors font-inter"
+                className="text-gray-400 hover:text-white transition-colors font-roboto"
               >
                 Cookies
               </Link>

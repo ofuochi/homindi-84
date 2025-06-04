@@ -55,15 +55,15 @@ export default function AdminHeader() {
             {/* Logo */}
             <Link href={ROUTES.ADMIN} className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg font-poppins">
+                <span className="text-white font-bold text-lg font-roboto">
                   DB
                 </span>
               </div>
               <div>
-                <span className="text-xl font-bold text-gray-900 font-poppins">
+                <span className="text-xl font-bold text-gray-900 font-roboto">
                   Homindi
                 </span>
-                <span className="text-sm text-primary-500 font-inter ml-2 bg-green-100 px-2 py-1 rounded-full">
+                <span className="text-sm text-primary-500 font-roboto ml-2 bg-green-100 px-2 py-1 rounded-full">
                   Admin
                 </span>
               </div>
@@ -94,7 +94,7 @@ export default function AdminHeader() {
                     icon={<UserOutlined />}
                     src={user?.avatar}
                   />
-                  <span className="hidden md:inline font-inter font-medium">
+                  <span className="hidden md:inline font-roboto font-medium">
                     {user?.name}
                   </span>
                 </Button>
@@ -115,7 +115,7 @@ export default function AdminHeader() {
       {/* Mobile Menu Drawer */}
       <Drawer
         title={
-          <span className="font-poppins font-semibold text-gray-900">
+          <span className="font-roboto font-semibold text-gray-900">
             Admin Menu
           </span>
         }
@@ -126,22 +126,22 @@ export default function AdminHeader() {
       >
         <div className="flex flex-col space-y-4">
           <Link href="/admin" onClick={() => setMobileMenuOpen(false)}>
-            <Button type="default" block className="font-inter">
+            <Button type="default" block className="font-roboto">
               Dashboard
             </Button>
           </Link>
           <Link href="/admin/orders" onClick={() => setMobileMenuOpen(false)}>
-            <Button type="default" block className="font-inter">
+            <Button type="default" block className="font-roboto">
               Orders
             </Button>
           </Link>
           <Link href="/admin/products" onClick={() => setMobileMenuOpen(false)}>
-            <Button type="default" block className="font-inter">
+            <Button type="default" block className="font-roboto">
               Products
             </Button>
           </Link>
           <Link href="/admin/users" onClick={() => setMobileMenuOpen(false)}>
-            <Button type="default" block className="font-inter">
+            <Button type="default" block className="font-roboto">
               Users
             </Button>
           </Link>
@@ -152,7 +152,7 @@ export default function AdminHeader() {
                 logout();
                 setMobileMenuOpen(false);
               }}
-              className="font-inter"
+              className="font-roboto"
             >
               Logout
             </Button>

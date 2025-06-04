@@ -387,7 +387,7 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
               />
             </div>
             <div>
-              <span className="font-bold text-gray-900 font-poppins text-lg">
+              <span className="font-bold text-gray-900 font-roboto text-lg">
                 Homindi
               </span>
             </div>
@@ -428,10 +428,10 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
       {!collapsed && (
         <div className="p-4 border-t border-gray-200 bg-gray-50">
           <div className="text-center">
-            <p className="text-xs text-gray-500 font-inter">
+            <p className="text-xs text-gray-500 font-roboto">
               Homindi Admin v2.0
             </p>
-            <p className="text-xs text-gray-400 font-inter mt-1">
+            <p className="text-xs text-gray-400 font-roboto mt-1">
               © {new Date().getFullYear()} All rights reserved
             </p>
           </div>

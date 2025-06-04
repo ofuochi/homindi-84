@@ -225,11 +225,11 @@ export default function AdminUsersPage() {
         <div className="flex items-center space-x-3">
           <Avatar size={40} icon={<RoleIcon role={record.publicMetadata.role} />} src={record.imageUrl} />
           <div>
-            <Text strong className="font-inter">
+            <Text strong className="font-roboto">
               {`${record.firstName || ""} ${record.lastName || ""}`.trim() || "No Name"}
             </Text>
             <br />
-            <Text type="secondary" className="font-inter text-sm">
+            <Text type="secondary" className="font-roboto text-sm">
               {record.emailAddresses[0]?.emailAddress}
             </Text>
           </div>
@@ -246,7 +246,7 @@ export default function AdminUsersPage() {
           <Tag
             color={getRoleColor(record.publicMetadata.role)}
             icon={<RoleIcon role={record.publicMetadata.role} />}
-            className="font-inter"
+            className="font-roboto"
           >
             {roleInfo.name}
           </Tag>
@@ -259,11 +259,11 @@ export default function AdminUsersPage() {
       key: "status",
       render: (_: any, record: ExtendedUser) => (
         <div>
-          <Tag color={record.publicMetadata.isActive !== false ? "green" : "red"} className="font-inter">
+          <Tag color={record.publicMetadata.isActive !== false ? "green" : "red"} className="font-roboto">
             {record.publicMetadata.isActive !== false ? "Active" : "Inactive"}
           </Tag>
           <br />
-          <Text type="secondary" className="font-inter text-xs">
+          <Text type="secondary" className="font-roboto text-xs">
             {record.emailAddresses.length > 0 ? "✓ Email" : "✗ Email"}
             {" | "}
             {record.phoneNumbers.length > 0 ? "✓ Phone" : "✗ Phone"}
@@ -276,14 +276,14 @@ export default function AdminUsersPage() {
       dataIndex: "lastSignInAt",
       key: "lastLogin",
       render: (date: number | null) => (
-        <Text className="font-inter text-sm">{date ? new Date(date).toLocaleDateString() : "Never"}</Text>
+        <Text className="font-roboto text-sm">{date ? new Date(date).toLocaleDateString() : "Never"}</Text>
       ),
     },
     {
       title: "Member Since",
       dataIndex: "createdAt",
       key: "createdAt",
-      render: (date: number) => <Text className="font-inter text-sm">{new Date(date).toLocaleDateString()}</Text>,
+      render: (date: number) => <Text className="font-roboto text-sm">{new Date(date).toLocaleDateString()}</Text>,
     },
     {
       title: "Actions",
@@ -328,10 +328,10 @@ export default function AdminUsersPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <Title level={2} className="font-poppins mb-2">
+          <Title level={2} className="font-roboto mb-2">
             User Management
           </Title>
-          <Text type="secondary" className="font-inter">
+          <Text type="secondary" className="font-roboto">
             Manage and view all registered users
           </Text>
         </div>
@@ -340,7 +340,7 @@ export default function AdminUsersPage() {
             type="primary"
             icon={<PlusOutlined />}
             onClick={() => setCreateModalVisible(true)}
-            className="font-inter"
+            className="font-roboto"
           >
             Create User
           </Button>
@@ -352,38 +352,38 @@ export default function AdminUsersPage() {
         <Col xs={12} sm={6}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter text-sm">Total Users</span>}
+              title={<span className="font-roboto text-sm">Total Users</span>}
               value={stats.totalUsers}
               prefix={<UserOutlined />}
-              valueStyle={{ fontSize: "20px", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{ fontSize: "20px", fontFamily: "var(--font-roboto)" }}
             />
           </Card>
         </Col>
         <Col xs={12} sm={6}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter text-sm">Active Users</span>}
+              title={<span className="font-roboto text-sm">Active Users</span>}
               value={stats.activeUsers}
-              valueStyle={{ fontSize: "20px", color: "#52c41a", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{ fontSize: "20px", color: "#52c41a", fontFamily: "var(--font-roboto)" }}
             />
           </Card>
         </Col>
         <Col xs={12} sm={6}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter text-sm">Admins</span>}
+              title={<span className="font-roboto text-sm">Admins</span>}
               value={stats.roleStats.admin || 0}
               prefix={<SafetyOutlined />}
-              valueStyle={{ fontSize: "20px", color: "#ff4d4f", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{ fontSize: "20px", color: "#ff4d4f", fontFamily: "var(--font-roboto)" }}
             />
           </Card>
         </Col>
         <Col xs={12} sm={6}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter text-sm">New (30 days)</span>}
+              title={<span className="font-roboto text-sm">New (30 days)</span>}
               value={stats.recentUsers}
-              valueStyle={{ fontSize: "20px", color: "#1890ff", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{ fontSize: "20px", color: "#1890ff", fontFamily: "var(--font-roboto)" }}
             />
           </Card>
         </Col>
@@ -397,10 +397,10 @@ export default function AdminUsersPage() {
             allowClear
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="flex-1 font-inter"
+            className="flex-1 font-roboto"
             prefix={<SearchOutlined />}
           />
-          <Select value={roleFilter} onChange={setRoleFilter} className="w-full sm:w-48 font-inter">
+          <Select value={roleFilter} onChange={setRoleFilter} className="w-full sm:w-48 font-roboto">
             <Option value="all">All Roles</Option>
             <Option value="god">God Admin</Option>
             <Option value="admin">Administrator</Option>
@@ -424,7 +424,7 @@ export default function AdminUsersPage() {
             showSizeChanger: true,
             showQuickJumper: true,
             showTotal: (total, range) => (
-              <span className="font-inter">
+              <span className="font-roboto">
                 {range[0]}-{range[1]} of {total} users
               </span>
             ),
@@ -435,16 +435,16 @@ export default function AdminUsersPage() {
 
       {/* User Details Modal */}
       <Modal
-        title={<span className="font-poppins">User Details</span>}
+        title={<span className="font-roboto">User Details</span>}
         open={!!selectedUser && !editModalVisible}
         onCancel={() => setSelectedUser(null)}
         footer={[
-          <Button key="close" onClick={() => setSelectedUser(null)} className="font-inter">
+          <Button key="close" onClick={() => setSelectedUser(null)} className="font-roboto">
             Close
           </Button>,
           ...(selectedUser && canEditUser(selectedUser)
             ? [
-              <Button key="edit" type="primary" onClick={() => setEditModalVisible(true)} className="font-inter">
+              <Button key="edit" type="primary" onClick={() => setEditModalVisible(true)} className="font-roboto">
                 Edit User
               </Button>,
             ]
@@ -461,43 +461,43 @@ export default function AdminUsersPage() {
                 src={selectedUser.imageUrl}
                 className="mb-4"
               />
-              <Title level={4} className="font-poppins mb-1">
+              <Title level={4} className="font-roboto mb-1">
                 {`${selectedUser.firstName || ""} ${selectedUser.lastName || ""}`.trim() || "No Name"}
               </Title>
               <Tag
                 color={getRoleColor(selectedUser.publicMetadata.role)}
                 icon={<RoleIcon role={selectedUser.publicMetadata.role} />}
-                className="font-inter"
+                className="font-roboto"
               >
                 {getRoleInfo(selectedUser.publicMetadata.role).name}
               </Tag>
             </div>
 
             <Descriptions bordered column={1} size="small">
-              <Descriptions.Item label={<span className="font-inter font-medium">Email</span>}>
+              <Descriptions.Item label={<span className="font-roboto font-medium">Email</span>}>
                 <div className="flex items-center space-x-2">
                   <MailOutlined className="text-gray-500" />
-                  <Text className="font-inter">{selectedUser.emailAddresses[0]?.emailAddress}</Text>
+                  <Text className="font-roboto">{selectedUser.emailAddresses[0]?.emailAddress}</Text>
                 </div>
               </Descriptions.Item>
-              <Descriptions.Item label={<span className="font-inter font-medium">Phone</span>}>
+              <Descriptions.Item label={<span className="font-roboto font-medium">Phone</span>}>
                 <div className="flex items-center space-x-2">
                   <PhoneOutlined className="text-gray-500" />
-                  <Text className="font-inter">{selectedUser.phoneNumbers[0]?.phoneNumber || "Not provided"}</Text>
+                  <Text className="font-roboto">{selectedUser.phoneNumbers[0]?.phoneNumber || "Not provided"}</Text>
                 </div>
               </Descriptions.Item>
-              <Descriptions.Item label={<span className="font-inter font-medium">Status</span>}>
+              <Descriptions.Item label={<span className="font-roboto font-medium">Status</span>}>
                 <Tag color={selectedUser.publicMetadata.isActive !== false ? "green" : "red"}>
                   {selectedUser.publicMetadata.isActive !== false ? "Active" : "Inactive"}
                 </Tag>
               </Descriptions.Item>
-              <Descriptions.Item label={<span className="font-inter font-medium">Last Login</span>}>
-                <Text className="font-inter">
+              <Descriptions.Item label={<span className="font-roboto font-medium">Last Login</span>}>
+                <Text className="font-roboto">
                   {selectedUser.lastSignInAt ? new Date(selectedUser.lastSignInAt).toLocaleString() : "Never"}
                 </Text>
               </Descriptions.Item>
-              <Descriptions.Item label={<span className="font-inter font-medium">Member Since</span>}>
-                <Text className="font-inter">{new Date(selectedUser.createdAt).toLocaleString()}</Text>
+              <Descriptions.Item label={<span className="font-roboto font-medium">Member Since</span>}>
+                <Text className="font-roboto">{new Date(selectedUser.createdAt).toLocaleString()}</Text>
               </Descriptions.Item>
             </Descriptions>
           </div>
@@ -506,7 +506,7 @@ export default function AdminUsersPage() {
 
       {/* Edit User Modal */}
       <Modal
-        title={<span className="font-poppins">Edit User</span>}
+        title={<span className="font-roboto">Edit User</span>}
         open={editModalVisible}
         onCancel={() => {
           setEditModalVisible(false)
@@ -524,19 +524,19 @@ export default function AdminUsersPage() {
                 src={selectedUser.imageUrl}
                 className="mb-2"
               />
-              <Title level={5} className="font-poppins mb-0">
+              <Title level={5} className="font-roboto mb-0">
                 {`${selectedUser.firstName || ""} ${selectedUser.lastName || ""}`.trim() || "No Name"}
               </Title>
             </div>
 
             <div>
-              <Text strong className="font-inter">
+              <Text strong className="font-roboto">
                 Role:
               </Text>
               <Select
                 value={selectedUser.publicMetadata.role}
                 onChange={(newRole) => handleRoleUpdate(selectedUser.id, newRole)}
-                className="w-full mt-2 font-inter"
+                className="w-full mt-2 font-roboto"
                 disabled={!canEditUser(selectedUser)}
               >
                 {getAvailableRoles(userRole).map((role) => (
@@ -548,7 +548,7 @@ export default function AdminUsersPage() {
             </div>
 
             <div>
-              <Text strong className="font-inter">
+              <Text strong className="font-roboto">
                 Account Status:
               </Text>
               <div className="mt-2">
@@ -567,7 +567,7 @@ export default function AdminUsersPage() {
 
       {/* Create User Modal */}
       <Modal
-        title={<span className="font-poppins">Create New User</span>}
+        title={<span className="font-roboto">Create New User</span>}
         open={createModalVisible}
         onCancel={() => {
           setCreateModalVisible(false)

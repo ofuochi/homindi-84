@@ -153,18 +153,18 @@ export default function NotificationsPage() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
         <div>
-          <Title level={2} className="font-poppins mb-2">
+          <Title level={2} className="font-roboto mb-2">
             Notifications
           </Title>
           <div className="flex items-center gap-4">
-            <Text type="secondary" className="font-inter">
+            <Text type="secondary" className="font-roboto">
               Stay updated with your orders and promotions
             </Text>
             <div className="flex items-center gap-2">
               <WifiOutlined style={{ color: getConnectionStatusColor() }} />
               <Text
                 type="secondary"
-                className="font-inter text-sm"
+                className="font-roboto text-sm"
                 style={{ color: getConnectionStatusColor() }}
               >
                 {getConnectionStatusText()}
@@ -176,7 +176,7 @@ export default function NotificationsPage() {
           <Button
             icon={<SettingOutlined />}
             onClick={() => setShowSettings(true)}
-            className="font-inter"
+            className="font-roboto"
           >
             Settings
           </Button>
@@ -184,7 +184,7 @@ export default function NotificationsPage() {
             <Button
               icon={<CheckOutlined />}
               onClick={markAllAsRead}
-              className="font-inter"
+              className="font-roboto"
             >
               Mark All Read ({unreadCount})
             </Button>
@@ -199,7 +199,7 @@ export default function NotificationsPage() {
               cancelText="Cancel"
               onConfirm={clearAllNotifications}
             >
-              <Button danger icon={<ClearOutlined />} className="font-inter">
+              <Button danger icon={<ClearOutlined />} className="font-roboto">
                 Clear All
               </Button>
             </Popconfirm>
@@ -212,12 +212,12 @@ export default function NotificationsPage() {
         <Col xs={24} sm={8}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter">Total Notifications</span>}
+              title={<span className="font-roboto">Total Notifications</span>}
               value={totalNotifications}
               prefix={<BellOutlined />}
               valueStyle={{
                 color: "#0B8457",
-                fontFamily: "var(--font-poppins)",
+                fontFamily: "var(--font-roboto)",
               }}
             />
           </Card>
@@ -225,12 +225,12 @@ export default function NotificationsPage() {
         <Col xs={24} sm={8}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter">Read Notifications</span>}
+              title={<span className="font-roboto">Read Notifications</span>}
               value={readNotifications}
               prefix={<CheckOutlined />}
               valueStyle={{
                 color: "#52c41a",
-                fontFamily: "var(--font-poppins)",
+                fontFamily: "var(--font-roboto)",
               }}
             />
           </Card>
@@ -238,12 +238,12 @@ export default function NotificationsPage() {
         <Col xs={24} sm={8}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter">High Priority</span>}
+              title={<span className="font-roboto">High Priority</span>}
               value={highPriorityNotifications}
               prefix={<TrophyOutlined />}
               valueStyle={{
                 color: "#ff4d4f",
-                fontFamily: "var(--font-poppins)",
+                fontFamily: "var(--font-roboto)",
               }}
             />
           </Card>
@@ -254,7 +254,7 @@ export default function NotificationsPage() {
         {/* Notification Types Sidebar */}
         <div className="lg:col-span-1">
           <Card
-            title={<span className="font-poppins">Filter Notifications</span>}
+            title={<span className="font-roboto">Filter Notifications</span>}
           >
             <div className="space-y-2">
               {notificationTypes.map((type) => (
@@ -271,7 +271,7 @@ export default function NotificationsPage() {
                     <div className="flex items-center gap-3">
                       <span className="text-lg">{type.icon}</span>
                       <Text
-                        className={`font-inter font-medium ${
+                        className={`font-roboto font-medium ${
                           selectedType === type.key ? "text-white" : ""
                         }`}
                       >
@@ -279,7 +279,7 @@ export default function NotificationsPage() {
                       </Text>
                     </div>
                     <Tag
-                      className={`font-inter ${
+                      className={`font-roboto ${
                         selectedType === type.key ? "text-[#0B8457]" : ""
                       }`}
                     >
@@ -296,7 +296,7 @@ export default function NotificationsPage() {
         <div className="lg:col-span-3">
           <Card
             title={
-              <span className="font-poppins">
+              <span className="font-roboto">
                 {selectedType.charAt(0).toUpperCase() + selectedType.slice(1)}{" "}
                 Notifications
               </span>
@@ -306,7 +306,7 @@ export default function NotificationsPage() {
               <div className="text-center py-12">
                 <Empty
                   description={
-                    <span className="font-inter text-gray-500">
+                    <span className="font-roboto text-gray-500">
                       No notifications found
                     </span>
                   }
@@ -330,7 +330,7 @@ export default function NotificationsPage() {
                           type="text"
                           size="small"
                           onClick={() => markAsRead(notification.id)}
-                          className="font-inter"
+                          className="font-roboto"
                         >
                           Mark as read
                         </Button>
@@ -342,7 +342,7 @@ export default function NotificationsPage() {
                         size="small"
                         icon={<DeleteOutlined />}
                         onClick={() => deleteNotification(notification.id)}
-                        className="font-inter"
+                        className="font-roboto"
                       >
                         Delete
                       </Button>,
@@ -362,7 +362,7 @@ export default function NotificationsPage() {
                       title={
                         <div className="flex justify-between items-start">
                           <Text
-                            className={`font-inter text-base ${
+                            className={`font-roboto text-base ${
                               !notification.isRead
                                 ? "font-semibold text-gray-900"
                                 : "font-medium text-gray-700"
@@ -373,13 +373,13 @@ export default function NotificationsPage() {
                           <div className="flex items-center gap-2 ml-4">
                             <Tag
                               color={getPriorityColor(notification.priority)}
-                              className="font-inter"
+                              className="font-roboto"
                             >
                               {notification.priority}
                             </Tag>
                             <Text
                               type="secondary"
-                              className="text-sm font-inter whitespace-nowrap"
+                              className="text-sm font-roboto whitespace-nowrap"
                             >
                               {formatDate(notification.createdAt)}
                             </Text>
@@ -388,13 +388,13 @@ export default function NotificationsPage() {
                       }
                       description={
                         <div className="space-y-3 mt-2">
-                          <Text className="font-inter text-gray-600 leading-relaxed">
+                          <Text className="font-roboto text-gray-600 leading-relaxed">
                             {notification.message}
                           </Text>
                           {notification.orderId && (
                             <Text
                               type="secondary"
-                              className="text-sm font-inter"
+                              className="text-sm font-roboto"
                             >
                               Order: {notification.orderId}
                             </Text>
@@ -405,7 +405,7 @@ export default function NotificationsPage() {
                                 <Button
                                   type="link"
                                   href={notification.actionUrl}
-                                  className="p-0 font-inter text-[#0B8457] hover:text-[#0a7249] font-medium"
+                                  className="p-0 font-roboto text-[#0B8457] hover:text-[#0a7249] font-medium"
                                 >
                                   {notification.actionText} →
                                 </Button>
@@ -421,7 +421,7 @@ export default function NotificationsPage() {
                   showSizeChanger: true,
                   showQuickJumper: true,
                   showTotal: (total, range) => (
-                    <span className="font-inter">
+                    <span className="font-roboto">
                       {range[0]}-{range[1]} of {total} notifications
                     </span>
                   ),
@@ -435,7 +435,7 @@ export default function NotificationsPage() {
       {/* Settings Modal */}
       <Modal
         title={
-          <span className="font-poppins font-semibold">
+          <span className="font-roboto font-semibold">
             Notification Settings
           </span>
         }
@@ -445,7 +445,7 @@ export default function NotificationsPage() {
           <Button
             key="close"
             onClick={() => setShowSettings(false)}
-            className="font-inter"
+            className="font-roboto"
           >
             Close
           </Button>,
@@ -454,7 +454,7 @@ export default function NotificationsPage() {
       >
         <div className="space-y-6">
           <div>
-            <Title level={4} className="font-poppins">
+            <Title level={4} className="font-roboto">
               Notification Channels
             </Title>
             <div className="space-y-4">
@@ -464,11 +464,11 @@ export default function NotificationsPage() {
                     <BellOutlined className="text-white" />
                   </div>
                   <div>
-                    <Text className="font-inter font-medium">
+                    <Text className="font-roboto font-medium">
                       Browser Notifications
                     </Text>
                     <br />
-                    <Text type="secondary" className="font-inter text-sm">
+                    <Text type="secondary" className="font-roboto text-sm">
                       Get instant notifications in your browser
                     </Text>
                   </div>
@@ -486,11 +486,11 @@ export default function NotificationsPage() {
                     <MailOutlined className="text-white" />
                   </div>
                   <div>
-                    <Text className="font-inter font-medium">
+                    <Text className="font-roboto font-medium">
                       Email Notifications
                     </Text>
                     <br />
-                    <Text type="secondary" className="font-inter text-sm">
+                    <Text type="secondary" className="font-roboto text-sm">
                       Receive important updates via email
                     </Text>
                   </div>
@@ -508,7 +508,7 @@ export default function NotificationsPage() {
           <Divider />
 
           <div>
-            <Title level={4} className="font-poppins">
+            <Title level={4} className="font-roboto">
               Notification Types
             </Title>
             <div className="space-y-4">
@@ -516,11 +516,11 @@ export default function NotificationsPage() {
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">📦</span>
                   <div>
-                    <Text className="font-inter font-medium">
+                    <Text className="font-roboto font-medium">
                       Order Updates
                     </Text>
                     <br />
-                    <Text type="secondary" className="font-inter text-sm">
+                    <Text type="secondary" className="font-roboto text-sm">
                       Status changes, shipping, and delivery notifications
                     </Text>
                   </div>
@@ -536,11 +536,11 @@ export default function NotificationsPage() {
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">🎉</span>
                   <div>
-                    <Text className="font-inter font-medium">
+                    <Text className="font-roboto font-medium">
                       Promotions & Offers
                     </Text>
                     <br />
-                    <Text type="secondary" className="font-inter text-sm">
+                    <Text type="secondary" className="font-roboto text-sm">
                       Special deals, discounts, and promotional content
                     </Text>
                   </div>
@@ -556,11 +556,11 @@ export default function NotificationsPage() {
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">⚙️</span>
                   <div>
-                    <Text className="font-inter font-medium">
+                    <Text className="font-roboto font-medium">
                       System Notifications
                     </Text>
                     <br />
-                    <Text type="secondary" className="font-inter text-sm">
+                    <Text type="secondary" className="font-roboto text-sm">
                       Important system updates and maintenance alerts
                     </Text>
                   </div>
@@ -578,12 +578,12 @@ export default function NotificationsPage() {
           <Divider />
 
           <div>
-            <Title level={4} className="font-poppins">
+            <Title level={4} className="font-roboto">
               Update Frequency
             </Title>
             <div className="p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center gap-4 mb-3">
-                <Text className="font-inter font-medium">
+                <Text className="font-roboto font-medium">
                   Check for updates every
                 </Text>
                 <InputNumber
@@ -594,10 +594,10 @@ export default function NotificationsPage() {
                     updateSettings({ pollingInterval: (value || 30) * 1000 })
                   }
                   addonAfter="seconds"
-                  className="font-inter"
+                  className="font-roboto"
                 />
               </div>
-              <Text type="secondary" className="text-sm font-inter">
+              <Text type="secondary" className="text-sm font-roboto">
                 Lower values provide more real-time updates but may impact
                 performance. WebSocket connection provides instant updates when
                 available.

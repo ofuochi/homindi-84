@@ -205,10 +205,10 @@ export default function AdminDashboard() {
       <div className="bg-gradient-to-r from-[#0B8457] to-[#0a7249] rounded-xl p-6 text-white">
         <div className="flex items-center justify-between">
           <div>
-            <Title level={2} className="text-white mb-2 font-poppins">
+            <Title level={2} className="text-white mb-2 font-roboto">
               Welcome back, {user?.firstName || user?.username}! 👋
             </Title>
-            <Text className="text-white/80 font-inter">
+            <Text className="text-white/80 font-roboto">
               You're logged in as <strong>{roleInfo?.name}</strong>. Here's
               what's happening with your platform today.
             </Text>

@@ -78,10 +78,10 @@ export default function PrivacySettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <Title level={2} className="font-poppins mb-2">
+        <Title level={2} className="font-roboto mb-2">
           Privacy & Security
         </Title>
-        <Text type="secondary" className="font-inter">
+        <Text type="secondary" className="font-roboto">
           Manage your privacy settings and account security
         </Text>
       </div>
@@ -89,7 +89,7 @@ export default function PrivacySettingsPage() {
       <Row gutter={[24, 24]}>
         {/* Privacy Settings */}
         <Col xs={24} lg={12}>
-          <Card title={<span className="font-poppins">Privacy Settings</span>}>
+          <Card title={<span className="font-roboto">Privacy Settings</span>}>
             <div className="space-y-6">
               {privacySettings.map((setting, index) => (
                 <div key={index} className="flex items-start justify-between p-4 bg-gray-50 rounded-lg">
@@ -98,9 +98,9 @@ export default function PrivacySettingsPage() {
                       {setting.icon}
                     </div>
                     <div className="flex-1">
-                      <Text className="font-inter font-semibold text-gray-900">{setting.title}</Text>
+                      <Text className="font-roboto font-semibold text-gray-900">{setting.title}</Text>
                       <br />
-                      <Text type="secondary" className="font-inter text-sm">
+                      <Text type="secondary" className="font-roboto text-sm">
                         {setting.description}
                       </Text>
                     </div>
@@ -114,7 +114,7 @@ export default function PrivacySettingsPage() {
 
         {/* Security Settings */}
         <Col xs={24} lg={12}>
-          <Card title={<span className="font-poppins">Security Settings</span>}>
+          <Card title={<span className="font-roboto">Security Settings</span>}>
             <div className="space-y-6">
               {securitySettings.map((setting, index) => (
                 <div key={index} className="flex items-start justify-between p-4 bg-gray-50 rounded-lg">
@@ -123,9 +123,9 @@ export default function PrivacySettingsPage() {
                       {setting.icon}
                     </div>
                     <div className="flex-1">
-                      <Text className="font-inter font-semibold text-gray-900">{setting.title}</Text>
+                      <Text className="font-roboto font-semibold text-gray-900">{setting.title}</Text>
                       <br />
-                      <Text type="secondary" className="font-inter text-sm">
+                      <Text type="secondary" className="font-roboto text-sm">
                         {setting.description}
                       </Text>
                     </div>
@@ -139,18 +139,18 @@ export default function PrivacySettingsPage() {
 
         {/* Account Actions */}
         <Col xs={24}>
-          <Card title={<span className="font-poppins">Account Management</span>}>
+          <Card title={<span className="font-roboto">Account Management</span>}>
             <Row gutter={[24, 24]}>
               <Col xs={24} md={8}>
                 <div className="text-center p-6 bg-blue-50 rounded-lg">
                   <LockOutlined className="text-4xl text-blue-500 mb-4" />
-                  <Title level={4} className="font-poppins mb-2">
+                  <Title level={4} className="font-roboto mb-2">
                     Change Password
                   </Title>
-                  <Text type="secondary" className="font-inter mb-4 block">
+                  <Text type="secondary" className="font-roboto mb-4 block">
                     Update your account password for better security
                   </Text>
-                  <Button type="primary" onClick={() => setChangePasswordModalVisible(true)} className="font-inter">
+                  <Button type="primary" onClick={() => setChangePasswordModalVisible(true)} className="font-roboto">
                     Change Password
                   </Button>
                 </div>
@@ -159,13 +159,13 @@ export default function PrivacySettingsPage() {
               <Col xs={24} md={8}>
                 <div className="text-center p-6 bg-green-50 rounded-lg">
                   <EyeOutlined className="text-4xl text-green-500 mb-4" />
-                  <Title level={4} className="font-poppins mb-2">
+                  <Title level={4} className="font-roboto mb-2">
                     Export Data
                   </Title>
-                  <Text type="secondary" className="font-inter mb-4 block">
+                  <Text type="secondary" className="font-roboto mb-4 block">
                     Download a copy of all your account data
                   </Text>
-                  <Button onClick={() => setExportModalVisible(true)} className="font-inter">
+                  <Button onClick={() => setExportModalVisible(true)} className="font-roboto">
                     Export Data
                   </Button>
                 </div>
@@ -174,13 +174,13 @@ export default function PrivacySettingsPage() {
               <Col xs={24} md={8}>
                 <div className="text-center p-6 bg-red-50 rounded-lg">
                   <DeleteOutlined className="text-4xl text-red-500 mb-4" />
-                  <Title level={4} className="font-poppins mb-2">
+                  <Title level={4} className="font-roboto mb-2">
                     Delete Account
                   </Title>
-                  <Text type="secondary" className="font-inter mb-4 block">
+                  <Text type="secondary" className="font-roboto mb-4 block">
                     Permanently delete your account and all data
                   </Text>
-                  <Button danger onClick={() => setDeleteModalVisible(true)} className="font-inter">
+                  <Button danger onClick={() => setDeleteModalVisible(true)} className="font-roboto">
                     Delete Account
                   </Button>
                 </div>
@@ -191,11 +191,11 @@ export default function PrivacySettingsPage() {
 
         {/* Data Usage Information */}
         <Col xs={24}>
-          <Card title={<span className="font-poppins">Data Usage & Rights</span>}>
+          <Card title={<span className="font-roboto">Data Usage & Rights</span>}>
             <Alert
               message="Your Privacy Rights"
               description={
-                <div className="font-inter">
+                <div className="font-roboto">
                   <p className="mb-2">
                     We respect your privacy and are committed to protecting your personal data. You have the right to:
                   </p>
@@ -215,20 +215,20 @@ export default function PrivacySettingsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <Text className="font-inter font-semibold block">Data Collected</Text>
-                <Text type="secondary" className="font-inter text-sm">
+                <Text className="font-roboto font-semibold block">Data Collected</Text>
+                <Text type="secondary" className="font-roboto text-sm">
                   Profile info, orders, preferences
                 </Text>
               </div>
               <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <Text className="font-inter font-semibold block">Data Retention</Text>
-                <Text type="secondary" className="font-inter text-sm">
+                <Text className="font-roboto font-semibold block">Data Retention</Text>
+                <Text type="secondary" className="font-roboto text-sm">
                   Kept for 7 years after account closure
                 </Text>
               </div>
               <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <Text className="font-inter font-semibold block">Data Sharing</Text>
-                <Text type="secondary" className="font-inter text-sm">
+                <Text className="font-roboto font-semibold block">Data Sharing</Text>
+                <Text type="secondary" className="font-roboto text-sm">
                   Only with trusted partners
                 </Text>
               </div>
@@ -239,51 +239,51 @@ export default function PrivacySettingsPage() {
 
       {/* Change Password Modal */}
       <Modal
-        title={<span className="font-poppins">Change Password</span>}
+        title={<span className="font-roboto">Change Password</span>}
         open={changePasswordModalVisible}
         onCancel={() => setChangePasswordModalVisible(false)}
         footer={[
-          <Button key="cancel" onClick={() => setChangePasswordModalVisible(false)} className="font-inter">
+          <Button key="cancel" onClick={() => setChangePasswordModalVisible(false)} className="font-roboto">
             Cancel
           </Button>,
-          <Button key="submit" type="primary" onClick={handleChangePassword} className="font-inter">
+          <Button key="submit" type="primary" onClick={handleChangePassword} className="font-roboto">
             Change Password
           </Button>,
         ]}
       >
         <div className="space-y-4">
           <div>
-            <Text className="font-inter font-medium">Current Password</Text>
-            <Password placeholder="Enter current password" className="font-inter" />
+            <Text className="font-roboto font-medium">Current Password</Text>
+            <Password placeholder="Enter current password" className="font-roboto" />
           </div>
           <div>
-            <Text className="font-inter font-medium">New Password</Text>
-            <Password placeholder="Enter new password" className="font-inter" />
+            <Text className="font-roboto font-medium">New Password</Text>
+            <Password placeholder="Enter new password" className="font-roboto" />
           </div>
           <div>
-            <Text className="font-inter font-medium">Confirm New Password</Text>
-            <Password placeholder="Confirm new password" className="font-inter" />
+            <Text className="font-roboto font-medium">Confirm New Password</Text>
+            <Password placeholder="Confirm new password" className="font-roboto" />
           </div>
         </div>
       </Modal>
 
       {/* Export Data Modal */}
       <Modal
-        title={<span className="font-poppins">Export Your Data</span>}
+        title={<span className="font-roboto">Export Your Data</span>}
         open={exportModalVisible}
         onCancel={() => setExportModalVisible(false)}
         footer={[
-          <Button key="cancel" onClick={() => setExportModalVisible(false)} className="font-inter">
+          <Button key="cancel" onClick={() => setExportModalVisible(false)} className="font-roboto">
             Cancel
           </Button>,
-          <Button key="submit" type="primary" onClick={handleExportData} className="font-inter">
+          <Button key="submit" type="primary" onClick={handleExportData} className="font-roboto">
             Request Export
           </Button>,
         ]}
       >
         <div className="space-y-4">
-          <Text className="font-inter">We'll prepare a comprehensive export of all your account data including:</Text>
-          <ul className="list-disc list-inside space-y-1 font-inter text-sm">
+          <Text className="font-roboto">We'll prepare a comprehensive export of all your account data including:</Text>
+          <ul className="list-disc list-inside space-y-1 font-roboto text-sm">
             <li>Profile information</li>
             <li>Order history</li>
             <li>Notification preferences</li>
@@ -302,7 +302,7 @@ export default function PrivacySettingsPage() {
       {/* Delete Account Modal */}
       <Modal
         title={
-          <span className="font-poppins flex items-center">
+          <span className="font-roboto flex items-center">
             <WarningOutlined className="text-red-500 mr-2" />
             Delete Account
           </span>
@@ -310,10 +310,10 @@ export default function PrivacySettingsPage() {
         open={deleteModalVisible}
         onCancel={() => setDeleteModalVisible(false)}
         footer={[
-          <Button key="cancel" onClick={() => setDeleteModalVisible(false)} className="font-inter">
+          <Button key="cancel" onClick={() => setDeleteModalVisible(false)} className="font-roboto">
             Cancel
           </Button>,
-          <Button key="delete" type="primary" danger onClick={handleDeleteAccount} className="font-inter">
+          <Button key="delete" type="primary" danger onClick={handleDeleteAccount} className="font-roboto">
             Delete Account
           </Button>,
         ]}
@@ -325,8 +325,8 @@ export default function PrivacySettingsPage() {
             type="error"
             showIcon
           />
-          <Text className="font-inter">To confirm deletion, please type "DELETE" in the field below:</Text>
-          <Input placeholder="Type DELETE to confirm" className="font-inter" />
+          <Text className="font-roboto">To confirm deletion, please type "DELETE" in the field below:</Text>
+          <Input placeholder="Type DELETE to confirm" className="font-roboto" />
         </div>
       </Modal>
     </div>

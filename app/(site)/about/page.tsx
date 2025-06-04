@@ -57,11 +57,11 @@ export default function AboutPage() {
       color: "#0B8457",
       children: (
         <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-          <Text strong className="font-inter text-lg">
+          <Text strong className="font-roboto text-lg">
             2016 - The Beginning
           </Text>
           <br />
-          <Text className="text-gray-600 font-inter leading-relaxed">
+          <Text className="text-gray-600 font-roboto leading-relaxed">
             Founded with a vision to connect diaspora communities with authentic products from their homeland, starting
             with a small team and big dreams.
           </Text>
@@ -77,11 +77,11 @@ export default function AboutPage() {
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
-          <Text strong className="font-inter text-lg">
+          <Text strong className="font-roboto text-lg">
             2018 - Platform Launch
           </Text>
           <br />
-          <Text className="text-gray-600 font-inter leading-relaxed">
+          <Text className="text-gray-600 font-roboto leading-relaxed">
             Launched our first e-commerce platform, serving customers across 5 countries with carefully curated Nigerian
             products.
           </Text>
@@ -97,11 +97,11 @@ export default function AboutPage() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <Text strong className="font-inter text-lg">
+          <Text strong className="font-roboto text-lg">
             2020 - Global Expansion
           </Text>
           <br />
-          <Text className="text-gray-600 font-inter leading-relaxed">
+          <Text className="text-gray-600 font-roboto leading-relaxed">
             Expanded to 15 countries and partnered with over 100 local suppliers worldwide, establishing quality control
             standards.
           </Text>
@@ -117,11 +117,11 @@ export default function AboutPage() {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <Text strong className="font-inter text-lg">
+          <Text strong className="font-roboto text-lg">
             2022 - Technology Upgrade
           </Text>
           <br />
-          <Text className="text-gray-600 font-inter leading-relaxed">
+          <Text className="text-gray-600 font-roboto leading-relaxed">
             Implemented AI-powered recommendations and enhanced mobile experience with real-time tracking and customer
             support.
           </Text>
@@ -137,11 +137,11 @@ export default function AboutPage() {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <Text strong className="font-inter text-lg">
+          <Text strong className="font-roboto text-lg">
             2024 - Present
           </Text>
           <br />
-          <Text className="text-gray-600 font-inter leading-relaxed">
+          <Text className="text-gray-600 font-roboto leading-relaxed">
             Serving 25+ countries with 10,000+ happy customers and 5,000+ authentic products, continuing to innovate and
             expand.
           </Text>
@@ -209,10 +209,10 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="text-center">
             <motion.div variants={fadeInUp}>
-              <Title level={1} className="!text-white !mb-6 font-poppins text-5xl lg:text-6xl">
+              <Title level={1} className="!text-white !mb-6 font-roboto text-5xl lg:text-6xl">
                 About Homindi
               </Title>
-              <Paragraph className="text-xl text-green-100 max-w-4xl mx-auto font-inter leading-relaxed">
+              <Paragraph className="text-xl text-green-100 max-w-4xl mx-auto font-roboto leading-relaxed">
                 We're on a mission to bridge the gap between diaspora communities and their cultural roots by providing
                 authentic, high-quality products from around the world. Every purchase tells a story, connects a family,
                 and preserves a tradition.
@@ -238,12 +238,12 @@ export default function AboutPage() {
                             <Icon className="text-2xl text-[#0B8457]" />
                           </div>
                           <Statistic
-                            title={<span className="font-inter text-gray-600 text-base">{stat.title}</span>}
+                            title={<span className="font-roboto text-gray-600 text-base">{stat.title}</span>}
                             value={stat.value}
                             suffix={stat.suffix}
                             valueStyle={{
                               color: "#0B8457",
-                              fontFamily: "Poppins",
+                              fontFamily: "Roboto",
                               fontWeight: "bold",
                               fontSize: "2rem",
                             }}
@@ -294,20 +294,20 @@ export default function AboutPage() {
                 className="space-y-8"
               >
                 <div>
-                  <Title level={2} className="!mb-6 font-poppins text-gray-900 text-4xl">
+                  <Title level={2} className="!mb-6 font-roboto text-gray-900 text-4xl">
                     Our Mission
                   </Title>
-                  <Paragraph className="text-lg text-gray-700 font-inter leading-relaxed mb-6">
+                  <Paragraph className="text-lg text-gray-700 font-roboto leading-relaxed mb-6">
                     To create meaningful connections between diaspora communities and their cultural heritage through
                     authentic products, exceptional service, and innovative technology. We believe that distance should
                     never diminish the bond with one's roots.
                   </Paragraph>
                 </div>
                 <div>
-                  <Title level={3} className="!mb-4 font-poppins text-gray-900 text-2xl">
+                  <Title level={3} className="!mb-4 font-roboto text-gray-900 text-2xl">
                     Our Vision
                   </Title>
-                  <Paragraph className="text-lg text-gray-700 font-inter leading-relaxed">
+                  <Paragraph className="text-lg text-gray-700 font-roboto leading-relaxed">
                     To become the world's most trusted platform for authentic cultural products, fostering global
                     communities while preserving and celebrating diverse traditions for future generations.
                   </Paragraph>
@@ -329,10 +329,10 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <motion.div variants={fadeInUp}>
-              <Title level={2} className="!mb-6 font-poppins text-gray-900 text-4xl">
+              <Title level={2} className="!mb-6 font-roboto text-gray-900 text-4xl">
                 Our Core Values
               </Title>
-              <Paragraph className="text-xl text-gray-600 max-w-3xl mx-auto font-inter leading-relaxed">
+              <Paragraph className="text-xl text-gray-600 max-w-3xl mx-auto font-roboto leading-relaxed">
                 These principles guide everything we do and shape how we serve our community with integrity, passion,
                 and excellence.
               </Paragraph>
@@ -357,10 +357,10 @@ export default function AboutPage() {
                         {value.icon}
                       </div>
                     </div>
-                    <Title level={4} className="!mb-4 font-poppins text-gray-900 text-xl">
+                    <Title level={4} className="!mb-4 font-roboto text-gray-900 text-xl">
                       {value.title}
                     </Title>
-                    <Paragraph className="text-gray-600 font-inter leading-relaxed">{value.description}</Paragraph>
+                    <Paragraph className="text-gray-600 font-roboto leading-relaxed">{value.description}</Paragraph>
                   </Card>
                 </motion.div>
               </Col>
@@ -380,10 +380,10 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
               >
-                <Title level={2} className="!mb-8 font-poppins text-gray-900 text-4xl">
+                <Title level={2} className="!mb-8 font-roboto text-gray-900 text-4xl">
                   Our Journey
                 </Title>
-                <Paragraph className="text-xl text-gray-600 mb-12 font-inter leading-relaxed">
+                <Paragraph className="text-xl text-gray-600 mb-12 font-roboto leading-relaxed">
                   From a simple idea to a global platform serving thousands of customers worldwide, here's how we've
                   grown and evolved.
                 </Paragraph>
@@ -400,10 +400,10 @@ export default function AboutPage() {
                 <Card className="bg-gradient-to-br from-[#0B8457] to-[#0a7249] text-white border-0 rounded-3xl shadow-2xl">
                   <div className="p-8">
                     <RocketOutlined className="text-5xl text-white mb-6" />
-                    <Title level={3} className="!text-white !mb-6 font-poppins text-2xl">
+                    <Title level={3} className="!text-white !mb-6 font-roboto text-2xl">
                       What's Next?
                     </Title>
-                    <Paragraph className="text-green-100 mb-8 font-inter text-lg leading-relaxed">
+                    <Paragraph className="text-green-100 mb-8 font-roboto text-lg leading-relaxed">
                       We're constantly innovating and expanding our reach. Our upcoming features include AI-powered
                       product recommendations, virtual cultural experiences, enhanced community features, and
                       sustainable packaging initiatives.
@@ -412,7 +412,7 @@ export default function AboutPage() {
                       <Button
                         type="default"
                         size="large"
-                        className="bg-white text-[#0B8457] border-white hover:bg-gray-50 rounded-xl font-inter font-semibold h-12"
+                        className="bg-white text-[#0B8457] border-white hover:bg-gray-50 rounded-xl font-roboto font-semibold h-12"
                         block
                       >
                         Join Our Newsletter
@@ -420,7 +420,7 @@ export default function AboutPage() {
                       <Button
                         type="default"
                         size="large"
-                        className="bg-transparent text-white border-white hover:bg-white hover:text-[#0B8457] rounded-xl font-inter font-semibold h-12"
+                        className="bg-transparent text-white border-white hover:bg-white hover:text-[#0B8457] rounded-xl font-roboto font-semibold h-12"
                         block
                       >
                         Follow Our Journey
@@ -445,10 +445,10 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <motion.div variants={fadeInUp}>
-              <Title level={2} className="!mb-6 font-poppins text-gray-900 text-4xl">
+              <Title level={2} className="!mb-6 font-roboto text-gray-900 text-4xl">
                 Meet Our Team
               </Title>
-              <Paragraph className="text-xl text-gray-600 max-w-3xl mx-auto font-inter leading-relaxed">
+              <Paragraph className="text-xl text-gray-600 max-w-3xl mx-auto font-roboto leading-relaxed">
                 The passionate individuals behind Homindi, working tirelessly to serve our global community and preserve
                 cultural connections.
               </Paragraph>
@@ -477,13 +477,13 @@ export default function AboutPage() {
                           className="mx-auto shadow-lg"
                         />
                       </div>
-                      <Title level={4} className="!mb-2 font-poppins text-gray-900 text-xl">
+                      <Title level={4} className="!mb-2 font-roboto text-gray-900 text-xl">
                         {member.name}
                       </Title>
-                      <Text className="text-[#0B8457] font-semibold font-inter text-base block mb-4">
+                      <Text className="text-[#0B8457] font-semibold font-roboto text-base block mb-4">
                         {member.role}
                       </Text>
-                      <Paragraph className="text-gray-600 font-inter leading-relaxed">{member.description}</Paragraph>
+                      <Paragraph className="text-gray-600 font-roboto leading-relaxed">{member.description}</Paragraph>
                     </div>
                   </Card>
                 </motion.div>
@@ -498,10 +498,10 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
             <motion.div variants={fadeInUp}>
-              <Title level={2} className="!mb-8 font-poppins text-white text-4xl">
+              <Title level={2} className="!mb-8 font-roboto text-white text-4xl">
                 Ready to Start Your Journey?
               </Title>
-              <Paragraph className="text-xl text-green-100 mb-12 font-inter leading-relaxed">
+              <Paragraph className="text-xl text-green-100 mb-12 font-roboto leading-relaxed">
                 Join thousands of satisfied customers who trust Homindi for authentic cultural products and exceptional
                 service.
               </Paragraph>
@@ -512,7 +512,7 @@ export default function AboutPage() {
                   <Button
                     type="default"
                     size="large"
-                    className="bg-[#F9A826] border-[#F9A826] text-white hover:bg-[#e09620] rounded-xl px-8 font-inter font-semibold h-14 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="bg-[#F9A826] border-[#F9A826] text-white hover:bg-[#e09620] rounded-xl px-8 font-roboto font-semibold h-14 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     Explore Products
                   </Button>
@@ -520,7 +520,7 @@ export default function AboutPage() {
                 <Link href="/contact">
                   <Button
                     size="large"
-                    className="bg-transparent text-white border-white hover:bg-white hover:text-[#0B8457] rounded-xl px-8 font-inter font-semibold h-14 text-lg transition-all duration-300"
+                    className="bg-transparent text-white border-white hover:bg-white hover:text-[#0B8457] rounded-xl px-8 font-roboto font-semibold h-14 text-lg transition-all duration-300"
                   >
                     Contact Us
                   </Button>

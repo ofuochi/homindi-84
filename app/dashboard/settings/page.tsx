@@ -64,10 +64,10 @@ export default function SettingsPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <Title level={2} className="font-poppins mb-2">
+          <Title level={2} className="font-roboto mb-2">
             Profile Settings
           </Title>
-          <Text type="secondary" className="font-inter">
+          <Text type="secondary" className="font-roboto">
             Manage your personal information and account preferences
           </Text>
         </div>
@@ -76,7 +76,7 @@ export default function SettingsPage() {
           icon={editing ? <SaveOutlined /> : <EditOutlined />}
           onClick={() => (editing ? form.submit() : setEditing(!editing))}
           loading={loading}
-          className="font-inter"
+          className="font-roboto"
         >
           {editing ? "Save Changes" : "Edit Profile"}
         </Button>
@@ -85,7 +85,7 @@ export default function SettingsPage() {
       <Row gutter={[24, 24]}>
         {/* Profile Information */}
         <Col xs={24} lg={16}>
-          <Card title={<span className="font-poppins">Personal Information</span>}>
+          <Card title={<span className="font-roboto">Personal Information</span>}>
             <Form
               form={form}
               layout="vertical"
@@ -107,22 +107,22 @@ export default function SettingsPage() {
                 <Col xs={24} sm={12}>
                   <Form.Item
                     name="name"
-                    label={<span className="font-inter font-medium">Full Name</span>}
+                    label={<span className="font-roboto font-medium">Full Name</span>}
                     rules={[{ required: true, message: "Please enter your full name" }]}
                   >
-                    <Input placeholder="Enter your full name" className="font-inter" />
+                    <Input placeholder="Enter your full name" className="font-roboto" />
                   </Form.Item>
                 </Col>
                 <Col xs={24} sm={12}>
                   <Form.Item
                     name="email"
-                    label={<span className="font-inter font-medium">Email Address</span>}
+                    label={<span className="font-roboto font-medium">Email Address</span>}
                     rules={[
                       { required: true, message: "Please enter your email" },
                       { type: "email", message: "Please enter a valid email" },
                     ]}
                   >
-                    <Input placeholder="Enter your email" className="font-inter" />
+                    <Input placeholder="Enter your email" className="font-roboto" />
                   </Form.Item>
                 </Col>
               </Row>
@@ -131,15 +131,15 @@ export default function SettingsPage() {
                 <Col xs={24} sm={12}>
                   <Form.Item
                     name="phone"
-                    label={<span className="font-inter font-medium">Phone Number</span>}
+                    label={<span className="font-roboto font-medium">Phone Number</span>}
                     rules={[{ required: true, message: "Please enter your phone number" }]}
                   >
-                    <Input placeholder="Enter your phone number" className="font-inter" />
+                    <Input placeholder="Enter your phone number" className="font-roboto" />
                   </Form.Item>
                 </Col>
                 <Col xs={24} sm={12}>
-                  <Form.Item name="dateOfBirth" label={<span className="font-inter font-medium">Date of Birth</span>}>
-                    <DatePicker placeholder="Select date of birth" className="w-full font-inter" format="YYYY-MM-DD" />
+                  <Form.Item name="dateOfBirth" label={<span className="font-roboto font-medium">Date of Birth</span>}>
+                    <DatePicker placeholder="Select date of birth" className="w-full font-roboto" format="YYYY-MM-DD" />
                   </Form.Item>
                 </Col>
               </Row>
@@ -148,10 +148,10 @@ export default function SettingsPage() {
                 <Col xs={24} sm={12}>
                   <Form.Item
                     name="preferredCountry"
-                    label={<span className="font-inter font-medium">Country</span>}
+                    label={<span className="font-roboto font-medium">Country</span>}
                     rules={[{ required: true, message: "Please select your country" }]}
                   >
-                    <Select placeholder="Select your country" className="font-inter">
+                    <Select placeholder="Select your country" className="font-roboto">
                       {COUNTRIES.map((country) => (
                         <Option key={country} value={country}>
                           {country}
@@ -161,30 +161,30 @@ export default function SettingsPage() {
                   </Form.Item>
                 </Col>
                 <Col xs={24} sm={12}>
-                  <Form.Item name="website" label={<span className="font-inter font-medium">Website</span>}>
-                    <Input placeholder="https://yourwebsite.com" className="font-inter" />
+                  <Form.Item name="website" label={<span className="font-roboto font-medium">Website</span>}>
+                    <Input placeholder="https://yourwebsite.com" className="font-roboto" />
                   </Form.Item>
                 </Col>
               </Row>
 
               <Row gutter={16}>
                 <Col xs={24} sm={12}>
-                  <Form.Item name="company" label={<span className="font-inter font-medium">Company</span>}>
-                    <Input placeholder="Enter your company name" className="font-inter" />
+                  <Form.Item name="company" label={<span className="font-roboto font-medium">Company</span>}>
+                    <Input placeholder="Enter your company name" className="font-roboto" />
                   </Form.Item>
                 </Col>
                 <Col xs={24} sm={12}>
-                  <Form.Item name="jobTitle" label={<span className="font-inter font-medium">Job Title</span>}>
-                    <Input placeholder="Enter your job title" className="font-inter" />
+                  <Form.Item name="jobTitle" label={<span className="font-roboto font-medium">Job Title</span>}>
+                    <Input placeholder="Enter your job title" className="font-roboto" />
                   </Form.Item>
                 </Col>
               </Row>
 
-              <Form.Item name="bio" label={<span className="font-inter font-medium">Bio</span>}>
+              <Form.Item name="bio" label={<span className="font-roboto font-medium">Bio</span>}>
                 <TextArea
                   rows={4}
                   placeholder="Tell us about yourself..."
-                  className="font-inter"
+                  className="font-roboto"
                   maxLength={500}
                   showCount
                 />
@@ -197,7 +197,7 @@ export default function SettingsPage() {
         <Col xs={24} lg={8}>
           <div className="space-y-6">
             {/* Profile Picture */}
-            <Card title={<span className="font-poppins">Profile Picture</span>}>
+            <Card title={<span className="font-roboto">Profile Picture</span>}>
               <div className="text-center space-y-4">
                 <Avatar size={120} icon={<UserOutlined />} src={user?.avatar} className="mx-auto shadow-lg" />
                 <Upload
@@ -208,24 +208,24 @@ export default function SettingsPage() {
                   onChange={handleAvatarUpload}
                   disabled={!editing}
                 >
-                  <Button icon={<CameraOutlined />} disabled={!editing} className="font-inter">
+                  <Button icon={<CameraOutlined />} disabled={!editing} className="font-roboto">
                     Change Photo
                   </Button>
                 </Upload>
-                <Text type="secondary" className="text-sm font-inter block">
+                <Text type="secondary" className="text-sm font-roboto block">
                   JPG, PNG or GIF. Max size 2MB.
                 </Text>
               </div>
             </Card>
 
             {/* Quick Settings */}
-            <Card title={<span className="font-poppins">Quick Settings</span>}>
+            <Card title={<span className="font-roboto">Quick Settings</span>}>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <div>
-                    <Text className="font-inter font-medium">Email Notifications</Text>
+                    <Text className="font-roboto font-medium">Email Notifications</Text>
                     <br />
-                    <Text type="secondary" className="text-sm font-inter">
+                    <Text type="secondary" className="text-sm font-roboto">
                       Receive order updates via email
                     </Text>
                   </div>
@@ -236,9 +236,9 @@ export default function SettingsPage() {
 
                 <div className="flex justify-between items-center">
                   <div>
-                    <Text className="font-inter font-medium">Marketing Emails</Text>
+                    <Text className="font-roboto font-medium">Marketing Emails</Text>
                     <br />
-                    <Text type="secondary" className="text-sm font-inter">
+                    <Text type="secondary" className="text-sm font-roboto">
                       Receive promotional offers
                     </Text>
                   </div>
@@ -249,9 +249,9 @@ export default function SettingsPage() {
 
                 <div className="flex justify-between items-center">
                   <div>
-                    <Text className="font-inter font-medium">Two-Factor Auth</Text>
+                    <Text className="font-roboto font-medium">Two-Factor Auth</Text>
                     <br />
-                    <Text type="secondary" className="text-sm font-inter">
+                    <Text type="secondary" className="text-sm font-roboto">
                       Extra security for your account
                     </Text>
                   </div>
@@ -261,21 +261,21 @@ export default function SettingsPage() {
             </Card>
 
             {/* Account Stats */}
-            <Card title={<span className="font-poppins">Account Statistics</span>}>
+            <Card title={<span className="font-roboto">Account Statistics</span>}>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <Text className="font-inter">Member since:</Text>
-                  <Text className="font-inter font-medium">
+                  <Text className="font-roboto">Member since:</Text>
+                  <Text className="font-roboto font-medium">
                     {user?.createdAt ? dayjs(user.createdAt).format("MMM YYYY") : "N/A"}
                   </Text>
                 </div>
                 <div className="flex justify-between">
-                  <Text className="font-inter">Total orders:</Text>
-                  <Text className="font-inter font-medium">12</Text>
+                  <Text className="font-roboto">Total orders:</Text>
+                  <Text className="font-roboto font-medium">12</Text>
                 </div>
                 <div className="flex justify-between">
-                  <Text className="font-inter">Loyalty points:</Text>
-                  <Text className="font-inter font-medium text-[#0B8457]">2,450</Text>
+                  <Text className="font-roboto">Loyalty points:</Text>
+                  <Text className="font-roboto font-medium text-[#0B8457]">2,450</Text>
                 </div>
               </div>
             </Card>

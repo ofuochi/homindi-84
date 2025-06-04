@@ -6,14 +6,14 @@ export default function Page() {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="w-16 h-16 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg mx-auto mb-4">
-            <span className="text-white font-bold text-2xl font-poppins">
+            <span className="text-white font-bold text-2xl font-roboto">
               DB
             </span>
           </div>
-          <h2 className="text-3xl font-bold text-gray-900 font-poppins">
+          <h2 className="text-3xl font-bold text-gray-900 font-roboto">
             Join Homindi
           </h2>
-          <p className="mt-2 text-sm text-gray-600 font-inter">
+          <p className="mt-2 text-sm text-gray-600 font-roboto">
             Create your account and start shopping for authentic African foods
           </p>
         </div>
@@ -22,8 +22,8 @@ export default function Page() {
             elements: {
               formButtonPrimary: "bg-[#0B8457] hover:bg-[#0a7249] text-white",
               card: "shadow-lg border-0",
-              headerTitle: "font-poppins text-2xl",
-              headerSubtitle: "font-inter",
+              headerTitle: "font-roboto text-2xl",
+              headerSubtitle: "font-roboto",
               socialButtonsBlockButton: "border-gray-200 hover:bg-gray-50",
               formFieldInput:
                 "border-gray-300 focus:border-[#0B8457] focus:ring-[#0B8457]",

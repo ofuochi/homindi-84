@@ -132,10 +132,10 @@ export const HeaderActions = ({
                   }}
                 />
                 <div className="text-left hidden lg:block">
-                  <div className="font-inter font-medium text-sm">
+                  <div className="font-roboto font-medium text-sm">
                     {userName}
                   </div>
-                  <div className="font-inter text-xs text-gray-500">
+                  <div className="font-roboto text-xs text-gray-500">
                     {roleInfo?.name}
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export const HeaderActions = ({
               >
                 <Button
                   type="default"
-                  className="font-inter font-medium rounded-lg"
+                  className="font-roboto font-medium rounded-lg"
                 >
                   Sign In
                 </Button>
@@ -164,7 +164,7 @@ export const HeaderActions = ({
               >
                 <Button
                   type="primary"
-                  className="font-inter font-medium rounded-lg"
+                  className="font-roboto font-medium rounded-lg"
                 >
                   Sign Up
                 </Button>
@@ -232,7 +232,7 @@ export default function Header() {
                 />
               </motion.div>
               <motion.span
-                className="text-xl font-bold text-gray-900 font-poppins hidden sm:block"
+                className="text-xl font-bold text-gray-900 font-roboto hidden sm:block"
                 whileHover={{ scale: 1.05 }}
               >
                 Homindi
@@ -250,7 +250,7 @@ export default function Header() {
                 >
                   <Link
                     href={link.href}
-                    className="text-gray-700 hover:text-primary-500 font-medium transition-all duration-300 font-inter relative group py-2"
+                    className="text-gray-700 hover:text-primary-500 font-medium transition-all duration-300 font-roboto relative group py-2"
                   >
                     <span className="flex items-center space-x-1">
                       {link.icon && <link.icon className="text-sm" />}
@@ -271,7 +271,7 @@ export default function Header() {
       {/* Mobile Menu Drawer */}
       <Drawer
         title={
-          <span className="font-poppins font-semibold text-gray-900">Menu</span>
+          <span className="font-roboto font-semibold text-gray-900">Menu</span>
         }
         placement="right"
         onClose={() => setMobileMenuOpen(false)}
@@ -284,7 +284,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-gray-700 hover:text-primary-500 font-medium py-3 px-2 font-inter transition-colors rounded-lg hover:bg-gray-50 flex items-center space-x-2"
+              className="text-gray-700 hover:text-primary-500 font-medium py-3 px-2 font-roboto transition-colors rounded-lg hover:bg-gray-50 flex items-center space-x-2"
               onClick={() => setMobileMenuOpen(false)}
             >
               {link.icon && <link.icon />}
@@ -304,8 +304,8 @@ export default function Header() {
                     }}
                   />
                   <div>
-                    <div className="font-inter font-medium">{userName}</div>
-                    <div className="font-inter text-xs text-gray-500">
+                    <div className="font-roboto font-medium">{userName}</div>
+                    <div className="font-roboto text-xs text-gray-500">
                       {roleInfo?.name}
                     </div>
                   </div>
@@ -318,7 +318,7 @@ export default function Header() {
                     type="default"
                     block
                     icon={<UserOutlined />}
-                    className="font-inter rounded-lg"
+                    className="font-roboto rounded-lg"
                   >
                     Dashboard
                   </Button>
@@ -329,7 +329,7 @@ export default function Header() {
                       type="default"
                       block
                       icon={<DashboardOutlined />}
-                      className="font-inter rounded-lg"
+                      className="font-roboto rounded-lg"
                     >
                       Admin Panel
                     </Button>
@@ -339,7 +339,7 @@ export default function Header() {
                   <Button
                     block
                     onClick={() => setMobileMenuOpen(false)}
-                    className="font-inter rounded-lg"
+                    className="font-roboto rounded-lg"
                   >
                     Sign Out
                   </Button>
@@ -351,7 +351,7 @@ export default function Header() {
                   <Button
                     type="default"
                     block
-                    className="font-inter rounded-lg"
+                    className="font-roboto rounded-lg"
                   >
                     Sign In
                   </Button>
@@ -360,7 +360,7 @@ export default function Header() {
                   <Button
                     type="primary"
                     block
-                    className="font-inter rounded-lg"
+                    className="font-roboto rounded-lg"
                   >
                     Sign Up
                   </Button>

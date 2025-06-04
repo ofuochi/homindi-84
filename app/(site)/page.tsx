@@ -213,7 +213,7 @@ export default function HomePage() {
                     <Card className="border-0 shadow-lg rounded-2xl hover:shadow-xl transition-all duration-300 h-full">
                       <Statistic
                         title={
-                          <span className="font-inter text-gray-600 text-base">
+                          <span className="font-roboto text-gray-600 text-base">
                             {stat.title}
                           </span>
                         }
@@ -221,7 +221,7 @@ export default function HomePage() {
                         suffix={stat.suffix}
                         valueStyle={{
                           color: colors.primary[500],
-                          fontFamily: "Poppins",
+                          fontFamily: "Roboto",
                           fontWeight: "bold",
                           fontSize: "2rem",
                         }}
@@ -623,7 +623,7 @@ export default function HomePage() {
                 <input
                   type="email"
                   placeholder="Enter your email address"
-                  className="flex-1 px-4 py-3 rounded-xl border-0 text-gray-900 font-inter"
+                  className="flex-1 px-4 py-3 rounded-xl border-0 text-gray-900 font-roboto"
                 />
                 <Button
                   size="large"

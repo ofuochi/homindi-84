@@ -110,13 +110,13 @@ export default function AdminCategoriesPage() {
       key: "name",
       render: (name: string, record: Category) => (
         <div>
-          <Text strong className="font-inter">
+          <Text strong className="font-roboto">
             {name}
           </Text>
           {record.description && (
             <>
               <br />
-              <Text type="secondary" className="font-inter text-sm">
+              <Text type="secondary" className="font-roboto text-sm">
                 {record.description}
               </Text>
             </>
@@ -128,13 +128,13 @@ export default function AdminCategoriesPage() {
       title: "Products",
       dataIndex: "productCount",
       key: "productCount",
-      render: (count: number) => <Text className="font-inter">{count} products</Text>,
+      render: (count: number) => <Text className="font-roboto">{count} products</Text>,
     },
     {
       title: "Sort Order",
       dataIndex: "sortOrder",
       key: "sortOrder",
-      render: (order: number) => <Text className="font-inter">{order}</Text>,
+      render: (order: number) => <Text className="font-roboto">{order}</Text>,
     },
     {
       title: "Status",
@@ -170,14 +170,14 @@ export default function AdminCategoriesPage() {
     <div className="space-y-6">
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
         <div>
-          <Title level={2} className="font-poppins mb-2">
+          <Title level={2} className="font-roboto mb-2">
             Category Management
           </Title>
-          <Text type="secondary" className="font-inter">
+          <Text type="secondary" className="font-roboto">
             Organize your products into categories
           </Text>
         </div>
-        <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd} className="font-inter">
+        <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd} className="font-roboto">
           Add Category
         </Button>
       </div>
@@ -189,7 +189,7 @@ export default function AdminCategoriesPage() {
           allowClear
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="max-w-md font-inter"
+          className="max-w-md font-roboto"
           prefix={<SearchOutlined />}
         />
       </Card>
@@ -208,7 +208,7 @@ export default function AdminCategoriesPage() {
             showSizeChanger: true,
             showQuickJumper: true,
             showTotal: (total, range) => (
-              <span className="font-inter">
+              <span className="font-roboto">
                 {range[0]}-{range[1]} of {total} categories
               </span>
             ),
@@ -223,7 +223,7 @@ export default function AdminCategoriesPage() {
 
       {/* Add/Edit Category Modal */}
       <Modal
-        title={<span className="font-poppins">{editingCategory ? "Edit Category" : "Add New Category"}</span>}
+        title={<span className="font-roboto">{editingCategory ? "Edit Category" : "Add New Category"}</span>}
         open={modalVisible}
         onCancel={() => {
           setModalVisible(false)
@@ -238,7 +238,7 @@ export default function AdminCategoriesPage() {
               setEditingCategory(null)
               form.resetFields()
             }}
-            className="font-inter"
+            className="font-roboto"
           >
             Cancel
           </Button>,
@@ -247,7 +247,7 @@ export default function AdminCategoriesPage() {
             type="primary"
             onClick={() => form.submit()}
             loading={createCategoryMutation.isPending || updateCategoryMutation.isPending}
-            className="font-inter"
+            className="font-roboto"
           >
             {editingCategory ? "Update Category" : "Create Category"}
           </Button>,
@@ -257,34 +257,34 @@ export default function AdminCategoriesPage() {
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
           <Form.Item
             name="name"
-            label={<span className="font-inter">Category Name</span>}
+            label={<span className="font-roboto">Category Name</span>}
             rules={[{ required: true, message: "Please enter category name" }]}
           >
-            <Input placeholder="Enter category name" className="font-inter" />
+            <Input placeholder="Enter category name" className="font-roboto" />
           </Form.Item>
 
-          <Form.Item name="description" label={<span className="font-inter">Description</span>}>
+          <Form.Item name="description" label={<span className="font-roboto">Description</span>}>
             <TextArea
               rows={3}
               placeholder="Enter category description"
-              className="font-inter"
+              className="font-roboto"
               maxLength={200}
               showCount
             />
           </Form.Item>
 
-          <Form.Item name="image" label={<span className="font-inter">Category Image URL</span>}>
-            <Input placeholder="https://example.com/image.jpg" className="font-inter" />
+          <Form.Item name="image" label={<span className="font-roboto">Category Image URL</span>}>
+            <Input placeholder="https://example.com/image.jpg" className="font-roboto" />
           </Form.Item>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Form.Item name="sortOrder" label={<span className="font-inter">Sort Order</span>} initialValue={0}>
-              <InputNumber min={0} placeholder="0" className="w-full font-inter" />
+            <Form.Item name="sortOrder" label={<span className="font-roboto">Sort Order</span>} initialValue={0}>
+              <InputNumber min={0} placeholder="0" className="w-full font-roboto" />
             </Form.Item>
 
             <Form.Item
               name="isActive"
-              label={<span className="font-inter">Active</span>}
+              label={<span className="font-roboto">Active</span>}
               valuePropName="checked"
               initialValue={true}
             >

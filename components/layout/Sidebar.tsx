@@ -157,7 +157,7 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
               />{" "}
             </div>
             <div>
-              <span className="font-bold text-gray-900 font-poppins text-lg">
+              <span className="font-bold text-gray-900 font-roboto text-lg">
                 Homindi
               </span>
             </div>

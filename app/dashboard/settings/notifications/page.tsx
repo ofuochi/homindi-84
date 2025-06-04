@@ -81,14 +81,14 @@ export default function NotificationSettingsPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <Title level={2} className="font-poppins mb-2">
+          <Title level={2} className="font-roboto mb-2">
             Notification Settings
           </Title>
-          <Text type="secondary" className="font-inter">
+          <Text type="secondary" className="font-roboto">
             Customize how and when you receive notifications
           </Text>
         </div>
-        <Button type="primary" onClick={handleSave} className="font-inter">
+        <Button type="primary" onClick={handleSave} className="font-roboto">
           Save Settings
         </Button>
       </div>
@@ -96,7 +96,7 @@ export default function NotificationSettingsPage() {
       <Row gutter={[24, 24]}>
         {/* Notification Channels */}
         <Col xs={24} lg={12}>
-          <Card title={<span className="font-poppins">Notification Channels</span>}>
+          <Card title={<span className="font-roboto">Notification Channels</span>}>
             <div className="space-y-6">
               {notificationChannels.map((channel) => (
                 <div key={channel.key} className="flex items-start justify-between p-4 bg-gray-50 rounded-lg">
@@ -105,9 +105,9 @@ export default function NotificationSettingsPage() {
                       {channel.icon}
                     </div>
                     <div className="flex-1">
-                      <Text className="font-inter font-semibold text-gray-900">{channel.title}</Text>
+                      <Text className="font-roboto font-semibold text-gray-900">{channel.title}</Text>
                       <br />
-                      <Text type="secondary" className="font-inter text-sm">
+                      <Text type="secondary" className="font-roboto text-sm">
                         {channel.description}
                       </Text>
                     </div>
@@ -121,7 +121,7 @@ export default function NotificationSettingsPage() {
 
         {/* Notification Types */}
         <Col xs={24} lg={12}>
-          <Card title={<span className="font-poppins">Notification Types</span>}>
+          <Card title={<span className="font-roboto">Notification Types</span>}>
             <div className="space-y-6">
               {notificationTypes.map((type) => (
                 <div key={type.key} className="flex items-start justify-between p-4 bg-gray-50 rounded-lg">
@@ -130,9 +130,9 @@ export default function NotificationSettingsPage() {
                       {type.icon}
                     </div>
                     <div className="flex-1">
-                      <Text className="font-inter font-semibold text-gray-900">{type.title}</Text>
+                      <Text className="font-roboto font-semibold text-gray-900">{type.title}</Text>
                       <br />
-                      <Text type="secondary" className="font-inter text-sm">
+                      <Text type="secondary" className="font-roboto text-sm">
                         {type.description}
                       </Text>
                     </div>
@@ -146,24 +146,24 @@ export default function NotificationSettingsPage() {
 
         {/* Frequency Settings */}
         <Col xs={24}>
-          <Card title={<span className="font-poppins">Frequency & Timing</span>}>
+          <Card title={<span className="font-roboto">Frequency & Timing</span>}>
             <Row gutter={[24, 24]}>
               <Col xs={24} md={12}>
                 <div className="space-y-4">
                   <div>
-                    <Text className="font-inter font-medium block mb-3">Update Frequency</Text>
+                    <Text className="font-roboto font-medium block mb-3">Update Frequency</Text>
                     <div className="flex items-center space-x-4">
-                      <Text className="font-inter text-sm">Check every</Text>
+                      <Text className="font-roboto text-sm">Check every</Text>
                       <InputNumber
                         min={10}
                         max={300}
                         value={settings.pollingInterval / 1000}
                         onChange={(value) => updateSettings({ pollingInterval: (value || 30) * 1000 })}
-                        className="font-inter"
+                        className="font-roboto"
                       />
-                      <Text className="font-inter text-sm">seconds</Text>
+                      <Text className="font-roboto text-sm">seconds</Text>
                     </div>
-                    <Text type="secondary" className="font-inter text-xs mt-2 block">
+                    <Text type="secondary" className="font-roboto text-xs mt-2 block">
                       Lower values provide more real-time updates
                     </Text>
                   </div>
@@ -171,24 +171,24 @@ export default function NotificationSettingsPage() {
                   <Divider />
 
                   <div>
-                    <Text className="font-inter font-medium block mb-3">Quiet Hours</Text>
+                    <Text className="font-roboto font-medium block mb-3">Quiet Hours</Text>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <Text className="font-inter">Enable quiet hours</Text>
+                        <Text className="font-roboto">Enable quiet hours</Text>
                         <Switch />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <Text className="font-inter text-sm">Start time</Text>
-                          <Select defaultValue="22:00" className="w-full font-inter">
+                          <Text className="font-roboto text-sm">Start time</Text>
+                          <Select defaultValue="22:00" className="w-full font-roboto">
                             <Option value="21:00">9:00 PM</Option>
                             <Option value="22:00">10:00 PM</Option>
                             <Option value="23:00">11:00 PM</Option>
                           </Select>
                         </div>
                         <div>
-                          <Text className="font-inter text-sm">End time</Text>
-                          <Select defaultValue="08:00" className="w-full font-inter">
+                          <Text className="font-roboto text-sm">End time</Text>
+                          <Select defaultValue="08:00" className="w-full font-roboto">
                             <Option value="07:00">7:00 AM</Option>
                             <Option value="08:00">8:00 AM</Option>
                             <Option value="09:00">9:00 AM</Option>
@@ -203,19 +203,19 @@ export default function NotificationSettingsPage() {
               <Col xs={24} md={12}>
                 <div className="space-y-4">
                   <div>
-                    <Text className="font-inter font-medium block mb-3">Device Preferences</Text>
+                    <Text className="font-roboto font-medium block mb-3">Device Preferences</Text>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <div className="flex items-center space-x-3">
                           <DesktopOutlined className="text-gray-600" />
-                          <Text className="font-inter">Desktop notifications</Text>
+                          <Text className="font-roboto">Desktop notifications</Text>
                         </div>
                         <Switch defaultChecked />
                       </div>
                       <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <div className="flex items-center space-x-3">
                           <MobileOutlined className="text-gray-600" />
-                          <Text className="font-inter">Mobile notifications</Text>
+                          <Text className="font-roboto">Mobile notifications</Text>
                         </div>
                         <Switch defaultChecked />
                       </div>
@@ -225,18 +225,18 @@ export default function NotificationSettingsPage() {
                   <Divider />
 
                   <div>
-                    <Text className="font-inter font-medium block mb-3">Priority Settings</Text>
+                    <Text className="font-roboto font-medium block mb-3">Priority Settings</Text>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <Text className="font-inter text-sm">High priority only</Text>
+                        <Text className="font-roboto text-sm">High priority only</Text>
                         <Switch />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Text className="font-inter text-sm">Group similar notifications</Text>
+                        <Text className="font-roboto text-sm">Group similar notifications</Text>
                         <Switch defaultChecked />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Text className="font-inter text-sm">Sound alerts</Text>
+                        <Text className="font-roboto text-sm">Sound alerts</Text>
                         <Switch defaultChecked />
                       </div>
                     </div>

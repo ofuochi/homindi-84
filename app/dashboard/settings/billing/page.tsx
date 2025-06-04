@@ -63,7 +63,7 @@ export default function BillingSettingsPage() {
       render: (type: string) => (
         <div className="flex items-center space-x-2">
           <CreditCardOutlined />
-          <span className="font-inter">{type}</span>
+          <span className="font-roboto">{type}</span>
         </div>
       ),
     },
@@ -71,20 +71,20 @@ export default function BillingSettingsPage() {
       title: "Card Number",
       dataIndex: "last4",
       key: "last4",
-      render: (last4: string) => <span className="font-inter">**** **** **** {last4}</span>,
+      render: (last4: string) => <span className="font-roboto">**** **** **** {last4}</span>,
     },
     {
       title: "Expiry",
       dataIndex: "expiry",
       key: "expiry",
-      render: (expiry: string) => <span className="font-inter">{expiry}</span>,
+      render: (expiry: string) => <span className="font-roboto">{expiry}</span>,
     },
     {
       title: "Status",
       dataIndex: "isDefault",
       key: "isDefault",
       render: (isDefault: boolean) => (
-        <Tag color={isDefault ? "green" : "default"} className="font-inter">
+        <Tag color={isDefault ? "green" : "default"} className="font-roboto">
           {isDefault ? "Default" : "Active"}
         </Tag>
       ),
@@ -110,26 +110,26 @@ export default function BillingSettingsPage() {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      render: (date: string) => <span className="font-inter">{date}</span>,
+      render: (date: string) => <span className="font-roboto">{date}</span>,
     },
     {
       title: "Order ID",
       dataIndex: "orderId",
       key: "orderId",
-      render: (orderId: string) => <span className="font-inter font-medium text-[#0B8457]">{orderId}</span>,
+      render: (orderId: string) => <span className="font-roboto font-medium text-[#0B8457]">{orderId}</span>,
     },
     {
       title: "Amount",
       dataIndex: "amount",
       key: "amount",
-      render: (amount: number) => <span className="font-inter font-medium">${amount.toFixed(2)}</span>,
+      render: (amount: number) => <span className="font-roboto font-medium">${amount.toFixed(2)}</span>,
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
       render: (status: string) => (
-        <Tag color={status === "Paid" ? "green" : status === "Refunded" ? "orange" : "red"} className="font-inter">
+        <Tag color={status === "Paid" ? "green" : status === "Refunded" ? "orange" : "red"} className="font-roboto">
           {status}
         </Tag>
       ),
@@ -138,13 +138,13 @@ export default function BillingSettingsPage() {
       title: "Payment Method",
       dataIndex: "method",
       key: "method",
-      render: (method: string) => <span className="font-inter text-sm">{method}</span>,
+      render: (method: string) => <span className="font-roboto text-sm">{method}</span>,
     },
     {
       title: "Actions",
       key: "actions",
       render: () => (
-        <Button size="small" icon={<DownloadOutlined />} className="font-inter">
+        <Button size="small" icon={<DownloadOutlined />} className="font-roboto">
           Invoice
         </Button>
       ),
@@ -164,10 +164,10 @@ export default function BillingSettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <Title level={2} className="font-poppins mb-2">
+        <Title level={2} className="font-roboto mb-2">
           Billing & Payment
         </Title>
-        <Text type="secondary" className="font-inter">
+        <Text type="secondary" className="font-roboto">
           Manage your payment methods and billing history
         </Text>
       </div>
@@ -176,13 +176,13 @@ export default function BillingSettingsPage() {
         {/* Payment Methods */}
         <Col xs={24}>
           <Card
-            title={<span className="font-poppins">Payment Methods</span>}
+            title={<span className="font-roboto">Payment Methods</span>}
             extra={
               <Button
                 type="primary"
                 icon={<PlusOutlined />}
                 onClick={() => setAddCardModalVisible(true)}
-                className="font-inter"
+                className="font-roboto"
               >
                 Add Card
               </Button>
@@ -195,30 +195,30 @@ export default function BillingSettingsPage() {
               description="All payment information is encrypted and processed securely through our PCI-compliant payment processor."
               type="info"
               showIcon
-              className="font-inter"
+              className="font-roboto"
             />
           </Card>
         </Col>
 
         {/* Billing Summary */}
         <Col xs={24} lg={8}>
-          <Card title={<span className="font-poppins">Billing Summary</span>}>
+          <Card title={<span className="font-roboto">Billing Summary</span>}>
             <div className="space-y-4">
               <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                <Text className="font-inter">Current Month</Text>
-                <Text className="font-inter font-semibold text-[#0B8457]">$245.75</Text>
+                <Text className="font-roboto">Current Month</Text>
+                <Text className="font-roboto font-semibold text-[#0B8457]">$245.75</Text>
               </div>
               <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                <Text className="font-inter">Last Month</Text>
-                <Text className="font-inter font-semibold">$189.50</Text>
+                <Text className="font-roboto">Last Month</Text>
+                <Text className="font-roboto font-semibold">$189.50</Text>
               </div>
               <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                <Text className="font-inter">Total Spent</Text>
-                <Text className="font-inter font-semibold">$1,456.25</Text>
+                <Text className="font-roboto">Total Spent</Text>
+                <Text className="font-roboto font-semibold">$1,456.25</Text>
               </div>
               <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                <Text className="font-inter">Loyalty Points</Text>
-                <Text className="font-inter font-semibold text-[#F9A826]">2,450 pts</Text>
+                <Text className="font-roboto">Loyalty Points</Text>
+                <Text className="font-roboto font-semibold text-[#F9A826]">2,450 pts</Text>
               </div>
             </div>
           </Card>
@@ -226,13 +226,13 @@ export default function BillingSettingsPage() {
 
         {/* Quick Actions */}
         <Col xs={24} lg={16}>
-          <Card title={<span className="font-poppins">Quick Actions</span>}>
+          <Card title={<span className="font-roboto">Quick Actions</span>}>
             <Row gutter={[16, 16]}>
               <Col xs={24} sm={12} md={6}>
                 <div className="text-center p-4 bg-blue-50 rounded-lg">
                   <DownloadOutlined className="text-2xl text-blue-500 mb-2" />
-                  <Text className="font-inter font-medium block">Download Invoices</Text>
-                  <Button size="small" className="mt-2 font-inter">
+                  <Text className="font-roboto font-medium block">Download Invoices</Text>
+                  <Button size="small" className="mt-2 font-roboto">
                     Download
                   </Button>
                 </div>
@@ -240,8 +240,8 @@ export default function BillingSettingsPage() {
               <Col xs={24} sm={12} md={6}>
                 <div className="text-center p-4 bg-green-50 rounded-lg">
                   <CreditCardOutlined className="text-2xl text-green-500 mb-2" />
-                  <Text className="font-inter font-medium block">Update Billing</Text>
-                  <Button size="small" className="mt-2 font-inter">
+                  <Text className="font-roboto font-medium block">Update Billing</Text>
+                  <Button size="small" className="mt-2 font-roboto">
                     Update
                   </Button>
                 </div>
@@ -249,8 +249,8 @@ export default function BillingSettingsPage() {
               <Col xs={24} sm={12} md={6}>
                 <div className="text-center p-4 bg-orange-50 rounded-lg">
                   <EditOutlined className="text-2xl text-orange-500 mb-2" />
-                  <Text className="font-inter font-medium block">Tax Settings</Text>
-                  <Button size="small" className="mt-2 font-inter">
+                  <Text className="font-roboto font-medium block">Tax Settings</Text>
+                  <Button size="small" className="mt-2 font-roboto">
                     Configure
                   </Button>
                 </div>
@@ -258,8 +258,8 @@ export default function BillingSettingsPage() {
               <Col xs={24} sm={12} md={6}>
                 <div className="text-center p-4 bg-purple-50 rounded-lg">
                   <PlusOutlined className="text-2xl text-purple-500 mb-2" />
-                  <Text className="font-inter font-medium block">Auto-Pay</Text>
-                  <Button size="small" className="mt-2 font-inter">
+                  <Text className="font-roboto font-medium block">Auto-Pay</Text>
+                  <Button size="small" className="mt-2 font-roboto">
                     Setup
                   </Button>
                 </div>
@@ -270,7 +270,7 @@ export default function BillingSettingsPage() {
 
         {/* Billing History */}
         <Col xs={24}>
-          <Card title={<span className="font-poppins">Billing History</span>}>
+          <Card title={<span className="font-roboto">Billing History</span>}>
             <Table
               dataSource={billingHistory}
               columns={billingHistoryColumns}
@@ -279,7 +279,7 @@ export default function BillingSettingsPage() {
                 showSizeChanger: true,
                 showQuickJumper: true,
                 showTotal: (total, range) => (
-                  <span className="font-inter">
+                  <span className="font-roboto">
                     {range[0]}-{range[1]} of {total} transactions
                   </span>
                 ),
@@ -291,39 +291,39 @@ export default function BillingSettingsPage() {
 
       {/* Add Card Modal */}
       <Modal
-        title={<span className="font-poppins">Add Payment Method</span>}
+        title={<span className="font-roboto">Add Payment Method</span>}
         open={addCardModalVisible}
         onCancel={() => setAddCardModalVisible(false)}
         footer={[
-          <Button key="cancel" onClick={() => setAddCardModalVisible(false)} className="font-inter">
+          <Button key="cancel" onClick={() => setAddCardModalVisible(false)} className="font-roboto">
             Cancel
           </Button>,
-          <Button key="submit" type="primary" onClick={handleAddCard} className="font-inter">
+          <Button key="submit" type="primary" onClick={handleAddCard} className="font-roboto">
             Add Card
           </Button>,
         ]}
       >
         <Form layout="vertical">
-          <Form.Item label={<span className="font-inter">Card Number</span>}>
-            <Input placeholder="1234 5678 9012 3456" className="font-inter" />
+          <Form.Item label={<span className="font-roboto">Card Number</span>}>
+            <Input placeholder="1234 5678 9012 3456" className="font-roboto" />
           </Form.Item>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label={<span className="font-inter">Expiry Date</span>}>
-                <Input placeholder="MM/YY" className="font-inter" />
+              <Form.Item label={<span className="font-roboto">Expiry Date</span>}>
+                <Input placeholder="MM/YY" className="font-roboto" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label={<span className="font-inter">CVV</span>}>
-                <Input placeholder="123" className="font-inter" />
+              <Form.Item label={<span className="font-roboto">CVV</span>}>
+                <Input placeholder="123" className="font-roboto" />
               </Form.Item>
             </Col>
           </Row>
-          <Form.Item label={<span className="font-inter">Cardholder Name</span>}>
-            <Input placeholder="John Doe" className="font-inter" />
+          <Form.Item label={<span className="font-roboto">Cardholder Name</span>}>
+            <Input placeholder="John Doe" className="font-roboto" />
           </Form.Item>
-          <Form.Item label={<span className="font-inter">Billing Country</span>}>
-            <Select placeholder="Select country" className="font-inter">
+          <Form.Item label={<span className="font-roboto">Billing Country</span>}>
+            <Select placeholder="Select country" className="font-roboto">
               <Option value="US">United States</Option>
               <Option value="CA">Canada</Option>
               <Option value="UK">United Kingdom</Option>
@@ -334,27 +334,27 @@ export default function BillingSettingsPage() {
 
       {/* Edit Card Modal */}
       <Modal
-        title={<span className="font-poppins">Edit Payment Method</span>}
+        title={<span className="font-roboto">Edit Payment Method</span>}
         open={editCardModalVisible}
         onCancel={() => setEditCardModalVisible(false)}
         footer={[
-          <Button key="cancel" onClick={() => setEditCardModalVisible(false)} className="font-inter">
+          <Button key="cancel" onClick={() => setEditCardModalVisible(false)} className="font-roboto">
             Cancel
           </Button>,
-          <Button key="submit" type="primary" onClick={handleEditCard} className="font-inter">
+          <Button key="submit" type="primary" onClick={handleEditCard} className="font-roboto">
             Update Card
           </Button>,
         ]}
       >
         <Form layout="vertical">
-          <Form.Item label={<span className="font-inter">Expiry Date</span>}>
-            <Input defaultValue="12/25" className="font-inter" />
+          <Form.Item label={<span className="font-roboto">Expiry Date</span>}>
+            <Input defaultValue="12/25" className="font-roboto" />
           </Form.Item>
-          <Form.Item label={<span className="font-inter">Cardholder Name</span>}>
-            <Input defaultValue="John Doe" className="font-inter" />
+          <Form.Item label={<span className="font-roboto">Cardholder Name</span>}>
+            <Input defaultValue="John Doe" className="font-roboto" />
           </Form.Item>
-          <Form.Item label={<span className="font-inter">Set as Default</span>}>
-            <Select defaultValue="no" className="font-inter">
+          <Form.Item label={<span className="font-roboto">Set as Default</span>}>
+            <Select defaultValue="no" className="font-roboto">
               <Option value="yes">Yes</Option>
               <Option value="no">No</Option>
             </Select>

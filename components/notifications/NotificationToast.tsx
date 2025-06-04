@@ -39,8 +39,8 @@ export default function NotificationToast() {
 
     const getNotificationConfig = () => {
       const baseConfig = {
-        message: <div className="font-inter font-semibold text-gray-900">{notif.title}</div>,
-        description: <div className="font-inter text-gray-600 mt-1">{notif.message}</div>,
+        message: <div className="font-roboto font-semibold text-gray-900">{notif.title}</div>,
+        description: <div className="font-roboto text-gray-600 mt-1">{notif.message}</div>,
         icon: getIcon(),
         placement: "topRight" as const,
         duration: notif.priority === "high" ? 8 : notif.priority === "medium" ? 6 : 4,
@@ -49,7 +49,7 @@ export default function NotificationToast() {
           borderRadius: "12px",
           boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)",
           border: "1px solid rgba(0, 0, 0, 0.06)",
-          fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          fontFamily: "'Roboto', -apple-system, BlinkMacSystemFont, sans-serif",
         },
       }
 
@@ -60,7 +60,7 @@ export default function NotificationToast() {
           btn: (
             <a
               href={notif.actionUrl}
-              className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg transition-colors duration-200 font-inter"
+              className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg transition-colors duration-200 font-roboto"
               onClick={() => api.destroy()}
             >
               {notif.actionText}

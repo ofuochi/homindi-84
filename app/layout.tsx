@@ -1,19 +1,14 @@
 import type React from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 
-const inter = Inter({
+const roboto = Roboto({
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const poppins = Poppins({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-roboto",
 });
 
 export const metadata: Metadata = {
@@ -41,13 +36,13 @@ export default function RootLayout({
         elements: {
           formButtonPrimary: "bg-[#0B8457] hover:bg-[#0a7249]",
           card: "shadow-lg",
-          headerTitle: "font-poppins",
-          headerSubtitle: "font-inter",
+          headerTitle: "font-roboto",
+          headerSubtitle: "font-roboto",
         },
       }}
     >
-      <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-        <body className="font-inter antialiased">
+      <html lang="en" className={roboto.variable}>
+        <body className="font-roboto antialiased">
           <Providers>{children}</Providers>
         </body>
       </html>

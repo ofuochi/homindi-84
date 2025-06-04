@@ -170,11 +170,11 @@ export default function BarcodeScannerPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <Title level={2} className="mb-2 font-poppins">
+        <Title level={2} className="mb-2 font-roboto">
           <ScanOutlined className="text-blue-500 mr-2" />
           Barcode Scanner
         </Title>
-        <p className="text-gray-600 font-inter">
+        <p className="text-gray-600 font-roboto">
           Scan product barcodes to quickly update inventory or process stock movements
         </p>
       </div>

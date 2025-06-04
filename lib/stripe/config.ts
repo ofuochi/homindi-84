@@ -20,7 +20,7 @@ export const STRIPE_APPEARANCE = {
     colorBackground: "#ffffff",
     colorText: "#1f2937",
     colorDanger: "#dc2626",
-    fontFamily: "Inter, system-ui, sans-serif",
+    fontFamily: "Roboto, system-ui, sans-serif",
     spacingUnit: "4px",
     borderRadius: "8px",
   },

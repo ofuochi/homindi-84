@@ -96,14 +96,14 @@ export default function ProductCard({ product }: ProductCardProps) {
           >
             <div className="flex flex-col h-full p-2">
               <Link href={`/products/${product.id}`} className="block mb-3">
-                <h3 className="font-semibold text-lg line-clamp-2 hover:text-primary-500 transition-colors font-poppins">
+                <h3 className="font-semibold text-lg line-clamp-2 hover:text-primary-500 transition-colors font-roboto">
                   {product.name}
                 </h3>
               </Link>
 
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center space-x-2">
-                  <span className="font-bold text-xl text-primary-500 font-poppins">
+                  <span className="font-bold text-xl text-primary-500 font-roboto">
                     ${product.price.toFixed(2)}
                   </span>
                   {product.discount && (
@@ -120,11 +120,11 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </Tag>
               </div>
 
-              <p className="text-sm text-gray-600 mb-4 line-clamp-2 font-inter leading-relaxed flex-grow">
+              <p className="text-sm text-gray-600 mb-4 line-clamp-2 font-roboto leading-relaxed flex-grow">
                 {product.description}
               </p>
 
-              <div className="flex items-center justify-between mb-4 text-xs text-gray-500 font-inter">
+              <div className="flex items-center justify-between mb-4 text-xs text-gray-500 font-roboto">
                 <span>Origin: {product.origin}</span>
                 <span>{product.stockQuantity} in stock</span>
               </div>

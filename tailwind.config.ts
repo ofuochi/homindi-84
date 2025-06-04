@@ -12,9 +12,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        inter: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
-        poppins: ["var(--font-poppins)", "Poppins", "system-ui", "sans-serif"],
-        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
+        roboto: ["var(--font-roboto)", "Roboto", "system-ui", "sans-serif"],
+        sans: ["var(--font-roboto)", "Roboto", "system-ui", "sans-serif"],
       },
       colors: {
         // Use centralized colors

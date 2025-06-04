@@ -26,10 +26,10 @@ export default function Page() {
               </motion.div>
             </Link>
           </div>
-          <h2 className="text-3xl font-bold text-gray-900 font-poppins">
+          <h2 className="text-3xl font-bold text-gray-900 font-roboto">
             Sign in to Homindi
           </h2>
-          <p className="mt-2 text-sm text-gray-600 font-inter">
+          <p className="mt-2 text-sm text-gray-600 font-roboto">
             Access your account and manage your orders
           </p>
         </div>
@@ -40,8 +40,8 @@ export default function Page() {
               elements: {
                 formButtonPrimary: "bg-[#0B8457] hover:bg-[#0a7249] text-white",
                 card: "shadow-lg border-0",
-                headerTitle: "font-poppins text-2xl",
-                headerSubtitle: "font-inter",
+                headerTitle: "font-roboto text-2xl",
+                headerSubtitle: "font-roboto",
                 socialButtonsBlockButton: "border-gray-200 hover:bg-gray-50",
                 formFieldInput:
                   "border-gray-300 focus:border-[#0B8457] focus:ring-[#0B8457]",

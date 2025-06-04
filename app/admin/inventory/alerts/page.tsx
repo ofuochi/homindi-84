@@ -189,11 +189,11 @@ export default function LowStockAlertsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <Title level={2} className="mb-2 font-poppins">
+          <Title level={2} className="mb-2 font-roboto">
             <AlertOutlined className="text-orange-500 mr-2" />
             Low Stock Alerts
           </Title>
-          <p className="text-gray-600 font-inter">Monitor and manage products that are running low on inventory</p>
+          <p className="text-gray-600 font-roboto">Monitor and manage products that are running low on inventory</p>
         </div>
         <Space>
           <Button icon={<ReloadOutlined />} onClick={() => window.location.reload()}>

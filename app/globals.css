@@ -22,12 +22,8 @@
     text-rendering: optimizeLegibility;
   }
 
-  .font-inter {
-    font-family: var(--font-inter);
-  }
-
-  .font-poppins {
-    font-family: var(--font-poppins);
+  .font-roboto {
+    font-family: var(--font-roboto);
   }
 
   .line-clamp-2 {
@@ -47,12 +43,12 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-[#0B8457] hover:bg-[#0a7249] text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 font-inter;
+    @apply bg-[#0B8457] hover:bg-[#0a7249] text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 font-roboto;
     box-shadow: 0 4px 6px -1px rgba(11, 132, 87, 0.1), 0 2px 4px -1px rgba(11, 132, 87, 0.06);
   }
 
   .btn-secondary {
-    @apply bg-[#F9A826] hover:bg-[#e09620] text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 font-inter;
+    @apply bg-[#F9A826] hover:bg-[#e09620] text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 font-roboto;
     box-shadow: 0 4px 6px -1px rgba(249, 168, 38, 0.1), 0 2px 4px -1px rgba(249, 168, 38, 0.06);
   }
 
@@ -74,23 +70,23 @@
     background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
     border: 2px solid white;
     box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
-    font-family: var(--font-inter);
+    font-family: var(--font-roboto);
     font-weight: 600;
     font-size: 10px;
   }
 
   .notification-toast {
-    font-family: var(--font-inter);
+    font-family: var(--font-roboto);
   }
 
   .notification-toast .ant-notification-notice-message {
-    font-family: var(--font-inter);
+    font-family: var(--font-roboto);
     font-weight: 600;
     color: #1f2937;
   }
 
   .notification-toast .ant-notification-notice-description {
-    font-family: var(--font-inter);
+    font-family: var(--font-roboto);
     color: #6b7280;
     line-height: 1.5;
   }
@@ -139,7 +135,7 @@
 .ant-btn-primary {
   background: linear-gradient(135deg, #0b8457 0%, #0a7249 100%);
   border: none;
-  font-family: var(--font-inter);
+  font-family: var(--font-roboto);
   font-weight: 500;
   box-shadow: 0 4px 6px -1px rgba(11, 132, 87, 0.1), 0 2px 4px -1px rgba(11, 132, 87, 0.06);
   transition: all 0.3s ease;
@@ -152,7 +148,7 @@
 }
 
 .ant-btn {
-  font-family: var(--font-inter);
+  font-family: var(--font-roboto);
   font-weight: 500;
   transition: all 0.3s ease;
   border-radius: 8px;
@@ -174,7 +170,7 @@
 }
 
 .ant-menu-item {
-  font-family: var(--font-inter);
+  font-family: var(--font-roboto);
   font-weight: 500;
   border-radius: 8px;
   margin: 4px 0;
@@ -188,7 +184,7 @@
 }
 
 .ant-typography {
-  font-family: var(--font-inter);
+  font-family: var(--font-roboto);
 }
 
 .ant-typography h1,
@@ -197,7 +193,7 @@
 .ant-typography h4,
 .ant-typography h5,
 .ant-typography h6 {
-  font-family: var(--font-poppins);
+  font-family: var(--font-roboto);
   font-weight: 600;
 }
 
@@ -214,12 +210,12 @@
 }
 
 .ant-card-head-title {
-  font-family: var(--font-poppins);
+  font-family: var(--font-roboto);
   font-weight: 600;
 }
 
 .ant-notification {
-  font-family: var(--font-inter);
+  font-family: var(--font-roboto);
 }
 
 .ant-notification-notice {
@@ -238,7 +234,7 @@
 .ant-input,
 .ant-select-selector {
   border-radius: 12px;
-  font-family: var(--font-inter);
+  font-family: var(--font-roboto);
   transition: all 0.3s ease;
   border: 2px solid #e5e7eb;
 }
@@ -259,7 +255,7 @@
 }
 
 .ant-collapse-header {
-  font-family: var(--font-inter);
+  font-family: var(--font-roboto);
   font-weight: 500;
   padding: 16px 24px !important;
   transition: all 0.3s ease;
@@ -271,7 +267,7 @@
 
 .ant-collapse-content-box {
   padding: 16px 24px;
-  font-family: var(--font-inter);
+  font-family: var(--font-roboto);
 }
 
 .ant-timeline-item-head {

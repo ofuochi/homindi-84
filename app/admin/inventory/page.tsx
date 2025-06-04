@@ -36,11 +36,11 @@ export default function InventoryOverviewPage() {
       key: "name",
       render: (name: string, record: any) => (
         <div>
-          <Text strong className="font-inter">
+          <Text strong className="font-roboto">
             {name}
           </Text>
           <br />
-          <Text type="secondary" className="font-inter text-sm">
+          <Text type="secondary" className="font-roboto text-sm">
             {record.category}
           </Text>
         </div>
@@ -51,7 +51,7 @@ export default function InventoryOverviewPage() {
       dataIndex: "stockQuantity",
       key: "stock",
       render: (stock: number) => (
-        <Tag color={stock === 0 ? "red" : stock <= 5 ? "orange" : "yellow"} className="font-inter">
+        <Tag color={stock === 0 ? "red" : stock <= 5 ? "orange" : "yellow"} className="font-roboto">
           {stock} units
         </Tag>
       ),
@@ -61,7 +61,7 @@ export default function InventoryOverviewPage() {
       dataIndex: "price",
       key: "value",
       render: (price: number, record: any) => (
-        <Text className="font-inter">{formatCurrency(price * record.stockQuantity)}</Text>
+        <Text className="font-roboto">{formatCurrency(price * record.stockQuantity)}</Text>
       ),
     },
     {
@@ -88,21 +88,21 @@ export default function InventoryOverviewPage() {
     <div className="space-y-6">
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
         <div>
-          <Title level={2} className="font-poppins mb-2">
+          <Title level={2} className="font-roboto mb-2">
             Inventory Overview
           </Title>
-          <Text type="secondary" className="font-inter">
+          <Text type="secondary" className="font-roboto">
             Monitor your inventory levels and stock status
           </Text>
         </div>
         <Space>
           <Link href="/admin/products">
-            <Button type="primary" icon={<PlusOutlined />} className="font-inter">
+            <Button type="primary" icon={<PlusOutlined />} className="font-roboto">
               Add Product
             </Button>
           </Link>
           <Link href="/admin/inventory/logs">
-            <Button icon={<HistoryOutlined />} className="font-inter">
+            <Button icon={<HistoryOutlined />} className="font-roboto">
               View Stock History
             </Button>
           </Link>
@@ -150,40 +150,40 @@ export default function InventoryOverviewPage() {
         <Col xs={24} sm={12} lg={6}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter">Total Products</span>}
+              title={<span className="font-roboto">Total Products</span>}
               value={stats?.totalProducts || products.length}
               prefix={<InboxOutlined />}
-              valueStyle={{ color: "#0B8457", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{ color: "#0B8457", fontFamily: "var(--font-roboto)" }}
             />
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter">In Stock</span>}
+              title={<span className="font-roboto">In Stock</span>}
               value={inStockProducts.length}
               prefix={<CheckCircleOutlined />}
-              valueStyle={{ color: "#52c41a", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{ color: "#52c41a", fontFamily: "var(--font-roboto)" }}
             />
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter">Low Stock</span>}
+              title={<span className="font-roboto">Low Stock</span>}
               value={lowStockProducts.length}
               prefix={<ExclamationCircleOutlined />}
-              valueStyle={{ color: "#fa8c16", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{ color: "#fa8c16", fontFamily: "var(--font-roboto)" }}
             />
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter">Out of Stock</span>}
+              title={<span className="font-roboto">Out of Stock</span>}
               value={outOfStockProducts.length}
               prefix={<StopOutlined />}
-              valueStyle={{ color: "#ff4d4f", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{ color: "#ff4d4f", fontFamily: "var(--font-roboto)" }}
             />
           </Card>
         </Col>
@@ -194,12 +194,12 @@ export default function InventoryOverviewPage() {
         <Col xs={24} lg={8}>
           <Card className="text-center">
             <Statistic
-              title={<span className="font-inter">Total Inventory Value</span>}
+              title={<span className="font-roboto">Total Inventory Value</span>}
               value={totalInventoryValue}
               formatter={(value) => formatCurrency(Number(value))}
-              valueStyle={{ color: "#0B8457", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{ color: "#0B8457", fontFamily: "var(--font-roboto)" }}
             />
-            <Text type="secondary" className="font-inter text-sm">
+            <Text type="secondary" className="font-roboto text-sm">
               Current stock value
             </Text>
           </Card>
@@ -207,12 +207,12 @@ export default function InventoryOverviewPage() {
 
         {/* Stock Distribution */}
         <Col xs={24} lg={16}>
-          <Card title={<span className="font-poppins">Stock Distribution</span>}>
+          <Card title={<span className="font-roboto">Stock Distribution</span>}>
             <div className="space-y-4">
               <div>
                 <div className="flex justify-between items-center mb-2">
-                  <Text className="font-inter">In Stock ({inStockProducts.length})</Text>
-                  <Text className="font-inter text-sm text-gray-500">
+                  <Text className="font-roboto">In Stock ({inStockProducts.length})</Text>
+                  <Text className="font-roboto text-sm text-gray-500">
                     {((inStockProducts.length / products.length) * 100).toFixed(1)}%
                   </Text>
                 </div>
@@ -224,8 +224,8 @@ export default function InventoryOverviewPage() {
               </div>
               <div>
                 <div className="flex justify-between items-center mb-2">
-                  <Text className="font-inter">Low Stock ({lowStockProducts.length})</Text>
-                  <Text className="font-inter text-sm text-gray-500">
+                  <Text className="font-roboto">Low Stock ({lowStockProducts.length})</Text>
+                  <Text className="font-roboto text-sm text-gray-500">
                     {((lowStockProducts.length / products.length) * 100).toFixed(1)}%
                   </Text>
                 </div>
@@ -237,8 +237,8 @@ export default function InventoryOverviewPage() {
               </div>
               <div>
                 <div className="flex justify-between items-center mb-2">
-                  <Text className="font-inter">Out of Stock ({outOfStockProducts.length})</Text>
-                  <Text className="font-inter text-sm text-gray-500">
+                  <Text className="font-roboto">Out of Stock ({outOfStockProducts.length})</Text>
+                  <Text className="font-roboto text-sm text-gray-500">
                     {((outOfStockProducts.length / products.length) * 100).toFixed(1)}%
                   </Text>
                 </div>
@@ -256,10 +256,10 @@ export default function InventoryOverviewPage() {
       {/* Low Stock Products */}
       {lowStockProducts.length > 0 && (
         <Card
-          title={<span className="font-poppins">Products Requiring Attention</span>}
+          title={<span className="font-roboto">Products Requiring Attention</span>}
           extra={
             <Link href="/admin/products?stockStatus=low">
-              <Button type="link" className="font-inter">
+              <Button type="link" className="font-roboto">
                 View All
               </Button>
             </Link>

@@ -135,7 +135,7 @@ export default function AuditLogsPage() {
       dataIndex: "timestamp",
       key: "timestamp",
       render: (timestamp: string) => (
-        <Text className="font-inter text-sm">
+        <Text className="font-roboto text-sm">
           {new Date(timestamp).toLocaleString()}
         </Text>
       ),
@@ -150,7 +150,7 @@ export default function AuditLogsPage() {
       render: (email: string, record: AuditLog) => (
         <div className="flex items-center space-x-2">
           <Avatar size="small" icon={<UserOutlined />} />
-          <Text className="font-inter text-sm">{email}</Text>
+          <Text className="font-roboto text-sm">{email}</Text>
         </div>
       ),
     },
@@ -159,7 +159,7 @@ export default function AuditLogsPage() {
       dataIndex: "action",
       key: "action",
       render: (action: string) => (
-        <Tag color={getActionColor(action)} className="font-inter">
+        <Tag color={getActionColor(action)} className="font-roboto">
           {action.replace("_", " ").toUpperCase()}
         </Tag>
       ),
@@ -169,7 +169,7 @@ export default function AuditLogsPage() {
       dataIndex: "resource",
       key: "resource",
       render: (resource: string) => (
-        <Tag className="font-inter">{resource.toUpperCase()}</Tag>
+        <Tag className="font-roboto">{resource.toUpperCase()}</Tag>
       ),
     },
     {
@@ -178,7 +178,7 @@ export default function AuditLogsPage() {
       key: "details",
       render: (details: Record<string, any>) => (
         <div className="max-w-xs">
-          <Text className="font-inter text-sm text-gray-600">
+          <Text className="font-roboto text-sm text-gray-600">
             {Object.entries(details)
               .map(([key, value]) => `${key}: ${value}`)
               .join(", ")}
@@ -191,7 +191,7 @@ export default function AuditLogsPage() {
       dataIndex: "ipAddress",
       key: "ipAddress",
       render: (ip: string) => (
-        <Text className="font-inter text-sm font-mono">{ip}</Text>
+        <Text className="font-roboto text-sm font-mono">{ip}</Text>
       ),
     },
   ];
@@ -201,10 +201,10 @@ export default function AuditLogsPage() {
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <div>
-            <Title level={2} className="font-poppins mb-2">
+            <Title level={2} className="font-roboto mb-2">
               Audit Logs
             </Title>
-            <Text type="secondary" className="font-inter">
+            <Text type="secondary" className="font-roboto">
               Track all administrative actions and system changes
             </Text>
           </div>
@@ -213,14 +213,14 @@ export default function AuditLogsPage() {
               icon={<ReloadOutlined />}
               onClick={loadAuditLogs}
               loading={loading}
-              className="font-inter"
+              className="font-roboto"
             >
               Refresh
             </Button>
             <Button
               type="primary"
               icon={<DownloadOutlined />}
-              className="font-inter"
+              className="font-roboto"
               onClick={() => {
                 // Export functionality would be implemented here
                 console.log("Exporting audit logs...");
@@ -239,14 +239,14 @@ export default function AuditLogsPage() {
               allowClear
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="font-inter"
+              className="font-roboto"
               prefix={<SearchOutlined />}
             />
 
             <Select
               value={actionFilter}
               onChange={setActionFilter}
-              className="font-inter"
+              className="font-roboto"
               placeholder="Filter by action"
             >
               <Option value="all">All Actions</Option>
@@ -263,7 +263,7 @@ export default function AuditLogsPage() {
             <RangePicker
               value={dateRange}
               onChange={setDateRange}
-              className="font-inter"
+              className="font-roboto"
               placeholder={["Start Date", "End Date"]}
             />
 
@@ -274,7 +274,7 @@ export default function AuditLogsPage() {
                 setActionFilter("all");
                 setDateRange(null);
               }}
-              className="font-inter"
+              className="font-roboto"
             >
               Clear Filters
             </Button>
@@ -293,7 +293,7 @@ export default function AuditLogsPage() {
               showSizeChanger: true,
               showQuickJumper: true,
               showTotal: (total, range) => (
-                <span className="font-inter">
+                <span className="font-roboto">
                   {range[0]}-{range[1]} of {total} logs
                 </span>
               ),

@@ -80,11 +80,11 @@ export default function NotificationBell() {
       <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-primary-500 to-primary-600">
         <div className="flex justify-between items-center">
           <div>
-            <Text className="text-white font-inter font-semibold text-lg">
+            <Text className="text-white font-roboto font-semibold text-lg">
               Notifications
             </Text>
             {unreadCount > 0 && (
-              <Text className="text-green-100 font-inter text-sm block">
+              <Text className="text-green-100 font-roboto text-sm block">
                 {unreadCount} unread message{unreadCount > 1 ? "s" : ""}
               </Text>
             )}
@@ -96,7 +96,7 @@ export default function NotificationBell() {
                 size="small"
                 icon={<CheckOutlined />}
                 onClick={markAllAsRead}
-                className="text-white hover:bg-white/20 border-white/30 font-inter"
+                className="text-white hover:bg-white/20 border-white/30 font-roboto"
               >
                 Mark all read
               </Button>
@@ -107,7 +107,7 @@ export default function NotificationBell() {
                 size="small"
                 icon={<SettingOutlined />}
                 onClick={() => setOpen(false)}
-                className="text-white hover:bg-white/20 border-white/30 font-inter"
+                className="text-white hover:bg-white/20 border-white/30 font-roboto"
               >
                 Settings
               </Button>
@@ -123,7 +123,7 @@ export default function NotificationBell() {
             <Empty
               image={Empty.PRESENTED_IMAGE_SIMPLE}
               description={
-                <Text className="font-inter text-gray-500">
+                <Text className="font-roboto text-gray-500">
                   No notifications yet
                 </Text>
               }
@@ -173,7 +173,7 @@ export default function NotificationBell() {
                   title={
                     <div className="flex justify-between items-start">
                       <Text
-                        className={`font-inter text-sm ${
+                        className={`font-roboto text-sm ${
                           !notification.isRead
                             ? "font-semibold text-gray-900"
                             : "font-medium text-gray-700"
@@ -181,14 +181,14 @@ export default function NotificationBell() {
                       >
                         {notification.title}
                       </Text>
-                      <Text className="font-inter text-xs text-gray-400 ml-2 whitespace-nowrap">
+                      <Text className="font-roboto text-xs text-gray-400 ml-2 whitespace-nowrap">
                         {formatDate(notification.createdAt)}
                       </Text>
                     </div>
                   }
                   description={
                     <div className="mt-1">
-                      <Text className="font-inter text-sm text-gray-600 leading-relaxed">
+                      <Text className="font-roboto text-sm text-gray-600 leading-relaxed">
                         {notification.message}
                       </Text>
                       {notification.actionUrl && notification.actionText && (
@@ -197,7 +197,7 @@ export default function NotificationBell() {
                             <Button
                               type="link"
                               size="small"
-                              className="p-0 h-auto font-inter text-primary-500 hover:text-primary-600 font-medium"
+                              className="p-0 h-auto font-roboto text-primary-500 hover:text-primary-600 font-medium"
                             >
                               {notification.actionText} →
                             </Button>
@@ -222,7 +222,7 @@ export default function NotificationBell() {
               <Button
                 type="link"
                 onClick={() => setOpen(false)}
-                className="font-inter font-medium text-primary-500 hover:text-primary-600"
+                className="font-roboto font-medium text-primary-500 hover:text-primary-600"
               >
                 View all notifications
               </Button>

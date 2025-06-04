@@ -201,10 +201,10 @@ export default function FAQPage() {
       <div className="bg-gradient-to-r from-[#0B8457] to-[#0a7249] text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="text-center">
-            <Title level={1} className="!text-white !mb-6 font-poppins">
+            <Title level={1} className="!text-white !mb-6 font-roboto">
               Frequently Asked Questions
             </Title>
-            <Paragraph className="text-xl text-green-100 max-w-3xl mx-auto font-inter leading-relaxed">
+            <Paragraph className="text-xl text-green-100 max-w-3xl mx-auto font-roboto leading-relaxed">
               Find answers to common questions about ordering, shipping, payments, and more. Can't find what you're
               looking for? Our support team is here to help!
             </Paragraph>
@@ -242,7 +242,7 @@ export default function FAQPage() {
                     type={activeCategory === category.key ? "primary" : "default"}
                     icon={<Icon />}
                     onClick={() => setActiveCategory(category.key)}
-                    className={`rounded-full font-inter font-medium ${
+                    className={`rounded-full font-roboto font-medium ${
                       activeCategory === category.key
                         ? "bg-[#0B8457] border-[#0B8457]"
                         : "hover:border-[#0B8457] hover:text-[#0B8457]"
@@ -261,10 +261,10 @@ export default function FAQPage() {
           <Col xs={24} lg={16}>
             <motion.div initial="hidden" animate="visible" variants={fadeInUp} custom={3}>
               <div className="mb-6 flex items-center justify-between">
-                <Title level={3} className="!mb-0 font-poppins">
+                <Title level={3} className="!mb-0 font-roboto">
                   {activeCategory === "all" ? "All Questions" : categories.find((c) => c.key === activeCategory)?.label}
                 </Title>
-                <Tag color="blue" className="font-inter">
+                <Tag color="blue" className="font-roboto">
                   {filteredFAQs.length} questions
                 </Tag>
               </div>
@@ -288,10 +288,10 @@ export default function FAQPage() {
                   {filteredFAQs.map((faq, index) => (
                     <Panel
                       key={faq.id}
-                      header={<div className="font-inter font-medium text-gray-900 pr-4">{faq.question}</div>}
+                      header={<div className="font-roboto font-medium text-gray-900 pr-4">{faq.question}</div>}
                       className="border-b border-gray-100 last:border-b-0"
                     >
-                      <div className="font-inter text-gray-700 leading-relaxed pl-4">{faq.answer}</div>
+                      <div className="font-roboto text-gray-700 leading-relaxed pl-4">{faq.answer}</div>
                     </Panel>
                   ))}
                 </Collapse>
@@ -306,19 +306,19 @@ export default function FAQPage() {
               <Card className="border-0 shadow-lg rounded-2xl">
                 <div className="text-center p-4">
                   <CustomerServiceOutlined className="text-4xl text-[#0B8457] mb-4" />
-                  <Title level={4} className="!mb-3 font-poppins">
+                  <Title level={4} className="!mb-3 font-roboto">
                     Need More Help?
                   </Title>
-                  <Paragraph className="text-gray-600 mb-6 font-inter">
+                  <Paragraph className="text-gray-600 mb-6 font-roboto">
                     Can't find the answer you're looking for? Our friendly support team is ready to help!
                   </Paragraph>
                   <Space direction="vertical" className="w-full">
                     <Link href="/contact">
-                      <Button type="primary" block size="large" className="bg-[#0B8457] font-inter">
+                      <Button type="primary" block size="large" className="bg-[#0B8457] font-roboto">
                         Contact Support
                       </Button>
                     </Link>
-                    <Button block size="large" className="font-inter">
+                    <Button block size="large" className="font-roboto">
                       Live Chat
                     </Button>
                   </Space>
@@ -339,7 +339,7 @@ export default function FAQPage() {
                       <Button
                         type="text"
                         block
-                        className="text-left justify-start font-inter hover:bg-gray-50 hover:text-[#0B8457]"
+                        className="text-left justify-start font-roboto hover:bg-gray-50 hover:text-[#0B8457]"
                       >
                         {topic.label}
                       </Button>
@@ -351,10 +351,10 @@ export default function FAQPage() {
               {/* Contact Info */}
               <Card className="bg-gradient-to-br from-[#0B8457] to-[#0a7249] text-white border-0 rounded-2xl">
                 <div className="p-4">
-                  <Title level={4} className="!text-white !mb-4 font-poppins">
+                  <Title level={4} className="!text-white !mb-4 font-roboto">
                     Contact Information
                   </Title>
-                  <div className="space-y-3 font-inter">
+                  <div className="space-y-3 font-roboto">
                     <div>
                       <Text className="text-green-100 block">Email Support</Text>
                       <Text className="text-white font-medium">support@homindi.com</Text>
@@ -378,21 +378,21 @@ export default function FAQPage() {
         <motion.div initial="hidden" animate="visible" variants={fadeInUp} custom={5} className="mt-16 text-center">
           <Card className="bg-gray-50 border-0 rounded-2xl">
             <div className="py-12 px-8">
-              <Title level={2} className="!mb-4 font-poppins">
+              <Title level={2} className="!mb-4 font-roboto">
                 Still Have Questions?
               </Title>
-              <Paragraph className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto font-inter">
+              <Paragraph className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto font-roboto">
                 Our customer support team is available to help you with any questions about our products, orders, or
                 services.
               </Paragraph>
               <Space size="large" wrap>
                 <Link href="/contact">
-                  <Button type="primary" size="large" className="bg-[#0B8457] px-8 font-inter">
+                  <Button type="primary" size="large" className="bg-[#0B8457] px-8 font-roboto">
                     Get in Touch
                   </Button>
                 </Link>
                 <Link href="/products">
-                  <Button size="large" className="px-8 font-inter">
+                  <Button size="large" className="px-8 font-roboto">
                     Browse Products
                   </Button>
                 </Link>

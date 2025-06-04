@@ -162,17 +162,17 @@ export default function AdminProductsPage() {
       key: "name",
       render: (name: string, record: Product) => (
         <div>
-          <Text strong className="font-inter">
+          <Text strong className="font-roboto">
             {name}
           </Text>
           <br />
-          <Text type="secondary" className="font-inter text-sm">
+          <Text type="secondary" className="font-roboto text-sm">
             {record.category}
           </Text>
           {record.sku && (
             <>
               <br />
-              <Text type="secondary" className="font-inter text-xs">
+              <Text type="secondary" className="font-roboto text-xs">
                 SKU: {record.sku}
               </Text>
             </>
@@ -186,17 +186,17 @@ export default function AdminProductsPage() {
       key: "price",
       render: (price: number, record: Product) => (
         <div>
-          <Text strong className="font-inter">
+          <Text strong className="font-roboto">
             {formatCurrency(price)}
           </Text>
           <br />
-          <Text type="secondary" className="font-inter text-sm">
+          <Text type="secondary" className="font-roboto text-sm">
             {record.unit}
           </Text>
           {record.discount && (
             <>
               <br />
-              <Text type="secondary" className="font-inter text-xs text-red-500">
+              <Text type="secondary" className="font-roboto text-xs text-red-500">
                 -{record.discount}% off
               </Text>
             </>
@@ -212,9 +212,9 @@ export default function AdminProductsPage() {
         const status = getStockStatus(record)
         return (
           <div>
-            <Text className="font-inter">{stock} units</Text>
+            <Text className="font-roboto">{stock} units</Text>
             <br />
-            <Tag color={status.color} size="small" className="font-inter" icon={status.icon}>
+            <Tag color={status.color} size="small" className="font-roboto" icon={status.icon}>
               {status.text}
             </Tag>
           </div>
@@ -225,7 +225,7 @@ export default function AdminProductsPage() {
       title: "Origin",
       dataIndex: "origin",
       key: "origin",
-      render: (origin: string) => <Text className="font-inter text-sm">{origin}</Text>,
+      render: (origin: string) => <Text className="font-roboto text-sm">{origin}</Text>,
     },
     {
       title: "Featured",
@@ -269,14 +269,14 @@ export default function AdminProductsPage() {
     <div className="space-y-6">
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
         <div>
-          <Title level={2} className="font-poppins mb-2">
+          <Title level={2} className="font-roboto mb-2">
             Product Management
           </Title>
-          <Text type="secondary" className="font-inter">
+          <Text type="secondary" className="font-roboto">
             Manage your product catalog and inventory
           </Text>
         </div>
-        <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd} className="font-inter">
+        <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd} className="font-roboto">
           Add Product
         </Button>
       </div>
@@ -289,10 +289,10 @@ export default function AdminProductsPage() {
             allowClear
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="flex-1 font-inter"
+            className="flex-1 font-roboto"
             prefix={<SearchOutlined />}
           />
-          <Select value={categoryFilter} onChange={setCategoryFilter} className="w-full sm:w-48 font-inter">
+          <Select value={categoryFilter} onChange={setCategoryFilter} className="w-full sm:w-48 font-roboto">
             <Option value="all">All Categories</Option>
             {categories.map((category) => (
               <Option key={category.id} value={category.name}>
@@ -300,7 +300,7 @@ export default function AdminProductsPage() {
               </Option>
             ))}
           </Select>
-          <Select value={stockFilter} onChange={setStockFilter} className="w-full sm:w-48 font-inter">
+          <Select value={stockFilter} onChange={setStockFilter} className="w-full sm:w-48 font-roboto">
             <Option value="all">All Stock Status</Option>
             <Option value="in">In Stock</Option>
             <Option value="low">Low Stock</Option>
@@ -323,7 +323,7 @@ export default function AdminProductsPage() {
             showSizeChanger: true,
             showQuickJumper: true,
             showTotal: (total, range) => (
-              <span className="font-inter">
+              <span className="font-roboto">
                 {range[0]}-{range[1]} of {total} products
               </span>
             ),
@@ -338,7 +338,7 @@ export default function AdminProductsPage() {
 
       {/* Add/Edit Product Modal */}
       <Modal
-        title={<span className="font-poppins">{editingProduct ? "Edit Product" : "Add New Product"}</span>}
+        title={<span className="font-roboto">{editingProduct ? "Edit Product" : "Add New Product"}</span>}
         open={modalVisible}
         onCancel={() => {
           setModalVisible(false)
@@ -353,7 +353,7 @@ export default function AdminProductsPage() {
               setEditingProduct(null)
               form.resetFields()
             }}
-            className="font-inter"
+            className="font-roboto"
           >
             Cancel
           </Button>,
@@ -362,7 +362,7 @@ export default function AdminProductsPage() {
             type="primary"
             onClick={() => form.submit()}
             loading={createProductMutation.isPending || updateProductMutation.isPending}
-            className="font-inter"
+            className="font-roboto"
           >
             {editingProduct ? "Update Product" : "Create Product"}
           </Button>,
@@ -373,22 +373,22 @@ export default function AdminProductsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Form.Item
               name="name"
-              label={<span className="font-inter">Product Name</span>}
+              label={<span className="font-roboto">Product Name</span>}
               rules={[{ required: true, message: "Please enter product name" }]}
             >
-              <Input placeholder="Enter product name" className="font-inter" />
+              <Input placeholder="Enter product name" className="font-roboto" />
             </Form.Item>
 
-            <Form.Item name="sku" label={<span className="font-inter">SKU (Optional)</span>}>
-              <Input placeholder="Enter SKU" className="font-inter" />
+            <Form.Item name="sku" label={<span className="font-roboto">SKU (Optional)</span>}>
+              <Input placeholder="Enter SKU" className="font-roboto" />
             </Form.Item>
 
             <Form.Item
               name="category"
-              label={<span className="font-inter">Category</span>}
+              label={<span className="font-roboto">Category</span>}
               rules={[{ required: true, message: "Please select category" }]}
             >
-              <Select placeholder="Select category" className="font-inter">
+              <Select placeholder="Select category" className="font-roboto">
                 {categories.map((category) => (
                   <Option key={category.id} value={category.name}>
                     {category.name}
@@ -399,14 +399,14 @@ export default function AdminProductsPage() {
 
             <Form.Item
               name="price"
-              label={<span className="font-inter">Price ($)</span>}
+              label={<span className="font-roboto">Price ($)</span>}
               rules={[{ required: true, message: "Please enter price" }]}
             >
               <InputNumber
                 min={0}
                 step={0.01}
                 placeholder="0.00"
-                className="w-full font-inter"
+                className="w-full font-roboto"
                 formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 parser={(value) => value!.replace(/\$\s?|(,*)/g, "")}
               />
@@ -414,51 +414,51 @@ export default function AdminProductsPage() {
 
             <Form.Item
               name="unit"
-              label={<span className="font-inter">Unit</span>}
+              label={<span className="font-roboto">Unit</span>}
               rules={[{ required: true, message: "Please enter unit" }]}
             >
-              <Input placeholder="e.g., per 1kg, per bottle" className="font-inter" />
+              <Input placeholder="e.g., per 1kg, per bottle" className="font-roboto" />
             </Form.Item>
 
             <Form.Item
               name="stockQuantity"
-              label={<span className="font-inter">Stock Quantity</span>}
+              label={<span className="font-roboto">Stock Quantity</span>}
               rules={[{ required: true, message: "Please enter stock quantity" }]}
             >
-              <InputNumber min={0} placeholder="0" className="w-full font-inter" />
+              <InputNumber min={0} placeholder="0" className="w-full font-roboto" />
             </Form.Item>
 
             <Form.Item
               name="origin"
-              label={<span className="font-inter">Origin</span>}
+              label={<span className="font-roboto">Origin</span>}
               rules={[{ required: true, message: "Please enter origin" }]}
             >
-              <Input placeholder="e.g., Lagos State, Nigeria" className="font-inter" />
+              <Input placeholder="e.g., Lagos State, Nigeria" className="font-roboto" />
             </Form.Item>
 
-            <Form.Item name="weight" label={<span className="font-inter">Weight (Optional)</span>}>
-              <Input placeholder="e.g., 1kg, 500g" className="font-inter" />
+            <Form.Item name="weight" label={<span className="font-roboto">Weight (Optional)</span>}>
+              <Input placeholder="e.g., 1kg, 500g" className="font-roboto" />
             </Form.Item>
 
-            <Form.Item name="discount" label={<span className="font-inter">Discount % (Optional)</span>}>
-              <InputNumber min={0} max={100} placeholder="0" className="w-full font-inter" />
+            <Form.Item name="discount" label={<span className="font-roboto">Discount % (Optional)</span>}>
+              <InputNumber min={0} max={100} placeholder="0" className="w-full font-roboto" />
             </Form.Item>
 
             <Form.Item
               name="minOrderQuantity"
-              label={<span className="font-inter">Min Order Qty</span>}
+              label={<span className="font-roboto">Min Order Qty</span>}
               initialValue={1}
             >
-              <InputNumber min={1} placeholder="1" className="w-full font-inter" />
+              <InputNumber min={1} placeholder="1" className="w-full font-roboto" />
             </Form.Item>
 
-            <Form.Item name="maxOrderQuantity" label={<span className="font-inter">Max Order Qty (Optional)</span>}>
-              <InputNumber min={1} placeholder="No limit" className="w-full font-inter" />
+            <Form.Item name="maxOrderQuantity" label={<span className="font-roboto">Max Order Qty (Optional)</span>}>
+              <InputNumber min={1} placeholder="No limit" className="w-full font-roboto" />
             </Form.Item>
 
             <Form.Item
               name="featured"
-              label={<span className="font-inter">Featured Product</span>}
+              label={<span className="font-roboto">Featured Product</span>}
               valuePropName="checked"
             >
               <Switch />
@@ -467,13 +467,13 @@ export default function AdminProductsPage() {
 
           <Form.Item
             name="description"
-            label={<span className="font-inter">Description</span>}
+            label={<span className="font-roboto">Description</span>}
             rules={[{ required: true, message: "Please enter description" }]}
           >
             <TextArea
               rows={4}
               placeholder="Enter product description"
-              className="font-inter"
+              className="font-roboto"
               maxLength={500}
               showCount
             />
@@ -481,17 +481,17 @@ export default function AdminProductsPage() {
 
           <Form.Item
             name="image"
-            label={<span className="font-inter">Product Image URL</span>}
+            label={<span className="font-roboto">Product Image URL</span>}
             rules={[{ required: true, message: "Please enter image URL" }]}
           >
-            <Input placeholder="https://example.com/image.jpg" className="font-inter" />
+            <Input placeholder="https://example.com/image.jpg" className="font-roboto" />
           </Form.Item>
 
-          <Form.Item name="tags" label={<span className="font-inter">Tags (Optional)</span>}>
-            <Select mode="tags" placeholder="Add tags" className="font-inter" tokenSeparators={[","]} />
+          <Form.Item name="tags" label={<span className="font-roboto">Tags (Optional)</span>}>
+            <Select mode="tags" placeholder="Add tags" className="font-roboto" tokenSeparators={[","]} />
           </Form.Item>
 
-          <Form.Item label={<span className="font-inter">Upload Image (Alternative)</span>}>
+          <Form.Item label={<span className="font-roboto">Upload Image (Alternative)</span>}>
             <Upload
               name="productImage"
               listType="picture-card"
@@ -501,7 +501,7 @@ export default function AdminProductsPage() {
             >
               <div>
                 <UploadOutlined />
-                <div className="font-inter mt-2">Upload</div>
+                <div className="font-roboto mt-2">Upload</div>
               </div>
             </Upload>
           </Form.Item>
