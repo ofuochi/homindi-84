@@ -9,6 +9,7 @@ import {
   HeartOutlined,
   CreditCardOutlined,
   SafetyOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,6 +17,7 @@ import { useNotificationStore } from "@/store/useNotificationStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import { getRoleInfo } from "@/lib/auth/roles";
 import Image from "next/image";
+import { SignOutButton } from "@clerk/nextjs";
 
 interface SidebarProps {
   collapsed?: boolean;
@@ -42,12 +44,20 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
       title: "My Orders",
     },
     {
+      key: "/dashboard/wishlist",
+      icon: <HeartOutlined />,
+      label: collapsed ? null : (
+        <Link href="/dashboard/wishlist">Wishlist</Link>
+      ),
+      title: "Wishlist",
+    },
+    {
       key: "/dashboard/notifications",
       icon: (
         <Badge
-          count={unreadCount}
+          dot={unreadCount > 0}
           size="small"
-          offset={collapsed ? [0, 0] : [10, 0]}
+          offset={collapsed ? [0, 10] : [100, 0]}
         >
           <BellOutlined />
         </Badge>
@@ -105,12 +115,13 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
       type: "divider",
     },
     {
-      key: "/dashboard/wishlist",
-      icon: <HeartOutlined />,
-      label: collapsed ? null : (
-        <Link href="/dashboard/wishlist">Wishlist</Link>
+      key: "logout",
+      icon: <LogoutOutlined />,
+      label: (
+        <SignOutButton>
+          <span>Logout</span>
+        </SignOutButton>
       ),
-      title: "Wishlist",
     },
   ];
 
@@ -134,7 +145,7 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
     <div className="h-full flex flex-col">
       {!collapsed && (
         <div className="p-4 pb-3 border-r border-gray-200">
-          <div className="flex items-center space-x-3">
+          <Link className="flex items-center space-x-3" href="/">
             <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
               <Image
                 src="/logo.png"
@@ -149,7 +160,7 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
                 Homindi
               </span>
             </div>
-          </div>
+          </Link>
         </div>
       )}
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, Skeleton } from "antd";
 
 export default function WishlistLoading() {

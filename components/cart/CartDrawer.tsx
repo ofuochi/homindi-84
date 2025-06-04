@@ -1,30 +1,40 @@
-"use client"
+"use client";
 
-import { Drawer, Button, Empty, InputNumber, List, Typography } from "antd"
-import { DeleteOutlined, ShoppingOutlined } from "@ant-design/icons"
-import Image from "next/image"
-import Link from "next/link"
-import { useCartStore } from "@/store/useCartStore"
-import { formatCurrency } from "@/lib/utils"
-import { MINIMUM_ORDER_AMOUNT } from "@/lib/constants"
-import MinOrderBanner from "@/components/cart/MinOrderBanner"
+import { Drawer, Button, Empty, InputNumber, List, Typography } from "antd";
+import { DeleteOutlined, ShoppingOutlined } from "@ant-design/icons";
+import Image from "next/image";
+import Link from "next/link";
+import { useCartStore } from "@/store/useCartStore";
+import { formatCurrency } from "@/lib/utils";
+import { MINIMUM_ORDER_AMOUNT } from "@/lib/constants";
+import MinOrderBanner from "@/components/cart/MinOrderBanner";
 
-const { Text } = Typography
+const { Text } = Typography;
 
 export default function CartDrawer() {
-  const { items, isOpen, setIsOpen, updateQuantity, removeItem, getTotal } = useCartStore()
-  const total = getTotal()
-  const isMinimumMet = total >= MINIMUM_ORDER_AMOUNT
+  const { items, isOpen, setIsOpen, updateQuantity, removeItem, getTotal } =
+    useCartStore();
+  const total = getTotal();
+  const isMinimumMet = total >= MINIMUM_ORDER_AMOUNT;
 
   const handleClose = () => {
-    setIsOpen(false)
-  }
+    setIsOpen(false);
+  };
 
   if (items.length === 0) {
     return (
-      <Drawer title="Shopping Cart" placement="right" onClose={handleClose} open={isOpen} width={400}>
+      <Drawer
+        title="Shopping Cart"
+        placement="right"
+        onClose={handleClose}
+        open={isOpen}
+        width={400}
+      >
         <div className="flex flex-col items-center justify-center h-full">
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="Your cart is empty" />
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description="Your cart is empty"
+          />
           <Link href="/products" onClick={handleClose}>
             <Button type="primary" icon={<ShoppingOutlined />} className="mt-4">
               Start Shopping
@@ -32,7 +42,7 @@ export default function CartDrawer() {
           </Link>
         </div>
       </Drawer>
-    )
+    );
   }
 
   return (
@@ -46,7 +56,7 @@ export default function CartDrawer() {
         <div className="space-y-4">
           {!isMinimumMet && <MinOrderBanner currentTotal={total} />}
           <div className="flex justify-between items-center">
-            <Text strong className="text-lg">
+            <Text strong className="text-lg mb-5">
               Total: {formatCurrency(total)}
             </Text>
           </div>
@@ -81,12 +91,16 @@ export default function CartDrawer() {
                   <InputNumber
                     min={1}
                     value={item.quantity}
-                    onChange={(value) => updateQuantity(item.product.id, value || 1)}
+                    onChange={(value) =>
+                      updateQuantity(item.product.id, value || 1)
+                    }
                     size="small"
                     className="w-16"
                   />
                   <div className="flex items-center space-x-2">
-                    <Text strong>{formatCurrency(item.product.price * item.quantity)}</Text>
+                    <Text strong>
+                      {formatCurrency(item.product.price * item.quantity)}
+                    </Text>
                     <Button
                       type="text"
                       danger
@@ -102,5 +116,5 @@ export default function CartDrawer() {
         )}
       />
     </Drawer>
-  )
+  );
 }

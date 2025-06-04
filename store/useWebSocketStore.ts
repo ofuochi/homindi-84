@@ -44,7 +44,7 @@ export const useWebSocketStore = create<WebSocketState>()(
       try {
         // In a real app, this would be your WebSocket server URL
         // For demo purposes, we'll simulate WebSocket behavior
-        const mockWsManager = new WebSocketManager("wss://api.homindibasket.com/ws")
+        const mockWsManager = new WebSocketManager("wss://api.homindi.com/ws")
 
         // Simulate WebSocket connection
         const mockWs = {

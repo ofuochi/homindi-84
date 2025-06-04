@@ -1,39 +1,44 @@
-"use client"
+"use client";
 
-import { Card, Button, Tag, Badge, message } from "antd"
-import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons"
-import Image from "next/image"
-import Link from "next/link"
-import type { Product } from "@/lib/types"
-import { useCartStore } from "@/store/useCartStore"
-import WishlistButton from "./WishlistButton"
-import { motion } from "framer-motion"
+import { Card, Button, Tag, Badge, message } from "antd";
+import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
+import Image from "next/image";
+import Link from "next/link";
+import type { Product } from "@/lib/types";
+import { useCartStore } from "@/store/useCartStore";
+import WishlistButton from "./WishlistButton";
+import { motion } from "framer-motion";
 
 interface ProductCardProps {
-  product: Product
+  product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { addItem: addToCart } = useCartStore()
-  const [messageApi, contextHolder] = message.useMessage()
+  const { addItem: addToCart } = useCartStore();
+  const [messageApi, contextHolder] = message.useMessage();
 
   const handleAddToCart = () => {
-    addToCart(product, 1)
+    addToCart(product, 1);
     messageApi.success({
       content: `${product.name} has been added to your cart!`,
       duration: 2.5,
       className: "notification-toast",
-    })
-  }
+    });
+  };
 
   return (
     <>
       {contextHolder}
-      <motion.div whileHover={{ y: -8, scale: 1.02 }} transition={{ duration: 0.3 }} className="h-full">
+      <motion.div
+        whileHover={{ y: -8, scale: 1.02 }}
+        transition={{ duration: 0.3 }}
+        className="h-full"
+      >
         <Badge.Ribbon
           text={product.featured ? "Featured" : null}
-          color="#0B8457"
-          style={{ display: product.featured ? "block" : "none" }}
+          color="purple"
+          placement="start"
+          className="absolute top-3 left-3 z-10"
         >
           <Card
             hoverable
@@ -48,7 +53,9 @@ export default function ProductCard({ product }: ProductCardProps) {
                 />
                 {!product.inStock && (
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <span className="text-white font-semibold px-3 py-1 rounded-lg bg-red-500">Out of Stock</span>
+                    <span className="text-white font-semibold px-3 py-1 rounded-lg bg-red-500">
+                      Out of Stock
+                    </span>
                   </div>
                 )}
 
@@ -56,7 +63,10 @@ export default function ProductCard({ product }: ProductCardProps) {
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                   <div className="flex space-x-2">
                     <Link href={`/products/${product.id}`}>
-                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
                         <Button
                           type="primary"
                           shape="circle"
@@ -93,10 +103,15 @@ export default function ProductCard({ product }: ProductCardProps) {
 
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center space-x-2">
-                  <span className="font-bold text-xl text-[#0B8457] font-poppins">${product.price.toFixed(2)}</span>
+                  <span className="font-bold text-xl text-[#0B8457] font-poppins">
+                    ${product.price.toFixed(2)}
+                  </span>
                   {product.discount && (
                     <span className="text-sm text-gray-500 line-through">
-                      ${(product.price / (1 - product.discount / 100)).toFixed(2)}
+                      $
+                      {(product.price / (1 - product.discount / 100)).toFixed(
+                        2
+                      )}
                     </span>
                   )}
                 </div>
@@ -115,7 +130,10 @@ export default function ProductCard({ product }: ProductCardProps) {
               </div>
 
               <div className="mt-auto">
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
                   <Button
                     type="primary"
                     icon={<ShoppingCartOutlined />}
@@ -123,7 +141,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     disabled={!product.inStock}
                     block
                     size="large"
-                    className="bg-[#0B8457] hover:bg-[#0a7249] border-[#0B8457] rounded-xl font-semibold h-12 shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="bg-[#0B8457] hover:bg-[#0a7249] border-[#0B8457] rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     {product.inStock ? "Add to Cart" : "Out of Stock"}
                   </Button>
@@ -134,5 +152,5 @@ export default function ProductCard({ product }: ProductCardProps) {
         </Badge.Ribbon>
       </motion.div>
     </>
-  )
+  );
 }

@@ -1,13 +1,14 @@
-"use client"
+"use client";
 
-import Header from "@/components/layout/Header"
-import Footer from "@/components/layout/Footer"
-import { Typography, Card, Table, Switch, Button, Alert, Divider } from "antd"
-import { CookieOutlined, SettingOutlined, InfoCircleOutlined } from "@ant-design/icons"
-import { motion } from "framer-motion"
-import { useState } from "react"
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import { Typography, Card, Table, Switch, Button, Alert, Divider } from "antd";
+import { SettingOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { CookieIcon } from "lucide-react";
 
-const { Title, Paragraph, Text } = Typography
+const { Title, Paragraph, Text } = Typography;
 
 export default function CookiesPage() {
   const [cookieSettings, setCookieSettings] = useState({
@@ -15,7 +16,7 @@ export default function CookiesPage() {
     analytics: true,
     marketing: false,
     preferences: true,
-  })
+  });
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -24,7 +25,7 @@ export default function CookiesPage() {
       y: 0,
       transition: { delay: i * 0.1, duration: 0.6 },
     }),
-  }
+  };
 
   const cookieTypes = [
     {
@@ -63,14 +64,14 @@ export default function CookiesPage() {
       canDisable: true,
       enabled: cookieSettings.preferences,
     },
-  ]
+  ];
 
   const handleCookieToggle = (key: string, checked: boolean) => {
     setCookieSettings((prev) => ({
       ...prev,
       [key]: checked,
-    }))
-  }
+    }));
+  };
 
   const columns = [
     {
@@ -110,7 +111,7 @@ export default function CookiesPage() {
         />
       ),
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -131,14 +132,14 @@ export default function CookiesPage() {
           {/* Header */}
           <motion.div variants={fadeInUp} className="text-center mb-12">
             <div className="w-20 h-20 bg-primary-100 rounded-full mx-auto flex items-center justify-center mb-6">
-              <CookieOutlined className="text-3xl text-primary-500" />
+              <CookieIcon className="text-3xl text-primary-500" />
             </div>
             <Title level={1} className="text-4xl font-bold mb-4">
               Cookie Policy
             </Title>
             <Paragraph className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Learn about how Homindi uses cookies to improve your browsing experience and provide personalized
-              services.
+              Learn about how Homindi uses cookies to improve your browsing
+              experience and provide personalized services.
             </Paragraph>
             <Text type="secondary" className="text-lg">
               Last updated: December 2024
@@ -179,19 +180,27 @@ export default function CookiesPage() {
           {/* What Are Cookies */}
           <motion.div variants={fadeInUp} custom={2} className="mb-12">
             <Card className="border-0 shadow-lg rounded-2xl">
-              <Title level={2} className="text-2xl font-bold mb-6 text-primary-600">
+              <Title
+                level={2}
+                className="text-2xl font-bold mb-6 text-primary-600"
+              >
                 What Are Cookies?
               </Title>
               <Paragraph className="text-lg mb-4">
-                Cookies are small text files that are stored on your device when you visit a website. They help websites
-                remember information about your visit, which can make it easier to visit the site again and make the
-                site more useful to you.
+                Cookies are small text files that are stored on your device when
+                you visit a website. They help websites remember information
+                about your visit, which can make it easier to visit the site
+                again and make the site more useful to you.
               </Paragraph>
-              <Paragraph className="mb-4">Cookies perform many different functions, such as:</Paragraph>
+              <Paragraph className="mb-4">
+                Cookies perform many different functions, such as:
+              </Paragraph>
               <ul className="list-disc pl-6 mb-6 space-y-2">
                 <li>Remembering your login status and preferences</li>
                 <li>Keeping items in your shopping cart</li>
-                <li>Analyzing how you use our website to improve performance</li>
+                <li>
+                  Analyzing how you use our website to improve performance
+                </li>
                 <li>Providing personalized content and advertisements</li>
                 <li>Enabling social media features</li>
               </ul>
@@ -201,18 +210,26 @@ export default function CookiesPage() {
           {/* How We Use Cookies */}
           <motion.div variants={fadeInUp} custom={3} className="mb-12">
             <Card className="border-0 shadow-lg rounded-2xl">
-              <Title level={2} className="text-2xl font-bold mb-6 text-primary-600">
+              <Title
+                level={2}
+                className="text-2xl font-bold mb-6 text-primary-600"
+              >
                 How We Use Cookies
               </Title>
 
               <div className="space-y-8">
                 <div>
-                  <Title level={3} className="text-xl font-semibold mb-3 text-green-600">
+                  <Title
+                    level={3}
+                    className="text-xl font-semibold mb-3 text-green-600"
+                  >
                     Essential Cookies (Always Active)
                   </Title>
                   <Paragraph className="mb-4">
-                    These cookies are necessary for the website to function and cannot be switched off. They are usually
-                    only set in response to actions made by you which amount to a request for services.
+                    These cookies are necessary for the website to function and
+                    cannot be switched off. They are usually only set in
+                    response to actions made by you which amount to a request
+                    for services.
                   </Paragraph>
                   <div className="bg-green-50 p-4 rounded-xl">
                     <Text strong>Examples:</Text>
@@ -228,12 +245,16 @@ export default function CookiesPage() {
                 <Divider />
 
                 <div>
-                  <Title level={3} className="text-xl font-semibold mb-3 text-blue-600">
+                  <Title
+                    level={3}
+                    className="text-xl font-semibold mb-3 text-blue-600"
+                  >
                     Analytics Cookies
                   </Title>
                   <Paragraph className="mb-4">
-                    These cookies help us understand how visitors interact with our website by collecting and reporting
-                    information anonymously.
+                    These cookies help us understand how visitors interact with
+                    our website by collecting and reporting information
+                    anonymously.
                   </Paragraph>
                   <div className="bg-blue-50 p-4 rounded-xl">
                     <Text strong>We use analytics cookies to:</Text>
@@ -249,12 +270,16 @@ export default function CookiesPage() {
                 <Divider />
 
                 <div>
-                  <Title level={3} className="text-xl font-semibold mb-3 text-orange-600">
+                  <Title
+                    level={3}
+                    className="text-xl font-semibold mb-3 text-orange-600"
+                  >
                     Marketing Cookies
                   </Title>
                   <Paragraph className="mb-4">
-                    These cookies track your online activity to help advertisers deliver more relevant advertising or to
-                    limit how many times you see an ad.
+                    These cookies track your online activity to help advertisers
+                    deliver more relevant advertising or to limit how many times
+                    you see an ad.
                   </Paragraph>
                   <div className="bg-orange-50 p-4 rounded-xl">
                     <Text strong>Marketing cookies enable:</Text>
@@ -270,11 +295,15 @@ export default function CookiesPage() {
                 <Divider />
 
                 <div>
-                  <Title level={3} className="text-xl font-semibold mb-3 text-purple-600">
+                  <Title
+                    level={3}
+                    className="text-xl font-semibold mb-3 text-purple-600"
+                  >
                     Preference Cookies
                   </Title>
                   <Paragraph className="mb-4">
-                    These cookies remember choices you make to give you better functionality and personal features.
+                    These cookies remember choices you make to give you better
+                    functionality and personal features.
                   </Paragraph>
                   <div className="bg-purple-50 p-4 rounded-xl">
                     <Text strong>Preference cookies remember:</Text>
@@ -293,7 +322,10 @@ export default function CookiesPage() {
           {/* Managing Cookies */}
           <motion.div variants={fadeInUp} custom={4} className="mb-12">
             <Card className="border-0 shadow-lg rounded-2xl">
-              <Title level={2} className="text-2xl font-bold mb-6 text-primary-600">
+              <Title
+                level={2}
+                className="text-2xl font-bold mb-6 text-primary-600"
+              >
                 Managing Your Cookie Preferences
               </Title>
 
@@ -303,8 +335,9 @@ export default function CookiesPage() {
                     On Our Website
                   </Title>
                   <Paragraph>
-                    You can manage your cookie preferences using the settings table above. Your choices will be saved
-                    and applied to your future visits to our website.
+                    You can manage your cookie preferences using the settings
+                    table above. Your choices will be saved and applied to your
+                    future visits to our website.
                   </Paragraph>
                 </div>
 
@@ -313,7 +346,8 @@ export default function CookiesPage() {
                     In Your Browser
                   </Title>
                   <Paragraph className="mb-4">
-                    Most web browsers allow you to control cookies through their settings. You can:
+                    Most web browsers allow you to control cookies through their
+                    settings. You can:
                   </Paragraph>
                   <ul className="list-disc pl-6 mb-4 space-y-2">
                     <li>Block all cookies</li>
@@ -324,7 +358,8 @@ export default function CookiesPage() {
                   <div className="bg-yellow-50 p-4 rounded-xl">
                     <InfoCircleOutlined className="text-yellow-600 mr-2" />
                     <Text strong className="text-yellow-700">
-                      Note: Disabling cookies may affect the functionality of our website and your user experience.
+                      Note: Disabling cookies may affect the functionality of
+                      our website and your user experience.
                     </Text>
                   </div>
                 </div>
@@ -335,12 +370,15 @@ export default function CookiesPage() {
           {/* Third-Party Cookies */}
           <motion.div variants={fadeInUp} custom={5} className="mb-12">
             <Card className="border-0 shadow-lg rounded-2xl">
-              <Title level={2} className="text-2xl font-bold mb-6 text-primary-600">
+              <Title
+                level={2}
+                className="text-2xl font-bold mb-6 text-primary-600"
+              >
                 Third-Party Cookies
               </Title>
               <Paragraph className="mb-4">
-                Some cookies on our website are set by third-party services that appear on our pages. We use the
-                following third-party services:
+                Some cookies on our website are set by third-party services that
+                appear on our pages. We use the following third-party services:
               </Paragraph>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -351,7 +389,9 @@ export default function CookiesPage() {
                   <Paragraph className="text-sm text-gray-600 mb-2">
                     Helps us understand website usage and performance
                   </Paragraph>
-                  <Text className="text-xs text-gray-500">Privacy Policy: policies.google.com/privacy</Text>
+                  <Text className="text-xs text-gray-500">
+                    Privacy Policy: policies.google.com/privacy
+                  </Text>
                 </div>
 
                 <div className="p-4 bg-gray-50 rounded-xl">
@@ -361,7 +401,9 @@ export default function CookiesPage() {
                   <Paragraph className="text-sm text-gray-600 mb-2">
                     Secure payment processing and fraud prevention
                   </Paragraph>
-                  <Text className="text-xs text-gray-500">Stripe, PayPal privacy policies apply</Text>
+                  <Text className="text-xs text-gray-500">
+                    Stripe, PayPal privacy policies apply
+                  </Text>
                 </div>
 
                 <div className="p-4 bg-gray-50 rounded-xl">
@@ -371,15 +413,21 @@ export default function CookiesPage() {
                   <Paragraph className="text-sm text-gray-600 mb-2">
                     Social sharing buttons and embedded content
                   </Paragraph>
-                  <Text className="text-xs text-gray-500">Facebook, Twitter, Instagram policies apply</Text>
+                  <Text className="text-xs text-gray-500">
+                    Facebook, Twitter, Instagram policies apply
+                  </Text>
                 </div>
 
                 <div className="p-4 bg-gray-50 rounded-xl">
                   <Title level={4} className="mb-2">
                     Customer Support
                   </Title>
-                  <Paragraph className="text-sm text-gray-600 mb-2">Live chat and help desk functionality</Paragraph>
-                  <Text className="text-xs text-gray-500">Third-party support tool privacy policies apply</Text>
+                  <Paragraph className="text-sm text-gray-600 mb-2">
+                    Live chat and help desk functionality
+                  </Paragraph>
+                  <Text className="text-xs text-gray-500">
+                    Third-party support tool privacy policies apply
+                  </Text>
                 </div>
               </div>
             </Card>
@@ -392,8 +440,8 @@ export default function CookiesPage() {
                 Questions About Our Cookie Policy?
               </Title>
               <Paragraph className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                If you have any questions about our use of cookies or this cookie policy, please don't hesitate to
-                contact us.
+                If you have any questions about our use of cookies or this
+                cookie policy, please don't hesitate to contact us.
               </Paragraph>
               <div className="space-y-2 mb-6">
                 <Paragraph className="mb-1">
@@ -416,5 +464,5 @@ export default function CookiesPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

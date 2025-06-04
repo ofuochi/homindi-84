@@ -183,6 +183,7 @@ export const HeaderActions = ({
           className="md:hidden hover:bg-gray-50 rounded-lg"
         />
       </motion.div>
+      <CartDrawer />
     </div>
   );
 };

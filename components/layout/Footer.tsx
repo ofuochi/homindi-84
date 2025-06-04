@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button, Input, Row, Col, Divider } from "antd"
+import Link from "next/link";
+import { Button, Input, Row, Col, Divider } from "antd";
 import {
   FacebookOutlined,
   TwitterOutlined,
@@ -11,8 +11,8 @@ import {
   PhoneOutlined,
   EnvironmentOutlined,
   SendOutlined,
-} from "@ant-design/icons"
-import { motion } from "framer-motion"
+} from "@ant-design/icons";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   const fadeInUp = {
@@ -22,7 +22,7 @@ export default function Footer() {
       y: 0,
       transition: { delay: i * 0.1, duration: 0.6 },
     }),
-  }
+  };
 
   return (
     <footer className="bg-gray-900 text-white relative overflow-hidden">
@@ -51,11 +51,15 @@ export default function Footer() {
                   <div className="w-10 h-10 bg-[#0B8457] rounded-xl flex items-center justify-center shadow-lg">
                     <span className="text-white font-bold text-sm">H</span>
                   </div>
-                  <span className="text-2xl font-bold font-poppins">Homindi</span>
+                  <span className="text-2xl font-bold font-poppins">
+                    Homindi
+                  </span>
                 </div>
                 <p className="text-gray-300 mb-6 max-w-md leading-relaxed font-inter">
-                  Connecting Africans in the diaspora with authentic Nigerian food products. Fresh, quality ingredients
-                  delivered to your doorstep worldwide, bringing the taste of home to your kitchen.
+                  Connecting Africans in the diaspora with authentic Nigerian
+                  food products. Fresh, quality ingredients delivered to your
+                  doorstep worldwide, bringing the taste of home to your
+                  kitchen.
                 </p>
                 <div className="flex space-x-4">
                   {[
@@ -81,7 +85,9 @@ export default function Footer() {
             {/* Quick Links */}
             <Col xs={24} md={6} lg={4}>
               <motion.div variants={fadeInUp} custom={1}>
-                <h3 className="text-lg font-semibold mb-6 font-poppins">Quick Links</h3>
+                <h3 className="text-lg font-semibold mb-6 font-poppins">
+                  Quick Links
+                </h3>
                 <ul className="space-y-3">
                   {[
                     { href: "/products", label: "Products" },
@@ -106,7 +112,9 @@ export default function Footer() {
             {/* Support */}
             <Col xs={24} md={6} lg={4}>
               <motion.div variants={fadeInUp} custom={2}>
-                <h3 className="text-lg font-semibold mb-6 font-poppins">Support</h3>
+                <h3 className="text-lg font-semibold mb-6 font-poppins">
+                  Support
+                </h3>
                 <ul className="space-y-3">
                   {[
                     { href: "/faq", label: "FAQ" },
@@ -131,7 +139,9 @@ export default function Footer() {
             {/* Contact & Newsletter */}
             <Col xs={24} md={12} lg={8}>
               <motion.div variants={fadeInUp} custom={3}>
-                <h3 className="text-lg font-semibold mb-6 font-poppins">Stay Connected</h3>
+                <h3 className="text-lg font-semibold mb-6 font-poppins">
+                  Stay Connected
+                </h3>
 
                 {/* Contact Info */}
                 <div className="space-y-3 mb-6">
@@ -152,12 +162,13 @@ export default function Footer() {
                 {/* Newsletter */}
                 <div>
                   <p className="text-gray-300 mb-4 font-inter">
-                    Subscribe to get updates on new products and exclusive offers.
+                    Subscribe to get updates on new products and exclusive
+                    offers.
                   </p>
                   <div className="flex gap-2">
                     <Input
                       placeholder="Enter your email"
-                      className="flex-1 bg-gray-800 border-gray-700 text-white placeholder-gray-400 rounded-lg"
+                      className="flex-1 bg-gray-800 border-gray-700 text-gray-800 placeholder-white rounded-lg"
                       prefix={<MailOutlined className="text-gray-400" />}
                     />
                     <Button
@@ -179,16 +190,26 @@ export default function Footer() {
             className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
           >
             <p className="text-gray-400 font-inter text-center md:text-left">
-              © 2024 Homindi. All rights reserved. Made with ❤️ for the African diaspora.
+              © 2024 Homindi. All rights reserved. Made with ❤️ for the African
+              diaspora.
             </p>
             <div className="flex space-x-6 text-sm">
-              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors font-inter">
+              <Link
+                href="/privacy"
+                className="text-gray-400 hover:text-white transition-colors font-inter"
+              >
                 Privacy
               </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors font-inter">
+              <Link
+                href="/terms"
+                className="text-gray-400 hover:text-white transition-colors font-inter"
+              >
                 Terms
               </Link>
-              <Link href="/cookies" className="text-gray-400 hover:text-white transition-colors font-inter">
+              <Link
+                href="/cookies"
+                className="text-gray-400 hover:text-white transition-colors font-inter"
+              >
                 Cookies
               </Link>
             </div>
@@ -196,5 +217,5 @@ export default function Footer() {
         </motion.div>
       </div>
     </footer>
-  )
+  );
 }

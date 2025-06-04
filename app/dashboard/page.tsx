@@ -148,10 +148,7 @@ export default function DashboardPage() {
                       title={
                         <div className="flex items-center gap-2">
                           <Text strong>{order.id}</Text>
-                          <Tag
-                            color={getStatusColor(order.status)}
-                            size="small"
-                          >
+                          <Tag color={getStatusColor(order.status)}>
                             {order.status.charAt(0).toUpperCase() +
                               order.status.slice(1)}
                           </Tag>
@@ -190,20 +187,26 @@ export default function DashboardPage() {
         {/* Quick Actions */}
         <Col xs={24} lg={8}>
           <Card title="Quick Actions">
-            <div className="space-y-4">
-              <Link href="/products">
-                <Button type="primary" block icon={<ShoppingOutlined />}>
-                  Browse Products
-                </Button>
-              </Link>
-              <Link href="/dashboard/orders">
-                <Button block icon={<TruckOutlined />}>
-                  Track Orders
-                </Button>
-              </Link>
-              <Link href="/dashboard/settings">
-                <Button block>Account Settings</Button>
-              </Link>
+            <div className="space-y-3">
+              <div>
+                <Link href="/products">
+                  <Button type="primary" block icon={<ShoppingOutlined />}>
+                    Browse Products
+                  </Button>
+                </Link>
+              </div>
+              <div>
+                <Link href="/dashboard/orders">
+                  <Button block icon={<TruckOutlined />}>
+                    Track Orders
+                  </Button>
+                </Link>
+              </div>
+              <div>
+                <Link href="/dashboard/settings">
+                  <Button block>Account Settings</Button>
+                </Link>
+              </div>
               <Button
                 block
                 icon={<ReloadOutlined />}
@@ -228,9 +231,7 @@ export default function DashboardPage() {
                     className="flex justify-between items-center"
                   >
                     <div className="flex items-center gap-2">
-                      <Tag color={status.color} size="small">
-                        {status.label}
-                      </Tag>
+                      <Tag color={status.color}>{status.label}</Tag>
                     </div>
                     <Text strong>{count}</Text>
                   </div>
