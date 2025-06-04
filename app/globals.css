@@ -2,11 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --primary-green: #0b8457;
   --accent-orange: #f9a826;
   --neutral-bg: #f9fafb;
   --error-red: #ef4444;
+  --font-inter: 'Inter';
+  --font-poppins: 'Poppins';
 }
 
 @layer base {
