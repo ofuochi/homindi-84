@@ -61,11 +61,11 @@ export const useWishlistStore = create<WishlistState>()(
 
       moveAllToCart: () => {
         const { wishlistItems } = get()
-        const addToCart = useCartStore.getState().addToCart
+        const addItem = useCartStore.getState().addItem
 
         wishlistItems.forEach((product) => {
           if (product.inStock) {
-            addToCart(product, 1)
+            addItem(product, 1)
           }
         })
 
