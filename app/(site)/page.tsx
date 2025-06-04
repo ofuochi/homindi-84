@@ -22,7 +22,7 @@ import { motion } from "framer-motion";
 const { Title, Paragraph, Text } = Typography;
 
 export default function HomePage() {
-  const featuredProducts = mockProducts.slice(0, 4);
+  const featuredProducts = mockProducts.filter((product) => product.isFeatured);
 
   const testimonials = [
     {
@@ -103,7 +103,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
-
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-primary-500 to-primary-600 text-white african-pattern overflow-hidden">
         <motion.div
@@ -688,7 +687,6 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
     </div>
   );
 }

@@ -92,8 +92,8 @@ export const UserSchema = z.object({
   jobTitle: z.string().optional(),
   role: z.enum(userRoles).default("user"),
   isActive: z.boolean().default(true),
-  emailVerified: z.boolean().default(false),
-  phoneVerified: z.boolean().default(false),
+  emailVerified: z.boolean().optional().default(false),
+  phoneVerified: z.boolean().optional().default(false),
   lastLoginAt: z.string().optional(),
 })
 
