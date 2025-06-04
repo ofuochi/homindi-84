@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import { Button, Table, InputNumber, Typography, Empty, Card } from "antd"
-import { DeleteOutlined, ShoppingOutlined } from "@ant-design/icons"
-import Link from "next/link"
-import Image from "next/image"
-import Header from "@/components/layout/Header"
-import Footer from "@/components/layout/Footer"
-import { useCartStore } from "@/store/useCartStore"
-import { formatCurrency } from "@/lib/utils"
-import { MINIMUM_ORDER_AMOUNT } from "@/lib/constants"
-import MinOrderBanner from "@/components/cart/MinOrderBanner"
+import { Button, Table, InputNumber, Typography, Empty, Card } from "antd";
+import { DeleteOutlined, ShoppingOutlined } from "@ant-design/icons";
+import Link from "next/link";
+import Image from "next/image";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import { useCartStore } from "@/store/useCartStore";
+import { formatCurrency } from "@/lib/utils";
+import { MINIMUM_ORDER_AMOUNT } from "@/lib/constants";
+import MinOrderBanner from "@/components/cart/MinOrderBanner";
 
-const { Title, Text } = Typography
+const { Title, Text } = Typography;
 
 export default function CartPage() {
-  const { items, updateQuantity, removeItem, getTotal } = useCartStore()
-  const total = getTotal()
-  const isMinimumMet = total >= MINIMUM_ORDER_AMOUNT
+  const { items, updateQuantity, removeItem, getTotal } = useCartStore();
+  const total = getTotal();
+  const isMinimumMet = total >= MINIMUM_ORDER_AMOUNT;
 
   const columns = [
     {
@@ -64,18 +64,24 @@ export default function CartPage() {
     {
       title: "Subtotal",
       key: "subtotal",
-      render: (record: any) => formatCurrency(record.product.price * record.quantity),
+      render: (record: any) =>
+        formatCurrency(record.product.price * record.quantity),
     },
     {
       title: "Action",
       key: "action",
       render: (record: any) => (
-        <Button type="text" danger icon={<DeleteOutlined />} onClick={() => removeItem(record.product.id)}>
+        <Button
+          type="text"
+          danger
+          icon={<DeleteOutlined />}
+          onClick={() => removeItem(record.product.id)}
+        >
           Remove
         </Button>
       ),
     },
-  ]
+  ];
 
   if (items.length === 0) {
     return (
@@ -83,9 +89,17 @@ export default function CartPage() {
         <Header />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="Your cart is empty" />
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description="Your cart is empty"
+            />
             <Link href="/products">
-              <Button type="primary" size="large" icon={<ShoppingOutlined />} className="mt-4">
+              <Button
+                type="primary"
+                size="large"
+                icon={<ShoppingOutlined />}
+                className="mt-4"
+              >
                 Start Shopping
               </Button>
             </Link>
@@ -93,7 +107,7 @@ export default function CartPage() {
         </div>
         <Footer />
       </div>
-    )
+    );
   }
 
   return (
@@ -147,13 +161,23 @@ export default function CartPage() {
                 </div>
 
                 <Link href="/checkout">
-                  <Button type="primary" size="large" block disabled={!isMinimumMet} className="mt-6">
+                  <Button
+                    type="primary"
+                    size="large"
+                    block
+                    disabled={!isMinimumMet}
+                    className="mt-6 mb-4"
+                  >
                     Proceed to Checkout
                   </Button>
                 </Link>
 
                 <Link href="/products">
-                  <Button size="large" block ghost>
+                  <Button
+                    size="large"
+                    className="border-2 border-[#0B8457] text-[#0B8457] hover:!bg-[#0B8457] hover:!text-white transition-all duration-300"
+                    block
+                  >
                     Continue Shopping
                   </Button>
                 </Link>
@@ -165,5 +189,5 @@ export default function CartPage() {
 
       <Footer />
     </div>
-  )
+  );
 }
