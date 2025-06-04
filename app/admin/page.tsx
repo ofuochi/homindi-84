@@ -32,7 +32,7 @@ import Link from "next/link";
 const { Title, Text } = Typography;
 
 export default function AdminDashboard() {
-  const { user, userRole, roleInfo, hasPermission } = useClerkAuth();
+  const { user, roleInfo, hasPermission } = useClerkAuth();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -142,7 +142,7 @@ export default function AdminDashboard() {
     {
       title: "Actions",
       key: "actions",
-      render: (_, record: any) => (
+      render: () => (
         <Space>
           <Button size="small" icon={<EyeOutlined />} />
           {hasPermission("orders.manage") && (
@@ -187,7 +187,7 @@ export default function AdminDashboard() {
     {
       title: "Actions",
       key: "actions",
-      render: (_, record: any) => (
+      render: () => (
         <Space>
           {hasPermission("inventory.manage") && (
             <Button size="small" type="primary">
@@ -212,11 +212,6 @@ export default function AdminDashboard() {
               You're logged in as <strong>{roleInfo?.name}</strong>. Here's
               what's happening with your platform today.
             </Text>
-          </div>
-          <div className="hidden md:block">
-            <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-              <DollarOutlined className="text-3xl text-white" />
-            </div>
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@ export const useWebSocketStore = create<WebSocketState>()(
       try {
         // In a real app, this would be your WebSocket server URL
         // For demo purposes, we'll simulate WebSocket behavior
-        const mockWsManager = new WebSocketManager("wss://api.homindibasket.com/ws")
+        const mockWsManager = new WebSocketManager("wss://api.homindi.com/ws")
 
         // Simulate WebSocket connection
         const mockWs = {
@@ -118,8 +118,8 @@ export const useWebSocketStore = create<WebSocketState>()(
         })
 
         // Replace the actual WebSocket with our mock
-        ;(mockWsManager as any).ws = mockWs
-        mockWs.onopen = () => mockWsManager.emit?.("connected", null)
+        ;(mockWsManager as any).ws = mockWs;
+        mockWs.onopen = () => (mockWsManager as any).emit("connected", null)
         mockWs.onmessage = (event: any) => {
           try {
             const message = JSON.parse(event.data)

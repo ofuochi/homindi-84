@@ -1,4 +1,5 @@
 import { z } from "zod"
+import {  userRoles } from "@/lib/types"
 
 // Base schemas
 export const ProductSchema = z.object({
@@ -89,7 +90,11 @@ export const UserSchema = z.object({
   website: z.string().optional(),
   company: z.string().optional(),
   jobTitle: z.string().optional(),
-  role: z.enum(["user", "admin"]).default("user"),
+  role: z.enum(userRoles).default("user"),
+  isActive: z.boolean().default(true),
+  emailVerified: z.boolean().default(false),
+  phoneVerified: z.boolean().default(false),
+  lastLoginAt: z.string().optional(),
 })
 
 export const AdminStatsSchema = z.object({

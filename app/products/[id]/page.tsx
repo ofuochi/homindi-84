@@ -33,7 +33,6 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 const { Title, Text } = Typography;
-const { TabPane } = Tabs;
 
 export default function ProductPage() {
   const params = useParams();
@@ -82,17 +81,20 @@ export default function ProductPage() {
       <Header />
 
       <Layout.Content className="container mx-auto px-4 py-8">
-        <Breadcrumb className="mb-6">
-          <Breadcrumb.Item>
-            <Link href="/">Home</Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <Link href="/products">Products</Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            {loading ? <Skeleton.Button active size="small" /> : product?.name}
-          </Breadcrumb.Item>
-        </Breadcrumb>
+        <Breadcrumb 
+          className="mb-6"
+          items={[
+            {
+              title: <Link href="/">Home</Link>,
+            },
+            {
+              title: <Link href="/products">Products</Link>,
+            },
+            {
+              title: loading ? <Skeleton.Button active size="small" /> : product?.name,
+            },
+          ]}
+        />
 
         <Row gutter={[32, 32]}>
           <Col xs={24} md={12}>
@@ -230,58 +232,73 @@ export default function ProductPage() {
 
         {!loading && product && (
           <div className="mt-12">
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="Details" key="1">
-                <div className="p-4">
-                  <Title level={4}>Product Details</Title>
-                  <Row gutter={[16, 16]} className="mt-4">
-                    <Col xs={24} md={8}>
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <Text strong>SKU:</Text>
-                        <Text className="block">{product.sku || "N/A"}</Text>
+            <Tabs 
+              defaultActiveKey="1"
+              items={[
+                {
+                  key: "1",
+                  label: "Details",
+                  children: (
+                    <div className="p-4">
+                      <Title level={4}>Product Details</Title>
+                      <Row gutter={[16, 16]} className="mt-4">
+                        <Col xs={24} md={8}>
+                          <div className="bg-gray-50 p-4 rounded-lg">
+                            <Text strong>SKU:</Text>
+                            <Text className="block">{product.sku || "N/A"}</Text>
+                          </div>
+                        </Col>
+                        <Col xs={24} md={8}>
+                          <div className="bg-gray-50 p-4 rounded-lg">
+                            <Text strong>Weight:</Text>
+                            <Text className="block">{product.weight || "N/A"}</Text>
+                          </div>
+                        </Col>
+                        <Col xs={24} md={8}>
+                          <div className="bg-gray-50 p-4 rounded-lg">
+                            <Text strong>Unit:</Text>
+                            <Text className="block">{product.unit}</Text>
+                          </div>
+                        </Col>
+                      </Row>
+                      <div className="mt-6">
+                        <Text>{product.description}</Text>
                       </div>
-                    </Col>
-                    <Col xs={24} md={8}>
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <Text strong>Weight:</Text>
-                        <Text className="block">{product.weight || "N/A"}</Text>
-                      </div>
-                    </Col>
-                    <Col xs={24} md={8}>
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <Text strong>Unit:</Text>
-                        <Text className="block">{product.unit}</Text>
-                      </div>
-                    </Col>
-                  </Row>
-                  <div className="mt-6">
-                    <Text>{product.description}</Text>
-                  </div>
-                </div>
-              </TabPane>
-              <TabPane tab="Shipping" key="2">
-                <div className="p-4">
-                  <Title level={4}>Shipping Information</Title>
-                  <Text>
-                    We ship to most countries worldwide. Shipping costs are
-                    calculated at checkout based on weight, dimensions, and
-                    destination.
-                  </Text>
-                  <ul className="list-disc pl-6 mt-4">
-                    <li>Standard Shipping: 5-7 business days</li>
-                    <li>Express Shipping: 2-3 business days</li>
-                  </ul>
-                </div>
-              </TabPane>
-              <TabPane tab="Reviews" key="3">
-                <div className="p-4">
-                  <Title level={4}>Customer Reviews</Title>
-                  <Text>
-                    No reviews yet. Be the first to review this product!
-                  </Text>
-                </div>
-              </TabPane>
-            </Tabs>
+                    </div>
+                  )
+                },
+                {
+                  key: "2",
+                  label: "Shipping",
+                  children: (
+                    <div className="p-4">
+                      <Title level={4}>Shipping Information</Title>
+                      <Text>
+                        We ship to most countries worldwide. Shipping costs are
+                        calculated at checkout based on weight, dimensions, and
+                        destination.
+                      </Text>
+                      <ul className="list-disc pl-6 mt-4">
+                        <li>Standard Shipping: 5-7 business days</li>
+                        <li>Express Shipping: 2-3 business days</li>
+                      </ul>
+                    </div>
+                  )
+                },
+                {
+                  key: "3",
+                  label: "Reviews",
+                  children: (
+                    <div className="p-4">
+                      <Title level={4}>Customer Reviews</Title>
+                      <Text>
+                        No reviews yet. Be the first to review this product!
+                      </Text>
+                    </div>
+                  )
+                }
+              ]}
+            />
           </div>
         )}
       </Layout.Content>

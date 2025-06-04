@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import { colors } from "./lib/colors"
 
 const config: Config = {
   darkMode: ["class"],
@@ -16,34 +17,23 @@ const config: Config = {
         sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
       },
       colors: {
-        primary: {
-          DEFAULT: "#0B8457",
-          50: "#E8F5F0",
-          100: "#D1EBE1",
-          200: "#A3D7C3",
-          300: "#75C3A5",
-          400: "#47AF87",
-          500: "#0B8457",
-          600: "#096A46",
-          700: "#074F35",
-          800: "#053524",
-          900: "#021A12",
-        },
-        accent: {
-          DEFAULT: "#F9A826",
-          50: "#FEF7E8",
-          100: "#FDEFD1",
-          200: "#FBDFA3",
-          300: "#F9CF75",
-          400: "#F7BF47",
-          500: "#F9A826",
-          600: "#E09620",
-          700: "#C7841A",
-          800: "#AE7214",
-          900: "#95600E",
-        },
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        // Use centralized colors
+        primary: colors.primary,
+        accent: colors.accent,
+        success: colors.success,
+        warning: colors.warning,
+        error: colors.error,
+        gray: colors.gray,
+
+        // Cart and notification specific colors
+        cart: colors.cart,
+        notification: colors.notification,
+
+        // Background and text colors
+        background: colors.background.primary,
+        foreground: colors.text.primary,
+
+        // Existing shadcn colors (keeping for compatibility)
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
@@ -84,6 +74,17 @@ const config: Config = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      boxShadow: {
+        primary: colors.shadows.primary,
+        accent: colors.shadows.accent,
+        card: colors.shadows.md,
+        "card-hover": colors.shadows.xl,
+      },
+      backgroundImage: {
+        "gradient-primary": colors.gradients.primary,
+        "gradient-accent": colors.gradients.accent,
+        "gradient-hero": colors.gradients.hero,
       },
       borderRadius: {
         lg: "var(--radius)",

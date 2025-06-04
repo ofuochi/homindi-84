@@ -1,57 +1,77 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Badge, Dropdown, Button, List, Typography, Empty, Divider, Space } from "antd"
-import { BellOutlined, SettingOutlined, DeleteOutlined, CheckOutlined } from "@ant-design/icons"
-import Link from "next/link"
-import { useNotificationStore } from "@/store/useNotificationStore"
-import { formatDate } from "@/lib/utils"
-import type { Notification } from "@/store/useNotificationStore"
+import { useState } from "react";
+import {
+  Badge,
+  Dropdown,
+  Button,
+  List,
+  Typography,
+  Empty,
+  Divider,
+  Space,
+} from "antd";
+import {
+  BellOutlined,
+  SettingOutlined,
+  DeleteOutlined,
+  CheckOutlined,
+} from "@ant-design/icons";
+import Link from "next/link";
+import { useNotificationStore } from "@/store/useNotificationStore";
+import { formatDate } from "@/lib/utils";
+import type { Notification } from "@/store/useNotificationStore";
 
-const { Text } = Typography
+const { Text } = Typography;
 
 export default function NotificationBell() {
-  const [open, setOpen] = useState(false)
-  const { notifications, unreadCount, markAsRead, markAllAsRead, deleteNotification } = useNotificationStore()
+  const [open, setOpen] = useState(false);
+  const {
+    notifications,
+    unreadCount,
+    markAsRead,
+    markAllAsRead,
+    deleteNotification,
+  } = useNotificationStore();
 
-  const recentNotifications = notifications.slice(0, 8)
+  const recentNotifications = notifications.slice(0, 8);
 
   const getNotificationIcon = (type: Notification["type"]) => {
     switch (type) {
       case "order_status":
       case "order_shipped":
       case "order_delivered":
-        return "📦"
+        return "📦";
       case "order_cancelled":
-        return "❌"
+        return "❌";
       case "promotion":
-        return "🎉"
+        return "🎉";
       case "system":
-        return "⚙️"
+        return "⚙️";
       default:
-        return "📢"
+        return "📢";
     }
-  }
+  };
 
   const getPriorityColor = (priority: Notification["priority"]) => {
     switch (priority) {
       case "high":
-        return "#ff4d4f"
+        return "#ff4d4f";
       case "medium":
-        return "#faad14"
+        return "#faad14";
       case "low":
-        return "#52c41a"
+        return "#52c41a";
       default:
-        return "#d9d9d9"
+        return "#d9d9d9";
     }
-  }
+  };
 
   const handleNotificationClick = (notification: Notification) => {
     if (!notification.isRead) {
-      markAsRead(notification.id)
+      markAsRead(notification.id);
     }
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const dropdownContent = (
     <div className="w-96 max-h-[32rem] overflow-hidden bg-white rounded-xl shadow-2xl border border-gray-100">
@@ -59,7 +79,9 @@ export default function NotificationBell() {
       <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-[#0B8457] to-[#0a7249]">
         <div className="flex justify-between items-center">
           <div>
-            <Text className="text-white font-inter font-semibold text-lg">Notifications</Text>
+            <Text className="text-white font-inter font-semibold text-lg">
+              Notifications
+            </Text>
             {unreadCount > 0 && (
               <Text className="text-green-100 font-inter text-sm block">
                 {unreadCount} unread message{unreadCount > 1 ? "s" : ""}
@@ -99,7 +121,11 @@ export default function NotificationBell() {
           <div className="p-8 text-center">
             <Empty
               image={Empty.PRESENTED_IMAGE_SIMPLE}
-              description={<Text className="font-inter text-gray-500">No notifications yet</Text>}
+              description={
+                <Text className="font-inter text-gray-500">
+                  No notifications yet
+                </Text>
+              }
             />
           </div>
         ) : (
@@ -118,8 +144,8 @@ export default function NotificationBell() {
                     size="small"
                     icon={<DeleteOutlined />}
                     onClick={(e) => {
-                      e.stopPropagation()
-                      deleteNotification(notification.id)
+                      e.stopPropagation();
+                      deleteNotification(notification.id);
                     }}
                     className="text-gray-400 hover:text-red-500 transition-colors"
                   />,
@@ -134,7 +160,11 @@ export default function NotificationBell() {
                       {!notification.isRead && (
                         <div
                           className="w-2 h-2 rounded-full animate-pulse"
-                          style={{ backgroundColor: getPriorityColor(notification.priority) }}
+                          style={{
+                            backgroundColor: getPriorityColor(
+                              notification.priority
+                            ),
+                          }}
                         />
                       )}
                     </div>
@@ -142,7 +172,11 @@ export default function NotificationBell() {
                   title={
                     <div className="flex justify-between items-start">
                       <Text
-                        className={`font-inter text-sm ${!notification.isRead ? "font-semibold text-gray-900" : "font-medium text-gray-700"}`}
+                        className={`font-inter text-sm ${
+                          !notification.isRead
+                            ? "font-semibold text-gray-900"
+                            : "font-medium text-gray-700"
+                        }`}
                       >
                         {notification.title}
                       </Text>
@@ -153,7 +187,9 @@ export default function NotificationBell() {
                   }
                   description={
                     <div className="mt-1">
-                      <Text className="font-inter text-sm text-gray-600 leading-relaxed">{notification.message}</Text>
+                      <Text className="font-inter text-sm text-gray-600 leading-relaxed">
+                        {notification.message}
+                      </Text>
                       {notification.actionUrl && notification.actionText && (
                         <div className="mt-2">
                           <Link href={notification.actionUrl}>
@@ -194,11 +230,11 @@ export default function NotificationBell() {
         </>
       )}
     </div>
-  )
+  );
 
   return (
     <Dropdown
-    popupRender={() => dropdownContent}
+      popupRender={() => dropdownContent}
       trigger={["click"]}
       open={open}
       onOpenChange={setOpen}
@@ -206,11 +242,10 @@ export default function NotificationBell() {
       arrow={{ pointAtCenter: true }}
     >
       <Button type="text" className="flex items-center relative">
-        <Badge count={unreadCount} size="small" offset={[0, 0]} className="notification-badge">
+        <Badge count={unreadCount} size="small" offset={[0, 0]}>
           <BellOutlined className="text-xl text-gray-600 hover:text-[#0B8457] transition-colors" />
         </Badge>
-        {unreadCount > 0 && <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse" />}
       </Button>
     </Dropdown>
-  )
+  );
 }
