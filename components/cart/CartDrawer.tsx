@@ -60,7 +60,7 @@ export default function CartDrawer() {
               Total: {formatCurrency(total)}
             </Text>
           </div>
-          <Link href="/checkout" onClick={handleClose}>
+          <Link href="/cart" onClick={handleClose}>
             <Button type="primary" size="large" block disabled={!isMinimumMet}>
               Proceed to Checkout
             </Button>

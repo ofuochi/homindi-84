@@ -1,14 +1,30 @@
+"use client";
 import { SignIn } from "@clerk/nextjs";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Page() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg mx-auto mb-4">
-            <span className="text-white font-bold text-2xl font-poppins">
-              DB
-            </span>
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <div className="w-16 h-16 flex items-center justify-center  mx-auto mb-4">
+            <Link href="/">
+              <motion.div
+                className="w-16 h-16  flex items-center justify-center "
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Image
+                  src="/logo.png"
+                  alt="Homindi Logo"
+                  width={100}
+                  height={100}
+                  className="object-contain"
+                />
+              </motion.div>
+            </Link>
           </div>
           <h2 className="text-3xl font-bold text-gray-900 font-poppins">
             Sign in to Homindi
@@ -17,20 +33,23 @@ export default function Page() {
             Access your account and manage your orders
           </p>
         </div>
-        <SignIn
-          appearance={{
-            elements: {
-              formButtonPrimary: "bg-[#0B8457] hover:bg-[#0a7249] text-white",
-              card: "shadow-lg border-0",
-              headerTitle: "font-poppins text-2xl",
-              headerSubtitle: "font-inter",
-              socialButtonsBlockButton: "border-gray-200 hover:bg-gray-50",
-              formFieldInput:
-                "border-gray-300 focus:border-[#0B8457] focus:ring-[#0B8457]",
-              footerActionLink: "text-[#0B8457] hover:text-[#0a7249]",
-            },
-          }}
-        />
+
+        <div className="flex justify-center">
+          <SignIn
+            appearance={{
+              elements: {
+                formButtonPrimary: "bg-[#0B8457] hover:bg-[#0a7249] text-white",
+                card: "shadow-lg border-0",
+                headerTitle: "font-poppins text-2xl",
+                headerSubtitle: "font-inter",
+                socialButtonsBlockButton: "border-gray-200 hover:bg-gray-50",
+                formFieldInput:
+                  "border-gray-300 focus:border-[#0B8457] focus:ring-[#0B8457]",
+                footerActionLink: "text-[#0B8457] hover:text-[#0a7249]",
+              },
+            }}
+          />
+        </div>
       </div>
     </div>
   );
