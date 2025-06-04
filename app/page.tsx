@@ -18,6 +18,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ProductCard from "@/components/product/ProductCard";
 import { mockProducts } from "@/lib/mockData";
+import { colors } from "@/lib/colors";
 import { motion } from "framer-motion";
 
 const { Title, Paragraph, Text } = Typography;
@@ -58,25 +59,25 @@ export default function HomePage() {
 
   const features = [
     {
-      icon: <SafetyOutlined className="text-3xl text-[#0B8457]" />,
+      icon: <SafetyOutlined className="text-3xl text-primary-500" />,
       title: "Quality Guaranteed",
       description:
         "All products are sourced directly from trusted suppliers and undergo rigorous quality checks.",
     },
     {
-      icon: <GlobalOutlined className="text-3xl text-[#0B8457]" />,
+      icon: <GlobalOutlined className="text-3xl text-primary-500" />,
       title: "Worldwide Shipping",
       description:
         "We deliver authentic African ingredients to over 25 countries worldwide.",
     },
     {
-      icon: <HeartOutlined className="text-3xl text-[#0B8457]" />,
+      icon: <HeartOutlined className="text-3xl text-primary-500" />,
       title: "Customer First",
       description:
         "Your satisfaction is our priority. We're here to help you connect with your roots.",
     },
     {
-      icon: <RocketOutlined className="text-3xl text-[#0B8457]" />,
+      icon: <RocketOutlined className="text-3xl text-primary-500" />,
       title: "Fast Delivery",
       description:
         "Quick and reliable shipping with real-time tracking for all your orders.",
@@ -107,7 +108,7 @@ export default function HomePage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#0B8457] to-[#0a7249] text-white african-pattern overflow-hidden">
+      <section className="relative bg-gradient-to-r from-primary-500 to-primary-600 text-white african-pattern overflow-hidden">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -147,7 +148,7 @@ export default function HomePage() {
                 <Button
                   size="large"
                   ghost
-                  className="h-14 px-8 text-lg font-semibold rounded-xl border-2 hover:bg-white hover:text-[#0B8457] transition-all duration-300"
+                  className="h-14 px-8 text-lg font-semibold rounded-xl border-2 hover:bg-white hover:text-primary-500 transition-all duration-300"
                 >
                   <PlayCircleOutlined className="mr-2" />
                   Watch Story
@@ -173,7 +174,7 @@ export default function HomePage() {
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
               >
-                <Text className="text-[#0B8457] font-bold">
+                <Text className="text-primary-500 font-bold">
                   ✨ Fresh & Authentic
                 </Text>
               </motion.div>
@@ -186,7 +187,7 @@ export default function HomePage() {
                   delay: 1.5,
                 }}
               >
-                <Text className="text-[#0B8457] font-bold">
+                <Text className="text-primary-500 font-bold">
                   🚚 Fast Delivery
                 </Text>
               </motion.div>
@@ -222,7 +223,7 @@ export default function HomePage() {
                         value={stat.value}
                         suffix={stat.suffix}
                         valueStyle={{
-                          color: "#0B8457",
+                          color: colors.primary[500],
                           fontFamily: "Poppins",
                           fontWeight: "bold",
                           fontSize: "2rem",
@@ -385,21 +386,21 @@ export default function HomePage() {
                 title: "1. Browse & Order",
                 description:
                   "Browse our curated selection of authentic Nigerian products and add them to your cart. Filter by category, dietary preferences, or search for specific ingredients.",
-                color: "#0B8457",
+                color: colors.primary[500],
               },
               {
                 icon: CheckCircleOutlined,
                 title: "2. We Process",
                 description:
                   "We carefully package your order with fresh, quality ingredients sourced directly from Nigeria. Each item undergoes quality checks before shipping.",
-                color: "#F9A826",
+                color: colors.accent[500],
               },
               {
                 icon: TruckOutlined,
                 title: "3. Fast Delivery",
                 description:
                   "Receive your authentic Nigerian ingredients at your doorstep, anywhere in the world. Track your order in real-time from our warehouse to your door.",
-                color: "#0B8457",
+                color: colors.primary[500],
               },
             ].map((step, i) => (
               <Col xs={24} md={8} key={i}>
@@ -598,7 +599,7 @@ export default function HomePage() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-20 bg-gradient-to-r from-[#0B8457] to-[#0a7249] text-white">
+      <section className="py-20 bg-gradient-to-r from-primary-500 to-primary-600 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -681,7 +682,7 @@ export default function HomePage() {
               <Link href="/sign-up">
                 <Button
                   size="large"
-                  className="h-14 px-8 text-lg font-semibold rounded-xl border-2 border-[#0B8457] text-[#0B8457] hover:bg-[#0B8457] hover:text-white transition-all duration-300"
+                  className="h-14 px-8 text-lg font-semibold rounded-xl border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white transition-all duration-300"
                 >
                   Create Account
                 </Button>

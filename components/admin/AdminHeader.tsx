@@ -13,6 +13,7 @@ import {
 } from "@ant-design/icons";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useNotificationStore } from "@/store/useNotificationStore";
+import { ROUTES } from "@/lib/routes";
 
 export default function AdminHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -52,8 +53,8 @@ export default function AdminHeader() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <Link href="/admin" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
+            <Link href={ROUTES.ADMIN} className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-lg font-poppins">
                   DB
                 </span>
@@ -62,7 +63,7 @@ export default function AdminHeader() {
                 <span className="text-xl font-bold text-gray-900 font-poppins">
                   Homindi
                 </span>
-                <span className="text-sm text-[#0B8457] font-inter ml-2 bg-green-100 px-2 py-1 rounded-full">
+                <span className="text-sm text-primary-500 font-inter ml-2 bg-green-100 px-2 py-1 rounded-full">
                   Admin
                 </span>
               </div>
@@ -75,7 +76,7 @@ export default function AdminHeader() {
                 type="text"
                 icon={
                   <Badge count={unreadCount} size="small">
-                    <BellOutlined className="text-xl text-gray-600 hover:text-[#0B8457] transition-colors" />
+                    <BellOutlined className="text-xl text-gray-600 hover:text-primary-500 transition-colors" />
                   </Badge>
                 }
                 className="flex items-center"

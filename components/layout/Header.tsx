@@ -100,7 +100,7 @@ export const HeaderActions = ({
           type="text"
           icon={
             <Badge count={getItemCount()} size="small">
-              <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-[#0B8457] transition-colors" />
+              <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-primary-500 transition-colors" />
             </Badge>
           }
           onClick={() => setIsOpen(true)}
@@ -250,13 +250,13 @@ export default function Header() {
                 >
                   <Link
                     href={link.href}
-                    className="text-gray-700 hover:text-[#0B8457] font-medium transition-all duration-300 font-inter relative group py-2"
+                    className="text-gray-700 hover:text-primary-500 font-medium transition-all duration-300 font-inter relative group py-2"
                   >
                     <span className="flex items-center space-x-1">
                       {link.icon && <link.icon className="text-sm" />}
                       <span>{link.label}</span>
                     </span>
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#0B8457] transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 </motion.div>
               ))}
@@ -284,7 +284,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-gray-700 hover:text-[#0B8457] font-medium py-3 px-2 font-inter transition-colors rounded-lg hover:bg-gray-50 flex items-center space-x-2"
+              className="text-gray-700 hover:text-primary-500 font-medium py-3 px-2 font-inter transition-colors rounded-lg hover:bg-gray-50 flex items-center space-x-2"
               onClick={() => setMobileMenuOpen(false)}
             >
               {link.icon && <link.icon />}
