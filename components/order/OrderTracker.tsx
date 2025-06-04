@@ -5,6 +5,7 @@ import { Card, Timeline, Button, Modal, Spin, Typography, message } from "antd"
 import { TruckOutlined, ClockCircleOutlined } from "@ant-design/icons"
 import { useOrderStore } from "@/store/useOrderStore"
 import { formatDate } from "@/lib/utils"
+import { colors } from "@/lib/colors"
 
 const { Text } = Typography
 
@@ -78,8 +79,8 @@ export default function OrderTracker({ orderId, trackingNumber }: OrderTrackerPr
               </Text>
               <Timeline
                 items={trackingData.updates.map((update: any, index: number) => ({
-                  dot: index === 0 ? <ClockCircleOutlined className="text-[#0B8457]" /> : undefined,
-                  color: index === 0 ? "#0B8457" : "gray",
+                  dot: index === 0 ? <ClockCircleOutlined className="text-primary-500" /> : undefined,
+                  color: index === 0 ? colors.primary[500] : "gray",
                   children: (
                     <div>
                       <Text strong>{update.status}</Text>

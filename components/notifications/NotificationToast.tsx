@@ -60,7 +60,7 @@ export default function NotificationToast() {
           btn: (
             <a
               href={notif.actionUrl}
-              className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-[#0B8457] hover:bg-[#0a7249] rounded-lg transition-colors duration-200 font-inter"
+              className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg transition-colors duration-200 font-inter"
               onClick={() => api.destroy()}
             >
               {notif.actionText}

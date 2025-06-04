@@ -1,0 +1,26 @@
+export const ROUTES = {
+  HOME: '/',
+  ABOUT: '/about',
+  CONTACT: '/contact',
+  LOGIN: '/login',
+  REGISTER: '/register',
+  SIGN_IN: '/sign-in',
+  SIGN_UP: '/sign-up',
+  CART: '/cart',
+  CHECKOUT: '/checkout',
+  PRODUCTS: '/products',
+  PRIVACY: '/privacy',
+  TERMS: '/terms',
+  COOKIES: '/cookies',
+  DASHBOARD: '/dashboard',
+  DASHBOARD_ORDERS: '/dashboard/orders',
+  DASHBOARD_NOTIFICATIONS: '/dashboard/notifications',
+  DASHBOARD_SETTINGS: '/dashboard/settings',
+  ADMIN: '/admin',
+  ADMIN_ORDERS: '/admin/orders',
+  ADMIN_PRODUCTS: '/admin/products',
+  ADMIN_USERS: '/admin/users',
+  ADMIN_INVENTORY: '/admin/inventory',
+} as const;
+
+export type Route = (typeof ROUTES)[keyof typeof ROUTES];

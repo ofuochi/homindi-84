@@ -32,6 +32,7 @@ import { usePathname } from "next/navigation";
 import { useClerkAuth } from "@/lib/hooks/useClerkAuth";
 import { ItemType, MenuItemType } from "antd/es/menu/interface";
 import Image from "next/image";
+import { ROUTES } from "@/lib/routes";
 
 interface AdminSidebarProps {
   collapsed?: boolean;
@@ -56,9 +57,9 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
 
     // Dashboard
     items.push({
-      key: "/admin",
+      key: ROUTES.ADMIN,
       icon: <DashboardOutlined />,
-      label: collapsed ? null : <Link href="/admin">Dashboard</Link>,
+      label: collapsed ? null : <Link href={ROUTES.ADMIN}>Dashboard</Link>,
       title: "Dashboard",
     });
 
@@ -76,10 +77,10 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
 
       const inventoryItems = [
         {
-          key: "/admin/inventory",
+          key: ROUTES.ADMIN_INVENTORY,
           icon: <InboxOutlined />,
           label: collapsed ? null : (
-            <Link href="/admin/inventory">Overview</Link>
+            <Link href={ROUTES.ADMIN_INVENTORY}>Overview</Link>
           ),
           title: "Inventory Overview",
           show:
@@ -87,10 +88,10 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
             hasPermission("inventory.manage"),
         },
         {
-          key: "/admin/products",
+          key: ROUTES.ADMIN_PRODUCTS,
           icon: <AppstoreOutlined />,
           label: collapsed ? null : (
-            <Link href="/admin/products">Products</Link>
+            <Link href={ROUTES.ADMIN_PRODUCTS}>Products</Link>
           ),
           title: "Products",
           show:
@@ -160,10 +161,10 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
 
       const orderItems = [
         {
-          key: "/admin/orders",
+          key: ROUTES.ADMIN_ORDERS,
           icon: <ShoppingOutlined />,
           label: collapsed ? null : (
-            <Link href="/admin/orders">All Orders</Link>
+            <Link href={ROUTES.ADMIN_ORDERS}>All Orders</Link>
           ),
           title: "All Orders",
           show: hasPermission("orders.view") || hasPermission("orders.manage"),
@@ -219,9 +220,9 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
 
       const userItems = [
         {
-          key: "/admin/users",
+          key: ROUTES.ADMIN_USERS,
           icon: <UserOutlined />,
-          label: collapsed ? null : <Link href="/admin/users">All Users</Link>,
+          label: collapsed ? null : <Link href={ROUTES.ADMIN_USERS}>All Users</Link>,
           title: "All Users",
           show: hasPermission("users.view") || hasPermission("users.manage"),
         },
@@ -375,8 +376,8 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
       {/* Sidebar Header */}
       {!collapsed && (
         <div className="p-4 pb-3">
-          <Link className="flex items-center space-x-3" href="/">
-            <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
+          <Link className="flex items-center space-x-3" href={ROUTES.HOME}>
+            <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
               <Image
                 src="/logo.png"
                 alt="Homindi Logo"
@@ -396,7 +397,7 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
 
       {collapsed && (
         <div className="p-4 pb-3 flex justify-center">
-          <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
             <Image
               src="/logo.png"
               alt="Homindi Logo"

@@ -13,6 +13,7 @@ import {
   SendOutlined,
 } from "@ant-design/icons";
 import { motion } from "framer-motion";
+import { ROUTES } from "@/lib/routes";
 
 export default function Footer() {
   const fadeInUp = {
@@ -48,7 +49,7 @@ export default function Footer() {
             <Col xs={24} md={12} lg={8}>
               <motion.div variants={fadeInUp}>
                 <div className="flex items-center space-x-3 mb-6">
-                  <div className="w-10 h-10 bg-[#0B8457] rounded-xl flex items-center justify-center shadow-lg">
+                  <div className="w-10 h-10 bg-primary-500 rounded-xl flex items-center justify-center shadow-lg">
                     <span className="text-white font-bold text-sm">H</span>
                   </div>
                   <span className="text-2xl font-bold font-poppins">
@@ -71,7 +72,7 @@ export default function Footer() {
                     <motion.a
                       key={index}
                       href={social.href}
-                      className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-[#0B8457] transition-all duration-300"
+                      className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-all duration-300"
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -146,15 +147,15 @@ export default function Footer() {
                 {/* Contact Info */}
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center space-x-3 text-gray-300">
-                    <MailOutlined className="text-[#0B8457]" />
+                    <MailOutlined className="text-primary-500" />
                     <span className="font-inter">support@homindi.com</span>
                   </div>
                   <div className="flex items-center space-x-3 text-gray-300">
-                    <PhoneOutlined className="text-[#0B8457]" />
+                    <PhoneOutlined className="text-primary-500" />
                     <span className="font-inter">+1 (555) 123-4567</span>
                   </div>
                   <div className="flex items-center space-x-3 text-gray-300">
-                    <EnvironmentOutlined className="text-[#0B8457]" />
+                    <EnvironmentOutlined className="text-primary-500" />
                     <span className="font-inter">New York, NY 10001</span>
                   </div>
                 </div>
@@ -174,7 +175,7 @@ export default function Footer() {
                     <Button
                       type="primary"
                       icon={<SendOutlined />}
-                      className="bg-[#0B8457] border-[#0B8457] hover:bg-[#0a7249] rounded-lg px-4"
+                      className="bg-primary-500 border-primary-500 hover:bg-primary-600 rounded-lg px-4"
                     />
                   </div>
                 </div>
@@ -195,19 +196,19 @@ export default function Footer() {
             </p>
             <div className="flex space-x-6 text-sm">
               <Link
-                href="/privacy"
+                href={ROUTES.PRIVACY}
                 className="text-gray-400 hover:text-white transition-colors font-inter"
               >
                 Privacy
               </Link>
               <Link
-                href="/terms"
+                href={ROUTES.TERMS}
                 className="text-gray-400 hover:text-white transition-colors font-inter"
               >
                 Terms
               </Link>
               <Link
-                href="/cookies"
+                href={ROUTES.COOKIES}
                 className="text-gray-400 hover:text-white transition-colors font-inter"
               >
                 Cookies
