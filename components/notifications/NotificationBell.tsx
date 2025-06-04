@@ -20,6 +20,7 @@ import {
 import Link from "next/link";
 import { useNotificationStore } from "@/store/useNotificationStore";
 import { formatDate } from "@/lib/utils";
+import { ROUTES } from "@/lib/routes";
 import type { Notification } from "@/store/useNotificationStore";
 
 const { Text } = Typography;
@@ -76,7 +77,7 @@ export default function NotificationBell() {
   const dropdownContent = (
     <div className="w-96 max-h-[32rem] overflow-hidden bg-white rounded-xl shadow-2xl border border-gray-100">
       {/* Header */}
-      <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-[#0B8457] to-[#0a7249]">
+      <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-primary-500 to-primary-600">
         <div className="flex justify-between items-center">
           <div>
             <Text className="text-white font-inter font-semibold text-lg">
@@ -100,7 +101,7 @@ export default function NotificationBell() {
                 Mark all read
               </Button>
             )}
-            <Link href="/dashboard/notifications">
+            <Link href={ROUTES.DASHBOARD_NOTIFICATIONS}>
               <Button
                 type="text"
                 size="small"
@@ -154,7 +155,7 @@ export default function NotificationBell() {
                 <List.Item.Meta
                   avatar={
                     <div className="flex items-center">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0B8457] to-[#0a7249] flex items-center justify-center text-white text-lg mr-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white text-lg mr-3">
                         {getNotificationIcon(notification.type)}
                       </div>
                       {!notification.isRead && (
@@ -196,7 +197,7 @@ export default function NotificationBell() {
                             <Button
                               type="link"
                               size="small"
-                              className="p-0 h-auto font-inter text-[#0B8457] hover:text-[#0a7249] font-medium"
+                              className="p-0 h-auto font-inter text-primary-500 hover:text-primary-600 font-medium"
                             >
                               {notification.actionText} →
                             </Button>
@@ -217,11 +218,11 @@ export default function NotificationBell() {
         <>
           <Divider className="my-0" />
           <div className="p-3 text-center bg-gray-50">
-            <Link href="/dashboard/notifications">
+            <Link href={ROUTES.DASHBOARD_NOTIFICATIONS}>
               <Button
                 type="link"
                 onClick={() => setOpen(false)}
-                className="font-inter font-medium text-[#0B8457] hover:text-[#0a7249]"
+                className="font-inter font-medium text-primary-500 hover:text-primary-600"
               >
                 View all notifications
               </Button>
@@ -243,7 +244,7 @@ export default function NotificationBell() {
     >
       <Button type="text" className="flex items-center relative">
         <Badge count={unreadCount} size="small" offset={[0, 0]}>
-          <BellOutlined className="text-xl text-gray-600 hover:text-[#0B8457] transition-colors" />
+          <BellOutlined className="text-xl text-gray-600 hover:text-primary-500 transition-colors" />
         </Badge>
       </Button>
     </Dropdown>

@@ -18,6 +18,7 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { getRoleInfo } from "@/lib/auth/roles";
 import Image from "next/image";
 import { SignOutButton } from "@clerk/nextjs";
+import { ROUTES } from "@/lib/routes";
 
 interface SidebarProps {
   collapsed?: boolean;
@@ -32,15 +33,15 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
 
   const menuItems = [
     {
-      key: "/dashboard",
+      key: ROUTES.DASHBOARD,
       icon: <DashboardOutlined />,
-      label: collapsed ? null : <Link href="/dashboard">Dashboard</Link>,
+      label: collapsed ? null : <Link href={ROUTES.DASHBOARD}>Dashboard</Link>,
       title: "Dashboard",
     },
     {
-      key: "/dashboard/orders",
+      key: ROUTES.DASHBOARD_ORDERS,
       icon: <ShoppingOutlined />,
-      label: collapsed ? null : <Link href="/dashboard/orders">My Orders</Link>,
+      label: collapsed ? null : <Link href={ROUTES.DASHBOARD_ORDERS}>My Orders</Link>,
       title: "My Orders",
     },
     {
@@ -52,7 +53,7 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
       title: "Wishlist",
     },
     {
-      key: "/dashboard/notifications",
+      key: ROUTES.DASHBOARD_NOTIFICATIONS,
       icon: (
         <Badge
           dot={unreadCount > 0}
@@ -63,7 +64,7 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
         </Badge>
       ),
       label: collapsed ? null : (
-        <Link href="/dashboard/notifications">Notifications</Link>
+        <Link href={ROUTES.DASHBOARD_NOTIFICATIONS}>Notifications</Link>
       ),
       title: "Notifications",
     },
@@ -76,10 +77,10 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
       type: "group",
       children: [
         {
-          key: "/dashboard/settings",
+          key: ROUTES.DASHBOARD_SETTINGS,
           icon: <UserOutlined />,
           label: collapsed ? null : (
-            <Link href="/dashboard/settings">Profile Settings</Link>
+            <Link href={ROUTES.DASHBOARD_SETTINGS}>Profile Settings</Link>
           ),
           title: "Profile Settings",
         },
@@ -145,8 +146,8 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
     <div className="h-full flex flex-col">
       {!collapsed && (
         <div className="p-4 pb-3">
-          <Link className="flex items-center space-x-3" href="/">
-            <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
+          <Link className="flex items-center space-x-3" href={ROUTES.HOME}>
+            <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
               <Image
                 src="/logo.png"
                 alt="Homindi Logo"
@@ -166,7 +167,7 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
 
       {collapsed && (
         <div className="p-4 pb-3 flex justify-center">
-          <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
             <Image
               src="/logo.png"
               alt="Homindi Logo"
