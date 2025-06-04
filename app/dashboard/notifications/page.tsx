@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 import {
   Card,
   List,
@@ -16,7 +16,8 @@ import {
   Statistic,
   Row,
   Col,
-} from "antd"
+  Popconfirm,
+} from "antd";
 import {
   DeleteOutlined,
   SettingOutlined,
@@ -26,17 +27,17 @@ import {
   ClearOutlined,
   WifiOutlined,
   TrophyOutlined,
-} from "@ant-design/icons"
-import { useNotificationStore } from "@/store/useNotificationStore"
-import { useWebSocketStore } from "@/store/useWebSocketStore"
-import { formatDate } from "@/lib/utils"
-import type { Notification } from "@/store/useNotificationStore"
+} from "@ant-design/icons";
+import { useNotificationStore } from "@/store/useNotificationStore";
+import { useWebSocketStore } from "@/store/useWebSocketStore";
+import { formatDate } from "@/lib/utils";
+import type { Notification } from "@/store/useNotificationStore";
 
-const { Title, Text } = Typography
+const { Title, Text } = Typography;
 
 export default function NotificationsPage() {
-  const [selectedType, setSelectedType] = useState<string>("all")
-  const [showSettings, setShowSettings] = useState(false)
+  const [selectedType, setSelectedType] = useState<string>("all");
+  const [showSettings, setShowSettings] = useState(false);
 
   const {
     notifications,
@@ -47,74 +48,79 @@ export default function NotificationsPage() {
     deleteNotification,
     clearAllNotifications,
     updateSettings,
-  } = useNotificationStore()
+  } = useNotificationStore();
 
-  const { connectionStatus } = useWebSocketStore()
+  const { connectionStatus } = useWebSocketStore();
 
   const filteredNotifications = notifications.filter((notification) => {
-    if (selectedType === "all") return true
-    if (selectedType === "unread") return !notification.isRead
-    return notification.type === selectedType
-  })
+    if (selectedType === "all") return true;
+    if (selectedType === "unread") return !notification.isRead;
+    return notification.type === selectedType;
+  });
 
   const getNotificationIcon = (type: Notification["type"]) => {
     switch (type) {
       case "order_status":
       case "order_shipped":
       case "order_delivered":
-        return "📦"
+        return "📦";
       case "order_cancelled":
-        return "❌"
+        return "❌";
       case "promotion":
-        return "🎉"
+        return "🎉";
       case "system":
-        return "⚙️"
+        return "⚙️";
       default:
-        return "📢"
+        return "📢";
     }
-  }
+  };
 
   const getPriorityColor = (priority: Notification["priority"]) => {
     switch (priority) {
       case "high":
-        return "red"
+        return "red";
       case "medium":
-        return "orange"
+        return "orange";
       case "low":
-        return "green"
+        return "green";
       default:
-        return "default"
+        return "default";
     }
-  }
+  };
 
   const getConnectionStatusColor = () => {
     switch (connectionStatus) {
       case "connected":
-        return "#52c41a"
+        return "#52c41a";
       case "connecting":
-        return "#faad14"
+        return "#faad14";
       case "error":
-        return "#ff4d4f"
+        return "#ff4d4f";
       default:
-        return "#d9d9d9"
+        return "#d9d9d9";
     }
-  }
+  };
 
   const getConnectionStatusText = () => {
     switch (connectionStatus) {
       case "connected":
-        return "Connected"
+        return "Connected";
       case "connecting":
-        return "Connecting"
+        return "Connecting";
       case "error":
-        return "Disconnected"
+        return "Disconnected";
       default:
-        return "Offline"
+        return "Offline";
     }
-  }
+  };
 
   const notificationTypes = [
-    { key: "all", label: "All Notifications", count: notifications.length, icon: "📋" },
+    {
+      key: "all",
+      label: "All Notifications",
+      count: notifications.length,
+      icon: "📋",
+    },
     { key: "unread", label: "Unread", count: unreadCount, icon: "🔔" },
     {
       key: "order_status",
@@ -128,22 +134,19 @@ export default function NotificationsPage() {
       count: notifications.filter((n) => n.type === "promotion").length,
       icon: "🎉",
     },
-    { key: "system", label: "System", count: notifications.filter((n) => n.type === "system").length, icon: "⚙️" },
-  ]
+    {
+      key: "system",
+      label: "System",
+      count: notifications.filter((n) => n.type === "system").length,
+      icon: "⚙️",
+    },
+  ];
 
-  const handleClearAll = () => {
-    Modal.confirm({
-      title: "Clear All Notifications",
-      content: "Are you sure you want to delete all notifications? This action cannot be undone.",
-      okText: "Yes, Clear All",
-      okType: "danger",
-      onOk: clearAllNotifications,
-    })
-  }
-
-  const totalNotifications = notifications.length
-  const readNotifications = notifications.filter((n) => n.isRead).length
-  const highPriorityNotifications = notifications.filter((n) => n.priority === "high").length
+  const totalNotifications = notifications.length;
+  const readNotifications = notifications.filter((n) => n.isRead).length;
+  const highPriorityNotifications = notifications.filter(
+    (n) => n.priority === "high"
+  ).length;
 
   return (
     <div className="space-y-6">
@@ -159,25 +162,47 @@ export default function NotificationsPage() {
             </Text>
             <div className="flex items-center gap-2">
               <WifiOutlined style={{ color: getConnectionStatusColor() }} />
-              <Text type="secondary" className="font-inter text-sm" style={{ color: getConnectionStatusColor() }}>
+              <Text
+                type="secondary"
+                className="font-inter text-sm"
+                style={{ color: getConnectionStatusColor() }}
+              >
                 {getConnectionStatusText()}
               </Text>
             </div>
           </div>
         </div>
         <Space wrap>
-          <Button icon={<SettingOutlined />} onClick={() => setShowSettings(true)} className="font-inter">
+          <Button
+            icon={<SettingOutlined />}
+            onClick={() => setShowSettings(true)}
+            className="font-inter"
+          >
             Settings
           </Button>
           {unreadCount > 0 && (
-            <Button icon={<CheckOutlined />} onClick={markAllAsRead} className="font-inter">
+            <Button
+              icon={<CheckOutlined />}
+              onClick={markAllAsRead}
+              className="font-inter"
+            >
               Mark All Read ({unreadCount})
             </Button>
           )}
           {notifications.length > 0 && (
-            <Button danger icon={<ClearOutlined />} onClick={handleClearAll} className="font-inter">
-              Clear All
-            </Button>
+            <Popconfirm
+              title="Clear All Notifications"
+              placement="left"
+              description="Are you sure you want to delete all notifications? This action cannot be undone."
+              okText="Yes, clear all"
+              okButtonProps={{ danger: true }}
+              cancelText="Cancel"
+              onConfirm={clearAllNotifications}
+            >
+              <Button danger icon={<ClearOutlined />} className="font-inter">
+                Clear All
+              </Button>
+            </Popconfirm>
           )}
         </Space>
       </div>
@@ -190,7 +215,10 @@ export default function NotificationsPage() {
               title={<span className="font-inter">Total Notifications</span>}
               value={totalNotifications}
               prefix={<BellOutlined />}
-              valueStyle={{ color: "#0B8457", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{
+                color: "#0B8457",
+                fontFamily: "var(--font-poppins)",
+              }}
             />
           </Card>
         </Col>
@@ -200,7 +228,10 @@ export default function NotificationsPage() {
               title={<span className="font-inter">Read Notifications</span>}
               value={readNotifications}
               prefix={<CheckOutlined />}
-              valueStyle={{ color: "#52c41a", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{
+                color: "#52c41a",
+                fontFamily: "var(--font-poppins)",
+              }}
             />
           </Card>
         </Col>
@@ -210,7 +241,10 @@ export default function NotificationsPage() {
               title={<span className="font-inter">High Priority</span>}
               value={highPriorityNotifications}
               prefix={<TrophyOutlined />}
-              valueStyle={{ color: "#ff4d4f", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{
+                color: "#ff4d4f",
+                fontFamily: "var(--font-poppins)",
+              }}
             />
           </Card>
         </Col>
@@ -219,7 +253,9 @@ export default function NotificationsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Notification Types Sidebar */}
         <div className="lg:col-span-1">
-          <Card title={<span className="font-poppins">Filter Notifications</span>}>
+          <Card
+            title={<span className="font-poppins">Filter Notifications</span>}
+          >
             <div className="space-y-2">
               {notificationTypes.map((type) => (
                 <div
@@ -234,13 +270,18 @@ export default function NotificationsPage() {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-3">
                       <span className="text-lg">{type.icon}</span>
-                      <Text className={`font-inter font-medium ${selectedType === type.key ? "text-white" : ""}`}>
+                      <Text
+                        className={`font-inter font-medium ${
+                          selectedType === type.key ? "text-white" : ""
+                        }`}
+                      >
                         {type.label}
                       </Text>
                     </div>
                     <Tag
-                      color={selectedType === type.key ? "white" : "default"}
-                      className={`font-inter ${selectedType === type.key ? "text-[#0B8457]" : ""}`}
+                      className={`font-inter ${
+                        selectedType === type.key ? "text-[#0B8457]" : ""
+                      }`}
                     >
                       {type.count}
                     </Tag>
@@ -256,14 +297,19 @@ export default function NotificationsPage() {
           <Card
             title={
               <span className="font-poppins">
-                {selectedType.charAt(0).toUpperCase() + selectedType.slice(1)} Notifications
+                {selectedType.charAt(0).toUpperCase() + selectedType.slice(1)}{" "}
+                Notifications
               </span>
             }
           >
             {filteredNotifications.length === 0 ? (
               <div className="text-center py-12">
                 <Empty
-                  description={<span className="font-inter text-gray-500">No notifications found</span>}
+                  description={
+                    <span className="font-inter text-gray-500">
+                      No notifications found
+                    </span>
+                  }
                   image={Empty.PRESENTED_IMAGE_SIMPLE}
                 />
               </div>
@@ -304,7 +350,7 @@ export default function NotificationsPage() {
                   >
                     <List.Item.Meta
                       avatar={
-                        <div className="flex items-center">
+                        <div className="flex items-center pl-5">
                           <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0B8457] to-[#0a7249] flex items-center justify-center text-white text-xl mr-4 shadow-lg">
                             {getNotificationIcon(notification.type)}
                           </div>
@@ -317,16 +363,24 @@ export default function NotificationsPage() {
                         <div className="flex justify-between items-start">
                           <Text
                             className={`font-inter text-base ${
-                              !notification.isRead ? "font-semibold text-gray-900" : "font-medium text-gray-700"
+                              !notification.isRead
+                                ? "font-semibold text-gray-900"
+                                : "font-medium text-gray-700"
                             }`}
                           >
                             {notification.title}
                           </Text>
                           <div className="flex items-center gap-2 ml-4">
-                            <Tag color={getPriorityColor(notification.priority)} size="small" className="font-inter">
+                            <Tag
+                              color={getPriorityColor(notification.priority)}
+                              className="font-inter"
+                            >
                               {notification.priority}
                             </Tag>
-                            <Text type="secondary" className="text-sm font-inter whitespace-nowrap">
+                            <Text
+                              type="secondary"
+                              className="text-sm font-inter whitespace-nowrap"
+                            >
                               {formatDate(notification.createdAt)}
                             </Text>
                           </div>
@@ -334,23 +388,29 @@ export default function NotificationsPage() {
                       }
                       description={
                         <div className="space-y-3 mt-2">
-                          <Text className="font-inter text-gray-600 leading-relaxed">{notification.message}</Text>
+                          <Text className="font-inter text-gray-600 leading-relaxed">
+                            {notification.message}
+                          </Text>
                           {notification.orderId && (
-                            <Text type="secondary" className="text-sm font-inter">
+                            <Text
+                              type="secondary"
+                              className="text-sm font-inter"
+                            >
                               Order: {notification.orderId}
                             </Text>
                           )}
-                          {notification.actionUrl && notification.actionText && (
-                            <div>
-                              <Button
-                                type="link"
-                                href={notification.actionUrl}
-                                className="p-0 font-inter text-[#0B8457] hover:text-[#0a7249] font-medium"
-                              >
-                                {notification.actionText} →
-                              </Button>
-                            </div>
-                          )}
+                          {notification.actionUrl &&
+                            notification.actionText && (
+                              <div>
+                                <Button
+                                  type="link"
+                                  href={notification.actionUrl}
+                                  className="p-0 font-inter text-[#0B8457] hover:text-[#0a7249] font-medium"
+                                >
+                                  {notification.actionText} →
+                                </Button>
+                              </div>
+                            )}
                         </div>
                       }
                     />
@@ -374,11 +434,19 @@ export default function NotificationsPage() {
 
       {/* Settings Modal */}
       <Modal
-        title={<span className="font-poppins font-semibold">Notification Settings</span>}
+        title={
+          <span className="font-poppins font-semibold">
+            Notification Settings
+          </span>
+        }
         open={showSettings}
         onCancel={() => setShowSettings(false)}
         footer={[
-          <Button key="close" onClick={() => setShowSettings(false)} className="font-inter">
+          <Button
+            key="close"
+            onClick={() => setShowSettings(false)}
+            className="font-inter"
+          >
             Close
           </Button>,
         ]}
@@ -396,14 +464,21 @@ export default function NotificationsPage() {
                     <BellOutlined className="text-white" />
                   </div>
                   <div>
-                    <Text className="font-inter font-medium">Browser Notifications</Text>
+                    <Text className="font-inter font-medium">
+                      Browser Notifications
+                    </Text>
                     <br />
                     <Text type="secondary" className="font-inter text-sm">
                       Get instant notifications in your browser
                     </Text>
                   </div>
                 </div>
-                <Switch checked={settings.enablePush} onChange={(checked) => updateSettings({ enablePush: checked })} />
+                <Switch
+                  checked={settings.enablePush}
+                  onChange={(checked) =>
+                    updateSettings({ enablePush: checked })
+                  }
+                />
               </div>
               <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center gap-3">
@@ -411,7 +486,9 @@ export default function NotificationsPage() {
                     <MailOutlined className="text-white" />
                   </div>
                   <div>
-                    <Text className="font-inter font-medium">Email Notifications</Text>
+                    <Text className="font-inter font-medium">
+                      Email Notifications
+                    </Text>
                     <br />
                     <Text type="secondary" className="font-inter text-sm">
                       Receive important updates via email
@@ -420,7 +497,9 @@ export default function NotificationsPage() {
                 </div>
                 <Switch
                   checked={settings.enableEmail}
-                  onChange={(checked) => updateSettings({ enableEmail: checked })}
+                  onChange={(checked) =>
+                    updateSettings({ enableEmail: checked })
+                  }
                 />
               </div>
             </div>
@@ -437,7 +516,9 @@ export default function NotificationsPage() {
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">📦</span>
                   <div>
-                    <Text className="font-inter font-medium">Order Updates</Text>
+                    <Text className="font-inter font-medium">
+                      Order Updates
+                    </Text>
                     <br />
                     <Text type="secondary" className="font-inter text-sm">
                       Status changes, shipping, and delivery notifications
@@ -446,14 +527,18 @@ export default function NotificationsPage() {
                 </div>
                 <Switch
                   checked={settings.enableOrderUpdates}
-                  onChange={(checked) => updateSettings({ enableOrderUpdates: checked })}
+                  onChange={(checked) =>
+                    updateSettings({ enableOrderUpdates: checked })
+                  }
                 />
               </div>
               <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">🎉</span>
                   <div>
-                    <Text className="font-inter font-medium">Promotions & Offers</Text>
+                    <Text className="font-inter font-medium">
+                      Promotions & Offers
+                    </Text>
                     <br />
                     <Text type="secondary" className="font-inter text-sm">
                       Special deals, discounts, and promotional content
@@ -462,14 +547,18 @@ export default function NotificationsPage() {
                 </div>
                 <Switch
                   checked={settings.enablePromotions}
-                  onChange={(checked) => updateSettings({ enablePromotions: checked })}
+                  onChange={(checked) =>
+                    updateSettings({ enablePromotions: checked })
+                  }
                 />
               </div>
               <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">⚙️</span>
                   <div>
-                    <Text className="font-inter font-medium">System Notifications</Text>
+                    <Text className="font-inter font-medium">
+                      System Notifications
+                    </Text>
                     <br />
                     <Text type="secondary" className="font-inter text-sm">
                       Important system updates and maintenance alerts
@@ -478,7 +567,9 @@ export default function NotificationsPage() {
                 </div>
                 <Switch
                   checked={settings.enableSystem}
-                  onChange={(checked) => updateSettings({ enableSystem: checked })}
+                  onChange={(checked) =>
+                    updateSettings({ enableSystem: checked })
+                  }
                 />
               </div>
             </div>
@@ -492,24 +583,29 @@ export default function NotificationsPage() {
             </Title>
             <div className="p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center gap-4 mb-3">
-                <Text className="font-inter font-medium">Check for updates every</Text>
+                <Text className="font-inter font-medium">
+                  Check for updates every
+                </Text>
                 <InputNumber
                   min={10}
                   max={300}
                   value={settings.pollingInterval / 1000}
-                  onChange={(value) => updateSettings({ pollingInterval: (value || 30) * 1000 })}
+                  onChange={(value) =>
+                    updateSettings({ pollingInterval: (value || 30) * 1000 })
+                  }
                   addonAfter="seconds"
                   className="font-inter"
                 />
               </div>
               <Text type="secondary" className="text-sm font-inter">
-                Lower values provide more real-time updates but may impact performance. WebSocket connection provides
-                instant updates when available.
+                Lower values provide more real-time updates but may impact
+                performance. WebSocket connection provides instant updates when
+                available.
               </Text>
             </div>
           </div>
         </div>
       </Modal>
     </div>
-  )
+  );
 }

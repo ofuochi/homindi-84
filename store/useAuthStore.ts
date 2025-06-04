@@ -1,7 +1,8 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import { immer } from "zustand/middleware/immer"
-import type { User, UserRole } from "@/lib/types"
+import type {  UserRole } from "@/lib/types"
+import { User } from "@/lib/api/types"
 
 interface AuthState {
   user: User | null
@@ -135,7 +136,7 @@ export const useAuthStore = create<AuthState>()(
       },
     })),
     {
-      name: "homindi-auth",
+      name: "diaspora-auth",
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,

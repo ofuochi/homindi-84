@@ -45,7 +45,8 @@ export interface ShippingAddress {
   deliveryNotes?: string
 }
 
-export type UserRole = "god" | "admin" | "exporter" | "supplier" | "moderator" | "user"
+export const userRoles = ["god", "admin", "exporter", "supplier", "moderator", "user"] as const
+export type UserRole = typeof userRoles[number]
 
 export interface ClerkUserMetadata {
   role: UserRole

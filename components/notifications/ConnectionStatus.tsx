@@ -55,7 +55,12 @@ export default function ConnectionStatus() {
 
   return (
     <Tooltip title={getStatusText()}>
-      <Badge dot color={getStatusColor()} className="cursor-help">
+      <Badge
+        dot
+        color={getStatusColor()}
+        className="cursor-help"
+        offset={[0, 20]}
+      >
         <WifiOutlined
           className="text-gray-500 text-sm"
           style={{
