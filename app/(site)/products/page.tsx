@@ -12,7 +12,7 @@ import {
   Button,
   Empty,
   Pagination,
-  Spin,
+  Skeleton,
 } from "antd";
 import { FilterOutlined } from "@ant-design/icons";
 import ProductCard from "@/components/product/ProductCard";
@@ -61,8 +61,17 @@ export default function ProductsPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <Spin size="large" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <Row gutter={[24, 24]}>
+            {Array.from({ length: pageSize }).map((_, idx) => (
+              <Col key={idx} xs={24} sm={12} xl={8} className="flex">
+                <Card className="w-full min-h-[26rem]">
+                  <Skeleton.Image className="!w-full h-48" active />
+                  <Skeleton active paragraph={{ rows: 4 }} className="mt-4" />
+                </Card>
+              </Col>
+            ))}
+          </Row>
         </div>
       </div>
     );
@@ -182,7 +191,7 @@ export default function ProductsPage() {
               <>
                 <Row gutter={[24, 24]}>
                   {paginatedProducts.map((product) => (
-                    <Col key={product.id} xs={24} sm={12} xl={8}>
+                    <Col key={product.id} xs={24} sm={12} xl={8} className="flex">
                       <ProductCard product={product} />
                     </Col>
                   ))}

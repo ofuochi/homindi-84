@@ -1,3 +1,4 @@
+import { User } from "./api/types"
 import type { Product, Order, AdminStats } from "./types"
 
 export const mockProducts: Product[] = [
@@ -13,6 +14,7 @@ export const mockProducts: Product[] = [
     stockQuantity: 50,
     origin: "Abia State, Nigeria",
     weight: "1kg",
+    isFeatured: true,
   },
   {
     id: "2",
@@ -26,6 +28,7 @@ export const mockProducts: Product[] = [
     stockQuantity: 30,
     origin: "Norway/Nigeria",
     weight: "500g",
+    isFeatured: true,
   },
   {
     id: "3",
@@ -39,6 +42,7 @@ export const mockProducts: Product[] = [
     stockQuantity: 75,
     origin: "Kano State, Nigeria",
     weight: "250g",
+    isFeatured: true,
   },
   {
     id: "4",
@@ -52,6 +56,7 @@ export const mockProducts: Product[] = [
     stockQuantity: 0,
     origin: "Lagos State, Nigeria",
     weight: "100g",
+    isFeatured: true,
   },
   {
     id: "5",
@@ -134,6 +139,10 @@ export const mockUser: User = {
   phone: "+1-555-0123",
   preferredCountry: "United States",
   createdAt: "2023-12-01T00:00:00Z",
+  role: "user",
+  isActive: true,
+  emailVerified:true,
+  phoneVerified: true,
   addresses: [
     {
       fullName: "John Adebayo",
@@ -143,6 +152,7 @@ export const mockUser: User = {
       city: "Houston",
       streetAddress: "123 Main St, Apt 4B",
       postalCode: "77001",
+      deliveryNotes: "Leave at front door",
     },
   ],
 }

@@ -12,7 +12,7 @@ export interface Product {
   weight?: string
   sku?: string
   tags?: string[]
-  featured?: boolean
+  isFeatured?: boolean
   discount?: number
   minOrderQuantity?: number
   maxOrderQuantity?: number
