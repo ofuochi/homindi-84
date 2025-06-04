@@ -13,6 +13,7 @@ export const mockProducts: Product[] = [
     stockQuantity: 50,
     origin: "Abia State, Nigeria",
     weight: "1kg",
+    featured: true,
   },
   {
     id: "2",
@@ -39,6 +40,7 @@ export const mockProducts: Product[] = [
     stockQuantity: 75,
     origin: "Kano State, Nigeria",
     weight: "250g",
+    featured: true,
   },
   {
     id: "4",

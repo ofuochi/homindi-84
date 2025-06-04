@@ -26,27 +26,14 @@ export default function ProductCard({ product }: ProductCardProps) {
     });
   };
 
-  return (
-    <>
-      {contextHolder}
-      <motion.div
-        whileHover={{ y: -8, scale: 1.02 }}
-        transition={{ duration: 0.3 }}
-        className="h-full"
-      >
-        <Badge.Ribbon
-          text={product.featured ? "Featured" : null}
-          color="purple"
-          placement="start"
-          className="absolute top-3 left-3 z-10"
-        >
-          <Card
-            hoverable
-            className="h-full flex flex-col border-0 shadow-lg rounded-2xl overflow-hidden group"
-            cover={
-              <div className="relative h-48 bg-gray-100 overflow-hidden">
-                <Image
-                  src={product.image || "/placeholder.svg?height=200&width=300"}
+  const cardContent = (
+    <Card
+      hoverable
+      className="h-full flex flex-col border-0 shadow-lg rounded-2xl overflow-hidden group min-h-[26rem]"
+      cover={
+          <div className="relative h-48 bg-gray-100 overflow-hidden">
+            <Image
+              src={product.image || "/placeholder.svg?height=200&width=300"}
                   alt={product.name}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -149,7 +136,23 @@ export default function ProductCard({ product }: ProductCardProps) {
               </div>
             </div>
           </Card>
-        </Badge.Ribbon>
+  );
+
+  return (
+    <>
+      {contextHolder}
+      <motion.div
+        whileHover={{ y: -8, scale: 1.02 }}
+        transition={{ duration: 0.3 }}
+        className="h-full"
+      >
+        {product.featured ? (
+          <Badge.Ribbon text="Featured" color="purple" placement="start">
+            {cardContent}
+          </Badge.Ribbon>
+        ) : (
+          cardContent
+        )}
       </motion.div>
     </>
   );
