@@ -118,8 +118,8 @@ export const useWebSocketStore = create<WebSocketState>()(
         })
 
         // Replace the actual WebSocket with our mock
-        ;(mockWsManager as any).ws = mockWs
-        mockWs.onopen = () => mockWsManager.emit?.("connected", null)
+        ;(mockWsManager as any).ws = mockWs;
+        mockWs.onopen = () => (mockWsManager as any).emit("connected", null)
         mockWs.onmessage = (event: any) => {
           try {
             const message = JSON.parse(event.data)

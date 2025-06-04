@@ -101,7 +101,7 @@ export default function CookiesPage() {
     {
       title: "Settings",
       key: "settings",
-      render: (_, record: any) => (
+      render: (_: any, record: any) => (
         <Switch
           checked={record.enabled}
           disabled={!record.canDisable}

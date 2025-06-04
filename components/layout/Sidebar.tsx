@@ -144,7 +144,7 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
   return (
     <div className="h-full flex flex-col">
       {!collapsed && (
-        <div className="p-4 pb-3 border-r border-gray-200">
+        <div className="p-4 pb-3">
           <Link className="flex items-center space-x-3" href="/">
             <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
               <Image
@@ -165,7 +165,7 @@ export default function Sidebar({ collapsed = false }: SidebarProps) {
       )}
 
       {collapsed && (
-        <div className="p-4 pb-3 border-r border-gray-200 flex justify-center">
+        <div className="p-4 pb-3 flex justify-center">
           <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
             <Image
               src="/logo.png"

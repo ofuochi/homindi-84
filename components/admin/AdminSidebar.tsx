@@ -31,6 +31,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useClerkAuth } from "@/lib/hooks/useClerkAuth";
 import { ItemType, MenuItemType } from "antd/es/menu/interface";
+import Image from "next/image";
 
 interface AdminSidebarProps {
   collapsed?: boolean;
@@ -373,36 +374,37 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
     <div className="h-full flex flex-col bg-white">
       {/* Sidebar Header */}
       {!collapsed && (
-        <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-[#0B8457] to-[#0a7249]">
-          <div className="text-center">
-            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg mx-auto mb-3">
-              <RoleIcon className="text-white text-xl" />
+        <div className="p-4 pb-3">
+          <Link className="flex items-center space-x-3" href="/">
+            <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
+              <Image
+                src="/logo.png"
+                alt="Homindi Logo"
+                width={100}
+                height={100}
+                className="object-contain"
+              />
             </div>
-            <span className="font-bold text-white font-poppins text-lg block">
-              Admin Panel
-            </span>
-            <p className="text-xs text-white/80 font-inter mt-1">
-              {roleInfo?.name}
-            </p>
-            <div className="mt-2 px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full">
-              <span className="text-xs text-white font-inter font-medium">
-                {user?.firstName} {user?.lastName}
+            <div>
+              <span className="font-bold text-gray-900 font-poppins text-lg">
+                Homindi
               </span>
             </div>
-          </div>
+          </Link>
         </div>
       )}
 
       {collapsed && (
-        <div className="p-3 border-b border-gray-200 flex justify-center bg-gradient-to-r from-[#0B8457] to-[#0a7249]">
-          <Tooltip
-            title={`${roleInfo?.name} - ${user?.firstName} ${user?.lastName}`}
-            placement="right"
-          >
-            <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-lg">
-              <RoleIcon className="text-white text-sm" />
-            </div>
-          </Tooltip>
+        <div className="p-4 pb-3 flex justify-center">
+          <div className="w-8 h-8 bg-gradient-to-br from-[#0B8457] to-[#0a7249] rounded-xl flex items-center justify-center shadow-lg">
+            <Image
+              src="/logo.png"
+              alt="Homindi Logo"
+              width={100}
+              height={100}
+              className="object-contain"
+            />{" "}
+          </div>
         </div>
       )}
 
@@ -429,7 +431,7 @@ export default function AdminSidebar({ collapsed = false }: AdminSidebarProps) {
               Homindi Admin v2.0
             </p>
             <p className="text-xs text-gray-400 font-inter mt-1">
-              © 2024 All rights reserved
+              © {new Date().getFullYear()} All rights reserved
             </p>
           </div>
         </div>

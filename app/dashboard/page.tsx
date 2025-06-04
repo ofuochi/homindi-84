@@ -16,7 +16,6 @@ import {
   ShoppingOutlined,
   ReloadOutlined,
   TruckOutlined,
-  DollarOutlined,
   ShoppingCartOutlined,
   ClockCircleOutlined,
 } from "@ant-design/icons";
@@ -25,11 +24,14 @@ import { useOrderStore } from "@/store/useOrderStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { ORDER_STATUSES } from "@/lib/constants";
+import { useClerkAuth } from "@/lib/hooks/useClerkAuth";
 
 const { Title, Text } = Typography;
 
 export default function DashboardPage() {
-  const { user } = useAuthStore();
+  // const { user } = useAuthStore();
+  const { user, userRole, roleInfo, hasPermission } = useClerkAuth();
+
   const { orders, isLoading, fetchOrders, reorder } = useOrderStore();
 
   useEffect(() => {
@@ -55,7 +57,9 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <Title level={2}>Welcome back, {user?.name}!</Title>
+        <Title level={2}>
+          Welcome back, {user?.firstName || user?.username}! 👋
+        </Title>
         <Text type="secondary">Here's what's happening with your orders</Text>
       </div>
 
