@@ -23,6 +23,9 @@ importers:
       '@emotion/is-prop-valid':
         specifier: latest
         version: 1.3.1
+      '@faker-js/faker':
+        specifier: ^9.8.0
+        version: 9.8.0
       '@hookform/resolvers':
         specifier: ^3.10.0
         version: 3.10.0(react-hook-form@7.57.0(react@19.1.0))
@@ -411,6 +414,10 @@ packages:
 
   '@emotion/unitless@0.7.5':
     resolution: {integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==}
+
+  '@faker-js/faker@9.8.0':
+    resolution: {integrity: sha512-U9wpuSrJC93jZBxx/Qq2wPjCuYISBueyVUGK7qqdmj7r/nxaxwW8AQDCLeRO7wZnjj94sh3p246cAYjUKuqgfg==}
+    engines: {node: '>=18.0.0', npm: '>=9.0.0'}
 
   '@floating-ui/core@1.7.1':
     resolution: {integrity: sha512-azI0DrjMMfIug/ExbBaeDVJXcY0a7EPvPjb2xAJPa4HeimBX+Z18HK8QQR3jb6356SnDDdxx+hinMLcJEDdOjw==}
@@ -3044,6 +3051,8 @@ snapshots:
   '@emotion/memoize@0.9.0': {}
 
   '@emotion/unitless@0.7.5': {}
+
+  '@faker-js/faker@9.8.0': {}
 
   '@floating-ui/core@1.7.1':
     dependencies:
