@@ -2,6 +2,7 @@ import type React from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
+import "antd/dist/reset.css";
 import "./globals.css";
 import Providers from "./providers";
 
