@@ -21,6 +21,8 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { ROUTES } from "@/lib/routes";
 
 const { Title, Paragraph, Text } = Typography;
 const { TextArea } = Input;
@@ -309,13 +311,15 @@ export default function ContactPage() {
                       our FAQ section for quick answers to common questions.
                     </Paragraph>
                     <Space direction="vertical" className="w-full">
-                      <Button
-                        type="default"
-                        className="bg-white text-[#0B8457] border-white hover:bg-gray-50 rounded-lg font-inter font-medium"
-                        block
-                      >
-                        View FAQ
-                      </Button>
+                      <Link href={ROUTES.FAQ}>
+                        <Button
+                          type="default"
+                          className="bg-white text-[#0B8457] border-white hover:bg-gray-50 rounded-lg font-inter font-medium"
+                          block
+                        >
+                          View FAQ
+                        </Button>
+                      </Link>
                       <Button
                         type="default"
                         className="bg-transparent text-white border-white hover:bg-white hover:text-[#0B8457] rounded-lg font-inter font-medium"

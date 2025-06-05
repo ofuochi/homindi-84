@@ -205,7 +205,7 @@ export default function AdminDashboard() {
       <div className="bg-gradient-to-r from-[#0B8457] to-[#0a7249] rounded-xl p-6 text-white">
         <div className="flex items-center justify-between">
           <div>
-            <Title level={2} className="text-white mb-2 font-poppins">
+            <Title level={2} className="!text-white mb-2 font-poppins">
               Welcome back, {user?.firstName || user?.username}! 👋
             </Title>
             <Text className="text-white/80 font-inter">
