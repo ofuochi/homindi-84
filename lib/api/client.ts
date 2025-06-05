@@ -26,23 +26,18 @@ import {
   PaginatedResponseSchema,
 } from "./types";
 
-import { delay } from "../utils";
+import type { AxiosRequestConfig } from "axios";
+import axiosInstance from "./axios";
 
 class ApiClient {
-  private baseUrl = "/api";
-
   private async request<T>(
-    endpoint: string,
-    options: RequestInit = {},
+    config: AxiosRequestConfig,
     schema: z.ZodSchema<T>,
   ): Promise<T> {
-    await delay(Math.random() * 1000 + 500); // Simulate network delay
-
     try {
-      const response = await fetch(`${this.baseUrl}${endpoint}`, options);
-      const json = await response.json();
-      return schema.parse(json);
-    } catch (error) {
+      const response = await axiosInstance.request(config);
+      return schema.parse(response.data);
+    } catch (error: any) {
       if (error instanceof z.ZodError) {
         throw new Error(`API validation error: ${error.message}`);
       }
@@ -56,17 +51,17 @@ class ApiClient {
     limit?: number;
     status?: string;
   }): Promise<PaginatedResponse<Order>> {
-    const searchParams = new URLSearchParams();
-    if (params?.page) searchParams.set("page", params.page.toString());
-    if (params?.limit) searchParams.set("limit", params.limit.toString());
-    if (params?.status) searchParams.set("status", params.status);
-
-    const endpoint = `/orders?${searchParams.toString()}`;
-    return this.request(endpoint, {}, PaginatedResponseSchema(OrderSchema));
+    return this.request(
+      { url: "/orders", method: "GET", params },
+      PaginatedResponseSchema(OrderSchema),
+    );
   }
 
   async getOrder(id: string): Promise<ApiResponse<Order>> {
-    return this.request(`/orders/${id}`, {}, ApiResponseSchema(OrderSchema));
+    return this.request(
+      { url: `/orders/${id}`, method: "GET" },
+      ApiResponseSchema(OrderSchema),
+    );
   }
 
   async updateOrderStatus(
@@ -74,12 +69,7 @@ class ApiClient {
     data: UpdateOrderStatusRequest,
   ): Promise<ApiResponse<Order>> {
     return this.request(
-      `/orders/${id}/status`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      },
+      { url: `/orders/${id}/status`, method: "PUT", data },
       ApiResponseSchema(OrderSchema),
     );
   }
@@ -92,28 +82,17 @@ class ApiClient {
     search?: string;
     stockStatus?: string;
   }): Promise<PaginatedResponse<Product>> {
-    const searchParams = new URLSearchParams();
-    if (params?.page) searchParams.set("page", params.page.toString());
-    if (params?.limit) searchParams.set("limit", params.limit.toString());
-    if (params?.category) searchParams.set("category", params.category);
-    if (params?.search) searchParams.set("search", params.search);
-    if (params?.stockStatus)
-      searchParams.set("stockStatus", params.stockStatus);
-
-    const endpoint = `/products?${searchParams.toString()}`;
-    return this.request(endpoint, {}, PaginatedResponseSchema(ProductSchema));
+    return this.request(
+      { url: "/products", method: "GET", params },
+      PaginatedResponseSchema(ProductSchema),
+    );
   }
 
   async createProduct(
     data: CreateProductRequest,
   ): Promise<ApiResponse<Product>> {
     return this.request(
-      "/products",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      },
+      { url: "/products", method: "POST", data },
       ApiResponseSchema(ProductSchema),
     );
   }
@@ -123,22 +102,14 @@ class ApiClient {
     data: UpdateProductRequest,
   ): Promise<ApiResponse<Product>> {
     return this.request(
-      `/products/${id}`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      },
+      { url: `/products/${id}`, method: "PUT", data },
       ApiResponseSchema(ProductSchema),
     );
   }
 
   async deleteProduct(id: string): Promise<ApiResponse<Product>> {
     return this.request(
-      `/products/${id}`,
-      {
-        method: "DELETE",
-      },
+      { url: `/products/${id}`, method: "DELETE" },
       ApiResponseSchema(ProductSchema),
     );
   }
@@ -148,24 +119,17 @@ class ApiClient {
     page?: number;
     limit?: number;
   }): Promise<PaginatedResponse<Category>> {
-    const searchParams = new URLSearchParams();
-    if (params?.page) searchParams.set("page", params.page.toString());
-    if (params?.limit) searchParams.set("limit", params.limit.toString());
-
-    const endpoint = `/categories?${searchParams.toString()}`;
-    return this.request(endpoint, {}, PaginatedResponseSchema(CategorySchema));
+    return this.request(
+      { url: "/categories", method: "GET", params },
+      PaginatedResponseSchema(CategorySchema),
+    );
   }
 
   async createCategory(
     data: CreateCategoryRequest,
   ): Promise<ApiResponse<Category>> {
     return this.request(
-      "/categories",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      },
+      { url: "/categories", method: "POST", data },
       ApiResponseSchema(CategorySchema),
     );
   }
@@ -175,22 +139,14 @@ class ApiClient {
     data: UpdateCategoryRequest,
   ): Promise<ApiResponse<Category>> {
     return this.request(
-      `/categories/${id}`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      },
+      { url: `/categories/${id}`, method: "PUT", data },
       ApiResponseSchema(CategorySchema),
     );
   }
 
   async deleteCategory(id: string): Promise<ApiResponse<Category>> {
     return this.request(
-      `/categories/${id}`,
-      {
-        method: "DELETE",
-      },
+      { url: `/categories/${id}`, method: "DELETE" },
       ApiResponseSchema(CategorySchema),
     );
   }
@@ -201,15 +157,8 @@ class ApiClient {
     limit?: number;
     productId?: string;
   }): Promise<PaginatedResponse<InventoryLog>> {
-    const searchParams = new URLSearchParams();
-    if (params?.page) searchParams.set("page", params.page.toString());
-    if (params?.limit) searchParams.set("limit", params.limit.toString());
-    if (params?.productId) searchParams.set("productId", params.productId);
-
-    const endpoint = `/inventory/logs?${searchParams.toString()}`;
     return this.request(
-      endpoint,
-      {},
+      { url: "/inventory/logs", method: "GET", params },
       PaginatedResponseSchema(InventoryLogSchema),
     );
   }
@@ -218,12 +167,7 @@ class ApiClient {
     data: StockAdjustmentRequest,
   ): Promise<ApiResponse<InventoryLog>> {
     return this.request(
-      "/inventory/adjust",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      },
+      { url: "/inventory/adjust", method: "POST", data },
       ApiResponseSchema(InventoryLogSchema),
     );
   }
@@ -233,19 +177,16 @@ class ApiClient {
     page?: number;
     limit?: number;
   }): Promise<PaginatedResponse<User>> {
-    const searchParams = new URLSearchParams();
-    if (params?.page) searchParams.set("page", params.page.toString());
-    if (params?.limit) searchParams.set("limit", params.limit.toString());
-
-    const endpoint = `/users?${searchParams.toString()}`;
-    return this.request(endpoint, {}, PaginatedResponseSchema(UserSchema));
+    return this.request(
+      { url: "/users", method: "GET", params },
+      PaginatedResponseSchema(UserSchema),
+    );
   }
 
   // Admin API
   async getAdminStats(): Promise<ApiResponse<AdminStats>> {
     return this.request(
-      "/admin/stats",
-      {},
+      { url: "/admin/stats", method: "GET" },
       ApiResponseSchema(AdminStatsSchema),
     );
   }
