@@ -12,6 +12,7 @@ import {
   Divider,
   message,
   Steps,
+  ConfigProvider,
 } from "antd";
 import {
   CreditCardOutlined,
@@ -23,6 +24,7 @@ import {
   LockFilled,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
+import { colors } from "@/lib/colors";
 import { PaymentForm } from "@/components/payment/PaymentForm";
 import { PaymentSuccess } from "@/components/payment/PaymentSuccess";
 import { PaymentError } from "@/components/payment/PaymentError";
@@ -36,7 +38,6 @@ import type { PaymentIntent } from "@/lib/stripe/types";
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
-const { Step } = Steps;
 
 type CheckoutStep = "shipping" | "payment" | "success" | "error";
 
@@ -130,6 +131,21 @@ export default function CheckoutPage() {
     }
   };
 
+  const stepItems = [
+    {
+      title: "Shipping",
+      icon: <HomeOutlined />,
+    },
+    {
+      title: "Payment",
+      icon: <CreditCardOutlined />,
+    },
+    {
+      title: "Complete",
+      icon: <CheckOutlined />,
+    },
+  ];
+
   if (items.length === 0 && currentStep === "shipping") return null;
 
   return (
@@ -141,24 +157,16 @@ export default function CheckoutPage() {
 
         {/* Progress Steps */}
         <div className="mb-8">
-          <Steps
-            current={getStepNumber()}
-            className="max-w-2xl mx-auto"
-            items={[
-              {
-                title: "Shipping",
-                icon: <HomeOutlined />,
-              },
-              {
-                title: "Payment",
-                icon: <CreditCardOutlined />,
-              },
-              {
-                title: "Complete",
-                icon: <CheckOutlined />,
-              },
-            ]}
-          ></Steps>
+          <ConfigProvider
+            theme={{ token: { colorPrimary: colors.primary.DEFAULT } }}
+          >
+            <Steps
+              current={getStepNumber()}
+              status={currentStep === "error" ? "error" : undefined}
+              className="max-w-2xl mx-auto"
+              items={stepItems}
+            />
+          </ConfigProvider>
         </div>
 
         {/* Shipping Information Step */}
