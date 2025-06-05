@@ -341,4 +341,68 @@ mock.onGet("/admin/stats").reply(() => {
   return [200, { success: true, data: mockEnhancedAdminStats }];
 });
 
+// Payments
+mock.onPost("/payments/create-payment-intent").reply((config) => {
+  const body = JSON.parse(config.data || "{}");
+  const paymentIntent = {
+    id: `pi_${Date.now()}`,
+    client_secret: `pi_${Date.now()}_secret_mock`,
+    amount: body.amount,
+    currency: body.currency,
+    status: "requires_payment_method",
+  };
+  return [
+    200,
+    {
+      success: true,
+      data: { paymentIntent, clientSecret: paymentIntent.client_secret },
+    },
+  ];
+});
+
+mock.onPost("/payments/confirm-payment").reply((config) => {
+  const body = JSON.parse(config.data || "{}");
+  return [
+    200,
+    {
+      success: true,
+      data: {
+        paymentIntent: { id: body.paymentIntentId, status: "succeeded" },
+      },
+    },
+  ];
+});
+
+mock.onGet(/\/payments\/payment-record\/[^/]+$/).reply((config) => {
+  const id = config.url!.split("/").pop()!;
+  return [
+    200,
+    { success: true, data: { id, status: "succeeded", amount: 100 } },
+  ];
+});
+
+mock.onPost("/payments/refund").reply(() => {
+  return [
+    200,
+    {
+      success: true,
+      data: { refundId: `re_${Date.now()}`, status: "succeeded" },
+    },
+  ];
+});
+
+// Analytics
+mock.onGet("/analytics/overview").reply(() => {
+  return [200, { success: true, data: mockEnhancedAdminStats }];
+});
+mock.onGet("/analytics/sales").reply(() => {
+  return [200, { success: true, data: { revenue: 1000 } }];
+});
+mock.onGet("/analytics/customers").reply(() => {
+  return [200, { success: true, data: { total: 50 } }];
+});
+mock.onGet("/analytics/performance").reply(() => {
+  return [200, { success: true, data: { pageViews: 100 } }];
+});
+
 export default axiosInstance;
