@@ -98,16 +98,14 @@ export const HeaderActions = ({
 
       {/* Cart */}
       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-        <Button
-          type="text"
-          icon={
-            <Badge count={getItemCount()} size="small">
-              <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-primary-500 transition-colors" />
-            </Badge>
-          }
+        <Badge
+          count={getItemCount()}
+          size="small"
+          className="flex items-center relative cursor-pointer"
           onClick={() => setIsOpen(true)}
-          className="flex items-center hover:bg-gray-50 rounded-lg"
-        />
+        >
+          <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-primary-500 transition-colors" />
+        </Badge>
       </motion.div>
 
       {/* Auth */}

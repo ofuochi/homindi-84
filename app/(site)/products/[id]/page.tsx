@@ -15,6 +15,8 @@ import {
   Skeleton,
   message,
   Layout,
+  Image,
+  Spin,
 } from "antd";
 import {
   ShoppingCartOutlined,
@@ -24,7 +26,6 @@ import {
   GlobalOutlined,
   InfoCircleOutlined,
 } from "@ant-design/icons";
-import Image from "next/image";
 import Link from "next/link";
 import { useCartStore } from "@/store/useCartStore";
 import { mockProducts } from "@/lib/mockData";
@@ -98,20 +99,19 @@ export default function ProductPage() {
 
         <Row gutter={[32, 32]}>
           <Col xs={24} md={12}>
-            {loading ? (
-              <Skeleton.Image className="w-full h-96" active />
-            ) : (
+            <Spin spinning={loading} tip="Loading product..." size="large">
               <div className="relative w-full h-96 bg-gray-100 rounded-lg overflow-hidden">
-                <Image
-                  src={
-                    product?.image || "/placeholder.svg?height=400&width=600"
-                  }
-                  alt={product?.name || "Product"}
-                  fill
-                  className="object-cover"
-                />
+                <Image.PreviewGroup
+                  items={[
+                    "https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp",
+                    "https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp",
+                    "https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp",
+                  ]}
+                >
+                  <Image src="https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp" />
+                </Image.PreviewGroup>
               </div>
-            )}
+            </Spin>
           </Col>
 
           <Col xs={24} md={12}>

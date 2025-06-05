@@ -166,7 +166,10 @@ const PaymentFormContent: React.FC<PaymentFormProps> = ({
           Payment Details
         </Title>
         <Text type="secondary">
-          Total: <strong>{formatCurrency(amount)}</strong>
+          Total:{" "}
+          <span className="text-primary  font-extrabold">
+            {formatCurrency(amount)}
+          </span>
         </Text>
       </div>
 

@@ -1,6 +1,15 @@
 "use client";
 
-import { Button, Card, Typography, Row, Col, Statistic, Avatar } from "antd";
+import {
+  Button,
+  Card,
+  Typography,
+  Row,
+  Col,
+  Statistic,
+  Avatar,
+  Modal,
+} from "antd";
 import {
   CheckCircleOutlined,
   TruckOutlined,
@@ -11,9 +20,11 @@ import {
   HeartOutlined,
   RocketOutlined,
   PlayCircleOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import ProductCard from "@/components/product/ProductCard";
 import { mockProducts } from "@/lib/mockData";
 import { colors } from "@/lib/colors";
@@ -24,6 +35,7 @@ const { Title, Paragraph, Text } = Typography;
 
 export default function HomePage() {
   const featuredProducts = mockProducts.filter((product) => product.isFeatured);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
 
   const testimonials = [
     {
@@ -119,7 +131,7 @@ export default function HomePage() {
                 variants={fadeInUp}
               >
                 Bringing Nigerian Food to Your{" "}
-                <span className="text-[#F9A826]">Doorstep</span>
+                <span className="text-accent">Doorstep</span>
               </motion.h1>
               <motion.div variants={fadeInUp} custom={1}>
                 <Paragraph className="text-xl text-green-100 mb-8 leading-relaxed">
@@ -145,7 +157,8 @@ export default function HomePage() {
                 <Button
                   size="large"
                   ghost
-                  className="h-14 px-8 text-lg font-semibold rounded-xl border-2 hover:bg-white hover:text-primary-500 transition-all duration-300"
+                  className="h-14 px-8 text-lg font-semibold rounded-xl border-2 hover:!border-inherit hover:!bg-white hover:!text-primary-500 transition-all duration-300"
+                  onClick={() => setVideoModalOpen(true)}
                 >
                   <PlayCircleOutlined className="mr-2" />
                   Watch Story
@@ -196,7 +209,6 @@ export default function HomePage() {
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-48 translate-x-48"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-32 -translate-x-32"></div>
       </section>
-
       {/* Stats Section */}
       <section className="py-16 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -233,7 +245,6 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
       {/* Enhanced Why Choose Us Section */}
       <section className="py-20 bg-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-5">
@@ -373,7 +384,6 @@ export default function HomePage() {
           </Row>
         </div>
       </section>
-
       {/* How It Works */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -446,7 +456,6 @@ export default function HomePage() {
           </Row>
         </div>
       </section>
-
       {/* Featured Products */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -503,7 +512,6 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
       {/* Features Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -553,7 +561,6 @@ export default function HomePage() {
           </Row>
         </div>
       </section>
-
       {/* Testimonials */}
       <section className="py-20 bg-gradient-to-br from-primary-50 to-accent-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -613,7 +620,6 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
       {/* Newsletter Section */}
       <section className="py-20 bg-gradient-to-r from-primary-500 to-primary-600 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
@@ -662,7 +668,6 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
@@ -707,6 +712,32 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Video Modal */}
+      <Modal
+        open={videoModalOpen}
+        onCancel={() => setVideoModalOpen(false)}
+        footer={null}
+        centered
+        width={"65%"}
+        closeIcon={
+          <CloseOutlined className="text-white text-xl bg-black/50 p-2 rounded-full" />
+        }
+        className="video-modal"
+        styles={{
+          body: { padding: 0, borderRadius: "16px", overflow: "hidden" },
+          mask: { backdropFilter: "blur(6px)", background: "rgba(0,0,0,0.65)" },
+        }}
+      >
+        <div className="relative pt-[56.25%] w-full">
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*uYT7SZwhJnUAAAAAAAAAAAAADgCCAQ"
+            controls
+            autoPlay
+          />
+        </div>
+      </Modal>
     </div>
   );
 }
