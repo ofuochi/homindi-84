@@ -1,38 +1,60 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Row, Col, Card, Table, Tag, DatePicker, Select, Statistic, Spin } from "antd"
-import { Column, Pie } from "@ant-design/plots"
-import { DollarOutlined, ShoppingCartOutlined, TrendingUpOutlined, CreditCardOutlined } from "@ant-design/icons"
-import { analyticsApi } from "@/lib/analytics/api"
-import type { SalesMetrics, MonthlySales, PaymentMethodStats, RegionSales } from "@/lib/analytics/types"
+import { useState, useEffect } from "react";
+import {
+  Row,
+  Col,
+  Card,
+  Table,
+  Tag,
+  DatePicker,
+  Select,
+  Statistic,
+  Spin,
+} from "antd";
+import { Column, Pie } from "@ant-design/plots";
+import {
+  DollarOutlined,
+  ShoppingCartOutlined,
+  CreditCardOutlined,
+} from "@ant-design/icons";
+import { analyticsApi } from "@/lib/analytics/api";
+import type {
+  SalesMetrics,
+  MonthlySales,
+  PaymentMethodStats,
+  RegionSales,
+} from "@/lib/analytics/types";
+import { TrendingUpIcon } from "lucide-react";
 
-const { RangePicker } = DatePicker
-const { Option } = Select
+const { RangePicker } = DatePicker;
+const { Option } = Select;
 
 export default function SalesAnalyticsPage() {
-  const [loading, setLoading] = useState(true)
-  const [salesMetrics, setSalesMetrics] = useState<SalesMetrics | null>(null)
-  const [dateRange, setDateRange] = useState<[string, string] | null>(null)
-  const [selectedMetric, setSelectedMetric] = useState<"revenue" | "orders">("revenue")
+  const [loading, setLoading] = useState(true);
+  const [salesMetrics, setSalesMetrics] = useState<SalesMetrics | null>(null);
+  const [dateRange, setDateRange] = useState<[string, string] | null>(null);
+  const [selectedMetric, setSelectedMetric] = useState<"revenue" | "orders">(
+    "revenue"
+  );
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
         const data = await analyticsApi.getSalesMetrics(
-          dateRange ? { start: dateRange[0], end: dateRange[1] } : undefined,
-        )
-        setSalesMetrics(data)
+          dateRange ? { start: dateRange[0], end: dateRange[1] } : undefined
+        );
+        setSalesMetrics(data);
       } catch (error) {
-        console.error("Failed to fetch sales data:", error)
+        console.error("Failed to fetch sales data:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchData()
-  }, [dateRange])
+    fetchData();
+  }, [dateRange]);
 
   const monthlyRevenueConfig = {
     data: salesMetrics?.monthlySales || [],
@@ -43,15 +65,21 @@ export default function SalesAnalyticsPage() {
     tooltip: {
       formatter: (datum: MonthlySales) => ({
         name: selectedMetric === "revenue" ? "Revenue" : "Orders",
-        value: selectedMetric === "revenue" ? `$${datum.revenue.toLocaleString()}` : datum.orders.toLocaleString(),
+        value:
+          selectedMetric === "revenue"
+            ? `$${datum.revenue.toLocaleString()}`
+            : datum.orders.toLocaleString(),
       }),
     },
     yAxis: {
       label: {
-        formatter: (value: string) => (selectedMetric === "revenue" ? `$${Number(value).toLocaleString()}` : value),
+        formatter: (value: string) =>
+          selectedMetric === "revenue"
+            ? `$${Number(value).toLocaleString()}`
+            : value,
       },
     },
-  }
+  };
 
   const paymentMethodsConfig = {
     data: salesMetrics?.paymentMethods || [],
@@ -65,10 +93,12 @@ export default function SalesAnalyticsPage() {
     tooltip: {
       formatter: (datum: PaymentMethodStats) => ({
         name: datum.method,
-        value: `$${datum.revenue.toLocaleString()} (${datum.count} transactions)`,
+        value: `$${datum.revenue.toLocaleString()} (${
+          datum.count
+        } transactions)`,
       }),
     },
-  }
+  };
 
   const regionSalesColumns = [
     {
@@ -101,9 +131,10 @@ export default function SalesAnalyticsPage() {
     {
       title: "Avg. Order Value",
       key: "aov",
-      render: (record: RegionSales) => `$${(record.revenue / record.orders).toFixed(2)}`,
+      render: (record: RegionSales) =>
+        `$${(record.revenue / record.orders).toFixed(2)}`,
     },
-  ]
+  ];
 
   const paymentMethodColumns = [
     {
@@ -122,14 +153,16 @@ export default function SalesAnalyticsPage() {
       dataIndex: "count",
       key: "count",
       render: (count: number) => count.toLocaleString(),
-      sorter: (a: PaymentMethodStats, b: PaymentMethodStats) => a.count - b.count,
+      sorter: (a: PaymentMethodStats, b: PaymentMethodStats) =>
+        a.count - b.count,
     },
     {
       title: "Revenue",
       dataIndex: "revenue",
       key: "revenue",
       render: (revenue: number) => `$${revenue.toLocaleString()}`,
-      sorter: (a: PaymentMethodStats, b: PaymentMethodStats) => a.revenue - b.revenue,
+      sorter: (a: PaymentMethodStats, b: PaymentMethodStats) =>
+        a.revenue - b.revenue,
     },
     {
       title: "Percentage",
@@ -140,20 +173,25 @@ export default function SalesAnalyticsPage() {
     {
       title: "Avg. Transaction",
       key: "avgTransaction",
-      render: (record: PaymentMethodStats) => `$${(record.revenue / record.count).toFixed(2)}`,
+      render: (record: PaymentMethodStats) =>
+        `$${(record.revenue / record.count).toFixed(2)}`,
     },
-  ]
+  ];
 
-  const totalRevenue = salesMetrics?.monthlySales.reduce((sum, month) => sum + month.revenue, 0) || 0
-  const totalOrders = salesMetrics?.monthlySales.reduce((sum, month) => sum + month.orders, 0) || 0
-  const averageOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0
+  const totalRevenue =
+    salesMetrics?.monthlySales.reduce((sum, month) => sum + month.revenue, 0) ||
+    0;
+  const totalOrders =
+    salesMetrics?.monthlySales.reduce((sum, month) => sum + month.orders, 0) ||
+    0;
+  const averageOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
         <Spin size="large" />
       </div>
-    )
+    );
   }
 
   return (
@@ -164,13 +202,20 @@ export default function SalesAnalyticsPage() {
           <RangePicker
             onChange={(dates) => {
               if (dates) {
-                setDateRange([dates[0]!.format("YYYY-MM-DD"), dates[1]!.format("YYYY-MM-DD")])
+                setDateRange([
+                  dates[0]!.format("YYYY-MM-DD"),
+                  dates[1]!.format("YYYY-MM-DD"),
+                ]);
               } else {
-                setDateRange(null)
+                setDateRange(null);
               }
             }}
           />
-          <Select value={selectedMetric} onChange={setSelectedMetric} style={{ width: 120 }}>
+          <Select
+            value={selectedMetric}
+            onChange={setSelectedMetric}
+            style={{ width: 120 }}
+          >
             <Option value="revenue">Revenue</Option>
             <Option value="orders">Orders</Option>
           </Select>
@@ -184,7 +229,6 @@ export default function SalesAnalyticsPage() {
             <Statistic
               title="Total Revenue"
               value={totalRevenue}
-              prefix={<DollarOutlined />}
               formatter={(value) => `$${Number(value).toLocaleString()}`}
             />
           </Card>
@@ -204,7 +248,7 @@ export default function SalesAnalyticsPage() {
             <Statistic
               title="Average Order Value"
               value={averageOrderValue}
-              prefix={<TrendingUpOutlined />}
+              prefix={<TrendingUpIcon />}
               formatter={(value) => `$${Number(value).toFixed(2)}`}
             />
           </Card>
@@ -233,14 +277,23 @@ export default function SalesAnalyticsPage() {
           <Card title="Category Performance" loading={loading}>
             <div className="space-y-4">
               {salesMetrics?.salesByCategory.map((category) => (
-                <div key={category.category} className="flex justify-between items-center">
+                <div
+                  key={category.category}
+                  className="flex justify-between items-center"
+                >
                   <div>
                     <p className="font-medium">{category.category}</p>
-                    <p className="text-sm text-gray-500">{category.orders} orders</p>
+                    <p className="text-sm text-gray-500">
+                      {category.orders} orders
+                    </p>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold">${category.revenue.toLocaleString()}</p>
-                    <p className="text-sm text-gray-500">{category.percentage}%</p>
+                    <p className="font-bold">
+                      ${category.revenue.toLocaleString()}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {category.percentage}%
+                    </p>
                   </div>
                 </div>
               ))}
@@ -269,5 +322,5 @@ export default function SalesAnalyticsPage() {
         />
       </Card>
     </div>
-  )
+  );
 }

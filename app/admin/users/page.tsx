@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import {
   Card,
   Table,
@@ -20,7 +20,7 @@ import {
   message,
   Form,
   Popconfirm,
-} from "antd"
+} from "antd";
 import {
   UserOutlined,
   SearchOutlined,
@@ -35,16 +35,24 @@ import {
   FlagOutlined,
   PlusOutlined,
   DeleteOutlined,
-} from "@ant-design/icons"
-import { useUser, useClerk } from "@clerk/nextjs"
-import { useClerkAuth } from "@/lib/hooks/useClerkAuth"
-import { updateUserRole, updateUserStatus, createAuditLog } from "@/lib/auth/clerk-utils"
-import { getRoleInfo, canManageRole, getAvailableRoles } from "@/lib/auth/roles"
-import type { ExtendedUser, UserRole } from "@/lib/types"
+} from "@ant-design/icons";
+import { useUser, useClerk } from "@clerk/nextjs";
+import { useClerkAuth } from "@/lib/hooks/useClerkAuth";
+import {
+  updateUserRole,
+  updateUserStatus,
+  createAuditLog,
+} from "@/lib/auth/clerk-utils";
+import {
+  getRoleInfo,
+  canManageRole,
+  getAvailableRoles,
+} from "@/lib/auth/roles";
+import type { ExtendedUser, UserRole } from "@/lib/types";
 
-const { Title, Text } = Typography
-const { Search } = Input
-const { Option } = Select
+const { Title, Text } = Typography;
+const { Search } = Input;
+const { Option } = Select;
 
 const roleIcons = {
   god: CrownOutlined,
@@ -53,30 +61,30 @@ const roleIcons = {
   supplier: ShopOutlined,
   moderator: FlagOutlined,
   user: UserOutlined,
-}
+};
 
 export default function AdminUsersPage() {
-  const [users, setUsers] = useState<ExtendedUser[]>([])
-  const [loading, setLoading] = useState(true)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [roleFilter, setRoleFilter] = useState<string>("all")
-  const [selectedUser, setSelectedUser] = useState<ExtendedUser | null>(null)
-  const [editModalVisible, setEditModalVisible] = useState(false)
-  const [createModalVisible, setCreateModalVisible] = useState(false)
+  const [users, setUsers] = useState<ExtendedUser[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [roleFilter, setRoleFilter] = useState<string>("all");
+  const [selectedUser, setSelectedUser] = useState<ExtendedUser | null>(null);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [createModalVisible, setCreateModalVisible] = useState(false);
 
-  const { user: currentUser } = useUser()
-  const { userRole, hasPermission } = useClerkAuth()
-  const clerk = useClerk()
+  const { user: currentUser } = useUser();
+  const { userRole, hasPermission } = useClerkAuth();
+  const clerk = useClerk();
 
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
 
   useEffect(() => {
-    loadUsers()
-  }, [])
+    loadUsers();
+  }, []);
 
   const loadUsers = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       // In a real app, you'd fetch from Clerk's API
       // For demo purposes, we'll use mock data
       const mockUsers: ExtendedUser[] = [
@@ -119,102 +127,112 @@ export default function AdminUsersPage() {
           privateMetadata: {},
           unsafeMetadata: {},
         },
-      ]
-      setUsers(mockUsers)
+      ];
+      setUsers(mockUsers);
     } catch (error) {
-      message.error("Failed to load users")
+      message.error("Failed to load users");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleRoleUpdate = async (userId: string, newRole: UserRole) => {
     try {
-      const result = await updateUserRole(userId, newRole, currentUser?.id || "")
+      const result = await updateUserRole(
+        userId,
+        newRole,
+        currentUser?.id || ""
+      );
       if (result.success) {
-        message.success("User role updated successfully!")
+        message.success("User role updated successfully!");
         await createAuditLog(currentUser?.id || "", "role_update", "user", {
           targetUserId: userId,
           newRole,
           userEmail: currentUser?.emailAddresses[0]?.emailAddress,
-        })
-        loadUsers()
-        setEditModalVisible(false)
-        setSelectedUser(null)
+        });
+        loadUsers();
+        setEditModalVisible(false);
+        setSelectedUser(null);
       } else {
-        message.error(result.error || "Failed to update user role")
+        message.error(result.error || "Failed to update user role");
       }
     } catch (error) {
-      message.error("Failed to update user role")
+      message.error("Failed to update user role");
     }
-  }
+  };
 
   const handleStatusUpdate = async (userId: string, isActive: boolean) => {
     try {
-      const result = await updateUserStatus(userId, isActive)
+      const result = await updateUserStatus(userId, isActive);
       if (result.success) {
-        message.success(`User ${isActive ? "activated" : "deactivated"} successfully!`)
+        message.success(
+          `User ${isActive ? "activated" : "deactivated"} successfully!`
+        );
         await createAuditLog(currentUser?.id || "", "status_update", "user", {
           targetUserId: userId,
           isActive,
           userEmail: currentUser?.emailAddresses[0]?.emailAddress,
-        })
-        loadUsers()
+        });
+        loadUsers();
       } else {
-        message.error(result.error || "Failed to update user status")
+        message.error(result.error || "Failed to update user status");
       }
     } catch (error) {
-      message.error("Failed to update user status")
+      message.error("Failed to update user status");
     }
-  }
+  };
 
   const canEditUser = (user: ExtendedUser) => {
-    if (!hasPermission("users.manage")) return false
-    return canManageRole(userRole, user.publicMetadata.role)
-  }
+    if (!hasPermission("users.manage")) return false;
+    return canManageRole(userRole, user.publicMetadata.role);
+  };
 
   const getRoleColor = (role: UserRole) => {
-    const roleInfo = getRoleInfo(role)
-    return roleInfo.color
-  }
+    const roleInfo = getRoleInfo(role);
+    return roleInfo.color;
+  };
 
   const RoleIcon = ({ role }: { role: UserRole }) => {
-    const IconComponent = roleIcons[role]
-    return <IconComponent />
-  }
+    const IconComponent = roleIcons[role];
+    return <IconComponent />;
+  };
 
   const filteredUsers = users.filter((user) => {
     const matchesSearch =
-      `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.emailAddresses[0]?.emailAddress.toLowerCase().includes(searchTerm.toLowerCase())
+      `${user.firstName} ${user.lastName}`
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      user.emailAddresses[0]?.emailAddress
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
 
-    const matchesRole = roleFilter === "all" || user.publicMetadata.role === roleFilter
+    const matchesRole =
+      roleFilter === "all" || user.publicMetadata.role === roleFilter;
 
-    return matchesSearch && matchesRole
-  })
+    return matchesSearch && matchesRole;
+  });
 
   const getUserStats = () => {
-    const totalUsers = users.length
-    const roleStats = users.reduce(
-      (acc, user) => {
-        acc[user.publicMetadata.role] = (acc[user.publicMetadata.role] || 0) + 1
-        return acc
-      },
-      {} as Record<string, number>,
-    )
+    const totalUsers = users.length;
+    const roleStats = users.reduce((acc, user) => {
+      acc[user.publicMetadata.role] = (acc[user.publicMetadata.role] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
 
-    const activeUsers = users.filter((user) => user.publicMetadata.isActive !== false).length
+    const activeUsers = users.filter(
+      (user) => user.publicMetadata.isActive !== false
+    ).length;
     const recentUsers = users.filter((user) => {
-      const createdDate = new Date(user.createdAt)
-      const thirtyDaysAgo = new Date()
-      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
-      return createdDate > thirtyDaysAgo
-    }).length
+      const createdDate = new Date(user.createdAt);
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      return createdDate > thirtyDaysAgo;
+    }).length;
 
-    return { totalUsers, roleStats, activeUsers, recentUsers }
-  }
+    return { totalUsers, roleStats, activeUsers, recentUsers };
+  };
 
-  const stats = getUserStats()
+  const stats = getUserStats();
 
   const columns = [
     {
@@ -223,10 +241,15 @@ export default function AdminUsersPage() {
       key: "name",
       render: (_: any, record: ExtendedUser) => (
         <div className="flex items-center space-x-3">
-          <Avatar size={40} icon={<RoleIcon role={record.publicMetadata.role} />} src={record.imageUrl} />
+          <Avatar
+            size={40}
+            icon={<RoleIcon role={record.publicMetadata.role} />}
+            src={record.imageUrl || null}
+          />
           <div>
             <Text strong className="font-inter">
-              {`${record.firstName || ""} ${record.lastName || ""}`.trim() || "No Name"}
+              {`${record.firstName || ""} ${record.lastName || ""}`.trim() ||
+                "No Name"}
             </Text>
             <br />
             <Text type="secondary" className="font-inter text-sm">
@@ -241,7 +264,7 @@ export default function AdminUsersPage() {
       dataIndex: "role",
       key: "role",
       render: (_: any, record: ExtendedUser) => {
-        const roleInfo = getRoleInfo(record.publicMetadata.role)
+        const roleInfo = getRoleInfo(record.publicMetadata.role);
         return (
           <Tag
             color={getRoleColor(record.publicMetadata.role)}
@@ -250,7 +273,7 @@ export default function AdminUsersPage() {
           >
             {roleInfo.name}
           </Tag>
-        )
+        );
       },
     },
     {
@@ -259,7 +282,10 @@ export default function AdminUsersPage() {
       key: "status",
       render: (_: any, record: ExtendedUser) => (
         <div>
-          <Tag color={record.publicMetadata.isActive !== false ? "green" : "red"} className="font-inter">
+          <Tag
+            color={record.publicMetadata.isActive !== false ? "green" : "red"}
+            className="font-inter"
+          >
             {record.publicMetadata.isActive !== false ? "Active" : "Inactive"}
           </Tag>
           <br />
@@ -276,21 +302,32 @@ export default function AdminUsersPage() {
       dataIndex: "lastSignInAt",
       key: "lastLogin",
       render: (date: number | null) => (
-        <Text className="font-inter text-sm">{date ? new Date(date).toLocaleDateString() : "Never"}</Text>
+        <Text className="font-inter text-sm">
+          {date ? new Date(date).toLocaleDateString() : "Never"}
+        </Text>
       ),
     },
     {
       title: "Member Since",
       dataIndex: "createdAt",
       key: "createdAt",
-      render: (date: number) => <Text className="font-inter text-sm">{new Date(date).toLocaleDateString()}</Text>,
+      render: (date: number) => (
+        <Text className="font-inter text-sm">
+          {new Date(date).toLocaleDateString()}
+        </Text>
+      ),
     },
     {
       title: "Actions",
       key: "actions",
       render: (_: any, record: ExtendedUser) => (
         <Space size="small">
-          <Button type="text" icon={<EyeOutlined />} onClick={() => setSelectedUser(record)} size="small">
+          <Button
+            type="text"
+            icon={<EyeOutlined />}
+            onClick={() => setSelectedUser(record)}
+            size="small"
+          >
             View
           </Button>
           {canEditUser(record) && (
@@ -298,8 +335,8 @@ export default function AdminUsersPage() {
               type="text"
               icon={<EditOutlined />}
               onClick={() => {
-                setSelectedUser(record)
-                setEditModalVisible(true)
+                setSelectedUser(record);
+                setEditModalVisible(true);
               }}
               size="small"
             >
@@ -322,7 +359,7 @@ export default function AdminUsersPage() {
         </Space>
       ),
     },
-  ]
+  ];
 
   return (
     <div className="space-y-6">
@@ -355,7 +392,10 @@ export default function AdminUsersPage() {
               title={<span className="font-inter text-sm">Total Users</span>}
               value={stats.totalUsers}
               prefix={<UserOutlined />}
-              valueStyle={{ fontSize: "20px", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{
+                fontSize: "20px",
+                fontFamily: "var(--font-poppins)",
+              }}
             />
           </Card>
         </Col>
@@ -364,7 +404,11 @@ export default function AdminUsersPage() {
             <Statistic
               title={<span className="font-inter text-sm">Active Users</span>}
               value={stats.activeUsers}
-              valueStyle={{ fontSize: "20px", color: "#52c41a", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{
+                fontSize: "20px",
+                color: "#52c41a",
+                fontFamily: "var(--font-poppins)",
+              }}
             />
           </Card>
         </Col>
@@ -374,7 +418,11 @@ export default function AdminUsersPage() {
               title={<span className="font-inter text-sm">Admins</span>}
               value={stats.roleStats.admin || 0}
               prefix={<SafetyOutlined />}
-              valueStyle={{ fontSize: "20px", color: "#ff4d4f", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{
+                fontSize: "20px",
+                color: "#ff4d4f",
+                fontFamily: "var(--font-poppins)",
+              }}
             />
           </Card>
         </Col>
@@ -383,7 +431,11 @@ export default function AdminUsersPage() {
             <Statistic
               title={<span className="font-inter text-sm">New (30 days)</span>}
               value={stats.recentUsers}
-              valueStyle={{ fontSize: "20px", color: "#1890ff", fontFamily: "var(--font-poppins)" }}
+              valueStyle={{
+                fontSize: "20px",
+                color: "#1890ff",
+                fontFamily: "var(--font-poppins)",
+              }}
             />
           </Card>
         </Col>
@@ -400,7 +452,11 @@ export default function AdminUsersPage() {
             className="flex-1 font-inter"
             prefix={<SearchOutlined />}
           />
-          <Select value={roleFilter} onChange={setRoleFilter} className="w-full sm:w-48 font-inter">
+          <Select
+            value={roleFilter}
+            onChange={setRoleFilter}
+            className="w-full sm:w-48 font-inter"
+          >
             <Option value="all">All Roles</Option>
             <Option value="god">God Admin</Option>
             <Option value="admin">Administrator</Option>
@@ -439,15 +495,24 @@ export default function AdminUsersPage() {
         open={!!selectedUser && !editModalVisible}
         onCancel={() => setSelectedUser(null)}
         footer={[
-          <Button key="close" onClick={() => setSelectedUser(null)} className="font-inter">
+          <Button
+            key="close"
+            onClick={() => setSelectedUser(null)}
+            className="font-inter"
+          >
             Close
           </Button>,
           ...(selectedUser && canEditUser(selectedUser)
             ? [
-              <Button key="edit" type="primary" onClick={() => setEditModalVisible(true)} className="font-inter">
-                Edit User
-              </Button>,
-            ]
+                <Button
+                  key="edit"
+                  type="primary"
+                  onClick={() => setEditModalVisible(true)}
+                  className="font-inter"
+                >
+                  Edit User
+                </Button>,
+              ]
             : []),
         ]}
         width={600}
@@ -462,7 +527,9 @@ export default function AdminUsersPage() {
                 className="mb-4"
               />
               <Title level={4} className="font-poppins mb-1">
-                {`${selectedUser.firstName || ""} ${selectedUser.lastName || ""}`.trim() || "No Name"}
+                {`${selectedUser.firstName || ""} ${
+                  selectedUser.lastName || ""
+                }`.trim() || "No Name"}
               </Title>
               <Tag
                 color={getRoleColor(selectedUser.publicMetadata.role)}
@@ -474,30 +541,61 @@ export default function AdminUsersPage() {
             </div>
 
             <Descriptions bordered column={1} size="small">
-              <Descriptions.Item label={<span className="font-inter font-medium">Email</span>}>
+              <Descriptions.Item
+                label={<span className="font-inter font-medium">Email</span>}
+              >
                 <div className="flex items-center space-x-2">
                   <MailOutlined className="text-gray-500" />
-                  <Text className="font-inter">{selectedUser.emailAddresses[0]?.emailAddress}</Text>
+                  <Text className="font-inter">
+                    {selectedUser.emailAddresses[0]?.emailAddress}
+                  </Text>
                 </div>
               </Descriptions.Item>
-              <Descriptions.Item label={<span className="font-inter font-medium">Phone</span>}>
+              <Descriptions.Item
+                label={<span className="font-inter font-medium">Phone</span>}
+              >
                 <div className="flex items-center space-x-2">
                   <PhoneOutlined className="text-gray-500" />
-                  <Text className="font-inter">{selectedUser.phoneNumbers[0]?.phoneNumber || "Not provided"}</Text>
+                  <Text className="font-inter">
+                    {selectedUser.phoneNumbers[0]?.phoneNumber ||
+                      "Not provided"}
+                  </Text>
                 </div>
               </Descriptions.Item>
-              <Descriptions.Item label={<span className="font-inter font-medium">Status</span>}>
-                <Tag color={selectedUser.publicMetadata.isActive !== false ? "green" : "red"}>
-                  {selectedUser.publicMetadata.isActive !== false ? "Active" : "Inactive"}
+              <Descriptions.Item
+                label={<span className="font-inter font-medium">Status</span>}
+              >
+                <Tag
+                  color={
+                    selectedUser.publicMetadata.isActive !== false
+                      ? "green"
+                      : "red"
+                  }
+                >
+                  {selectedUser.publicMetadata.isActive !== false
+                    ? "Active"
+                    : "Inactive"}
                 </Tag>
               </Descriptions.Item>
-              <Descriptions.Item label={<span className="font-inter font-medium">Last Login</span>}>
+              <Descriptions.Item
+                label={
+                  <span className="font-inter font-medium">Last Login</span>
+                }
+              >
                 <Text className="font-inter">
-                  {selectedUser.lastSignInAt ? new Date(selectedUser.lastSignInAt).toLocaleString() : "Never"}
+                  {selectedUser.lastSignInAt
+                    ? new Date(selectedUser.lastSignInAt).toLocaleString()
+                    : "Never"}
                 </Text>
               </Descriptions.Item>
-              <Descriptions.Item label={<span className="font-inter font-medium">Member Since</span>}>
-                <Text className="font-inter">{new Date(selectedUser.createdAt).toLocaleString()}</Text>
+              <Descriptions.Item
+                label={
+                  <span className="font-inter font-medium">Member Since</span>
+                }
+              >
+                <Text className="font-inter">
+                  {new Date(selectedUser.createdAt).toLocaleString()}
+                </Text>
               </Descriptions.Item>
             </Descriptions>
           </div>
@@ -509,8 +607,8 @@ export default function AdminUsersPage() {
         title={<span className="font-poppins">Edit User</span>}
         open={editModalVisible}
         onCancel={() => {
-          setEditModalVisible(false)
-          setSelectedUser(null)
+          setEditModalVisible(false);
+          setSelectedUser(null);
         }}
         footer={null}
         width={500}
@@ -525,7 +623,9 @@ export default function AdminUsersPage() {
                 className="mb-2"
               />
               <Title level={5} className="font-poppins mb-0">
-                {`${selectedUser.firstName || ""} ${selectedUser.lastName || ""}`.trim() || "No Name"}
+                {`${selectedUser.firstName || ""} ${
+                  selectedUser.lastName || ""
+                }`.trim() || "No Name"}
               </Title>
             </div>
 
@@ -535,7 +635,9 @@ export default function AdminUsersPage() {
               </Text>
               <Select
                 value={selectedUser.publicMetadata.role}
-                onChange={(newRole) => handleRoleUpdate(selectedUser.id, newRole)}
+                onChange={(newRole) =>
+                  handleRoleUpdate(selectedUser.id, newRole)
+                }
                 className="w-full mt-2 font-inter"
                 disabled={!canEditUser(selectedUser)}
               >
@@ -556,7 +658,9 @@ export default function AdminUsersPage() {
                   checked={selectedUser.publicMetadata.isActive !== false}
                   checkedChildren="Active"
                   unCheckedChildren="Inactive"
-                  onChange={(checked) => handleStatusUpdate(selectedUser.id, checked)}
+                  onChange={(checked) =>
+                    handleStatusUpdate(selectedUser.id, checked)
+                  }
                   disabled={!canEditUser(selectedUser)}
                 />
               </div>
@@ -570,8 +674,8 @@ export default function AdminUsersPage() {
         title={<span className="font-poppins">Create New User</span>}
         open={createModalVisible}
         onCancel={() => {
-          setCreateModalVisible(false)
-          form.resetFields()
+          setCreateModalVisible(false);
+          form.resetFields();
         }}
         footer={null}
         width={500}
@@ -581,9 +685,9 @@ export default function AdminUsersPage() {
           layout="vertical"
           onFinish={(values) => {
             // In a real app, you'd create the user via Clerk's API
-            message.info("User creation would be implemented here")
-            setCreateModalVisible(false)
-            form.resetFields()
+            message.info("User creation would be implemented here");
+            setCreateModalVisible(false);
+            form.resetFields();
           }}
         >
           <Form.Item
@@ -600,7 +704,9 @@ export default function AdminUsersPage() {
           <Form.Item
             name="firstName"
             label="First Name"
-            rules={[{ required: true, message: "Please input the first name!" }]}
+            rules={[
+              { required: true, message: "Please input the first name!" },
+            ]}
           >
             <Input placeholder="John" />
           </Form.Item>
@@ -613,7 +719,11 @@ export default function AdminUsersPage() {
             <Input placeholder="Doe" />
           </Form.Item>
 
-          <Form.Item name="role" label="Role" rules={[{ required: true, message: "Please select a role!" }]}>
+          <Form.Item
+            name="role"
+            label="Role"
+            rules={[{ required: true, message: "Please select a role!" }]}
+          >
             <Select placeholder="Select a role">
               {getAvailableRoles(userRole).map((role) => (
                 <Option key={role} value={role}>
@@ -625,7 +735,9 @@ export default function AdminUsersPage() {
 
           <Form.Item>
             <Space className="w-full justify-end">
-              <Button onClick={() => setCreateModalVisible(false)}>Cancel</Button>
+              <Button onClick={() => setCreateModalVisible(false)}>
+                Cancel
+              </Button>
               <Button type="primary" htmlType="submit">
                 Create User
               </Button>
@@ -634,5 +746,5 @@ export default function AdminUsersPage() {
         </Form>
       </Modal>
     </div>
-  )
+  );
 }

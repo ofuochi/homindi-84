@@ -262,7 +262,7 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <motion.div variants={fadeInUp}>
-              <Title level={2} className="mb-4 text-4xl font-bold">
+              <Title level={2} className="mb-4 text-4xl !font-bold">
                 Trusted by <span className="text-primary-500">10,000+</span>{" "}
                 Customers Worldwide
               </Title>

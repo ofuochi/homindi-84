@@ -1,10 +1,11 @@
-import { Card, Table, Tag } from "antd"
-import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons"
-import type { TopProduct } from "@/lib/analytics/types"
+"use client";
+import { Card, Table, Tag } from "antd";
+import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
+import type { TopProduct } from "@/lib/analytics/types";
 
 interface TopProductsTableProps {
-  data: TopProduct[]
-  loading?: boolean
+  data: TopProduct[];
+  loading?: boolean;
 }
 
 export function TopProductsTable({ data, loading }: TopProductsTableProps) {
@@ -34,17 +35,26 @@ export function TopProductsTable({ data, loading }: TopProductsTableProps) {
       dataIndex: "growth",
       key: "growth",
       render: (growth: number) => (
-        <Tag color={growth > 0 ? "green" : "red"} icon={growth > 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />}>
+        <Tag
+          color={growth > 0 ? "green" : "red"}
+          icon={growth > 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
+        >
           {growth}%
         </Tag>
       ),
       sorter: (a: TopProduct, b: TopProduct) => a.growth - b.growth,
     },
-  ]
+  ];
 
   return (
     <Card title="Top Performing Products" loading={loading}>
-      <Table columns={columns} dataSource={data} rowKey="id" pagination={false} size="small" />
+      <Table
+        columns={columns}
+        dataSource={data}
+        rowKey="id"
+        pagination={false}
+        size="small"
+      />
     </Card>
-  )
+  );
 }

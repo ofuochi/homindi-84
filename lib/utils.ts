@@ -23,3 +23,15 @@ export function formatNumber(num: number): string {
 export function formatPercentage(num: number): string {
   return `${num.toFixed(1)}%`
 }
+
+export function formatDate(date: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).format(new Date(date))
+}
+
+export function generateId(): string {
+  return Math.random().toString(36).substring(2, 9)
+}
