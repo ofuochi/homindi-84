@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 import { Badge, Drawer, Button, Space, Avatar, Dropdown } from "antd";
 import {
   ShoppingCartOutlined,
@@ -96,16 +98,14 @@ export const HeaderActions = ({
 
       {/* Cart */}
       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-        <Button
-          type="text"
-          icon={
-            <Badge count={getItemCount()} size="small">
-              <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-primary-500 transition-colors" />
-            </Badge>
-          }
+        <Badge
+          count={getItemCount()}
+          size="small"
+          className="flex items-center relative cursor-pointer"
           onClick={() => setIsOpen(true)}
-          className="flex items-center hover:bg-gray-50 rounded-lg"
-        />
+        >
+          <ShoppingCartOutlined className="text-xl text-gray-600 hover:text-primary-500 transition-colors" />
+        </Badge>
       </motion.div>
 
       {/* Auth */}
@@ -153,7 +153,7 @@ export const HeaderActions = ({
                   type="default"
                   className="font-inter font-medium rounded-lg"
                 >
-                  Sign In
+                  Login
                 </Button>
               </motion.div>
             </Link>
@@ -190,6 +190,7 @@ export const HeaderActions = ({
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
   const { user, isSignedIn, userRole, roleInfo, canAccessAdminPanel } =
     useClerkAuth();
 
@@ -241,25 +242,39 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex space-x-8">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    href={link.href}
-                    className="text-gray-700 hover:text-primary-500 font-medium transition-all duration-300 font-inter relative group py-2"
+              {navLinks.map((link, index) => {
+                const isActive =
+                  link.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(link.href);
+                return (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    <span className="flex items-center space-x-1">
-                      {link.icon && <link.icon className="text-sm" />}
-                      <span>{link.label}</span>
-                    </span>
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        "text-gray-700 hover:text-primary-500 font-medium transition-all duration-300 font-inter relative group py-2",
+                        isActive && "text-primary-500"
+                      )}
+                    >
+                      <span className="flex items-center space-x-1">
+                        {link.icon && <link.icon className="text-sm" />}
+                        <span>{link.label}</span>
+                      </span>
+                      <span
+                        className={cn(
+                          "absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover:w-full",
+                          isActive && "w-full"
+                        )}
+                      ></span>
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </nav>
 
             {/* Right side actions */}
@@ -280,17 +295,26 @@ export default function Header() {
         className="mobile-menu-drawer"
       >
         <div className="flex flex-col space-y-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-gray-700 hover:text-primary-500 font-medium py-3 px-2 font-inter transition-colors rounded-lg hover:bg-gray-50 flex items-center space-x-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {link.icon && <link.icon />}
-              <span>{link.label}</span>
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-gray-700 hover:text-primary-500 font-medium py-3 px-2 font-inter transition-colors rounded-lg hover:bg-gray-50 flex items-center space-x-2",
+                  isActive && "bg-gray-50 text-primary-500"
+                )}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.icon && <link.icon />}
+                <span>{link.label}</span>
+              </Link>
+            );
+          })}
           <div className="border-t pt-4 space-y-3">
             {isSignedIn ? (
               <>

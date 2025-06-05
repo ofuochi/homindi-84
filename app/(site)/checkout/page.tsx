@@ -134,7 +134,6 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         <Title level={2} className="mb-8">
           Checkout
@@ -142,11 +141,24 @@ export default function CheckoutPage() {
 
         {/* Progress Steps */}
         <div className="mb-8">
-          <Steps current={getStepNumber()} className="max-w-2xl mx-auto">
-            <Step title="Shipping" icon={<HomeOutlined />} />
-            <Step title="Payment" icon={<CreditCardOutlined />} />
-            <Step title="Complete" icon={<CheckOutlined />} />
-          </Steps>
+          <Steps
+            current={getStepNumber()}
+            className="max-w-2xl mx-auto"
+            items={[
+              {
+                title: "Shipping",
+                icon: <HomeOutlined />,
+              },
+              {
+                title: "Payment",
+                icon: <CreditCardOutlined />,
+              },
+              {
+                title: "Complete",
+                icon: <CheckOutlined />,
+              },
+            ]}
+          ></Steps>
         </div>
 
         {/* Shipping Information Step */}
@@ -408,7 +420,6 @@ export default function CheckoutPage() {
           </div>
         )}
       </div>
-
     </div>
   );
 }

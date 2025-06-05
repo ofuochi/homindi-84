@@ -393,6 +393,18 @@
   animation: slideInRight 0.4s ease-out;
 }
 
+/* Video modal styling */
+.video-modal .ant-modal-content {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.video-modal .ant-modal-close {
+  top: -18px;
+  right: -18px;
+}
+
 /* Enhanced focus styles for accessibility */
 .ant-btn:focus,
 .ant-input:focus,
