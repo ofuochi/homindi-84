@@ -15,6 +15,8 @@ import {
   Skeleton,
   message,
   Layout,
+  Image,
+  Spin,
 } from "antd";
 import {
   ShoppingCartOutlined,
@@ -24,7 +26,6 @@ import {
   GlobalOutlined,
   InfoCircleOutlined,
 } from "@ant-design/icons";
-import Image from "next/image";
 import Link from "next/link";
 import { useCartStore } from "@/store/useCartStore";
 import { mockProducts } from "@/lib/mockData";
@@ -76,9 +77,8 @@ export default function ProductPage() {
 
   return (
     <Layout>
-
       <Layout.Content className="container mx-auto px-4 py-8">
-        <Breadcrumb 
+        <Breadcrumb
           className="mb-6"
           items={[
             {
@@ -88,27 +88,30 @@ export default function ProductPage() {
               title: <Link href="/products">Products</Link>,
             },
             {
-              title: loading ? <Skeleton.Button active size="small" /> : product?.name,
+              title: loading ? (
+                <Skeleton.Button active size="small" />
+              ) : (
+                product?.name
+              ),
             },
           ]}
         />
 
         <Row gutter={[32, 32]}>
           <Col xs={24} md={12}>
-            {loading ? (
-              <Skeleton.Image className="w-full h-96" active />
-            ) : (
+            <Spin spinning={loading} tip="Loading product..." size="large">
               <div className="relative w-full h-96 bg-gray-100 rounded-lg overflow-hidden">
-                <Image
-                  src={
-                    product?.image || "/placeholder.svg?height=400&width=600"
-                  }
-                  alt={product?.name || "Product"}
-                  fill
-                  className="object-cover"
-                />
+                <Image.PreviewGroup
+                  items={[
+                    "https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp",
+                    "https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp",
+                    "https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp",
+                  ]}
+                >
+                  <Image src="https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp" />
+                </Image.PreviewGroup>
               </div>
-            )}
+            </Spin>
           </Col>
 
           <Col xs={24} md={12}>
@@ -128,7 +131,7 @@ export default function ProductPage() {
                   </div>
 
                   <div className="flex items-center mb-4">
-                    <Text className="text-2xl font-bold mr-4">
+                    <Text className="text-2xl font-bold mr-4 text-primary">
                       ${product.price.toFixed(2)}
                     </Text>
                     {product.discount && (
@@ -143,6 +146,22 @@ export default function ProductPage() {
                   </Text>
 
                   <div className="flex items-center mb-4">
+                    <Text strong className="mr-2">
+                      Category:
+                    </Text>
+                    <Tag icon={<TagOutlined />} color="default">
+                      {product.category}
+                    </Tag>
+                  </div>
+                  <div className="flex items-center mb-4">
+                    <Text strong className="mr-2">
+                      Origin:
+                    </Text>
+                    <Tag icon={<GlobalOutlined />} color="processing">
+                      {product.origin}
+                    </Tag>
+                  </div>
+                  <div className="flex items-center mb-6">
                     <Text strong className="mr-2">
                       Availability:
                     </Text>
@@ -163,22 +182,6 @@ export default function ProductPage() {
                         Out of Stock
                       </Tag>
                     )}
-
-                    <Text strong className="mr-2">
-                      Category:
-                    </Text>
-                    <Tag icon={<TagOutlined />} color="default">
-                      {product.category}
-                    </Tag>
-                  </div>
-
-                  <div className="flex items-center mb-6">
-                    <Text strong className="mr-2">
-                      Origin:
-                    </Text>
-                    <Tag icon={<GlobalOutlined />} color="processing">
-                      {product.origin}
-                    </Tag>
                   </div>
 
                   <Divider />
@@ -229,7 +232,7 @@ export default function ProductPage() {
 
         {!loading && product && (
           <div className="mt-12">
-            <Tabs 
+            <Tabs
               defaultActiveKey="1"
               items={[
                 {
@@ -242,13 +245,17 @@ export default function ProductPage() {
                         <Col xs={24} md={8}>
                           <div className="bg-gray-50 p-4 rounded-lg">
                             <Text strong>SKU:</Text>
-                            <Text className="block">{product.sku || "N/A"}</Text>
+                            <Text className="block">
+                              {product.sku || "N/A"}
+                            </Text>
                           </div>
                         </Col>
                         <Col xs={24} md={8}>
                           <div className="bg-gray-50 p-4 rounded-lg">
                             <Text strong>Weight:</Text>
-                            <Text className="block">{product.weight || "N/A"}</Text>
+                            <Text className="block">
+                              {product.weight || "N/A"}
+                            </Text>
                           </div>
                         </Col>
                         <Col xs={24} md={8}>
@@ -262,7 +269,7 @@ export default function ProductPage() {
                         <Text>{product.description}</Text>
                       </div>
                     </div>
-                  )
+                  ),
                 },
                 {
                   key: "2",
@@ -280,7 +287,7 @@ export default function ProductPage() {
                         <li>Express Shipping: 2-3 business days</li>
                       </ul>
                     </div>
-                  )
+                  ),
                 },
                 {
                   key: "3",
@@ -292,14 +299,13 @@ export default function ProductPage() {
                         No reviews yet. Be the first to review this product!
                       </Text>
                     </div>
-                  )
-                }
+                  ),
+                },
               ]}
             />
           </div>
         )}
       </Layout.Content>
-
     </Layout>
   );
 }

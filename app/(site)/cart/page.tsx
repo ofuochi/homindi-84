@@ -108,7 +108,6 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Title level={2} className="mb-8">
           Shopping Cart
@@ -149,7 +148,7 @@ export default function CartPage() {
                     <Text strong className="text-lg">
                       Total:
                     </Text>
-                    <Text strong className="text-lg text-[#0B8457]">
+                    <Text strong className="text-lg text-primary">
                       {formatCurrency(total)}
                     </Text>
                   </div>
@@ -170,7 +169,7 @@ export default function CartPage() {
                 <Link href="/products">
                   <Button
                     size="large"
-                    className="border-2 border-[#0B8457] text-[#0B8457] hover:!bg-[#0B8457] hover:!text-white transition-all duration-300"
+                    className="border-2 border-primary text-primary hover:!border-primary hover:!text-white hover:!bg-primary transition-all duration-300"
                     block
                   >
                     Continue Shopping
@@ -181,7 +180,6 @@ export default function CartPage() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
