@@ -2,11 +2,9 @@ import { faker } from "@faker-js/faker";
 import type {
   Product,
   Order,
-  User,
   AdminStats,
-  Category,
-  InventoryLog,
 } from "./types";
+import { Category, InventoryLog, User } from "./api/types";
 
 export function generateMockProducts(count = 20): Product[] {
   return Array.from({ length: count }).map(() => ({
@@ -29,13 +27,13 @@ export function generateMockProducts(count = 20): Product[] {
     weight: `${faker.number.int({ min: 100, max: 1000 })}g`,
     sku: faker.string.alphanumeric(8).toUpperCase(),
     tags: [],
-    featured: faker.datatype.boolean(),
-    discount: faker.number.float({ min: 0, max: 20, precision: 0.01 }),
+    isFeatured: faker.datatype.boolean(),
+    discount: faker.number.float({ min: 0, max: 20, fractionDigits: 2 }),
     minOrderQuantity: 1,
     maxOrderQuantity: undefined,
     createdAt: faker.date.past().toISOString(),
     updatedAt: faker.date.past().toISOString(),
-  }));
+  } satisfies Product));
 }
 
 export function generateMockCategories(count = 5): Category[] {

@@ -26,10 +26,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import ProductCard from "@/components/product/ProductCard";
-import { mockProducts } from "@/lib/mockData";
 import { colors } from "@/lib/colors";
 import { motion } from "framer-motion";
 import { ROUTES } from "@/lib/routes";
+import { mockProducts } from "@/lib/mockDb";
 
 const { Title, Paragraph, Text } = Typography;
 
