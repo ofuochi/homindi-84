@@ -1,27 +1,52 @@
-import { delay } from "@/lib/utils"
-import type { AnalyticsOverview, SalesMetrics, CustomerAnalytics, PerformanceMetrics } from "./types"
-import { mockAnalyticsOverview, mockSalesMetrics, mockCustomerAnalytics, mockPerformanceMetrics } from "./mockData"
+import axiosInstance from "@/lib/api/axios";
+import type {
+  AnalyticsOverview,
+  SalesMetrics,
+  CustomerAnalytics,
+  PerformanceMetrics,
+} from "./types";
+import { z } from "zod";
+import { ApiResponseSchema } from "@/lib/api/types";
 
 class AnalyticsApiClient {
-  async getOverview(): Promise<AnalyticsOverview> {
-    await delay(500)
-    return mockAnalyticsOverview
+  private async request<T>(url: string, schema: z.ZodSchema<T>): Promise<T> {
+    const response = await axiosInstance.get(url);
+    return schema.parse(response.data);
   }
 
-  async getSalesMetrics(dateRange?: { start: string; end: string }): Promise<SalesMetrics> {
-    await delay(800)
-    return mockSalesMetrics
+  getOverview() {
+    return this.request(
+      "/analytics/overview",
+      ApiResponseSchema(z.any()).transform(
+        (data) => data.data as AnalyticsOverview,
+      ),
+    );
   }
 
-  async getCustomerAnalytics(): Promise<CustomerAnalytics> {
-    await delay(600)
-    return mockCustomerAnalytics
+  getSalesMetrics() {
+    return this.request(
+      "/analytics/sales",
+      ApiResponseSchema(z.any()).transform((data) => data.data as SalesMetrics),
+    );
   }
 
-  async getPerformanceMetrics(): Promise<PerformanceMetrics> {
-    await delay(700)
-    return mockPerformanceMetrics
+  getCustomerAnalytics() {
+    return this.request(
+      "/analytics/customers",
+      ApiResponseSchema(z.any()).transform(
+        (data) => data.data as CustomerAnalytics,
+      ),
+    );
+  }
+
+  getPerformanceMetrics() {
+    return this.request(
+      "/analytics/performance",
+      ApiResponseSchema(z.any()).transform(
+        (data) => data.data as PerformanceMetrics,
+      ),
+    );
   }
 }
 
-export const analyticsApi = new AnalyticsApiClient()
+export const analyticsApi = new AnalyticsApiClient();

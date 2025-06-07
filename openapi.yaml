@@ -1,0 +1,946 @@
+openapi: 3.0.3
+info:
+  title: Homindi API
+  version: "1.0"
+  description: Core API for products, orders, payments, admin tools, and more.
+servers:
+  - url: https://api.homindi.com
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    User:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string, format: email }
+        role:
+          type: string
+          enum: [god, admin, exporter, supplier, moderator, user]
+        isActive: { type: boolean }
+      required: [id, name, email, role]
+    CreateUser:
+      type: object
+      properties:
+        name: { type: string }
+        email: { type: string, format: email }
+        password: { type: string }
+    Product:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { type: string }
+        price: { type: number }
+        category: { type: string }
+        inStock: { type: boolean }
+        stockQuantity: { type: integer }
+      required: [id, name, price, category]
+    Category:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { type: string }
+        isActive: { type: boolean }
+      required: [id, name]
+    CartItem:
+      type: object
+      properties:
+        product: { $ref: '#/components/schemas/Product' }
+        quantity: { type: integer }
+      required: [product, quantity]
+    ShippingAddress:
+      type: object
+      properties:
+        fullName: { type: string }
+        email: { type: string, format: email }
+        phone: { type: string }
+        country: { type: string }
+        city: { type: string }
+        streetAddress: { type: string }
+        postalCode: { type: string }
+    Order:
+      type: object
+      properties:
+        id: { type: string }
+        userId: { type: string }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/CartItem' }
+        total: { type: number }
+        status:
+          type: string
+          enum: [pending, processing, shipped, delivered, cancelled]
+        shippingAddress: { $ref: '#/components/schemas/ShippingAddress' }
+        trackingNumber: { type: string }
+      required: [id, userId, items, total, status]
+    InventoryLog:
+      type: object
+      properties:
+        id: { type: string }
+        productId: { type: string }
+        action:
+          type: string
+          enum: [stock_in, stock_out, adjustment, sale, return]
+        quantity: { type: integer }
+        newStock: { type: integer }
+        createdAt: { type: string }
+    PaymentIntent:
+      type: object
+      properties:
+        id: { type: string }
+        client_secret: { type: string }
+        amount: { type: integer }
+        currency: { type: string }
+        status: { type: string }
+    PaymentRecord:
+      type: object
+      properties:
+        id: { type: string }
+        orderId: { type: string }
+        status: { type: string }
+        amount: { type: number }
+        currency: { type: string }
+    Paginated:
+      type: object
+      properties:
+        items: { type: array, items: {} }
+        total: { type: integer }
+        page: { type: integer }
+        limit: { type: integer }
+        totalPages: { type: integer }
+tags:
+  - name: Auth
+  - name: Users
+  - name: Products
+  - name: Categories
+  - name: Cart
+  - name: Wishlist
+  - name: Orders
+  - name: Payments
+  - name: Inventory
+  - name: Notifications
+  - name: Analytics
+  - name: Admin
+  - name: Audit
+  - name: WebSocket
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Register a new account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateUser' }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Log in and receive tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: { type: string }
+                password: { type: string }
+      responses:
+        "200": { description: Successful authentication }
+  /auth/logout:
+    post:
+      tags: [Auth]
+      security: [bearerAuth: []]
+      summary: Log out current session
+      responses:
+        "204": { description: Logged out }
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Refresh authentication tokens
+      security: [bearerAuth: []]
+      responses:
+        "200": { description: Token refreshed }
+  /users:
+    get:
+      tags: [Users]
+      summary: List users
+      security: [bearerAuth: []]
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer }
+        - in: query
+          name: limit
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Paginated list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    $ref: '#/components/schemas/Paginated'
+    post:
+      tags: [Users]
+      summary: Create a user
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateUser' }
+      responses:
+        "201": { description: User created }
+  /users/{id}:
+    get:
+      tags: [Users]
+      summary: Get user by ID
+      security: [bearerAuth: []]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: User found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+    put:
+      tags: [Users]
+      summary: Update user profile
+      security: [bearerAuth: []]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/User' }
+      responses:
+        "200": { description: Updated }
+    delete:
+      tags: [Users]
+      summary: Delete user
+      security: [bearerAuth: []]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "204": { description: Deleted }
+  /users/me:
+    get:
+      tags: [Users]
+      summary: Current user profile
+      security: [bearerAuth: []]
+      responses:
+        "200":
+          description: Profile info
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+    put:
+      tags: [Users]
+      summary: Update current profile
+      security: [bearerAuth: []]
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/User' }
+      responses:
+        "200": { description: Updated }
+  /users/{id}/role:
+    patch:
+      tags: [Users]
+      summary: Change a user's role
+      security: [bearerAuth: []]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                  enum: [god, admin, exporter, supplier, moderator, user]
+      responses:
+        "200": { description: Role updated }
+  /users/{id}/status:
+    patch:
+      tags: [Users]
+      summary: Activate or deactivate a user
+      security: [bearerAuth: []]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isActive: { type: boolean }
+      responses:
+        "200": { description: Status updated }
+  /products:
+    get:
+      tags: [Products]
+      summary: List products
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer }
+        - in: query
+          name: limit
+          schema: { type: integer }
+        - in: query
+          name: category
+          schema: { type: string }
+        - in: query
+          name: search
+          schema: { type: string }
+        - in: query
+          name: stockStatus
+          schema: { type: string, enum: [in, low, out] }
+      responses:
+        "200":
+          description: Paginated products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    $ref: '#/components/schemas/Paginated'
+    post:
+      tags: [Products]
+      summary: Create product
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Product' }
+      responses:
+        "201": { description: Created }
+  /products/{id}:
+    get:
+      tags: [Products]
+      summary: Fetch product
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Product data
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Product' }
+    put:
+      tags: [Products]
+      security: [bearerAuth: []]
+      summary: Update product
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Product' }
+      responses:
+        "200": { description: Updated }
+    delete:
+      tags: [Products]
+      security: [bearerAuth: []]
+      summary: Delete product
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "204": { description: Deleted }
+  /categories:
+    get:
+      tags: [Categories]
+      summary: List product categories
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer }
+        - in: query
+          name: limit
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Paginated categories
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    $ref: '#/components/schemas/Paginated'
+    post:
+      tags: [Categories]
+      summary: Create category
+      security: [bearerAuth: []]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Category' }
+      responses:
+        "201": { description: Created }
+  /categories/{id}:
+    get:
+      tags: [Categories]
+      summary: Get a category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Category data
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Category' }
+    put:
+      tags: [Categories]
+      security: [bearerAuth: []]
+      summary: Update category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Category' }
+      responses:
+        "200": { description: Updated }
+    delete:
+      tags: [Categories]
+      security: [bearerAuth: []]
+      summary: Delete category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "204": { description: Deleted }
+  /cart:
+    get:
+      tags: [Cart]
+      security: [bearerAuth: []]
+      summary: Current cart items
+      responses:
+        "200":
+          description: Cart contents
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: '#/components/schemas/CartItem' }
+    delete:
+      tags: [Cart]
+      security: [bearerAuth: []]
+      summary: Clear cart
+      responses:
+        "204": { description: Emptied }
+  /cart/items:
+    post:
+      tags: [Cart]
+      security: [bearerAuth: []]
+      summary: Add item to cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productId: { type: string }
+                quantity: { type: integer }
+      responses:
+        "200": { description: Added }
+  /cart/items/{productId}:
+    put:
+      tags: [Cart]
+      security: [bearerAuth: []]
+      summary: Update quantity
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity: { type: integer }
+      responses:
+        "200": { description: Updated }
+    delete:
+      tags: [Cart]
+      security: [bearerAuth: []]
+      summary: Remove item
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string }
+      responses:
+        "204": { description: Removed }
+  /wishlist:
+    get:
+      tags: [Wishlist]
+      security: [bearerAuth: []]
+      summary: View wishlist
+      responses:
+        "200":
+          description: Wishlist items
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Product' }
+    delete:
+      tags: [Wishlist]
+      security: [bearerAuth: []]
+      summary: Clear wishlist
+      responses:
+        "204": { description: Cleared }
+  /wishlist/items:
+    post:
+      tags: [Wishlist]
+      security: [bearerAuth: []]
+      summary: Add to wishlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productId: { type: string }
+      responses:
+        "200": { description: Added }
+  /wishlist/items/{productId}:
+    delete:
+      tags: [Wishlist]
+      security: [bearerAuth: []]
+      summary: Remove from wishlist
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string }
+      responses:
+        "204": { description: Removed }
+  /wishlist/move-to-cart:
+    post:
+      tags: [Wishlist]
+      security: [bearerAuth: []]
+      summary: Move all wishlist items to cart
+      responses:
+        "200": { description: Items moved }
+  /orders:
+    get:
+      tags: [Orders]
+      security: [bearerAuth: []]
+      summary: List orders
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer }
+        - in: query
+          name: limit
+          schema: { type: integer }
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [pending, processing, shipped, delivered, cancelled]
+      responses:
+        "200":
+          description: Paginated orders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    $ref: '#/components/schemas/Paginated'
+    post:
+      tags: [Orders]
+      security: [bearerAuth: []]
+      summary: Place a new order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items: { $ref: '#/components/schemas/CartItem' }
+                shippingAddress: { $ref: '#/components/schemas/ShippingAddress' }
+      responses:
+        "201":
+          description: Order created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Order' }
+  /orders/{id}:
+    get:
+      tags: [Orders]
+      security: [bearerAuth: []]
+      summary: Get order details
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Order info
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Order' }
+  /orders/{id}/status:
+    put:
+      tags: [Orders]
+      security: [bearerAuth: []]
+      summary: Update order status
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [pending, processing, shipped, delivered, cancelled]
+                trackingNumber: { type: string }
+      responses:
+        "200": { description: Status updated }
+  /orders/{id}/cancel:
+    put:
+      tags: [Orders]
+      security: [bearerAuth: []]
+      summary: Cancel an order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Cancelled }
+  /orders/{id}/track:
+    get:
+      tags: [Orders]
+      security: [bearerAuth: []]
+      summary: Retrieve tracking info
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Tracking details }
+  /payments/create-payment-intent:
+    post:
+      tags: [Payments]
+      security: [bearerAuth: []]
+      summary: Create Stripe payment intent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderId: { type: string }
+                amount: { type: number }
+                currency: { type: string }
+      responses:
+        "200":
+          description: Payment intent created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentIntent: { $ref: '#/components/schemas/PaymentIntent' }
+                  clientSecret: { type: string }
+  /payments/confirm-payment:
+    post:
+      tags: [Payments]
+      security: [bearerAuth: []]
+      summary: Confirm payment intent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                paymentIntentId: { type: string }
+                paymentMethodId: { type: string }
+      responses:
+        "200": { description: Confirmation result }
+  /payments/payment-record/{paymentIntentId}:
+    get:
+      tags: [Payments]
+      security: [bearerAuth: []]
+      summary: Retrieve payment record
+      parameters:
+        - in: path
+          name: paymentIntentId
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Record info
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PaymentRecord' }
+  /payments/refund:
+    post:
+      tags: [Payments]
+      security: [bearerAuth: []]
+      summary: Refund a payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                paymentIntentId: { type: string }
+                amount: { type: number }
+      responses:
+        "200": { description: Refund processed }
+  /inventory/logs:
+    get:
+      tags: [Inventory]
+      security: [bearerAuth: []]
+      summary: Inventory logs
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer }
+        - in: query
+          name: limit
+          schema: { type: integer }
+        - in: query
+          name: productId
+          schema: { type: string }
+      responses:
+        "200":
+          description: Log entries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    $ref: '#/components/schemas/Paginated'
+  /inventory/adjust:
+    post:
+      tags: [Inventory]
+      security: [bearerAuth: []]
+      summary: Adjust product stock levels
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productId: { type: string }
+                quantity: { type: integer }
+                action: { type: string, enum: [stock_in, stock_out, adjustment] }
+                reason: { type: string }
+      responses:
+        "200":
+          description: Adjustment recorded
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/InventoryLog' }
+  /notifications:
+    get:
+      tags: [Notifications]
+      security: [bearerAuth: []]
+      summary: List notifications
+      responses:
+        "200": { description: Notification list }
+    post:
+      tags: [Notifications]
+      security: [bearerAuth: []]
+      summary: Send a notification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type: { type: string }
+                title: { type: string }
+                message: { type: string }
+      responses:
+        "200": { description: Sent }
+  /notifications/{id}/read:
+    put:
+      tags: [Notifications]
+      security: [bearerAuth: []]
+      summary: Mark notification as read
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "204": { description: Marked }
+  /notifications/read-all:
+    put:
+      tags: [Notifications]
+      security: [bearerAuth: []]
+      summary: Mark all notifications as read
+      responses:
+        "204": { description: Cleared }
+  /notifications/{id}:
+    delete:
+      tags: [Notifications]
+      security: [bearerAuth: []]
+      summary: Delete notification
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "204": { description: Deleted }
+  /analytics/overview:
+    get:
+      tags: [Analytics]
+      security: [bearerAuth: []]
+      summary: High level analytics
+      responses:
+        "200": { description: Overview metrics }
+  /analytics/sales:
+    get:
+      tags: [Analytics]
+      security: [bearerAuth: []]
+      summary: Sales metrics
+      parameters:
+        - in: query
+          name: start
+          schema: { type: string, format: date }
+        - in: query
+          name: end
+          schema: { type: string, format: date }
+      responses:
+        "200": { description: Sales data }
+  /analytics/customers:
+    get:
+      tags: [Analytics]
+      security: [bearerAuth: []]
+      summary: Customer analytics
+      responses:
+        "200": { description: Customer stats }
+  /analytics/performance:
+    get:
+      tags: [Analytics]
+      security: [bearerAuth: []]
+      summary: Web performance metrics
+      responses:
+        "200": { description: Performance data }
+  /admin/stats:
+    get:
+      tags: [Admin]
+      security: [bearerAuth: []]
+      summary: Admin dashboard statistics
+      responses:
+        "200":
+          description: Admin stats
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalRevenue: { type: number }
+                  totalOrders: { type: integer }
+  /audit/logs:
+    get:
+      tags: [Audit]
+      security: [bearerAuth: []]
+      summary: Retrieve audit logs
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer }
+        - in: query
+          name: limit
+          schema: { type: integer }
+      responses:
+        "200": { description: Log entries }
+  /ws:
+    get:
+      tags: [WebSocket]
+      summary: WebSocket endpoint for real-time updates
+      responses:
+        "101": { description: Switching protocols }

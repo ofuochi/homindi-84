@@ -16,6 +16,8 @@ export interface Product {
   discount?: number
   minOrderQuantity?: number
   maxOrderQuantity?: number
+  createdAt: string
+  updatedAt: string
 }
 
 export interface CartItem {
